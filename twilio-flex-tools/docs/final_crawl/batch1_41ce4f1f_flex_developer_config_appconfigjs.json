@@ -1,0 +1,23 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/config/appconfigjs",
+  "batch_id": 1,
+  "crawled_at": "2025-10-07T20:30:34.712643+00:00",
+  "content": {
+    "title": "The appConfig.js object | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/config/appconfigjs",
+    "text_content": "On this page\nPage Tools\nThe appConfig.js object\n\nYou can control the behavior and appearance of your self-hosted Flex UI instance by specifying configuration properties in a JavaScript object housed within a file named appConfig.js.\n\nThis file must be made accessible on your Flex UI server at the location:\n\nCopy code block\npublic/assets/appConfig.js\n\nThe Flex UI application attempts to load the appConfig.js file from your server at startup. Flex UI then fetches your account's current Configuration resource via the Flex Configuration REST API, and merges any properties found in the ui_attributes field with the properties defined in appConfig.js to determine the app's effective configuration. Values defined in your server's appConfig.js take precedence over corresponding values defined in ui_attributes via the REST API.\n\nSee the REST API configuration guide to learn more about the Flex Configuration REST API.\n\n(information)\nInfo\n\nThe appConfig.js object is only directly accessible if you are running a self-hosted instance of Flex UI. If you are not running a self-hosted Flex instance (i.e. if you access Flex at https://flex.twilio.com\n), use the Flex Configuration REST API to manage your Flex instance's configuration.\n\nConfiguration properties\n\nTo see a complete list of fields you can specify in the configuration object, check out the Flex UI reference docs for the major version of Flex UI that you are using:\n\nFlex UI 1.x.x\nFlex UI 2.x.x\nSample content\n\nThis is example content for a valid Flex UI 2.x.x appConfig.js file.\n\nCopy code block\n1\nvar appConfig = {\n\n2\n  serviceBaseUrl: \"https://dancing-owl-1234.twil.io/\",\n\n3\n  sso: {\n\n4\n    accountSid: \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\n\n5\n  },\n\n6\n  sdkOptions: {\n\n7\n      chat: {},\n\n8\n      insights: {},\n\n9\n      voice: {},\n\n10\n      worker: {}\n\n11\n  },\n\n12\n  logLevel: \"debug\",\n\n13\n  theme: {\n\n14\n    isLight: false\n\n15\n  },\n\n16\n  componentProps: {\n\n17\n    CRMContainer: {\n\n18\n      uriCallback: (task) => task\n\n19\n        ? `https://www.bing.com/search?q=${task.attributes.name}`\n\n20\n        : \"http://bing.com\"\n\n21\n    }\n\n22\n  },\n\n23\n  router: {\n\n24\n    type: \"memory\",\n\n25\n    history: {\n\n26\n      initialEntries: [ \"/agent-desktop\" ]\n\n27\n    }\n\n28\n  }\n\n29\n};",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "public/assets/appConfig.js",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nvar appConfig = {\n\n2\n  serviceBaseUrl: \"https://dancing-owl-1234.twil.io/\",\n\n3\n  sso: {\n\n4\n    accountSid: \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\n\n5\n  },\n\n6\n  sdkOptions: {\n\n7\n      chat: {},\n\n8\n      insights: {},\n\n9\n      voice: {},\n\n10\n      worker: {}\n\n11\n  },\n\n12\n  logLevel: \"debug\",\n\n13\n  theme: {\n\n14\n    isLight: false\n\n15\n  },\n\n16\n  componentProps: {\n\n17\n    CRMContainer: {\n\n18\n      uriCallback: (task) => task\n\n19\n        ? `https://www.bing.com/search?q=${task.attributes.name}`\n\n20\n        : \"http://bing.com\"\n\n21\n    }\n\n22\n  },\n\n23\n  router: {\n\n24\n    type: \"memory\",\n\n25\n    history: {\n\n26\n      initialEntries: [ \"/agent-desktop\" ]\n\n27\n    }\n\n28\n  }\n\n29\n};",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

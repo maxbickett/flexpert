@@ -1,0 +1,321 @@
+{
+  "registry": {
+    "Manager": {
+      "total_usage": 2,
+      "methods": {
+        "getInstance": {
+          "usage_count": 2,
+          "examples": [
+            {
+              "code_snippet": "1\nconst manager = Flex.Manager.getInstance();\n\n2\nmanager.voiceClient.on('incoming', onVoiceClientConnectListener);\n\n3\n\n\n4\n// Listener function\n\n5\nfunction onVoiceClientConnectListener (){\n\n6\n  console...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates",
+              "full_match": "Flex.Manager.getInstance("
+            },
+            {
+              "code_snippet": "1\nconst { full_name, email } = Twilio.Flex.Manager.getInstance().workerClient.attributes;\n\n2\n\n\n3\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n4\n   body: <div><p>Your message here</p><p style='m...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Manager.getInstance("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.Manager.getInstance("
+          ]
+        }
+      }
+    },
+    "EmailMessageItem.Content": {
+      "total_usage": 1,
+      "methods": {
+        "replace": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "1\nconst CustomMessage = (props: EmailMessageItemChildrenProps) => {\n\n2\n    return <div>custom message</div>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailMessageItem.Content.replace(<CustomMessage key=\"custom\" />);\n\n6\n\n\n7",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.EmailMessageItem.Content.replace("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.EmailMessageItem.Content.replace("
+          ]
+        }
+      }
+    },
+    "EmailEditor.Content": {
+      "total_usage": 1,
+      "methods": {
+        "replace": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "1\nconst CustomEditor = (props: EmailEditorChildrenProps) => {\n\n2\n   return <textarea>custom content</textarea>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailEditor.Content.replace(<CustomMessage key=\"custom\" />);",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.EmailEditor.Content.replace("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.EmailEditor.Content.replace("
+          ]
+        }
+      }
+    },
+    "Actions": {
+      "total_usage": 7,
+      "methods": {
+        "invokeAction": {
+          "usage_count": 5,
+          "examples": [
+            {
+              "code_snippet": "1\nFlex.Actions.invokeAction(\"AttachFiles\", {\n\n2\n   files: [file1, file2],\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Actions.invokeAction("
+            },
+            {
+              "code_snippet": "1\nFlex.Actions.invokeAction(\"DownloadMedia\", {\n\n2\n   media: media,\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Actions.invokeAction("
+            },
+            {
+              "code_snippet": "1\nFlex.Actions.invokeAction(\"StartOutboundEmailTask\", {\n\n2\n   destination: \"customer@address.com\",\n\n3\n   queueSid: \"WQxxxx\",\n\n4\n   from: \"contactCenter@address.com\",\n\n5\n   fromName: \"My contact center...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Actions.invokeAction("
+            },
+            {
+              "code_snippet": "1\nconst { full_name, email } = Twilio.Flex.Manager.getInstance().workerClient.attributes;\n\n2\n\n\n3\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n4\n   body: <div><p>Your message here</p><p style='m...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Actions.invokeAction("
+            },
+            {
+              "code_snippet": "1\nconst conversationSid = \"CH...\"\n\n2\nconst task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(conversationSid);\n\n3\n\n\n4\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n5\n   body: <div><p>Hi $...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Actions.invokeAction("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.Actions.invokeAction("
+          ]
+        },
+        "addListener": {
+          "usage_count": 2,
+          "examples": [
+            {
+              "code_snippet": "1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   payload.htmlBody += <p style=\"font-size:10px; color:#666; margin-top:20px;\">CONFIDENTIAL: This email and any files transmitt...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Actions.addListener("
+            },
+            {
+              "code_snippet": "1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   const task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(payload.conversationSid);\n\n3\n   payload.htmlBody = payload.ht...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.Actions.addListener("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.Actions.addListener("
+          ]
+        }
+      }
+    },
+    "TaskHelper": {
+      "total_usage": 2,
+      "methods": {
+        "getTaskFromConversationSid": {
+          "usage_count": 2,
+          "examples": [
+            {
+              "code_snippet": "1\nconst conversationSid = \"CH...\"\n\n2\nconst task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(conversationSid);\n\n3\n\n\n4\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n5\n   body: <div><p>Hi $...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.TaskHelper.getTaskFromConversationSid("
+            },
+            {
+              "code_snippet": "1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   const task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(payload.conversationSid);\n\n3\n   payload.htmlBody = payload.ht...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+              "full_match": "Flex.TaskHelper.getTaskFromConversationSid("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.TaskHelper.getTaskFromConversationSid("
+          ]
+        }
+      }
+    },
+    "Component.Content": {
+      "total_usage": 3,
+      "methods": {
+        "add": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "1\nFlex.Component.Content.add(<MyComponent key=\"demo-component\"/>, {options});\n\n2\nFlex.Component.Content.replace(<MyComponent key=\"demo-component\"/>, {options});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.Component.Content.add("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.Component.Content.add("
+          ]
+        },
+        "replace": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "1\nFlex.Component.Content.add(<MyComponent key=\"demo-component\"/>, {options});\n\n2\nFlex.Component.Content.replace(<MyComponent key=\"demo-component\"/>, {options});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.Component.Content.replace("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.Component.Content.replace("
+          ]
+        },
+        "remove": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "Flex.Component.Content.remove(key, {options});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.Component.Content.remove("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.Component.Content.remove("
+          ]
+        }
+      }
+    },
+    "MainHeader.Content": {
+      "total_usage": 5,
+      "methods": {
+        "add": {
+          "usage_count": 4,
+          "examples": [
+            {
+              "code_snippet": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1,\n\n3\n  align: \"end\"\n\n4\n});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.MainHeader.Content.add("
+            },
+            {
+              "code_snippet": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  if : props => props.task.source.taskChannelUniqueName === \"custom1\"\n\n3\n});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.MainHeader.Content.add("
+            },
+            {
+              "code_snippet": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1\n\n3\n});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.MainHeader.Content.add("
+            },
+            {
+              "code_snippet": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  align: \"end\"\n\n3\n});",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.MainHeader.Content.add("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.MainHeader.Content.add("
+          ]
+        },
+        "remove": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "Flex.MainHeader.Content.remove(\"mute\");",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.MainHeader.Content.remove("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.MainHeader.Content.remove("
+          ]
+        }
+      }
+    },
+    "TaskCanvasTabs.Content": {
+      "total_usage": 1,
+      "methods": {
+        "add": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "1\nimport { Tab } from \"@twilio/flex-ui\"\n\n2\n\n\n3\ninit(flex, manager) {\n\n4\n  const Img = <img src=\"http://someimage.jpg\" />;\n\n5\n\n\n6\n  flex.TaskCanvasTabs.Content.add(\n\n7\n    <Tab icon={Img} iconActive={I...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "flex.TaskCanvasTabs.Content.add("
+            }
+          ],
+          "unique_patterns": [
+            "flex.TaskCanvasTabs.Content.add("
+          ]
+        }
+      }
+    },
+    "WorkerDirectory.Tabs.Content": {
+      "total_usage": 1,
+      "methods": {
+        "add": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "1\nFlex.WorkerDirectory.Tabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.WorkerDirectory.Tabs.Content.add("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.WorkerDirectory.Tabs.Content.add("
+          ]
+        }
+      }
+    },
+    "WorkersDataTable.Content": {
+      "total_usage": 3,
+      "methods": {
+        "add": {
+          "usage_count": 3,
+          "examples": [
+            {
+              "code_snippet": "1\nimport { TaskCardList, ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(\n\n4\n       <ColumnDefinition key=\"calls\" header={\"My Custom Header\"} content={(items, conte...",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.WorkersDataTable.Content.add("
+            },
+            {
+              "code_snippet": "1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"hello\" header={\"Helloxxx\"} content={<div>hello</div>}/>);",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.WorkersDataTable.Content.add("
+            },
+            {
+              "code_snippet": "1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"team\" header={\"Team\"} content={item => item.worker.attributes.team_name}/>);",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.WorkersDataTable.Content.add("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.WorkersDataTable.Content.add("
+          ]
+        }
+      }
+    },
+    "Supervisor.TaskCanvasTabs.Content": {
+      "total_usage": 1,
+      "methods": {
+        "add": {
+          "usage_count": 1,
+          "examples": [
+            {
+              "code_snippet": "1\nFlex.Supervisor.TaskCanvasTabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);",
+              "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+              "full_match": "Flex.Supervisor.TaskCanvasTabs.Content.add("
+            }
+          ],
+          "unique_patterns": [
+            "Flex.Supervisor.TaskCanvasTabs.Content.add("
+          ]
+        }
+      }
+    }
+  },
+  "validation": {
+    "total_examples_scanned": 150,
+    "examples_with_matches": 23,
+    "match_rate": "15.3%",
+    "total_components_found": 11,
+    "total_methods_found": 15
+  }
+}

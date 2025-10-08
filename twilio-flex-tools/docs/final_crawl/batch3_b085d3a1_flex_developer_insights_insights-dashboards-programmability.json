@@ -1,0 +1,31 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/insights/insights-dashboards-programmability",
+  "batch_id": 3,
+  "crawled_at": "2025-10-07T20:30:59.305254+00:00",
+  "content": {
+    "title": "Dashboards Programmability | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/insights/insights-dashboards-programmability",
+    "text_content": "On this page\nPage Tools\nDashboards Programmability\n(new)\nPublic beta\n\nFlex Insights (also known as Historical Reporting) is currently available as a public beta release and the information contained in the Flex Insights documentation is subject to change. This means that some features are not yet implemented and others may be changed before the product is declared as generally available. Public beta products are not covered by a Twilio SLA.\n\nAny reference to \"Historical Reporting\", \"Flex Insights API\", \"Flex Insights Historical Reporting\", or \"Flex Insights Historical Reporting API\" in the Flex Insights documentation refers to Flex Insights.\n\n(information)\nInfo\n\nA developer proxy is needed for local development. Learn more about Local Development.\n\nStarting version 1.27, Flex allows users to programmatically configure the Dashboards navigation. Currently setting a filter for the Dashboards is supported.\n\n(warning)\nWarning\n\nThis feature is for convenience use only and cannot be considered a security feature. Even with filtering enabled, agents are technically still able to access the whole list of the dashboards they have permissions to view.\n\nTerminology\n\nTo explain how the filtering works, it is important to establish some terms and explain how the navigation works.\n\nWe currently support 2 different kinds of dashboards:\n\nThe Project Dashboards, which group sets of Tabs, which you can select to display a dashboard,\nand Analytical Dashboards, which by themselves are the dashboards.\nSidebar navigation\n\nThe Sidebar is used to list all the dashboards and tabs. On top, there is a dropdown, which allows you to select between All Dashboards, My Dashboards and also allows you to select a specific Project Dashboard.\n\nExpand image\n\nWhen All Dashboards are selected, the list will display all the Analytical Dashboards first and then every Project Dashboard along with its tabs.\n\nWhen a specific Project Dashboard is selected, the list will only display its underlying tabs.\n\nDashboardsSidebar component\n\nThis component has 2 default props that can be overridden:\n\ndashboardsFilter: (dashboard) => boolean\ndashboardTabFilter: (tab, dashboard) => boolean\n\nThese props are available under the following namespace: Flex.Insights.DashboardsSidebar.defaultProps.\n\ndashboardsFilter\n\nThe dashboardsFilter determines which dashboards will be available in the dropdown at the top of the sidebar and as part of the navigation. The return value from the function dictates if the particular Dashboard will be displayed or hidden.\n\nThe function takes dashboard as an argument. This can be either an Analytical Dashboard or a Project Dashboard.\n\nIf false is returned for a Project Dashboard, it will disappear from both the dropdown and from the navigation - if \"All Dashboards\" is selected, along with all of its tabs. If you want to hide only some of the tabs, use the dashboardTabFilter prop.\n\nIf false is returned for an Analytical Dashboard, it will be hidden from the top of the navigation, when \"All Dashboards\" is selected.\n\nThe dashboard argument has the following shape:\n\nCopy code block\n1\nidentifier: string;\n\n2\ncategory?: string;\n\n3\nlink?: string;\n\n4\ntitle?: string;\n\n5\nauthor?: string;\n\n6\ntabs?: Array<{\n\n7\n    title: string;\n\n8\n    identifier: string;\n\n9\n}>;\n\n10\nwidgets?: string[];\nExample\n\nIn this example, let's say you want to hide a dashboard named \"Control Center\":\n\nCopy code block\n1\nFlex.Insights.DashboardsSidebar.defaultProps.dashboardsFilter = (dashboard) =>\n\n2\n  dashboard.title !== \"Control Center\";\ndashboardTabFilter\n\nSometimes you might not want to hide the whole Project Dashboard, but only some of its tabs. That's when this function comes in handy.\n\nThe function takes tab and a dashboard as its arguments. Each Project Dashboard tab is checked against this filter and the return value for that tab determines if the tab should be displayed or not. The dashboard argument is the Project Dashboard which the tab is part of. This allows you to decide not only based on the tab title itself, but also by the properties of the dashboard, as displayed in the example below.\n\nThe tab argument has the following shape:\n\nCopy code block\n1\ntitle: string;\n\n2\nidentifier: string;\nExample\n\nLet's say you want to hide a tab named Conversations which is part of the Control Center dashboard:\n\nCopy code block\n1\nFlex.Insights.DashboardsSidebar.defaultProps.dashboardTabFilter = (\n\n2\n  tab,\n\n3\n  dashboard\n\n4\n) => tab.title !== \"Conversations\" && dashboard.title !== \"Control Center\";\n\nIt might, however, be a better idea to filter directly by ID. To find out ID for any dashboard, you can follow this guide. The ID in the URL corresponds with the tab.identifier key.\n\nNote: Setting a dashboardTabFilter has no effect on Analytical Dashboards.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nidentifier: string;\n\n2\ncategory?: string;\n\n3\nlink?: string;\n\n4\ntitle?: string;\n\n5\nauthor?: string;\n\n6\ntabs?: Array<{\n\n7\n    title: string;\n\n8\n    identifier: string;\n\n9\n}>;\n\n10\nwidgets?: string[];",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Insights.DashboardsSidebar.defaultProps.dashboardsFilter = (dashboard) =>\n\n2\n  dashboard.title !== \"Control Center\";",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ntitle: string;\n\n2\nidentifier: string;",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Insights.DashboardsSidebar.defaultProps.dashboardTabFilter = (\n\n2\n  tab,\n\n3\n  dashboard\n\n4\n) => tab.title !== \"Conversations\" && dashboard.title !== \"Control Center\";",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

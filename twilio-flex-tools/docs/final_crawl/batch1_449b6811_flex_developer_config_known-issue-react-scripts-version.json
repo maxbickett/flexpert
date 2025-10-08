@@ -1,0 +1,19 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/config/known-issue-react-scripts-version",
+  "batch_id": 1,
+  "crawled_at": "2025-10-07T20:30:38.757354+00:00",
+  "content": {
+    "title": "Known issue: Self-hosted Flex 2.7.0 and later requires specific react-scripts version | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/config/known-issue-react-scripts-version",
+    "text_content": "On this page\nPage Tools\nKnown issue: Self-hosted Flex 2.7.0 and later requires specific react-scripts version\n\nIf you use self-hosted Flex and your custom application uses react-scripts v5, you must apply a workaround to use Flex UI 2.7.0 or later due to a react-scripts issue. Without the workaround, Flex will fail to initialize.\n\nThis happens because react-scripts v5 includes a known issue that prevents CommonJS modules from loading correctly and defines them incorrectly in the final bundle. At this time, there is no indication that this react-scripts issue will be fixed, so we are providing the following workaround to enable you to upgrade your Flex version.\n\nWorkaround\n\nYou must modify the webpack configuration that is included with react-scripts v5 as shown in the example below. We recommend using craco\n, but you can also use other packages that allow you to tweak the react-scripts configuration, such as react-app-rewired\n.\n\nThis example shows craco.config.js extends the react-scripts webpack configuration:\n\nCopy code block\n1\nmodule.exports = {\n\n2\n    webpack: {\n\n3\n        configure: (config) => {\n\n4\n            // ...\n\n5\n            const fileLoaderRule = getFileLoaderRule(config.module.rules);\n\n6\n            if(!fileLoaderRule) {\n\n7\n                throw new Error(\"File loader not found\");\n\n8\n            }\n\n9\n            fileLoaderRule.exclude.push(/\\.cjs$/);\n\n10\n            // ...\n\n11\n\t    return config;\n\n12\n        }\n\n13\n    }\n\n14\n};\n\n15\n\n\n16\nfunction getFileLoaderRule(rules) {\n\n17\n    for(const rule of rules) {\n\n18\n        if(\"oneOf\" in rule) {\n\n19\n            const found = getFileLoaderRule(rule.oneOf);\n\n20\n            if(found) {\n\n21\n                return found;\n\n22\n            }\n\n23\n        } else if(rule.test === undefined && rule.type === 'asset/resource') {\n\n24\n            return rule;\n\n25\n        }\n\n26\n    }\n\n27\n}",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nmodule.exports = {\n\n2\n    webpack: {\n\n3\n        configure: (config) => {\n\n4\n            // ...\n\n5\n            const fileLoaderRule = getFileLoaderRule(config.module.rules);\n\n6\n            if(!fileLoaderRule) {\n\n7\n                throw new Error(\"File loader not found\");\n\n8\n            }\n\n9\n            fileLoaderRule.exclude.push(/\\.cjs$/);\n\n10\n            // ...\n\n11\n\t    return config;\n\n12\n        }\n\n13\n    }\n\n14\n};\n\n15\n\n\n16\nfunction getFileLoaderRule(rules) {\n\n17\n    for(const rule of rules) {\n\n18\n        if(\"oneOf\" in rule) {\n\n19\n            const found = getFileLoaderRule(rule.oneOf);\n\n20\n            if(found) {\n\n21\n                return found;\n\n22\n            }\n\n23\n        } else if(rule.test === undefined && rule.type === 'asset/resource') {\n\n24\n            return rule;\n\n25\n        }\n\n26\n    }\n\n27\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

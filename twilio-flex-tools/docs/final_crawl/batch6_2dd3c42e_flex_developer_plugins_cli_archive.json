@@ -1,0 +1,41 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/archive",
+  "batch_id": 6,
+  "crawled_at": "2025-10-07T20:30:44.667142+00:00",
+  "content": {
+    "title": "Archive Plugins and Configurations | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/archive",
+    "text_content": "On this page\nPage Tools\nArchive Plugins and Configurations\n\nThe twilio flex:plugins:archive command provides the ability to archive a plugin, a plugin version, or a configuration. When archived, you can no longer enable the plugin for agents via the Plugins Dashboard or Plugins CLI. You can archive a configuration to prevent it from being redeployed.\n\n(warning)\nWarning\n\nArchiving a plugin or configuration is a permanent action and cannot be undone.\n\nCompatible CLI versions\n\nYou need to install the latest version of the Flex Plugins CLI in order to use these features. If you're migrating a legacy plugin to use the new CLI, refer to our Migration Guide.\n\nArchive a plugin\nA plugin can be archived only if it is not currently enabled within Flex.\nWhen a plugin is archived, none of its versions can be enabled within Flex.\nYou cannot redeploy any prior release that contains the archived plugin or plugin version.\n\nYou can archive a plugin by passing its name via the --name argument.\n\nCopy code block\ntwilio flex:plugins:archive:plugin --name plugin-sample\n\nYou can archive a version of a plugin by passing the plugin name and the version via the --name and --version arguments.\n\nCopy code block\ntwilio flex:plugins:archive:plugin-version --name plugin-test --version 1.0.0\nArchive a configuration\n\nSometimes you push changes to your application that need to be reverted and fixed. You can archive those changes to prevent someone from accidentally redeploying the changes to your application.\n\nFetch previous releases\nCopy code block\ntwilio flex:plugins:list:releases\nChoose a prior configuration\n\nFrom the list of Releases, choose the one that you want to archive. Copy the configuration_sid of that release.\n\nUse the describe command to get details on the Configuration and confirm that it is the Configuration you want to archive.\n\nCopy code block\ntwilio flex:plugins:describe:configuration --sid <Configuration Sid>\nArchive the configuration\n\nRun the archive command with the copied configuration_sid.\n\nCopy code block\ntwilio flex:plugins:archive:configuration --sid <Configuration Sid>\nPlugins Dashboard: View archived plugins\n\nYou can access the Plugins Dashboard\n by logging in as a Flex Admin. Archived plugins can be viewed along with the rest of your plugins.\n\nExpand image\n\nClick on a plugin and on the version dropdown to see information of versions of the plugin that have been archived.\n\nExpand image\n\nViewing archived configurations:\n\nExpand image\nNext Steps\nDeploy your plugins to your agents, and keep your development environment up-to-date.\nLearn about other common use cases for the Plugins CLI.",
+    "cli_commands": [
+      "twilio flex:plugins:archive:plugin --name plugin-sample",
+      "twilio flex:plugins:archive:plugin-version --name plugin-test --version 1.0.0",
+      "twilio flex:plugins:list:releases",
+      "twilio flex:plugins:describe:configuration --sid <Configuration Sid>",
+      "twilio flex:plugins:archive:configuration --sid <Configuration Sid>"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "twilio flex:plugins:archive:plugin --name plugin-sample",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:archive:plugin-version --name plugin-test --version 1.0.0",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:list:releases",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:describe:configuration --sid <Configuration Sid>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:archive:configuration --sid <Configuration Sid>",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

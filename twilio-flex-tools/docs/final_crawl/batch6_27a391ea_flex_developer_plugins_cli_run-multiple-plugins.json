@@ -1,0 +1,61 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/run-multiple-plugins",
+  "batch_id": 6,
+  "crawled_at": "2025-10-07T20:30:55.387485+00:00",
+  "content": {
+    "title": "Run Multiple Plugins Locally Using the Flex Plugins CLI | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/run-multiple-plugins",
+    "text_content": "On this page\nPage Tools\nRun Multiple Plugins Locally Using the Flex Plugins CLI\n\nThe twilio flex:plugins:start command enables you to load multiple plugins on a local instance of Flex. It can load plugins either from the local source directory of a plugin or those that are currently enabled on your Flex application. This command makes it easier and quicker to test a plugin you are developing locally with other plugins.\n\nCompatible CLI versions\n\nYou need to install the latest version of the Flex Plugins CLI in order to use these features. If you're migrating a legacy plugin to use the new CLI, refer to our Migration Guide.\n\nRegister existing plugins\n\nPlugins on your development machine must be registered with the Plugins CLI if you want to include them in a test environment. To register your plugins:\n\nOption 1: Download your plugin source using the CLI\n\nCopy code block\ntwilio flex:plugins:create --template <github url of plugin> --install\n\nOption 2: Register a plugin already on your machine\n\nCopy code block\n1\n# Executed within the directory of your plugin\n\n2\ntwilio flex:plugins:start\n\n3\nRun multiple plugins\n\nThe Plugins CLI can access any plugin that you have deployed to your Flex account (remote plugins) and any plugin that you are developing on your own machine (local plugins).\n\nUsing local plugins\n\nYou can choose the plugins you want to run locally by using the --name argument. The name corresponds to the name field in the package.json of your plugin. When you run the command in your plugin directory, you don't have to pass the name of the plugin.\n\nCopy code block\nplugin-agent-response $ twilio flex:plugins:start --name plugin-sample\n\nThe command does the following:\n\nStarts a local instance of Flex\nSince the command is being run in a plugin directory, it loads plugin-agent-response\nSince plugin-sample is being passed using the --name argument, it also loads the plugin plugin-sample\n\nBy default, your local Flex instance can be accessed from localhost:3000. If you see a login page, the 'Login with Twilio' option will log you into Flex without configuring SSO.\n\n(warning)\nSSO login requires additional configuration\n\nIf you need to log in to Flex using SSO instead, make sure that you first configure the appConfig.js file to support localhost as one of the redirectUrl values.\n\nRefer to your Terminal output for information on the plugin directories being used by the local server:\n\nExpand image\nUsing remote plugins\nViewing plugins deployed on you Flex application\n\nYou can view the plugins currently deployed on your Flex application by accessing the Plugins Dashboard\n or by running the following command via the CLI\n\nCopy code block\ntwilio flex:plugins:list:plugins\nIncluding every remote plugin\n\nUse the --include-remote argument to load every plugin that is already enabled on your live Flex application. This shortcut allows you to test any new changes against your normal Flex environment, without manually downloading & running each plugin individually.\n\nCopy code block\nplugin-agent-response $ twilio flex:plugins:start --include-remote\n\nThe command does the following:\n\nStarts a local instance of Flex\nSince the command is being run in a plugin directory, it loads plugin-agent-response\nSince --include-remote is used, it accesses your live Flex application, fetches the list of all currently enabled plugins, and loads each of these alongside plugin-agent-response\n\nIf plugin-agent-response is already deployed to your live Flex application, your local version will be used in place of the remote version.\n\nAn example output is shown below:\n\nExpand image\nIncluding select remote plugins\n\nYou can use the @remote tag if you only want to run a subset of your live plugins. The @remote tag will automatically load the version that is currently enabled on your Flex application. Each plugin you want to include must be identified with the --name flag.\n\nCopy code block\nplugin-agent-response $ twilio flex:plugins:start --name plugin-agent-notes@remote\n\nAn example output is shown below:\n\nExpand image\nIncluding select remote plugin version\n\nYou can choose a version of a plugin to load by using the format plugin name@version. You need to ensure that the version has been deployed to your Flex application. This lets you run a remote plugin locally without enabling it on your account.\n\nCopy code block\nplugin-sample $ twilio flex:plugins:start --name plugin-agent-notes@1.0.0\n\nAn example output is shown below:\n\nExpand image\nView all plugins registered by Flex Plugins CLI\n(warning)\nWarning\n\nThis settings file is used to identify which plugins can be accessed by the CLI. If you remove or edit this file, you may need to re-register your plugins using the methods listed above.\n\nThe Plugins CLI keeps track of all your registered plugins in a settings file. To view details on your registered plugins:\n\nmacOS/Linux\nCopy code block\ncd & cat ~/.twilio-cli/flex/plugins.json\nWindows\n\nRun the following command in your Home Directory ( C:\\Users\\$USERNAME)\n\nCopy code block\ntype .twilio-cli\\flex\\plugins.json\n(information)\nInfo\n\nWhile testing your plugin across multiple Flex applications, we recommend switching your project within your remote Flex application and restarting your development server.\n\nNext Steps\nDeploy your plugins to your agents, and keep your development environment up-to-date.\nLearn about other common use cases for the Plugins CLI.",
+    "cli_commands": [
+      "twilio flex:plugins:create --template <github url of plugin> --install",
+      "twilio flex:plugins:start",
+      "plugin-agent-response $ twilio flex:plugins:start --name plugin-sample",
+      "twilio flex:plugins:list:plugins",
+      "plugin-agent-response $ twilio flex:plugins:start --include-remote",
+      "plugin-agent-response $ twilio flex:plugins:start --name plugin-agent-notes@remote",
+      "plugin-sample $ twilio flex:plugins:start --name plugin-agent-notes@1.0.0",
+      "cd & cat ~/.twilio-cli/flex/plugins.json",
+      "type .twilio-cli\\flex\\plugins.json"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "twilio flex:plugins:create --template <github url of plugin> --install",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n# Executed within the directory of your plugin\n\n2\ntwilio flex:plugins:start\n\n3",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "plugin-agent-response $ twilio flex:plugins:start --name plugin-sample",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:list:plugins",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "plugin-agent-response $ twilio flex:plugins:start --include-remote",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "plugin-agent-response $ twilio flex:plugins:start --name plugin-agent-notes@remote",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "plugin-sample $ twilio flex:plugins:start --name plugin-agent-notes@1.0.0",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "cd & cat ~/.twilio-cli/flex/plugins.json",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "type .twilio-cli\\flex\\plugins.json",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

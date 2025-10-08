@@ -1,0 +1,181 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/interactions-api",
+  "batch_id": 1,
+  "crawled_at": "2025-10-07T20:30:51.215723+00:00",
+  "content": {
+    "title": "Interactions API | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/interactions-api",
+    "text_content": "On this page\nPage Tools\nInteractions API\nBase URL\nCopy code block\nhttps://flex-api.twilio.com/v1\nAuthentication\n\nThe Flex API uses the same HTTP Basic Authentication as other Twilio APIs. Use your Twilio account SID as your username and your Auth Token as your password.\n\nResources\nInteractions Resource\nInteraction Channel Participants\nChannels Subresource\nInvites Subresource\nExample request and response\n\nThe following is an example of an agent-initiated interaction.\n\nRequest\nAgent-initiated outbound SMS\nNode.js\nPython\nC#\nJava\nGo\nPHP\nRuby\ntwilio-cli\ncurl\nReport code block\nCopy code block\n1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createInteraction() {\n\n11\n  const interaction = await client.flexApi.v1.interaction.create({\n\n12\n    channel: {\n\n13\n      type: \"sms\",\n\n14\n      initiated_by: \"agent\",\n\n15\n      participants: [\n\n16\n        {\n\n17\n          address: \"+12345678910\",\n\n18\n          proxy_address: \"+192555512345\",\n\n19\n        },\n\n20\n      ],\n\n21\n    },\n\n22\n    routing: {\n\n23\n      properties: {\n\n24\n        workspace_sid: \"WSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n25\n        workflow_sid: \"WWXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n26\n        queue_sid: \"WQXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n27\n        worker_sid: \"WKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n28\n        task_channel_unique_name: \"sms\",\n\n29\n        attributes: {\n\n30\n          customerName: \"first last\",\n\n31\n          customerAddress: \"+15551234567\",\n\n32\n        },\n\n33\n      },\n\n34\n    },\n\n35\n  });\n\n36\n\n\n37\n  console.log(interaction.sid);\n\n38\n}\n\n39\n\n\n40\ncreateInteraction();\nResponse\nCopy response\n1\n{\n\n2\n  \"sid\": \"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"channel\": {\n\n4\n    \"type\": \"sms\",\n\n5\n    \"sid\": \"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n6\n  },\n\n7\n  \"routing\": {\n\n8\n    \"reservation\": null,\n\n9\n    \"properties\": {\n\n10\n      \"date_updated\": 1634845217,\n\n11\n      \"task_queue_entered_date\": 1634845217,\n\n12\n      \"workflow_name\": \"Default Fifo Workflow\",\n\n13\n      \"age_in_queue\": 0,\n\n14\n      \"task_channel_unique_name\": \"default\",\n\n15\n      \"assignment_status\": \"pending\",\n\n16\n      \"queue_name\": \"Sample Queue\",\n\n17\n      \"assignmentCounter\": 0,\n\n18\n      \"priority\": 0,\n\n19\n      \"sid\": \"WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n20\n      \"workflow_sid\": \"WWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n21\n      \"routing_target\": \"WKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n22\n      \"reason\": \"\",\n\n23\n      \"attributes\": \"{\\\"customerAddress\\\":\\\"customer phone address\\\",\\\"flexChannelInviteSid\\\":\\\"KGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"conversationSid\\\":\\\"CHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"channelType\\\":\\\"sms\\\",\\\"customers\\\":{\\\"phone\\\":\\\"customer phone address\\\",\\\"name\\\":\\\"customer name\\\"},\\\"conversations\\\":{\\\"initiated_by\\\":\\\"customer\\\",\\\"conversation_id\\\":\\\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"media\\\":[{\\\"type\\\":\\\"ChatTranscript\\\",\\\"sid\\\":\\\"CHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\"}]},\\\"customerName\\\":\\\"customer name\\\",\\\"flexInteractionChannelSid\\\":\\\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"initiatedBy\\\":\\\"customer\\\",\\\"flexInteractionSid\\\":\\\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"direction\\\":\\\"inbound\\\"}\",\n\n24\n      \"task_channel_sid\": \"TCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n25\n      \"age\": 0,\n\n26\n      \"workspace_sid\": \"WSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n27\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n28\n      \"timeout\": 86400,\n\n29\n      \"date_created\": 1634845217,\n\n30\n      \"addons\": \"{}\",\n\n31\n      \"queue_sid\": \"WQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n32\n    }\n\n33\n  },\n\n34\n  \"interaction_context_sid\": null,\n\n35\n  \"webhook_ttid\": \"flex_interactionwebhook_00000000000000000000000000\",\n\n36\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n37\n  \"links\": {\n\n38\n    \"channels\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels\"\n\n39\n  }\n\n40\n}\nResponse\nCopy code block\n1\n{\n\n2\n   \"url\": \"//https://flex-api.twilio.com//v1/Interactions/KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n3\n   \"routing\": {\n\n4\n       \"reservation\": null,\n\n5\n       \"properties\": {\n\n6\n           \"date_updated\": 1637013849,\n\n7\n           \"task_queue_entered_date\": 1637013849,\n\n8\n           \"workflow_name\": \"Assign to Anyone\",\n\n9\n           \"age_in_queue\": 0,\n\n10\n           \"task_channel_unique_name\": \"sms\",\n\n11\n           \"assignment_status\": \"pending\",\n\n12\n           \"queue_name\": \"Everyone\",\n\n13\n           \"assignmentCounter\": 0,\n\n14\n           \"priority\": 0,\n\n15\n           \"sid\": \"WTXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n16\n           \"workflow_sid\": \"WWXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n17\n           \"routing_target\": \"WKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n18\n           \"reason\": null,\n\n19\n           \"attributes\": \"{\\\"customerAddress\\\":\\\"+1234-567-8910\\\",\\\"flexChannelInviteSid\\\":\\\"KGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\",\\\"conversationSid\\\":\\\"CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\",\\\"channelType\\\":\\\"sms\\\",\\\"conversations\\\":{\\\"initiated_by\\\":\\\"Agent\\\",\\\"communication_channel\\\":\\\"Sms\\\",\\\"media\\\":[{\\\"conversation_sid\\\":\\\"CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\"}],\\\"direction\\\":\\\"Outbound\\\"},\\\"customerName\\\":\\\"silly name\\\",\\\"flexInteractionChannelSid\\\":\\\"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\",\\\"initiatedBy\\\":\\\"agent\\\",\\\"direction\\\":\\\"outbound\\\"}\",\n\n20\n           \"task_channel_sid\": \"TCXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n21\n           \"age\": 0,\n\n22\n           \"workspace_sid\": \"WSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n23\n           \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n24\n           \"timeout\": 86400,\n\n25\n           \"date_created\": 1637013849,\n\n26\n           \"addons\": \"{}\",\n\n27\n           \"queue_sid\": \"WQXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\n\n28\n       }\n\n29\n   },\n\n30\n   \"channel\": {\n\n31\n       \"type\": \"sms\",\n\n32\n       \"sid\": \"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\n\n33\n   },\n\n34\n   \"sid\": \"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n35\n   \"links\": {\n\n36\n       \"channels\": \"//https://flex-api.twilio.com/v1/Interactions/KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Channels\"\n\n37\n   }\n\n38\n}\nTask attributes\n\nThe following is a list of common attributes that are consumed by the Flex UI and/or Flex Insights.\n\nAttribute\tDescription\tExample\ncustomerName\tFor Insights, this attribute is used to populate conversations.customers.name.\n\nIn the Flex UI, this attribute is rendered as the main customer's name for an email task.\tFirst Last\ncustomerAddress\tFor Insights, this attribute is used to populate conversations.customers.email or conversations.customers.phone.\n\nIn the Flex UI, this attribute is rendered as the main customer's email address for an email task.\t+12345678910 or\n\nexample@example.com\nfrom\tThis is the Flex UI's preferred attribute for identifying the customer on non-email tasks. For email tasks, it uses customerName.\tFirst Last, +1234567890\nsubject\tIn the Flex UI, this is the initial subject of an email thread task.\tIssue with shoes\nflexInteractionChannelSid\tUsed in the Flex UI to identify whether a task is interaction-based or not and therefore whether there is a need for Flex UI orchestration or not.\tUOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nflexInteractionSid\tThe interaction SID.\tKDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nflexChannelInviteSid\tThe invite SID.\tKGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nfollowed_by\tUsed for external warm transfers.\t\noutcome\tUsed for external warm transfers.\t\ncustomers\tThis object is automatically added if customerAddress and customerName are provided.\n\nThis object contains the name, phone, and email of a single customer.\n\nname [required]: The display name of the customer. If name is not available, it must be set to null\n\nphone [required]: The phone number or WhatsApp number of the customer. If number is not available, it should be set to null\n\nemail [required]: The email address of the customer. If no email address is available, it should be set to null\t\"customers\": {\n\n\"name\": \"Al Fresco\",\n\n\"Phone\": \"+12345678910\",\n\n\"email\": null\n\n}\n\nThe following attributes are added when the channel is created (asynchronously):\n\nAttribute\tDescription\tExample\nconversations.external_contact\n\n(This is the Conversation projected address)\tFor Insights, this is the contact address the customer used to reach you or the contact address from which you have reached them. This may be an inbound support phone number, your support email, or a phone number that appears on the customer's phone when you call them.\n\nThe contact information (email or phone number) that the customer uses or sees when communicating with the contact center can be used for traffic segmentation.\thelp@example.com\nTask attributes mapped from channel attributes\n\nSome interaction request channel attributes are also used to create other task attributes. The following table lists those task attributes that are created from the given channel attributes:\n\nInteraction Channel attribute\tTask attribute(s)\tValues\ntype\tconversations.media.type (Insights)\n\nFor all conversation media types\tChatTranscript\n\tconversations.communication_channel (Insights)\tEmail, SMS, Whatsapp, Web, Chat\n\tchannelType (FlexUI)\n\nThe Flex UI uses this to identify tasks that have the same \"uniqueTaskChannelName\" as chat, but have to be treated differently (for example, email or sms).\temail, sms, whatsapp, web, chat, messenger, gbm\ninitiated_by\tdirection (Flex UI)\n\nWhen initiated_by is set to agent, this value is outbound, otherwise it's inbound.\tcustomer | api | agent\nproperties.media_channel_sid\tconversations.conversation_id (Insights)\tKDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\tconversations.media.sid (Insights)\t\n\tconversationSid (Flex UI)\t\n\nThe following table captures the reason for requiring these attributes:\n\nFlex Insights attributes\tHow/why is it used?\nconversations.media.type\tExample of the entire media object with attached chat transcript.\nconversations.initiated_by\tFlex Insights: Used to identify how the conversation was initiated. This helps to identify funnels leading towards a conversation.\nconversations.external_contact\tFlex Insights: The contact address the customer used to reach you or the contact address from which you have reached them. This may be an inbound support phone number, your support email, or a phone number that appears on the customer's phone when you call them.\n\nUseful for segmenting traffic by contact information (email or phone)\nconversations.conversation_id\n\nconversations.media.sid\tThe ID of the conversation used for Historical insights. The Media SID is used to get access to the transcripts.\nErrors\n\nSome common errors you may encounter include Error 20003 and Error 11200. See the Twilio Error and Warning Dictionary for a list of potential errors.",
+    "cli_commands": [
+      "https://flex-api.twilio.com/v1",
+      "const twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";",
+      "const client = twilio(accountSid, authToken);",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",",
+      "\"channels\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels\"",
+      "\"url\": \"//https://flex-api.twilio.com//v1/Interactions/KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",",
+      "\"channels\": \"//https://flex-api.twilio.com/v1/Interactions/KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Channels\""
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "https://flex-api.twilio.com/v1",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createInteraction() {\n\n11\n  const interaction = await client.flexApi.v1.interaction.create({\n\n12\n    channel: {\n\n13\n      type: \"sms\",\n\n14\n      initiated_by: \"agent\",\n\n15\n      participants: [\n\n16\n        {\n\n17\n          address: \"+12345678910\",\n\n18\n          proxy_address: \"+192555512345\",\n\n19\n        },\n\n20\n      ],\n\n21\n    },\n\n22\n    routing: {\n\n23\n      properties: {\n\n24\n        workspace_sid: \"WSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n25\n        workflow_sid: \"WWXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n26\n        queue_sid: \"WQXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n27\n        worker_sid: \"WKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n28\n        task_channel_unique_name: \"sms\",\n\n29\n        attributes: {\n\n30\n          customerName: \"first last\",\n\n31\n          customerAddress: \"+15551234567\",\n\n32\n        },\n\n33\n      },\n\n34\n    },\n\n35\n  });\n\n36\n\n\n37\n  console.log(interaction.sid);\n\n38\n}\n\n39\n\n\n40\ncreateInteraction();",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"sid\": \"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"channel\": {\n\n4\n    \"type\": \"sms\",\n\n5\n    \"sid\": \"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n6\n  },\n\n7\n  \"routing\": {\n\n8\n    \"reservation\": null,\n\n9\n    \"properties\": {\n\n10\n      \"date_updated\": 1634845217,\n\n11\n      \"task_queue_entered_date\": 1634845217,\n\n12\n      \"workflow_name\": \"Default Fifo Workflow\",\n\n13\n      \"age_in_queue\": 0,\n\n14\n      \"task_channel_unique_name\": \"default\",\n\n15\n      \"assignment_status\": \"pending\",\n\n16\n      \"queue_name\": \"Sample Queue\",\n\n17\n      \"assignmentCounter\": 0,\n\n18\n      \"priority\": 0,\n\n19\n      \"sid\": \"WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n20\n      \"workflow_sid\": \"WWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n21\n      \"routing_target\": \"WKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n22\n      \"reason\": \"\",\n\n23\n      \"attributes\": \"{\\\"customerAddress\\\":\\\"customer phone address\\\",\\\"flexChannelInviteSid\\\":\\\"KGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"conversationSid\\\":\\\"CHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"channelType\\\":\\\"sms\\\",\\\"customers\\\":{\\\"phone\\\":\\\"customer phone address\\\",\\\"name\\\":\\\"customer name\\\"},\\\"conversations\\\":{\\\"initiated_by\\\":\\\"customer\\\",\\\"conversation_id\\\":\\\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"media\\\":[{\\\"type\\\":\\\"ChatTranscript\\\",\\\"sid\\\":\\\"CHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\"}]},\\\"customerName\\\":\\\"customer name\\\",\\\"flexInteractionChannelSid\\\":\\\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"initiatedBy\\\":\\\"customer\\\",\\\"flexInteractionSid\\\":\\\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\\\",\\\"direction\\\":\\\"inbound\\\"}\",\n\n24\n      \"task_channel_sid\": \"TCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n25\n      \"age\": 0,\n\n26\n      \"workspace_sid\": \"WSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n27\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n28\n      \"timeout\": 86400,\n\n29\n      \"date_created\": 1634845217,\n\n30\n      \"addons\": \"{}\",\n\n31\n      \"queue_sid\": \"WQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n32\n    }\n\n33\n  },\n\n34\n  \"interaction_context_sid\": null,\n\n35\n  \"webhook_ttid\": \"flex_interactionwebhook_00000000000000000000000000\",\n\n36\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n37\n  \"links\": {\n\n38\n    \"channels\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels\"\n\n39\n  }\n\n40\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n   \"url\": \"//https://flex-api.twilio.com//v1/Interactions/KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n3\n   \"routing\": {\n\n4\n       \"reservation\": null,\n\n5\n       \"properties\": {\n\n6\n           \"date_updated\": 1637013849,\n\n7\n           \"task_queue_entered_date\": 1637013849,\n\n8\n           \"workflow_name\": \"Assign to Anyone\",\n\n9\n           \"age_in_queue\": 0,\n\n10\n           \"task_channel_unique_name\": \"sms\",\n\n11\n           \"assignment_status\": \"pending\",\n\n12\n           \"queue_name\": \"Everyone\",\n\n13\n           \"assignmentCounter\": 0,\n\n14\n           \"priority\": 0,\n\n15\n           \"sid\": \"WTXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n16\n           \"workflow_sid\": \"WWXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n17\n           \"routing_target\": \"WKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n18\n           \"reason\": null,\n\n19\n           \"attributes\": \"{\\\"customerAddress\\\":\\\"+1234-567-8910\\\",\\\"flexChannelInviteSid\\\":\\\"KGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\",\\\"conversationSid\\\":\\\"CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\",\\\"channelType\\\":\\\"sms\\\",\\\"conversations\\\":{\\\"initiated_by\\\":\\\"Agent\\\",\\\"communication_channel\\\":\\\"Sms\\\",\\\"media\\\":[{\\\"conversation_sid\\\":\\\"CHXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\"}],\\\"direction\\\":\\\"Outbound\\\"},\\\"customerName\\\":\\\"silly name\\\",\\\"flexInteractionChannelSid\\\":\\\"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\\\",\\\"initiatedBy\\\":\\\"agent\\\",\\\"direction\\\":\\\"outbound\\\"}\",\n\n20\n           \"task_channel_sid\": \"TCXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n21\n           \"age\": 0,\n\n22\n           \"workspace_sid\": \"WSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n23\n           \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n24\n           \"timeout\": 86400,\n\n25\n           \"date_created\": 1637013849,\n\n26\n           \"addons\": \"{}\",\n\n27\n           \"queue_sid\": \"WQXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\n\n28\n       }\n\n29\n   },\n\n30\n   \"channel\": {\n\n31\n       \"type\": \"sms\",\n\n32\n       \"sid\": \"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\n\n33\n   },\n\n34\n   \"sid\": \"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n35\n   \"links\": {\n\n36\n       \"channels\": \"//https://flex-api.twilio.com/v1/Interactions/KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Channels\"\n\n37\n   }\n\n38\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Attribute",
+          "Description",
+          "Example"
+        ],
+        "rows": [
+          [
+            "customerName",
+            "For Insights, this attribute is used to populate conversations.customers.name.\n\nIn the Flex UI, this attribute is rendered as the main customer's name for an email task.",
+            "First Last"
+          ],
+          [
+            "customerAddress",
+            "For Insights, this attribute is used to populate conversations.customers.email or conversations.customers.phone.\n\nIn the Flex UI, this attribute is rendered as the main customer's email address for an email task.",
+            "+12345678910 or\n\nexample@example.com"
+          ],
+          [
+            "from",
+            "This is the Flex UI's preferred attribute for identifying the customer on non-email tasks. For email tasks, it uses customerName.",
+            "First Last, +1234567890"
+          ],
+          [
+            "subject",
+            "In the Flex UI, this is the initial subject of an email thread task.",
+            "Issue with shoes"
+          ],
+          [
+            "flexInteractionChannelSid",
+            "Used in the Flex UI to identify whether a task is interaction-based or not and therefore whether there is a need for Flex UI orchestration or not.",
+            "UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+          ],
+          [
+            "flexInteractionSid",
+            "The interaction SID.",
+            "KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+          ],
+          [
+            "flexChannelInviteSid",
+            "The invite SID.",
+            "KGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+          ],
+          [
+            "followed_by",
+            "Used for external warm transfers.",
+            ""
+          ],
+          [
+            "outcome",
+            "Used for external warm transfers.",
+            ""
+          ],
+          [
+            "customers",
+            "This object is automatically added if customerAddress and customerName are provided.\n\nThis object contains the name, phone, and email of a single customer.\n\nname [required]: The display name of the customer. If name is not available, it must be set to null\n\nphone [required]: The phone number or WhatsApp number of the customer. If number is not available, it should be set to null\n\nemail [required]: The email address of the customer. If no email address is available, it should be set to null",
+            "\"customers\": {\n\n\"name\": \"Al Fresco\",\n\n\"Phone\": \"+12345678910\",\n\n\"email\": null\n\n}"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Attribute",
+          "Description",
+          "Example"
+        ],
+        "rows": [
+          [
+            "conversations.external_contact\n\n(This is the Conversation projected address)",
+            "For Insights, this is the contact address the customer used to reach you or the contact address from which you have reached them. This may be an inbound support phone number, your support email, or a phone number that appears on the customer's phone when you call them.\n\nThe contact information (email or phone number) that the customer uses or sees when communicating with the contact center can be used for traffic segmentation.",
+            "help@example.com"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Interaction Channel attribute",
+          "Task attribute(s)",
+          "Values"
+        ],
+        "rows": [
+          [
+            "type",
+            "conversations.media.type (Insights)\n\nFor all conversation media types",
+            "ChatTranscript"
+          ],
+          [
+            "",
+            "conversations.communication_channel (Insights)",
+            "Email, SMS, Whatsapp, Web, Chat"
+          ],
+          [
+            "",
+            "channelType (FlexUI)\n\nThe Flex UI uses this to identify tasks that have the same \"uniqueTaskChannelName\" as chat, but have to be treated differently (for example, email or sms).",
+            "email, sms, whatsapp, web, chat, messenger, gbm"
+          ],
+          [
+            "initiated_by",
+            "direction (Flex UI)\n\nWhen initiated_by is set to agent, this value is outbound, otherwise it's inbound.",
+            "customer | api | agent"
+          ],
+          [
+            "properties.media_channel_sid",
+            "conversations.conversation_id (Insights)",
+            "KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+          ],
+          [
+            "",
+            "conversations.media.sid (Insights)",
+            ""
+          ],
+          [
+            "",
+            "conversationSid (Flex UI)",
+            ""
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex Insights attributes",
+          "How/why is it used?"
+        ],
+        "rows": [
+          [
+            "conversations.media.type",
+            "Example of the entire media object with attached chat transcript."
+          ],
+          [
+            "conversations.initiated_by",
+            "Flex Insights: Used to identify how the conversation was initiated. This helps to identify funnels leading towards a conversation."
+          ],
+          [
+            "conversations.external_contact",
+            "Flex Insights: The contact address the customer used to reach you or the contact address from which you have reached them. This may be an inbound support phone number, your support email, or a phone number that appears on the customer's phone when you call them.\n\nUseful for segmenting traffic by contact information (email or phone)"
+          ],
+          [
+            "conversations.conversation_id\n\nconversations.media.sid",
+            "The ID of the conversation used for Historical insights. The Media SID is used to get access to the transcripts."
+          ]
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/v1/actions",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:48.149188+00:00",
+  "content": {
+    "title": "Actions framework | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/v1/actions",
+    "text_content": "On this page\nPage Tools\nActions framework\n(information)\nThis page applies to Flex UI 1.x.x.\n\nFor the Flex UI 2.x.x version of this content, see Use UI Actions.\n\n(information)\nInfo\n\nAuto-Generated Documentation for the Flex UI\n is now available. The auto-generated documentation is accurate and comprehensive, and so may differ from what you see in the official Flex UI documentation.\n\nFlex UI constantly emits asynchronous events and event payloads that describe how the user is interacting with the platform. With the Flex UI Actions Framework, you can manually invoke certain actions such as completing tasks, transferring tasks, holding a current call, and many more. Each action fires a before and after event, which allows you to handle your own logic before and after the action occurs. You can also replace the default behavior of an Action with your own custom logic. As you develop Plugins, the Actions Framework will allow you to describe how you want to interact with Flex UI or any CRM Data.\n\nRegister and Invoke an Action\n\nActions.registerAction\n registers a named action and allows you to invoke the action later. The second argument is an ActionFunction\n to be executed when the action is invoked. You can implement your logic in the ActionFunction.\n\nCopy code block\n1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nActions.registerAction(\"AcceptTask\", (payload) => {\n\n4\n   // Custom Logic Goes Here\n\n5\n});\n\nActions.invokeAction\n invokes actions that come out of the box with Flex, and the ones that you register. You can pass in an optional payload as a second parameter if the action needs any data when being invoked. When the named Action is invoked, it fires a before and after event.\n\nCopy code block\n1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\nActions.invokeAction(\"AcceptTask\", { sid: \"WRXXXXXXXXXXXXXXXXX\" });\nReplace an action\n\nActions.replaceAction\n replaces the default implementation of a named Action with your own. The replaced Action will be called with the same parameters as the original implementation, so you can add additional logic, then invoke the original action in your replacement function.\n\nCopy code block\n1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nActions.replaceAction(\"AcceptTask\", (payload, original) => {\n\n4\n    return new Promise((resolve, reject) => {\n\n5\n        alert(\"I have replaced this Action\");\n\n6\n        resolve();\n\n7\n    }).then(() => original(payload));\n\n8\n});\nAdd and remove event listeners\n\nYou can add and remove event listeners to events fired when an action is invoked. Every event name is the invoked Action's name prefixed with either \"before\" or \"after\".\n\nCopy code block\n1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nActions.addListener(\"beforeAcceptTask\", (payload, cancelActionInvocation) => {\n\n4\n  // Implement logic before the AcceptTask action has been invoked\n\n5\n  if (someCondition) {\n\n6\n     // use this function to prevent the actual AcceptTask action from being invoked\n\n7\n     cancelActionInvocation();\n\n8\n  }\n\n9\n});\n\n10\n\n\n11\nActions.addListener(\"afterAcceptTask\", (payload) => {\n\n12\n  // Implement logic after AcceptTask action has stopped executing\n\n13\n});\n\n14\n\nTo remove a listener, you must provide the same function you used as an argument when registering the event. If you need to remove listeners, you should register your event listeners with a named function instead of an anonymous function.\n\nRegistering event listeners with named functions\nCopy code block\n1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\nconst handleBeforeAcceptTask = (payload, cancelActionInvocation) => {\n\n3\n  // Implement logic before the AcceptTask action has been invoked\n\n4\n};\n\n5\n\n\n6\nconst handleAfterAcceptTask = (payload) => {\n\n7\n  // Implement logic after the AcceptTask action has stopped executing\n\n8\n};\n\n9\n\n\n10\n// Register beforeAcceptTask and afterAcceptTask events\n\n11\n\n\n12\nActions.addListener(\"beforeAcceptTask\", handleBeforeAcceptTask);\n\n13\nActions.addListener(\"afterAcceptTask\", handleAfterAcceptTask);\nRemoving event listeners with named functions\n\nYou can now remove the event listeners by passing the name of the event with the original function used to register the event.\n\nCopy code block\n1\nActions.removeListener(\"beforeAcceptTask\", handleBeforeAcceptTask);\n\n2\nActions.removeListener(\"afterAcceptTask\", handleAfterAcceptTask);\nSupported events\n\nFor a list of all actions, visit the Actions\n section of the Flex UI 1.x.x API Reference. All event names take the name of the Action, prefixed with before or after. Every event name is also in camel case.\n\nbefore[eventName] (for example \"beforeAcceptTask\")\nCalled when a named action is triggered, but before the action body is run. You can abort the action that's provided with event body.\n\nafter[eventName]\nCalled after the action has stopped executing.\n\n(information)\nInfo\n\nThe afterLogout event isn't supported. When a worker logs out, they return to the Flex login screen.\n\nCommon use cases and examples\nAdd an action after a task is accepted\n\nRaises a JavaScript alert after an Agent has clicked to accept any task.\n\nCopy code block\nflex.Actions.addListener(\"afterAcceptTask\", (payload) => alert(\"Triggered after event AcceptTask\"));\nAsk for confirmation before accepting a Task\n\nGenerates a prompt before Task Acceptance; prevent that Action from running with an abort command if the user doesn't confirm.\n\nCopy code block\n1\nflex.Actions.addListener(\"beforeAcceptTask\", (payload, abortFunction) => {\n\n2\n    alert(\"Triggered before event AcceptTask\");\n\n3\n        if (!window.confirm(\"Are you sure you want to accept the task?\")) {\n\n4\n            abortFunction();\n\n5\n        }\n\n6\n});\nCustomizing an existing action\n\nReplaces the original Action for AcceptTask. Injects custom logic to alert about the replacement, but executes the original Action.\n\nCopy code block\n1\nflex.Actions.replaceAction(\"AcceptTask\", (payload, original) => {\n\n2\n    return new Promise<void>((resolve, reject) => {\n\n3\n        alert(\"I have replaced this Action\");\n\n4\n        resolve();\n\n5\n    }).then(() => original(payload));\n\n6\n});\n\n7\nRegistering a custom action\n\nRegisters a custom Action called MyAction, which makes a HTTP request. We then add a listener to the action CompleteTask which then invokes this custom Action. For example this could be used to update your CRM system.\n\nCopy code block\n1\nflex.Actions.registerAction(\"MyAction\", (payload) => {\n\n2\n    return \n\n3\n        fetch(\"https://my.server.backend.com/test\")\n\n4\n        .then(response => {\n\n5\n            alert(\"Triggered MyAction with response \" + JSON.stringify(response));\n\n6\n        })\n\n7\n        .catch(error => {\n\n8\n            console.log(error);\n\n9\n            throw error;\n\n10\n        });\n\n11\n});\n\n12\n\n\n13\n\n\n14\nflex.Actions.addListener(\"afterCompleteTask\", (payload) => {return flex.Actions.invokeAction(\"MyAction\")});\nSending a message after a Task is completed\n\nSends a post-conversation message once the task is in a wrap-up state. For example, you could use this action to send a survey, or notify a user that the agent closed the session.\n\nCopy code block\n1\nflex.Actions.replaceAction(\"WrapupTask\", (payload, original) => {\n\n2\n    // Only alter chat tasks:\n\n3\n    if( payload.task.taskChannelUniqueName !== \"chat\" ) {\n\n4\n        original(payload);\n\n5\n    } else {\n\n6\n        return new Promise(function(resolve, reject) {\n\n7\n          // Send the message:\n\n8\n          flex.Actions.invokeAction(\"SendMessage\", {\n\n9\n            body: 'Thanks for chatting. Your session is now closed.',\n\n10\n            channelSid: payload.task.attributes.channelSid\n\n11\n          }).then(response => {\n\n12\n            // Wait until the message is sent to wrap-up the task:\n\n13\n            resolve(original(payload));\n\n14\n        });\n\n15\n\n\n16\n     });\n\n17\n\n\n18\n   }\n\n19\n\n\n20\n });\nNext steps\nYou can find the full list of supported Actions\n or dive deeper into the Action Manager interface\n using the Autogenerated Documentation.\nLearn more about the Notifications Framework to alert Agents about changes in the Flex UI\nGet started with your first Flex Plugin and try customizing it using the Actions Framework",
+    "cli_commands": [
+      "import { Actions } from \"@twilio/flex-ui\";",
+      "import { Actions } from \"@twilio/flex-ui\";",
+      "import { Actions } from \"@twilio/flex-ui\";",
+      "import { Actions } from \"@twilio/flex-ui\";",
+      "import { Actions } from \"@twilio/flex-ui\";"
+    ],
+    "actions": [
+      "registerAction",
+      "registerAction",
+      "invokeAction",
+      "invokeAction",
+      "replaceAction",
+      "replaceAction",
+      "addListener",
+      "addListener",
+      "addListener",
+      "addListener",
+      "removeListener",
+      "removeListener",
+      "addListener",
+      "addListener",
+      "replaceAction",
+      "registerAction",
+      "addListener",
+      "invokeAction",
+      "replaceAction",
+      "invokeAction",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "Logout",
+      "AcceptTask",
+      "CompleteTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "WrapupTask",
+      "AcceptTask",
+      "MyAction",
+      "AcceptTask",
+      "AcceptTask",
+      "WrapupTask",
+      "AcceptTask",
+      "MyAction",
+      "SendMessage"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nActions.registerAction(\"AcceptTask\", (payload) => {\n\n4\n   // Custom Logic Goes Here\n\n5\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\nActions.invokeAction(\"AcceptTask\", { sid: \"WRXXXXXXXXXXXXXXXXX\" });",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nActions.replaceAction(\"AcceptTask\", (payload, original) => {\n\n4\n    return new Promise((resolve, reject) => {\n\n5\n        alert(\"I have replaced this Action\");\n\n6\n        resolve();\n\n7\n    }).then(() => original(payload));\n\n8\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nActions.addListener(\"beforeAcceptTask\", (payload, cancelActionInvocation) => {\n\n4\n  // Implement logic before the AcceptTask action has been invoked\n\n5\n  if (someCondition) {\n\n6\n     // use this function to prevent the actual AcceptTask action from being invoked\n\n7\n     cancelActionInvocation();\n\n8\n  }\n\n9\n});\n\n10\n\n\n11\nActions.addListener(\"afterAcceptTask\", (payload) => {\n\n12\n  // Implement logic after AcceptTask action has stopped executing\n\n13\n});\n\n14",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\nconst handleBeforeAcceptTask = (payload, cancelActionInvocation) => {\n\n3\n  // Implement logic before the AcceptTask action has been invoked\n\n4\n};\n\n5\n\n\n6\nconst handleAfterAcceptTask = (payload) => {\n\n7\n  // Implement logic after the AcceptTask action has stopped executing\n\n8\n};\n\n9\n\n\n10\n// Register beforeAcceptTask and afterAcceptTask events\n\n11\n\n\n12\nActions.addListener(\"beforeAcceptTask\", handleBeforeAcceptTask);\n\n13\nActions.addListener(\"afterAcceptTask\", handleAfterAcceptTask);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nActions.removeListener(\"beforeAcceptTask\", handleBeforeAcceptTask);\n\n2\nActions.removeListener(\"afterAcceptTask\", handleAfterAcceptTask);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "flex.Actions.addListener(\"afterAcceptTask\", (payload) => alert(\"Triggered after event AcceptTask\"));",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.addListener(\"beforeAcceptTask\", (payload, abortFunction) => {\n\n2\n    alert(\"Triggered before event AcceptTask\");\n\n3\n        if (!window.confirm(\"Are you sure you want to accept the task?\")) {\n\n4\n            abortFunction();\n\n5\n        }\n\n6\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.replaceAction(\"AcceptTask\", (payload, original) => {\n\n2\n    return new Promise<void>((resolve, reject) => {\n\n3\n        alert(\"I have replaced this Action\");\n\n4\n        resolve();\n\n5\n    }).then(() => original(payload));\n\n6\n});\n\n7",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.registerAction(\"MyAction\", (payload) => {\n\n2\n    return \n\n3\n        fetch(\"https://my.server.backend.com/test\")\n\n4\n        .then(response => {\n\n5\n            alert(\"Triggered MyAction with response \" + JSON.stringify(response));\n\n6\n        })\n\n7\n        .catch(error => {\n\n8\n            console.log(error);\n\n9\n            throw error;\n\n10\n        });\n\n11\n});\n\n12\n\n\n13\n\n\n14\nflex.Actions.addListener(\"afterCompleteTask\", (payload) => {return flex.Actions.invokeAction(\"MyAction\")});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.replaceAction(\"WrapupTask\", (payload, original) => {\n\n2\n    // Only alter chat tasks:\n\n3\n    if( payload.task.taskChannelUniqueName !== \"chat\" ) {\n\n4\n        original(payload);\n\n5\n    } else {\n\n6\n        return new Promise(function(resolve, reject) {\n\n7\n          // Send the message:\n\n8\n          flex.Actions.invokeAction(\"SendMessage\", {\n\n9\n            body: 'Thanks for chatting. Your session is now closed.',\n\n10\n            channelSid: payload.task.attributes.channelSid\n\n11\n          }).then(response => {\n\n12\n            // Wait until the message is sent to wrap-up the task:\n\n13\n            resolve(original(payload));\n\n14\n        });\n\n15\n\n\n16\n     });\n\n17\n\n\n18\n   }\n\n19\n\n\n20\n });",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

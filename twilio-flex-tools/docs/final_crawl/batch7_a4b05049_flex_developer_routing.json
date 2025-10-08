@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/routing",
+  "batch_id": 7,
+  "crawled_at": "2025-10-07T20:30:47.886876+00:00",
+  "content": {
+    "title": "Getting Started with TaskRouter | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/routing",
+    "text_content": "On this page\nPage Tools\nGetting Started with TaskRouter\n\nTaskRouter is an attributes-based routing system for your Flex contact center. TaskRouter uses Tasks to represent a unit of work that needs to be completed across your configured communication channels and provides a set of tools to allow you to intelligently route a task to the agent best suited to handle it.\n\nExpand image\n\nTaskRouter includes a variety of objects, including Workflows, which are human readable definitions of your routing logic, and Task Queues, which represent key segments of agents. All of these moving parts come together to offer you customizability and scalability for your routing rules.\n\nHow Flex Uses Tasks\n\nFlex uses Tasks to power many parts of your contact center, including:\n\nUpleveling Agent Experience with Task Attributes\nYou can dynamically expose task data in the Flex UI. This helps to ensure that your agents have context for the work they're doing, and even allows you to change the look, feel and features of the Flex UI depending on the current Task.\n\nTask Channels\nBy default, TaskRouter understands that you'll create tasks for sms and voice. You can also define custom channels, like WhatsApp, Facebook Messenger, or Web Chat. You can route tasks based on their channels, and render the channel to the Agent in the Flex UI.\n\nAnalytics\nAs TaskRouter works, it generates a stream of valuable events and statistics about agent activity, task volume, and more. Flex can consume this Task data as the basis for workforce management in your contact center with Flex Insights.\n\nKey Differences\n\nTaskRouter for Flex differs from a vanilla TaskRouter implementation in the following ways:\n\nAllows One Workspace\nYou're limited to one workspace when using Flex. For majority contact centers, a single workspace is all you need, but you can work with your Twilio team to understand if this might be a limitation for you.\n\nUses the v2 SDK\nFlex currently uses the v2 Flex SDK\n in order to support features like transfers. The v2 SDK is currently documented on Github\n.\n\nDiving In\n\nNow that you know a little bit about TaskRouter, why not try:\n\nGetting started with the TaskRouter API Documentation\nTry your hand at tackling a TaskRouter quickstart",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

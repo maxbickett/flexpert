@@ -1,0 +1,149 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:50.424673+00:00",
+  "content": {
+    "title": "Flex UI 1.x.x components | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+    "text_content": "On this page\nPage Tools\nFlex UI 1.x.x components\n(information)\nThis page applies to Flex UI 1.x.x.\n\nFor the Flex UI 2.x.x version of this content, see Flex UI Components.\n\n(information)\nInfo\n\nAuto-Generated Documentation for the Flex UI\n is now available. The auto-generated documentation is accurate and comprehensive, and so may differ from what you see in the official Flex UI documentation.\n\nFlex UI is a library of programmable or dynamic components that expose a Content property and allow you to add, replace, or remove any component and its children.\n\nContent property and add / replace / remove methods\n\nThis article provdies a list of UI components and their details. You can override these components programmatically using the add, replace, and remove methods with options.\n\n(warning)\nWarning\n\nYou must declare a key for all components.\n\nSyntax for the add and replace methods\nCopy code block\n1\nFlex.Component.Content.add(<MyComponent key=\"demo-component\"/>, {options});\n\n2\nFlex.Component.Content.replace(<MyComponent key=\"demo-component\"/>, {options});\n\nExample\n\nThe following example adds a component called AnotherMuteButton to the MainHeader component. The AnotherMuteButton component appers aligned to the end (left, in the example) and placed as the first component in front of native components MuteButton and UserControls:\n\nCopy code block\n1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1,\n\n3\n  align: \"end\"\n\n4\n});\nSyntax for the remove method\n\nThe remove method allows you to remove immediate children of a programmable component by their key.\n\nCopy code block\nFlex.Component.Content.remove(key, {options});\n\nExample\n\nThe following example shows removing the AnotherMuteButton component from the MainHeader component mute key set in the previous example.\n\nCopy code block\nFlex.MainHeader.Content.remove(\"mute\");\nOptions for the add, replace, and remove methods\nif (Expression)\n\nUsed in both add and replace methods to add conditions on which component is added or replaced.\n\nExample\n\nCopy code block\n1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  if : props => props.task.source.taskChannelUniqueName === \"custom1\"\n\n3\n});\nsortOrder (number)\n\nUsed in the add method to specify the order in which the new component is placed in relation to other children of the parent component. Native children components take priority. Sort order counter starts with 0. To always place a new component at the start or end of the order, use large numbers like -100 or 100, depending on the direction.\n\nExample\n\nCopy code block\n1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1\n\n3\n});\nalign ('start' | 'end')\n\nUsed in the add method to align new components either to the top/bottom or right/left, depending on the direction of the parent component. Possible values are:\n\nstart: aligns new component on the left or top\nend: aligns new component on the right or bottom\n\nExample\n\nCopy code block\n1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  align: \"end\"\n\n3\n});\nProgrammable components\n\nEach immediate child of a component has a key (required for the add and replace methods) and a set of properties that its children inherit. To find a component's key or explore component props, go to the Flex UI API Reference\n.\n\nAgent Desktop View components overview\nExpand image\nTeams View components overview\nExpand image\nRootContainer\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nMainHeader\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nMainContainer\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nLiveCommsBar\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nNotificationsBar\n\nDirection: Horizontal\n\nCustomizing the NotificationsBar is described in Notifications Framework\n\nExpand image\nSideNav\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nAgent Desktop View Components\nAgentDesktopView\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nAgentDesktopView.Panel1\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nAgentDesktopView.Panel2\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nCRMContainer\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nNoTasksCanvas\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nTaskListContainer\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nTaskList\n\nView Full Component Reference >\n\nDirection: Vertical\n\nFor details on how to configure filters for the task list, see the UI configuration page.\n\nExpand image\nTaskListItem\n\nView Full Component Reference >\n\nDirection: Vertical\n\nAdd / Replace / Remove and properties of the TaskListItem are described in the Task Channel Definition API.\n\nExpand image\nTaskListItemButtons\n\nDirection: Horizontal\n\nAdd, replace, or remove and properties of the TaskListItem are described in the Task Channel Definition API.\n\nExpand image\n\nExamples\n\nAdding a button to Chat type task\n\nCopy code block\n1\nFlex.DefaultTaskChannels.Chat.addedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  component: <Flex.IconButton key=\"eye_button\" icon=\"Eye\" />\n\n4\n}];\n\nAdding a button to Chat type task when it is in accepted state\n\nCopy code block\n1\nFlex.DefaultTaskChannels.Chat.addedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  component: <Flex.IconButton key=\"eye_button\" icon=\"Eye\" />,\n\n4\n  options: { if: props.task.status === \"accepted\" }\n\n5\n}];\n\n6\n\nRemoving a reject button from Chat type task\n\nCopy code block\n1\nFlex.DefaultTaskChannels.Chat.removedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  key: \"reject\"\n\n4\n}];\nTaskCanvas\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nTaskCanvasHeader\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nTaskCanvasTabs\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\n\nExample\n\nAdd tabs and content\n\nCopy code block\n1\nimport { Tab } from \"@twilio/flex-ui\"\n\n2\n\n\n3\ninit(flex, manager) {\n\n4\n  const Img = <img src=\"http://someimage.jpg\" />;\n\n5\n\n\n6\n  flex.TaskCanvasTabs.Content.add(\n\n7\n    <Tab icon={Img} iconActive={Img} key=\"my-new-tab\">\n\n8\n      <MyNewTabComponent/>\n\n9\n    </Tab>\n\n10\n  );\n\n11\n}\nTaskInfoPanel\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nIncomingTaskCanvas\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nIncomingTaskCanvasActions\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nCallCanvas\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nCallCanvasActions\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nMessagingCanvas\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nMessageList\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nMessageList.WelcomeMessage\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nMessageListItem\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nMessageBubble\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nMessageInput\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nWorkerDirectory\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nWorkerDirectoryTabs\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\n\nThe Worker directory contains 2 tabs by default:\n\nAgents - key workers\nQueues- key queues\n\nExample: Add new custom tab\n\nCopy code block\n1\nFlex.WorkerDirectory.Tabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);\n\nWorker Directory Tabs Hidden Filters\n\nWorkerDirectoryTabs accepts 2 default props:\n\nhiddenWorkerFilter\nhiddenQueueFilter\n\nFlex applies filters to the list in combination with the filter the user applies by typing in a search string. You can programmatically apply a filter that's hidden from the user, which means the user can't disable it. You could use this feature to pre-filter the list of available transferees an agent can search and choose from to show their team members or available agents only. The following example uses live query to do the following:\n\nFlexilter the agents list to only show agents with a specific team_name attribute (you can set user attributes via your SSO provider)\nFilter the agents list to only show agents that are in the Available activity\nFilter the queues list to only show queues with a specific queue_name attribute\nCopy code block\n1\n// Filter Agents by Worker Attributes or activity_name\n\n2\nFlex.WorkerDirectoryTabs.defaultProps.hiddenWorkerFilter = 'data.attributes.team_name CONTAINS \"sales\"'\n\n3\nFlex.WorkerDirectoryTabs.defaultProps.hiddenWorkerFilter = 'data.activity_name CONTAINS \"Available\"'\n\n4\n\n\n5\n// Filter Queues by queue_name or queue_sid\n\n6\nFlex.WorkerDirectoryTabs.defaultProps.hiddenQueueFilter = 'data.queue_name CONTAINS \"sales\"'\n\nThe hidden filter feature is only available in @twilio/flex-ui@1.26.0 and later. Starting in 1.33.3, the hiddenWorkerFilter has been changed to queueFilter which takes a predicate function.\n\nCopy code block\nFlex.WorkerDirectoryTabs.defaultProps.queueFilter = (queue) => queue.queueName.includes(\"HR\")\nParticipantsCanvas\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nParticipantsCanvas is a responsive component and will switch between regular mode and list mode depending on the size of the container its placed in. Regular mode and list mode contain different children - ParticipantCanvas and ParticipantCanvasListItem respectively. When customizing ParticipantsCanvas children, like adding an additional button, remember to do customization to both children components\n\nRegular mode\n\nExpand image\n\nList mode\n\nExpand image\nParticipantCanvas\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nParticipantCanvasListItem\n\nDirection: Vertical\n\nExpand image\nTeams View components\nWorkersDataTable\n\nWorkersDataTable is a programmable component. It is a Material UI table styled to the Flex theme with data from the Insights SDK.\n\nView Full Component Reference >\n\n(warning)\nWarning\n\nAs of flex-ui v1.12.0 new exports were added to refer to workers instead of agents:\n\nWorkersDataTable\nWorkerListFilterSelect\nWorkersDataTable\nWorkersDataTableProps\nWorkerListFilter\n\nFor example, AgentsDataTable is now referred to as WorkersDataTable. However, previous exports (like AgentsDataTable) are kept for backwards compatibility\n\nBy default, WorkersDataTable contains the following rows:\n\nAgent - UserCard component\n\nSupervisorUserCardFirstLine - default value retrieves the full name of the worker if it exists, and the identity if not. Variables provided to the template: worker\nSupervisorUserCardSecondLine - default value shows the availability of the worker. Variables provided to the template: worker\nThe first and second row are template strings with names.\n\nCalls -TaskCardList component, showing tasks of the voice channel in assigned and wrapping state\n\nOther tasks - TaskCardList component, showing tasks of all channels (apart from voice) in assigned and wrapping state\n\nAdd columns to WorkersDataTable\n\nYou can add columns to the table programmatically. Columns can't be removed. You can add columns with different types of content:\n\nTaskCardList component\nAny custom component\nString\n\nTaskCardList\n\nCopy code block\n1\nimport { TaskCardList, ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(\n\n4\n       <ColumnDefinition key=\"calls\" header={\"My Custom Header\"} content={(items, context) => <TaskCardList tasks={items.tasks} />} />);\n\nTaskCardList also has an optional filter property. If you don't set the filter property, Flex renders all tasks in the list:\n\nCopy code block\n1\nexport interface TaskCardListProps {\n\n2\n   compareFunction?: (a: TaskData, b: TaskData) => number;\n\n3\n   filter?: (task: TaskData) => boolean;\n\n4\n   tasks: TaskData[];\n\n5\n}\n\nAny custom component\n\nCopy code block\n1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"hello\" header={\"Helloxxx\"} content={<div>hello</div>}/>);\n\nString\n\nYou can use Worker attributes as follows:\n\nCopy code block\n1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"team\" header={\"Team\"} content={item => item.worker.attributes.team_name}/>);\nCustomizing filters\n\nBy default, WorkersDataTable has 2 filters:\n\nAll agents\nActive agents - worker with current activity state set of type available\n\nFilters for the Workers Table can be programmatically changed, by defining filters property of WorkersDataTable component\n\nExample of creating a filter to show workers with activity \"Break\"\n\nWith configuration object\n\nCopy code block\n1\n   componentProps: {\n\n2\n        WorkersDataTable: {\n\n3\n            filters: [\n\n4\n                {\n\n5\n                    query: 'data.activity_name == \"Break\"',\n\n6\n                    text: \"Workers on break\"\n\n7\n                }\n\n8\n            ]\n\n9\n        }\n\n10\n    },...\n\nWith defaultProps API\n\nCopy code block\n1\nFlex.WorkersDataTable.defaultProps.filters = [\n\n2\n                {\n\n3\n                    query: 'data.activity_name == \"Break\"',\n\n4\n                    text: \"Workers on break\"\n\n5\n                },...\n\n6\n            ]\nQuery syntax\n\nQuery data schema\n\ndata object in the query refers to TaskRouter worker resource. The following attributes on a worker can be used for filters query:\n\nObject name\tDescription\tFormat\ndata.activity_name\tworker's current activity friendly name\tString\ndata.attributes\tworker's attributes\tKey value pair\ndata.date_activity_changed\tdate of the last activity change of the current worker\tDatetime ISO8601\ndata.friendly_name\tworker's friendly name\tString\ndata.worker_activity_sid\tworker's current activity sid\tString\ndata.worker_sid\tworker's sid\tString\ndata.workspace_sid\tworker's workspace sid\tString\n\nQuery operators\n\nWorkersDataTable is powered by Twilio Sync and Flex uses Twilio Sync Live Query for filtering of the workers. See Live Query docs for supported query operators.\n\nTaskCardList\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nTaskCard\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nUserCard\n\nDirection: Horizontal\n\nExpand image\nSupervisor.TaskCanvas\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nSupervisor.TaskCanvasHeader\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nSupervisor.TaskCanvasTabs\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\n\nWorker directory contains 2 tabs by default:\n\nOverview - key overview. Overview Tab has dynamic content based on the type of task\n\nFor standard conference based voice tasks - ParticipantsCanvas\nFor messaging tasks - MessagingCanvas\n\nInfo - key info. Info tab Contains SupervisorTaskInfoPanel\n\nExamples\n\nAdding tabs and content\n\nCopy code block\n1\nFlex.Supervisor.TaskCanvasTabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);\nSupervisorTaskInfoPanel\n\nView Full Component Reference >\n\nDirection: Horizontal\n\nExpand image\nWorkerCanvas\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nWorkerCanvasHeader\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nWorkerProfile\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image\nWorkerSkills\n\nView Full Component Reference >\n\nDirection: Vertical\n\nExpand image",
+    "cli_commands": [
+      "import { Tab } from \"@twilio/flex-ui\"",
+      "import { TaskCardList, ColumnDefinition } from \"@twilio/flex-ui\";",
+      "import { ColumnDefinition } from \"@twilio/flex-ui\";",
+      "import { ColumnDefinition } from \"@twilio/flex-ui\";"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nFlex.Component.Content.add(<MyComponent key=\"demo-component\"/>, {options});\n\n2\nFlex.Component.Content.replace(<MyComponent key=\"demo-component\"/>, {options});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1,\n\n3\n  align: \"end\"\n\n4\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.Component.Content.remove(key, {options});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.MainHeader.Content.remove(\"mute\");",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  if : props => props.task.source.taskChannelUniqueName === \"custom1\"\n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1\n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  align: \"end\"\n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.DefaultTaskChannels.Chat.addedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  component: <Flex.IconButton key=\"eye_button\" icon=\"Eye\" />\n\n4\n}];",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.DefaultTaskChannels.Chat.addedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  component: <Flex.IconButton key=\"eye_button\" icon=\"Eye\" />,\n\n4\n  options: { if: props.task.status === \"accepted\" }\n\n5\n}];\n\n6",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.DefaultTaskChannels.Chat.removedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  key: \"reject\"\n\n4\n}];",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Tab } from \"@twilio/flex-ui\"\n\n2\n\n\n3\ninit(flex, manager) {\n\n4\n  const Img = <img src=\"http://someimage.jpg\" />;\n\n5\n\n\n6\n  flex.TaskCanvasTabs.Content.add(\n\n7\n    <Tab icon={Img} iconActive={Img} key=\"my-new-tab\">\n\n8\n      <MyNewTabComponent/>\n\n9\n    </Tab>\n\n10\n  );\n\n11\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.WorkerDirectory.Tabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Filter Agents by Worker Attributes or activity_name\n\n2\nFlex.WorkerDirectoryTabs.defaultProps.hiddenWorkerFilter = 'data.attributes.team_name CONTAINS \"sales\"'\n\n3\nFlex.WorkerDirectoryTabs.defaultProps.hiddenWorkerFilter = 'data.activity_name CONTAINS \"Available\"'\n\n4\n\n\n5\n// Filter Queues by queue_name or queue_sid\n\n6\nFlex.WorkerDirectoryTabs.defaultProps.hiddenQueueFilter = 'data.queue_name CONTAINS \"sales\"'",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.WorkerDirectoryTabs.defaultProps.queueFilter = (queue) => queue.queueName.includes(\"HR\")",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { TaskCardList, ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(\n\n4\n       <ColumnDefinition key=\"calls\" header={\"My Custom Header\"} content={(items, context) => <TaskCardList tasks={items.tasks} />} />);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nexport interface TaskCardListProps {\n\n2\n   compareFunction?: (a: TaskData, b: TaskData) => number;\n\n3\n   filter?: (task: TaskData) => boolean;\n\n4\n   tasks: TaskData[];\n\n5\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"hello\" header={\"Helloxxx\"} content={<div>hello</div>}/>);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"team\" header={\"Team\"} content={item => item.worker.attributes.team_name}/>);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n   componentProps: {\n\n2\n        WorkersDataTable: {\n\n3\n            filters: [\n\n4\n                {\n\n5\n                    query: 'data.activity_name == \"Break\"',\n\n6\n                    text: \"Workers on break\"\n\n7\n                }\n\n8\n            ]\n\n9\n        }\n\n10\n    },...",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.WorkersDataTable.defaultProps.filters = [\n\n2\n                {\n\n3\n                    query: 'data.activity_name == \"Break\"',\n\n4\n                    text: \"Workers on break\"\n\n5\n                },...\n\n6\n            ]",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Supervisor.TaskCanvasTabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Object name",
+          "Description",
+          "Format"
+        ],
+        "rows": [
+          [
+            "data.activity_name",
+            "worker's current activity friendly name",
+            "String"
+          ],
+          [
+            "data.attributes",
+            "worker's attributes",
+            "Key value pair"
+          ],
+          [
+            "data.date_activity_changed",
+            "date of the last activity change of the current worker",
+            "Datetime ISO8601"
+          ],
+          [
+            "data.friendly_name",
+            "worker's friendly name",
+            "String"
+          ],
+          [
+            "data.worker_activity_sid",
+            "worker's current activity sid",
+            "String"
+          ],
+          [
+            "data.worker_sid",
+            "worker's sid",
+            "String"
+          ],
+          [
+            "data.workspace_sid",
+            "worker's workspace sid",
+            "String"
+          ]
+        ]
+      }
+    ]
+  }
+}

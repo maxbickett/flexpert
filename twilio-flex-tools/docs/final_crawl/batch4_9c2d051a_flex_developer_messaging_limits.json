@@ -1,0 +1,139 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/limits",
+  "batch_id": 4,
+  "crawled_at": "2025-10-07T20:30:52.743704+00:00",
+  "content": {
+    "title": "Flex Messaging Limits | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/limits",
+    "text_content": "On this page\nPage Tools\nFlex Messaging Limits\n(information)\nInfo\n\nThis guide is for Flex UI 1.x.x and channels that use Programmable Chat and Proxy. Programmable Chat for Flex will reach end of life on June 1, 2026. If you're new to Flex or currently using Programmable Chat, build with Flex Conversations or migrate.\n\nDue to various limitations and concerns, Flex messaging orchestration will constrain certain actions.\n\nRate limits on API endpoints\n\nRate limits return HTTP 429 when exceeded and should be handled accordingly on the customer side.\n\nAction\tDefault Limit\tNotes\nWebChat creation\t5 per second\tUsed when creating a new WebChat object for agents/customers to interact. This is per account. Contact sales for more information or to request an override.\nProxy Out-of-Session callbacks\t10 per second\tUsed when orchestrating a new messaging conversation. This is per account. Contact sales for more information or to request an override.\nFlex Flows\t2500\tYou can have up to 2500 Flex Flows per account.\nEndpoint\tMethod\tDescription\tRate Limit\n/FlexFlows\tGET\tLists all Flex Flows for an account\t10\n/FlexFlows/FOxx\tGET\tQueries a specific Flex Flow's configuration\t2\n/FlexFlows\tPOST\tCreates a new Flex Flow\t2\n/FlexFlows/FOxx\tPOST\tUpdates a Flex Flow's configuration\t1\n/FlexFlows/FOxx\tDELETE\tDeletes a Flex Flow\t2\n/WebChannels\tGET\tLists all WebChannels for current account\t1\n/WebChannels/CHxx\tGET\tQueries a specific WebChannel's configuration\t1\n/WebChannels\tPOST\tCreates a WebChannel\t5\n/WebChannels/CHxx\tPOST\tUpdates a WebChannel's configuration\t1\n/WebChannels/CHxx\tDELETE\tDeletes a WebChannel\t1\n/WebChannels/Users\tPOST\tAdds member to a WebChannel\t10\n/channels\tGET\tLists all channels\t5\n/channels/CHxx\tGET\tQueries a specific channel's configuration\t3\n/channels\tPOST\tCreates a new channel\t10\n/channels/CHxx\tDELETE\tDeletes a channel\t10",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "Action",
+          "Default Limit",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "WebChat creation",
+            "5 per second",
+            "Used when creating a new WebChat object for agents/customers to interact. This is per account. Contact sales for more information or to request an override."
+          ],
+          [
+            "Proxy Out-of-Session callbacks",
+            "10 per second",
+            "Used when orchestrating a new messaging conversation. This is per account. Contact sales for more information or to request an override."
+          ],
+          [
+            "Flex Flows",
+            "2500",
+            "You can have up to 2500 Flex Flows per account."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Endpoint",
+          "Method",
+          "Description",
+          "Rate Limit"
+        ],
+        "rows": [
+          [
+            "/FlexFlows",
+            "GET",
+            "Lists all Flex Flows for an account",
+            "10"
+          ],
+          [
+            "/FlexFlows/FOxx",
+            "GET",
+            "Queries a specific Flex Flow's configuration",
+            "2"
+          ],
+          [
+            "/FlexFlows",
+            "POST",
+            "Creates a new Flex Flow",
+            "2"
+          ],
+          [
+            "/FlexFlows/FOxx",
+            "POST",
+            "Updates a Flex Flow's configuration",
+            "1"
+          ],
+          [
+            "/FlexFlows/FOxx",
+            "DELETE",
+            "Deletes a Flex Flow",
+            "2"
+          ],
+          [
+            "/WebChannels",
+            "GET",
+            "Lists all WebChannels for current account",
+            "1"
+          ],
+          [
+            "/WebChannels/CHxx",
+            "GET",
+            "Queries a specific WebChannel's configuration",
+            "1"
+          ],
+          [
+            "/WebChannels",
+            "POST",
+            "Creates a WebChannel",
+            "5"
+          ],
+          [
+            "/WebChannels/CHxx",
+            "POST",
+            "Updates a WebChannel's configuration",
+            "1"
+          ],
+          [
+            "/WebChannels/CHxx",
+            "DELETE",
+            "Deletes a WebChannel",
+            "1"
+          ],
+          [
+            "/WebChannels/Users",
+            "POST",
+            "Adds member to a WebChannel",
+            "10"
+          ],
+          [
+            "/channels",
+            "GET",
+            "Lists all channels",
+            "5"
+          ],
+          [
+            "/channels/CHxx",
+            "GET",
+            "Queries a specific channel's configuration",
+            "3"
+          ],
+          [
+            "/channels",
+            "POST",
+            "Creates a new channel",
+            "10"
+          ],
+          [
+            "/channels/CHxx",
+            "DELETE",
+            "Deletes a channel",
+            "10"
+          ]
+        ]
+      }
+    ]
+  }
+}

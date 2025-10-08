@@ -1,0 +1,19 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/insights/insights-dashboards-embedding",
+  "batch_id": 3,
+  "crawled_at": "2025-10-07T20:30:57.298679+00:00",
+  "content": {
+    "title": "Embedding Dashboards | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/insights/insights-dashboards-embedding",
+    "text_content": "On this page\nPage Tools\nEmbedding Dashboards\n(new)\nPublic beta\n\nFlex Insights (also known as Historical Reporting) is currently available as a public beta release and the information contained in the Flex Insights documentation is subject to change. This means that some features are not yet implemented and others may be changed before the product is declared as generally available. Public beta products are not covered by a Twilio SLA.\n\nAny reference to \"Historical Reporting\", \"Flex Insights API\", \"Flex Insights Historical Reporting\", or \"Flex Insights Historical Reporting API\" in the Flex Insights documentation refers to Flex Insights.\n\n(information)\nInfo\n\nA developer proxy is needed for local development. Please refer to the article about Local Development.\n\nStarting in version 1.27, Flex supports Dashboard embedding. To utilize this functionality, use the Dashboard component exported under the Flex.Insights.Dashboard namespace.\n\nThe component takes a dashboardId prop and displays that dashboard embedded in an iframe. This allows you to create custom views with particular dashboards.\n\nDashboard component\n\nThe component has the following props:\n\ndashboardId: string;\nqueryParams?: {};\nevents?: { [event: string]: (eventData: unknown, eventId: string) => void };\ndashboardId\n\nThe ID of the dashboard. This is the only required prop on this component and most likely the only one you will need to use.\n\nPlease refer to the next chapter to learn how to get dashboardId.\n\nqueryParams\n\nFor expert users. The object will be passed as query string to the iframe URL.\n\nevents\n\nFor expert users. Allows you to attach custom handlers to the post message events received from the iframe.\n\nGetting the Dashboard ID\n\nKnowing the Dashboard ID is crucial for being able to render it. To figure out the correct Dashboard ID, navigate to the desired dashboard first and check the URL in your browser.\n\nIt should look something like this: <yourFlexUrl>/dashboards/aeJSfSg9if1x.\n\nThe part after dashboards/ is the currently displayed Dashboard's ID, in this case aeJSfSg9if1x.\n\nExample\n\nWe will use the Dashboard ID we just discovered to display the Dashboard as content of the CRM container:\n\nCopy code block\n1\nFlex.CRMContainer.Content.replace(\n\n2\n  <Flex.Insights.Dashboard key=\"some-key\" dashboardId=\"aeJSfSg9if1x\" />\n\n3\n);",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nFlex.CRMContainer.Content.replace(\n\n2\n  <Flex.Insights.Dashboard key=\"some-key\" dashboardId=\"aeJSfSg9if1x\" />\n\n3\n);",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

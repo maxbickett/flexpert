@@ -1,0 +1,53 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex",
+  "batch_id": 1,
+  "crawled_at": "2025-10-07T20:30:47.118653+00:00",
+  "content": {
+    "title": "Integrate a Custom Chat Client with Flex | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex",
+    "text_content": "On this page\nPage Tools\nIntegrate a Custom Chat Client with Flex\n(information)\nInfo\n\nFlex Conversations requires Flex UI 2.0.x. If you are on Flex UI 1.x.x, refer to the Messaging in Flex pages.\n\nYou may have already built a custom chat experience with Twilio Conversations or you are looking to build from scratch. You can integrate these chat experiences with Flex and hand off incoming Conversation messages to your agents.\n\n(information)\nInfo\n\nWe have an open source demo chat application\n available to get you started. Refer to the README file for more information about the features offered in that example application and how it works.\n\nExample Chat Integration with Conversations\n\nThe following diagram illustrates one potential way of integrating your Chat application with Flex:\n\nExpand image\n\nYour application needs to initialize the Twilio Conversations SDK with an Access Token and a Conversation SID. These should be obtained from your backend. This is outside the scope of this guide and you can get more information from the Twilio Conversations client applications' quickstart.\n\nYour backend will typically use the Twilio server-side SDK but for the purposes of this guide, we will utilize curl for our Conversations API requests:\n\nCreate a Conversation using the Twilio Conversations API.\n\nCopy code block\n1\ncurl -X POST https://conversations.twilio.com/v1/Conversations \\\n\n2\n--data-urlencode \"MessagingServiceSid=MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\" \\\n\n3\n--data-urlencode \"FriendlyName=My First Custom Chat Conversation\" \\\n\n4\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\nCopy code block\n1\nSID                                 Chat Service SID                    Friendly Name                      Date Created\n\n2\nCH1cbf85a0e7c844fca4cb4d2fad880196  IScf002bd40e59480bb62024d8fa161dbb  My First Custom Chat Conversation  Feb 17 2022 17:01:06 GMT-0800\n\nAdd a participant to the conversation. Use the SID of the conversation that you created in the previous step. Make sure the identity uniquely identifies your end user and avoid using personally identifiable information (PII) like names.\n\nCopy code block\n1\ntwilio api:conversations:v1:conversations:participants:create \\\n\n2\n    --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196 \\\n\n3\n    --identity=customer\nCopy code block\n1\nSID                                 Messaging Binding\n\n2\nMBb3469eabc7d040dbadc89a7876eb263f  null\n\nAdd a scoped webhook with \"studio\" as the target using the Conversations Webhook endpoint. With a scoped webhook set to Studio and the configuration filter set to \"onMessageAdded\", any message that is added to the conversation will invoke the \"Incoming Conversation\" trigger on the specified Studio flow.\n\nCopy code block\ntwilio api:conversations:v1:conversations:webhooks:create --target=studio --configuration.flow-sid=FWd945421fea3b172bb9c5889a22d2f410 --configuration.filters='onMessageAdded' --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196\nCopy code block\n1\nSID                                 Target\n\n2\nWH3bd00957227d499991c9a4ce5cd303e9  studio\n\nNow the Conversations SDK is initialized. Your participant can send a message.\n\nYour app makes use of the Conversations SDK to send the message. For the purposes of this guide, we will use the Twilio CLI to send a message on behalf of your participant. It's important to specify the x-twilio-webhook-enabled property to ensure any scoped or service webhooks are invoked.\n\nCopy code block\ntwilio api:conversations:v1:conversations:messages:create --author=customer --body=hello --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196 --x-twilio-webhook-enabled=true \n\nWhen the first message is sent, it will trigger the Studio Flow you set in step 2.3.\n\nThe Conversations Service will find your conversation and send an \"onMessageAdded\" event to your Studio Flow.\n\nIn your flow, you need to use the Send To Flex widget to route your participant, \"customer\" in this case, to an agent on Flex. Under the hood, the Send To Flex widget invokes the Interactions API to create a task and have it routed. Here's an example Interactions API POST request that Send To Flex makes (you don't need to do this since Studio does it on your behalf when you set Studio as the target for \"onMessageAdded\"):\n\nCopy code block\n1\nCHANNEL=$(cat << EOF\n\n2\n{\n\n3\n    \"type\": \"web\",\n\n4\n    \"initiated_by\": \"Customer\",\n\n5\n    \"properties\": {\n\n6\n        \"media_channel_sid\": \"CHXXX\"\n\n7\n        }\n\n8\n}\n\n9\nEOF\n\n10\n)\n\n11\n\n\n12\nROUTING=$(cat << EOF\n\n13\n{\n\n14\n    \"type\": \"TaskRouter\",\n\n15\n    \"properties\": {\n\n16\n        \"workspace_sid\": \"WSXXX\",\n\n17\n        \"workflow_sid\": \"WWXXX\",\n\n18\n        \"attributes\": {\n\n19\n            \"channelType\": \"web\",\n\n20\n            \"from\": \"customer\"\n\n21\n        }\n\n22\n    }\n\n23\n}\n\n24\nEOF\n\n25\n)\n\n26\n\n\n27\ncurl -X POST \"https://flex-api.twilio.com/v1/Interactions\" \\\n\n28\n--data-urlencode \"Channel=$CHANNEL\" \\\n\n29\n--data-urlencode \"Routing=$ROUTING\" \\\n\n30\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\nThe Flex agent will get a task reservation and when they accept it, they will get added to the same conversation.",
+    "cli_commands": [
+      "curl -X POST https://conversations.twilio.com/v1/Conversations \\",
+      "twilio api:conversations:v1:conversations:participants:create \\",
+      "twilio api:conversations:v1:conversations:webhooks:create --target=studio --configuration.flow-sid=FWd945421fea3b172bb9c5889a22d2f410 --configuration.filters='onMessageAdded' --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196",
+      "twilio api:conversations:v1:conversations:messages:create --author=customer --body=hello --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196 --x-twilio-webhook-enabled=true",
+      "curl -X POST \"https://flex-api.twilio.com/v1/Interactions\" \\"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\ncurl -X POST https://conversations.twilio.com/v1/Conversations \\\n\n2\n--data-urlencode \"MessagingServiceSid=MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\" \\\n\n3\n--data-urlencode \"FriendlyName=My First Custom Chat Conversation\" \\\n\n4\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nSID                                 Chat Service SID                    Friendly Name                      Date Created\n\n2\nCH1cbf85a0e7c844fca4cb4d2fad880196  IScf002bd40e59480bb62024d8fa161dbb  My First Custom Chat Conversation  Feb 17 2022 17:01:06 GMT-0800",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ntwilio api:conversations:v1:conversations:participants:create \\\n\n2\n    --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196 \\\n\n3\n    --identity=customer",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nSID                                 Messaging Binding\n\n2\nMBb3469eabc7d040dbadc89a7876eb263f  null",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio api:conversations:v1:conversations:webhooks:create --target=studio --configuration.flow-sid=FWd945421fea3b172bb9c5889a22d2f410 --configuration.filters='onMessageAdded' --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nSID                                 Target\n\n2\nWH3bd00957227d499991c9a4ce5cd303e9  studio",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio api:conversations:v1:conversations:messages:create --author=customer --body=hello --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196 --x-twilio-webhook-enabled=true ",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nCHANNEL=$(cat << EOF\n\n2\n{\n\n3\n    \"type\": \"web\",\n\n4\n    \"initiated_by\": \"Customer\",\n\n5\n    \"properties\": {\n\n6\n        \"media_channel_sid\": \"CHXXX\"\n\n7\n        }\n\n8\n}\n\n9\nEOF\n\n10\n)\n\n11\n\n\n12\nROUTING=$(cat << EOF\n\n13\n{\n\n14\n    \"type\": \"TaskRouter\",\n\n15\n    \"properties\": {\n\n16\n        \"workspace_sid\": \"WSXXX\",\n\n17\n        \"workflow_sid\": \"WWXXX\",\n\n18\n        \"attributes\": {\n\n19\n            \"channelType\": \"web\",\n\n20\n            \"from\": \"customer\"\n\n21\n        }\n\n22\n    }\n\n23\n}\n\n24\nEOF\n\n25\n)\n\n26\n\n\n27\ncurl -X POST \"https://flex-api.twilio.com/v1/Interactions\" \\\n\n28\n--data-urlencode \"Channel=$CHANNEL\" \\\n\n29\n--data-urlencode \"Routing=$ROUTING\" \\\n\n30\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

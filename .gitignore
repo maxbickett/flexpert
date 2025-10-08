@@ -1,0 +1,42 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MCP Server
+mcp-server/embeddings.json
+
+# Large data files (optional - keep raw KB)
+# twilio-flex-tools/docs/
+
+# Source repos (already extracted to knowledge base)
+twilio-flex-tools/repos/
+
+# Test files
+test-*.js
+
+# Logs
+*.log
+logs/

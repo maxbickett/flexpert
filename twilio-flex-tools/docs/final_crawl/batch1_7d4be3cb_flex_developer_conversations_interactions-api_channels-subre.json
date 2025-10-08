@@ -1,0 +1,176 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/interactions-api/channels-subresource",
+  "batch_id": 1,
+  "crawled_at": "2025-10-07T20:30:53.254288+00:00",
+  "content": {
+    "title": "Channels Subresource | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/interactions-api/channels-subresource",
+    "text_content": "On this page\nPage Tools\nChannels Subresource\n(information)\nInfo\n\nFlex Conversations requires Flex UI 2.0.x. If you are on Flex UI 1.x.x, refer to the Messaging in Flex pages.\n\nThe Interactions Channels subresource represents the communication channel associated with the interaction. An interaction channel may have multiple tasks associated with it but can only have one Twilio Conversation associated.\n\nThis subresource allows you to update the status of a channel but does not support creating a channel directly. Use the Interactions resource to create a channel.\n\nWhen a channel is created through the Interactions resource, a task is created and is immediately routed to Flex using the supplied TaskRouter workspace.\n\nChannel Properties\nProperty nameTypeRequiredDescriptionChild properties\nsid\nSID<UO>\n\nOptional\n\nNot PII\n\nThe unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.\n\nPattern:\n^UO[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\ninteractionSid\nSID<KD>\n\nOptional\n\nNot PII\n\nThe unique string created by Twilio to identify an Interaction resource, prefixed with KD.\n\nPattern:\n^KD[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\ntype\nenum<string>\n\nOptional\n\nNot PII\n\nThe Interaction Channel's type. Can be: sms, email, chat, whatsapp, web, messenger, or gbm. Note: These can be different from the task channel type specified in the Routing attributes. Task channel type corresponds to channel capacity while this channel type is the actual media type\n\nPossible values:\nvoice\nsms\nemail\nweb\nwhatsapp\nchat\nmessenger\ngbm\nstatus\nenum<string>\n\nOptional\n\nNot PII\n\nThe status of this channel.\n\nPossible values:\nsetup\nactive\nfailed\nclosed\ninactive\npause\nerrorCode\ninteger\n\nOptional\n\nNot PII\n\nThe Twilio error code for a failed channel.\n\nerrorMessage\nstring\n\nOptional\n\nNot PII\n\nThe error message for a failed channel.\n\nurl\nstring<uri>\n\nOptional\n\nNot PII\nlinks\nobject<uri-map>\n\nOptional\n\nNot PII\nParameter\tSub-fields\tDescription\nStatus [required]\t\tIndicates the interaction channel status. When a channel is set to closed, all tasks are put in \"wrapping\" state by default unless the Routing status is set to \"closed\" in which case the tasks will be \"completed\".\n\nValue: closed\nRouting [optional]\t\tThe state of associated tasks. If not specified, all tasks will be set to \"wrapping\".\n\tstatus\tValue: closed\n\nIf closed is specified, all associated tasks will be set to \"completed\".\nFetch a Channel\n\nGET https://flex-api.twilio.com/v1/Interactions/{InteractionSid}/Channels/{Sid}\n\nThis lets you retrieve a single Channel instance.\n\nPath parameters\nProperty nameTypeRequiredPIIDescription\ninteractionSid\nSID<KD>\nrequired\nNot PII\n\nThe unique string created by Twilio to identify an Interaction resource, prefixed with KD.\n\nPattern:\n^KD[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\nsid\nSID<UO>\nrequired\nNot PII\n\nThe unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.\n\nPattern:\n^UO[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\nFetch a Channel\nNode.js\nPython\nC#\nJava\nGo\nPHP\nRuby\ntwilio-cli\ncurl\nReport code block\nCopy code block\n1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n13\n    .channels(\"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n14\n    .fetch();\n\n15\n\n\n16\n  console.log(channel.sid);\n\n17\n}\n\n18\n\n\n19\nfetchInteractionChannel();\nResponse\nCopy response\n1\n{\n\n2\n  \"sid\": \"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n3\n  \"type\": \"chat\",\n\n4\n  \"interaction_sid\": \"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"status\": \"closed\",\n\n6\n  \"error_code\": 19025,\n\n7\n  \"error_message\": \"Channel validation error\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",\n\n9\n  \"links\": {\n\n10\n    \"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",\n\n11\n    \"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",\n\n12\n    \"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"\n\n13\n  }\n\n14\n}\nList Channels\nCopy code block\nGET /Interactions/<interaction_sid>/Channels\n\nSince only one Channel is supported in the private beta release, only one Channel will be returned.\n\nResponse Object\nParameter\tDescription\nsid\tUnique identifier for the interaction channel\ninteraction_sid\tUnique identifier for the interaction\n\tThe channel type specified when the interaction was created. Please refer to the Interactions Properties table for possible values.\nlinks\tA JSON object linking to the interaction channel's associated participants and invites\nList Channels\nNode.js\nPython\nC#\nJava\nGo\nPHP\nRuby\ntwilio-cli\ncurl\nReport code block\nCopy code block\n1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n13\n    .channels(\"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n14\n    .fetch();\n\n15\n\n\n16\n  console.log(channel.sid);\n\n17\n}\n\n18\n\n\n19\nfetchInteractionChannel();\nResponse\nCopy response\n1\n{\n\n2\n  \"sid\": \"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n3\n  \"type\": \"chat\",\n\n4\n  \"interaction_sid\": \"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"status\": \"closed\",\n\n6\n  \"error_code\": 19025,\n\n7\n  \"error_message\": \"Channel validation error\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",\n\n9\n  \"links\": {\n\n10\n    \"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",\n\n11\n    \"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",\n\n12\n    \"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"\n\n13\n  }\n\n14\n}\n(information)\nInfo\n\nAn interaction channel (UOXXXXXX) is deleted after 180 days of inactivity, regardless of its state. Retrieving the channel after 180 days from deletion returns a 404 Not Found. Note that the initial TTL (Time to Live) period resets every time there is an update to the interaction channel, such as if an agent accepts the new task through Flex UI. Changes to the Conversations channel, such as updating conversation status or adding or removing a participant, do not reset the interaction channel's inactivity period.\n\nUpdate an InteractionChannel resource\n\nPOST https://flex-api.twilio.com/v1/Interactions/{InteractionSid}/Channels/{Sid}\n\nThis subresource lets a developer close a channel in an interaction. When you close a channel, all tasks and reservations for all agents on the channel will be set to wrapup state. If you wish to complete the tasks, you can supply the optional routing status parameter with the value closed.\n\nFurthermore, when you set the channel status to closed, the underlying media channel will also be closed. This changes the channel to \"read-only\" regardless of the routing status.\n\nThe following table illustrates the media channel and task states for a given Channel and Routing status.\n\nChannel status\tRouting status\tResulting task state\tResulting conversation state\nclosed\tNot specified\twrapping\tclosed\nclosed\tclosed\tcompleted\tclosed\n\nIn some cases, it is desired to keep the channel open but have the agents complete their tasks. To achieve this, use the Channel Participants subresource to modify the status of the participants rather than the channel. Note however that you will need to add more logic to ensure the next incoming message.\n\nPath parameters\nProperty nameTypeRequiredPIIDescription\ninteractionSid\nSID<KD>\nrequired\nNot PII\n\nThe unique string created by Twilio to identify an Interaction resource, prefixed with KD.\n\nPattern:\n^KD[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\nsid\nSID<UO>\nrequired\nNot PII\n\nThe unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.\n\nPattern:\n^UO[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\nRequest body parameters\nEncoding type:application/x-www-form-urlencoded\nSchema\nExample\nProperty nameTypeRequiredDescriptionChild properties\nstatus\nenum<string>\nrequired\nNot PII\nPossible values:\nclosed\ninactive\nrouting\n\nOptional\n\nNot PII\n\nIt changes the state of associated tasks. Routing status is required, When the channel status is set to inactive. Allowed Value for routing status is closed. Otherwise Optional, if not specified, all tasks will be set to wrapping.\n\nClose an interaction channel and wrap agent participants\nNode.js\nPython\nC#\nJava\nGo\nPHP\nRuby\ntwilio-cli\ncurl\nReport code block\nCopy code block\n1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function updateInteractionChannelParticipant() {\n\n11\n  const participant = await client.flexApi.v1\n\n12\n    .interaction(\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n13\n    .channels(\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n14\n    .participants(\"UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n15\n    .update({ status: \"closed\" });\n\n16\n\n\n17\n  console.log(participant.sid);\n\n18\n}\n\n19\n\n\n20\nupdateInteractionChannelParticipant();\nResponse\nCopy response\n1\n{\n\n2\n  \"sid\": \"UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"channel_sid\": \"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"interaction_sid\": \"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"type\": \"agent\",\n\n6\n  \"routing_properties\": {\n\n7\n    \"task_sid\": \"WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n    \"worker_sid\": \"WKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n9\n    \"reservation_sid\": \"WRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n10\n  },\n\n11\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants/UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\"\n\n12\n}\nClose an Interaction Channel\n\nPOST https://flex-api.twilio.com/v1/Interactions/{InteractionSid}/Channels/{Sid}\n\nThis subresource lets a developer close a channel in an interaction. When you close a channel, all tasks and reservations for all agents on the channel will be set to wrapup state. If you wish to complete the tasks, you can supply the optional routing status parameter with the value closed.\n\nFurthermore, when you set the channel status to closed, the underlying media channel will also be closed. This changes the channel to \"read-only\" regardless of the routing status.\n\nThe following table illustrates the media channel and task states for a given Channel and Routing status.\n\nChannel status\tRouting status\tResulting task state\tResulting conversation state\nclosed\tNot specified\twrapping\tclosed\nclosed\tclosed\tcompleted\tclosed\n\nIn some cases, it is desired to keep the channel open but have the agents complete their tasks. To achieve this, use the Channel Participant subresource to modify the status of the participants rather than the channel. Note however that you will need to add more logic to ensure you invite the same or a new agent on the next incoming message.\n\nPath parameters\nProperty nameTypeRequiredPIIDescription\ninteractionSid\nSID<KD>\nrequired\nNot PII\n\nThe unique string created by Twilio to identify an Interaction resource, prefixed with KD.\n\nPattern:\n^KD[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\nsid\nSID<UO>\nrequired\nNot PII\n\nThe unique string created by Twilio to identify an Interaction Channel resource, prefixed with UO.\n\nPattern:\n^UO[0-9a-fA-F]{32}$\nMin length:\n34\nMax length:\n34\nRequest body parameters\nEncoding type:application/x-www-form-urlencoded\nSchema\nExample\nProperty nameTypeRequiredDescriptionChild properties\nstatus\nenum<string>\nrequired\nNot PII\nPossible values:\nclosed\ninactive\nrouting\n\nOptional\n\nNot PII\n\nIt changes the state of associated tasks. Routing status is required, When the channel status is set to inactive. Allowed Value for routing status is closed. Otherwise Optional, if not specified, all tasks will be set to wrapping.\n\nClose an interaction channel and wrap agent participants\nNode.js\nPython\nC#\nJava\nGo\nPHP\nRuby\ntwilio-cli\ncurl\nReport code block\nCopy code block\n1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function updateInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n13\n    .channels(\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n14\n    .update({ status: \"closed\" });\n\n15\n\n\n16\n  console.log(channel.sid);\n\n17\n}\n\n18\n\n\n19\nupdateInteractionChannel();\nResponse\nCopy response\n1\n{\n\n2\n  \"sid\": \"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"interaction_sid\": \"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"type\": \"chat\",\n\n5\n  \"status\": \"closed\",\n\n6\n  \"error_code\": 19025,\n\n7\n  \"error_message\": \"Channel validation error\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",\n\n9\n  \"links\": {\n\n10\n    \"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",\n\n11\n    \"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",\n\n12\n    \"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"\n\n13\n  }\n\n14\n}\nClose an interaction channel and complete all tasks\nNode.js\nPython\nC#\nJava\nGo\nPHP\nRuby\ntwilio-cli\ncurl\nReport code block\nCopy code block\n1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function updateInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n13\n    .channels(\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n14\n    .update({\n\n15\n      routing: {\n\n16\n        status: \"closed\",\n\n17\n      },\n\n18\n      status: \"closed\",\n\n19\n    });\n\n20\n\n\n21\n  console.log(channel.sid);\n\n22\n}\n\n23\n\n\n24\nupdateInteractionChannel();\nResponse\nCopy response\n1\n{\n\n2\n  \"sid\": \"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"interaction_sid\": \"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"type\": \"chat\",\n\n5\n  \"status\": \"closed\",\n\n6\n  \"error_code\": 19025,\n\n7\n  \"error_message\": \"Channel validation error\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",\n\n9\n  \"links\": {\n\n10\n    \"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",\n\n11\n    \"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",\n\n12\n    \"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"\n\n13\n  }\n\n14\n}",
+    "cli_commands": [
+      "const twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";",
+      "const client = twilio(accountSid, authToken);",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",",
+      "\"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",",
+      "\"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",",
+      "\"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"",
+      "const twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";",
+      "const client = twilio(accountSid, authToken);",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",",
+      "\"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",",
+      "\"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",",
+      "\"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"",
+      "const twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";",
+      "const client = twilio(accountSid, authToken);",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants/UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\"",
+      "const twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";",
+      "const client = twilio(accountSid, authToken);",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",",
+      "\"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",",
+      "\"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",",
+      "\"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"",
+      "const twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";",
+      "const client = twilio(accountSid, authToken);"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n13\n    .channels(\"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n14\n    .fetch();\n\n15\n\n\n16\n  console.log(channel.sid);\n\n17\n}\n\n18\n\n\n19\nfetchInteractionChannel();",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"sid\": \"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n3\n  \"type\": \"chat\",\n\n4\n  \"interaction_sid\": \"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"status\": \"closed\",\n\n6\n  \"error_code\": 19025,\n\n7\n  \"error_message\": \"Channel validation error\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",\n\n9\n  \"links\": {\n\n10\n    \"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",\n\n11\n    \"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",\n\n12\n    \"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"\n\n13\n  }\n\n14\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "GET /Interactions/<interaction_sid>/Channels",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n13\n    .channels(\"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n14\n    .fetch();\n\n15\n\n\n16\n  console.log(channel.sid);\n\n17\n}\n\n18\n\n\n19\nfetchInteractionChannel();",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"sid\": \"UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n3\n  \"type\": \"chat\",\n\n4\n  \"interaction_sid\": \"KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"status\": \"closed\",\n\n6\n  \"error_code\": 19025,\n\n7\n  \"error_message\": \"Channel validation error\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",\n\n9\n  \"links\": {\n\n10\n    \"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",\n\n11\n    \"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",\n\n12\n    \"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"\n\n13\n  }\n\n14\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "{\n  \"Status\": \"closed\"\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function updateInteractionChannelParticipant() {\n\n11\n  const participant = await client.flexApi.v1\n\n12\n    .interaction(\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n13\n    .channels(\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n14\n    .participants(\"UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n15\n    .update({ status: \"closed\" });\n\n16\n\n\n17\n  console.log(participant.sid);\n\n18\n}\n\n19\n\n\n20\nupdateInteractionChannelParticipant();",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"sid\": \"UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"channel_sid\": \"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"interaction_sid\": \"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"type\": \"agent\",\n\n6\n  \"routing_properties\": {\n\n7\n    \"task_sid\": \"WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n    \"worker_sid\": \"WKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n9\n    \"reservation_sid\": \"WRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n10\n  },\n\n11\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants/UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\"\n\n12\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function updateInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n13\n    .channels(\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n14\n    .update({ status: \"closed\" });\n\n15\n\n\n16\n  console.log(channel.sid);\n\n17\n}\n\n18\n\n\n19\nupdateInteractionChannel();",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"sid\": \"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"interaction_sid\": \"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"type\": \"chat\",\n\n5\n  \"status\": \"closed\",\n\n6\n  \"error_code\": 19025,\n\n7\n  \"error_message\": \"Channel validation error\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",\n\n9\n  \"links\": {\n\n10\n    \"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",\n\n11\n    \"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",\n\n12\n    \"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"\n\n13\n  }\n\n14\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function updateInteractionChannel() {\n\n11\n  const channel = await client.flexApi.v1\n\n12\n    .interaction(\"KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n13\n    .channels(\"UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\")\n\n14\n    .update({\n\n15\n      routing: {\n\n16\n        status: \"closed\",\n\n17\n      },\n\n18\n      status: \"closed\",\n\n19\n    });\n\n20\n\n\n21\n  console.log(channel.sid);\n\n22\n}\n\n23\n\n\n24\nupdateInteractionChannel();",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Parameter",
+          "Sub-fields",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Status [required]",
+            "",
+            "Indicates the interaction channel status. When a channel is set to closed, all tasks are put in \"wrapping\" state by default unless the Routing status is set to \"closed\" in which case the tasks will be \"completed\".\n\nValue: closed"
+          ],
+          [
+            "Routing [optional]",
+            "",
+            "The state of associated tasks. If not specified, all tasks will be set to \"wrapping\"."
+          ],
+          [
+            "",
+            "status",
+            "Value: closed\n\nIf closed is specified, all associated tasks will be set to \"completed\"."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter",
+          "Description"
+        ],
+        "rows": [
+          [
+            "sid",
+            "Unique identifier for the interaction channel"
+          ],
+          [
+            "interaction_sid",
+            "Unique identifier for the interaction"
+          ],
+          [
+            "",
+            "The channel type specified when the interaction was created. Please refer to the Interactions Properties table for possible values."
+          ],
+          [
+            "links",
+            "A JSON object linking to the interaction channel's associated participants and invites"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Channel status",
+          "Routing status",
+          "Resulting task state",
+          "Resulting conversation state"
+        ],
+        "rows": [
+          [
+            "closed",
+            "Not specified",
+            "wrapping",
+            "closed"
+          ],
+          [
+            "closed",
+            "closed",
+            "completed",
+            "closed"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Channel status",
+          "Routing status",
+          "Resulting task state",
+          "Resulting conversation state"
+        ],
+        "rows": [
+          [
+            "closed",
+            "Not specified",
+            "wrapping",
+            "closed"
+          ],
+          [
+            "closed",
+            "closed",
+            "completed",
+            "closed"
+          ]
+        ]
+      }
+    ]
+  }
+}

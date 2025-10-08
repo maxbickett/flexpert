@@ -1,0 +1,92 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/custom-views-and-routes",
+  "batch_id": 8,
+  "crawled_at": "2025-10-07T20:30:39.284731+00:00",
+  "content": {
+    "title": "Create Custom Views and Routes | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/custom-views-and-routes",
+    "text_content": "On this page\nPage Tools\nCreate Custom Views and Routes\n\nFlex is built using React, so it's a single page application by default. While you can add, replace or remove components to the Flex UI, you may find that workers need an entirely separate page to effectively get their work done in the Flex UI. Flex allows you to create these views and route workers to them.\n\nThe Flex UI uses the react-router, react-router-redux and history libraries for client-side routing.\n\nAdd, Replace, or Remove a View\n\nFlex organizes views within the ViewCollection dynamic component. You can manipulate Flex views in the same manner as a dynamic component.\n\nCopy code block\n1\nFlex.ViewCollection.Content.add(\n\n2\n  <Flex.View name=\"my-custom-page\" key=\"my-custom-page-key\">\n\n3\n    <div>My custom page</div>\n\n4\n  </Flex.View>\n\n5\n);\n\nThis will add a new view that's available under a path that corresponds to the name prop (i.e., https://localhost:3000/my-custom-page in this example.)\n\nIf you require more control over mounting your view, refer to the Mounting a View to Multiple Routes section.\n\nYou can also create a link to your view in the side navigation bar:\n\nCopy code block\n1\n Flex.SideNav.Content.add(\n\n2\n  <Flex.SideLink\n\n3\n    showLabel={ true }\n\n4\n    icon=\"DefaultAvatar\"\n\n5\n    isActive={true}\n\n6\n    onClick={() => { Flex.Actions.invokeAction(\"HistoryPush\", `/my-custom-page/`); } }\n\n7\n    key=\"MyCustomPageSideLink\"\n\n8\n  >\n\n9\n    My custom page\n\n10\n  </Flex.SideLink>\n\n11\n);\nConfiguration Options\n\nThe configuration interface for routing-related functionality in Flex has the following shape:\n\nCopy code block\n1\nrouter?: {\n\n2\n  type: \"browser\" | \"memory\"; // either a web-browser address or a reference implementation\n\n3\n  history?: HistoryBuildOptions; // build options for a `history` NPM package\n\n4\n  isolate?: boolean; // isolate Flex routing from other routing, forces Flex to use memory router.\n\n5\n};\nActions for Navigation and Routing\n\nYou can use actions to navigate to different \"locations\" in the Flex UI. Actions work similarly to the HTML5 History API\n. Flex actions include:\n\nAction\tPayload\tDescription\nNavigateToView\t{ viewName: string }\tNavigates the user to a view defined by the provided view name\nHistoryPush\tURL path as a String or an Object matching the shape of the history location ({ pathname: string, search: string, hash: string, state: { [key: string]: any } })\tAdds a history entry, leading to view change or redirect\nHistoryReplace\tURL path as a String or an Object matching the shape of the history location ({ pathname: string, search: string, hash: string, state: { [key: string]: any } })\tReplaces current history entry, leading to view change or redirect\nHistoryGo\tInteger\tGoes to a specific history entry, identified by its relative position to the current page. The current page is index 0.\nHistoryGoBack\tNone\tGoes back to the previous history entry\nHistoryGoForward\tNone\tGoes forward to the next history entry\nBrowser and In-Memory History\n\nSupport for browser and memory history that is configurable through the configuration object.\n\nMounting a view to multiple routes\n\nYou may want your page's path to be separate from the name, or to expose multiple paths that lead to the same View. The View component has a route property that you can use to add an alternative route. The route property has a shape similar to props of Route component of react-router package\n.\n\nCopy code block\n1\nFlex.ViewCollection.Content.add(\n\n2\n  <Flex.View name=\"some-name\" key=\"my-custom-page-key\" route={{path: \"/custom-route\"}}>\n\n3\n    <div>My custom page</div>\n\n4\n  </Flex.View>\n\n5\n);\n\nThe custom page will be visible at the/custom-route and /some-name paths.\n\nYou can also use an array to add even more paths:\n\nCopy code block\n<View key=\"teams\" name=\"teams\" route={{ path: [\"/supervisor\", \"/something\"] }}>\n\nThe view will be visible at the /teams /supervisor and /something paths.\n\nCoordinating Flex UI with your application's routing\n\nIf you are using routing libraries like react-router-redux or connected-react-router, you can sync history between your application and Flex by providing the history object that you are using for your Router as a parameter to the Flex store enhancer:\n\n(information)\nInfo\n\nThe router application configuration options will have no effect when a custom history object is provided.\n\nCopy code block\n1\nimport { createStore, combineReducers, applyMiddleware, compose } from \"redux\";\n\n2\nimport { createBrowserHistory } from \"history\";\n\n3\nimport { Provider } from \"react-redux\";\n\n4\nimport { ConnectedRouter } from \"react-router-redux\";\n\n5\nimport { Switch, Route } from \"react-router\";\n\n6\nimport { configuration } from \"/appConfig\";\n\n7\nimport { myReducer } from \"/myReducer\";\n\n8\n\n\n9\nconst reducers = combineReducers({\n\n10\n    flex: Flex.FlexReducer,\n\n11\n    app: myReducer\n\n12\n});\n\n13\n\n\n14\nconst history = createHistory();\n\n15\n\n\n16\nconst middleware = applyMiddleware();\n\n17\n\n\n18\nconst store = createStore(\n\n19\n    reducers,\n\n20\n    compose(\n\n21\n        middleware,\n\n22\n        Flex.applyFlexMiddleware(history)\n\n23\n    )\n\n24\n);\n\n25\n\n\n26\nFlex\n\n27\n    .Manager.create(configuration, store)\n\n28\n    .then(manager => {\n\n29\n        ReactDOM.render(\n\n30\n            <Provider store={store}>\n\n31\n                <ConnectedRouter history={history}>\n\n32\n                    <Switch>\n\n33\n                        <Route path=\"/hi\" component={() => {\n\n34\n                            setTimeout(() => { history.push(\"/\"); }, 5000);\n\n35\n                            return (\n\n36\n                                <div>Hi! I will redirect to Flex in 5 seconds flat!</div>\n\n37\n                            );\n\n38\n                        }}></Route>\n\n39\n                        <Route component={() => {\n\n40\n                            return (<Flex.ContextProvider manager={manager}>\n\n41\n                                <Flex.RootContainer />\n\n42\n                            </Flex.ContextProvider>);\n\n43\n                        }}></Route>\n\n44\n                    </Switch>\n\n45\n                </ConnectedRouter>\n\n46\n            </Provider>,\n\n47\n            container\n\n48\n        );\n\n49\n    })\nPrepend routes\n\nIf you are using Flex alongside other applications, you may wish to prepend the Flex URL path with a prefix so that Flex routing won't interfere with other registered endpoints. For example, let's make our Flex path relative to /foobar. To do so, apply the following configuration settings:\n\nCopy code block\n1\nwindow.appConfig = {\n\n2\n  <...>\n\n3\n  router: {\n\n4\n    type: \"browser\",\n\n5\n    history: {\n\n6\n      basename: \"/foobar\"\n\n7\n    }\n\n8\n  }\n\n9\n  <...>\n\n10\n};\n\nThe window.appConfig.router.history.basename field tells Flex to make the Agent Desktop available under http://example.com/foobar/agent-desktop/.\n\n(warning)\nWarning\n\nImplementing route prefixing creates several important side effects for other systems that interact with Flex.\n\nYour server must take the prefix into account in its own routing. The server needs a catch-all fallback route matching the prefix (/foobar in the above example). Otherwise, visiting http://example.com/foobar/agent-desktop/ will return a 404. An application's webpack-dev-server config that handles the route might look like the following:\n\nCopy code block\n1\ndevServer: {\n\n2\n    historyApiFallback: {\n\n3\n        rewrites: [{ from: /^\\/foobar/, to: '/foobar/index.html' }]\n\n4\n    }\n\n5\n}\n\nAdditionally, the prefix is only for browser routing and is not applicable to memory. Finally, make sure to adjust paths to your assets files, like configuration or CSS!\n\nLearn more in the history node package documentation\n.",
+    "cli_commands": [
+      "flex: Flex.FlexReducer,"
+    ],
+    "actions": [
+      "invokeAction",
+      "HistoryPush"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\nFlex.ViewCollection.Content.add(\n\n2\n  <Flex.View name=\"my-custom-page\" key=\"my-custom-page-key\">\n\n3\n    <div>My custom page</div>\n\n4\n  </Flex.View>\n\n5\n);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n Flex.SideNav.Content.add(\n\n2\n  <Flex.SideLink\n\n3\n    showLabel={ true }\n\n4\n    icon=\"DefaultAvatar\"\n\n5\n    isActive={true}\n\n6\n    onClick={() => { Flex.Actions.invokeAction(\"HistoryPush\", `/my-custom-page/`); } }\n\n7\n    key=\"MyCustomPageSideLink\"\n\n8\n  >\n\n9\n    My custom page\n\n10\n  </Flex.SideLink>\n\n11\n);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nrouter?: {\n\n2\n  type: \"browser\" | \"memory\"; // either a web-browser address or a reference implementation\n\n3\n  history?: HistoryBuildOptions; // build options for a `history` NPM package\n\n4\n  isolate?: boolean; // isolate Flex routing from other routing, forces Flex to use memory router.\n\n5\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.ViewCollection.Content.add(\n\n2\n  <Flex.View name=\"some-name\" key=\"my-custom-page-key\" route={{path: \"/custom-route\"}}>\n\n3\n    <div>My custom page</div>\n\n4\n  </Flex.View>\n\n5\n);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "<View key=\"teams\" name=\"teams\" route={{ path: [\"/supervisor\", \"/something\"] }}>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { createStore, combineReducers, applyMiddleware, compose } from \"redux\";\n\n2\nimport { createBrowserHistory } from \"history\";\n\n3\nimport { Provider } from \"react-redux\";\n\n4\nimport { ConnectedRouter } from \"react-router-redux\";\n\n5\nimport { Switch, Route } from \"react-router\";\n\n6\nimport { configuration } from \"/appConfig\";\n\n7\nimport { myReducer } from \"/myReducer\";\n\n8\n\n\n9\nconst reducers = combineReducers({\n\n10\n    flex: Flex.FlexReducer,\n\n11\n    app: myReducer\n\n12\n});\n\n13\n\n\n14\nconst history = createHistory();\n\n15\n\n\n16\nconst middleware = applyMiddleware();\n\n17\n\n\n18\nconst store = createStore(\n\n19\n    reducers,\n\n20\n    compose(\n\n21\n        middleware,\n\n22\n        Flex.applyFlexMiddleware(history)\n\n23\n    )\n\n24\n);\n\n25\n\n\n26\nFlex\n\n27\n    .Manager.create(configuration, store)\n\n28\n    .then(manager => {\n\n29\n        ReactDOM.render(\n\n30\n            <Provider store={store}>\n\n31\n                <ConnectedRouter history={history}>\n\n32\n                    <Switch>\n\n33\n                        <Route path=\"/hi\" component={() => {\n\n34\n                            setTimeout(() => { history.push(\"/\"); }, 5000);\n\n35\n                            return (\n\n36\n                                <div>Hi! I will redirect to Flex in 5 seconds flat!</div>\n\n37\n                            );\n\n38\n                        }}></Route>\n\n39\n                        <Route component={() => {\n\n40\n                            return (<Flex.ContextProvider manager={manager}>\n\n41\n                                <Flex.RootContainer />\n\n42\n                            </Flex.ContextProvider>);\n\n43\n                        }}></Route>\n\n44\n                    </Switch>\n\n45\n                </ConnectedRouter>\n\n46\n            </Provider>,\n\n47\n            container\n\n48\n        );\n\n49\n    })",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nwindow.appConfig = {\n\n2\n  <...>\n\n3\n  router: {\n\n4\n    type: \"browser\",\n\n5\n    history: {\n\n6\n      basename: \"/foobar\"\n\n7\n    }\n\n8\n  }\n\n9\n  <...>\n\n10\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ndevServer: {\n\n2\n    historyApiFallback: {\n\n3\n        rewrites: [{ from: /^\\/foobar/, to: '/foobar/index.html' }]\n\n4\n    }\n\n5\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Action",
+          "Payload",
+          "Description"
+        ],
+        "rows": [
+          [
+            "NavigateToView",
+            "{ viewName: string }",
+            "Navigates the user to a view defined by the provided view name"
+          ],
+          [
+            "HistoryPush",
+            "URL path as a String or an Object matching the shape of the history location ({ pathname: string, search: string, hash: string, state: { [key: string]: any } })",
+            "Adds a history entry, leading to view change or redirect"
+          ],
+          [
+            "HistoryReplace",
+            "URL path as a String or an Object matching the shape of the history location ({ pathname: string, search: string, hash: string, state: { [key: string]: any } })",
+            "Replaces current history entry, leading to view change or redirect"
+          ],
+          [
+            "HistoryGo",
+            "Integer",
+            "Goes to a specific history entry, identified by its relative position to the current page. The current page is index 0."
+          ],
+          [
+            "HistoryGoBack",
+            "None",
+            "Goes back to the previous history entry"
+          ],
+          [
+            "HistoryGoForward",
+            "None",
+            "Goes forward to the next history entry"
+          ]
+        ]
+      }
+    ]
+  }
+}

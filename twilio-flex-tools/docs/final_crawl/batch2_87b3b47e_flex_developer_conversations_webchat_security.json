@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/security",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:52.424954+00:00",
+  "content": {
+    "title": "Webchat 3.x.x security | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/security",
+    "text_content": "On this page\nPage Tools\nWebchat 3.x.x security\n\nWebchat 3.x.x includes enhanced security measures:\n\nDeployment key shields your account information\n\nTo add Webchat 3.x.x to your website, you create a randomly generated deployment key and map it to a chat address in Twilio Console. When you deploy Webchat 3.x.x, your account information is shielded, because only your deployment key is used. If you ever feel like your deployment key might have been compromised, you can replace it with a new deployment key and chat address.\n\nFingerprinting prevents spoofing\n\nWhen a user begins a webchat session, Webchat 3.x.x records the fingerprint of that browser and device based on a number of characteristics.\n\nWith every chat message that Flex UI receives, that fingerprint is verified. This means that the chat session can't be hacked, spoofed, or intercepted without being detected.\n\nAllowed origins\n\nIn your deployment key settings, you must specify up to 10 trusted URLs as allowed origins where your customers can initiate a chat. Chat sessions are only accepted from those trusted URLs. By setting these values, you ensure that your chat widget can't be deployed on other websites.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

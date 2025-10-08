@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "generated_at": "2025-10-07T20:39:35.207119+00:00",
+    "repos_analyzed": 6,
+    "search_queries": [
+      "twilio flex plugin 2.0 stars:>5",
+      "flex-ui 2.x language:typescript stars:>3",
+      "twilio paste flex plugin",
+      "flex-plugin-builder flexui2",
+      "@twilio/flex-ui 2 language:typescript",
+      "twilio flex plugin language:typescript stars:>10"
+    ]
+  },
+  "repositories": [
+    {
+      "repo_name": "",
+      "description": "        ",
+      "readme": "Emoji Picker Plugin for Flex UI 2.x\n\nA Flex Plugin for Twilio Flex Programmable Contact Center. \n\nAbout the project\n\nThe emoji picker component was built from scratch using Twilio Paste. This means that it will blend in with Flex UI styling and look the part when Flex UI is in dark mode. For customizing styling please refer to the Paste design tokens.\n\nTo add/remove emojis from the rendered list, simply modify the src/emojis.json file. If adding an emoji, please make sure to specify the category as one of the following. \"Smileys & People\", \"Animals & Nature\", \"Food & Drink\", \"Activity\", \"Travel & Places\", \"Objects\", \"Symbols\", \"Flags\".\n\nIt is also worth noting that Flex UI uses the 'Inter' font for displaying messages which is not compatible with all emojis. To avoid having a mis-rendered emoji appear in chat, these unsupported emojis have been removed from the picker.\n\nSetup\n\nClone the repository and enter the main directory:\n\ncd plugin-emoji-picker-2.x\n\nMake sure you have Node.js as well as npm. We support Node >= 10.12 (and recommend the even versions of Node). Afterwards, install the dependencies by running:\n\n# If you use npm\nnpm install\n\nMake a copy of the example appConfig.js file.\n\ncp public/appConfig.example.js public/appConfig.js\n\nNext, please install the Twilio CLI by running:\n\nbrew tap twilio/brew && brew install twilio\n\nFinally, install the Flex Plugin extension for the Twilio CLI:\n\ntwilio plugins:install @twilio-labs/plugin-flex\n\nTo run the plugin locally (for testing purposes) run:\n\ntwilio flex:plugins:start\n\nTo deploy the plugin run:\n\ntwilio flex:plugins:deploy --changelog \"WRITE YOUR CHANGELOG HERE\"\n\nFor further details on Flex Plugins refer to our documentation on the Twilio Docs page.\n\nContributing\n\nAny contributions are welcome to this project. Create a pull request, get it approved and make the project better :)\n\nCode of Conduct\n\nPlease read the Code of Conduct for further details.",
+      "file_structure": [],
+      "key_files": [],
+      "dependencies": {},
+      "analysis": {
+        "has_tests": false,
+        "has_serverless": false,
+        "has_utils": false,
+        "has_types": false,
+        "framework": "javascript",
+        "structure_type": "unknown"
+      },
+      "github_metadata": {
+        "name": "twilio-labs/plugin-emoji-picker-2.x",
+        "url": "https://github.com/twilio-labs/plugin-emoji-picker-2.x",
+        "description": "",
+        "stars": "5",
+        "language": "Unknown"
+      }
+    },
+    {
+      "repo_name": "",
+      "description": "        ",
+      "readme": "Material UI + Paste in Flex UI 2.0 Example Plugin\n\nWhen upgrading to Flex UI 2.0, existing Material UI based plugins will encounter rendering issues throughout the Flex UI whenever a Material UI component is mounted:\n\nIt is necessary to define a unique style provider and pass it to Flex to solve this issue:\n\nThis plugin serves as example code to demonstrate Material UI and Twilio Paste usage within the same plugin, which is necessary to allow a gradual migration strategy.\n\nWhat does it do?\n\nThis plugin adds the following code to the beginning of the plugin's init function. It is crucial that both productionPrefix and seed are unique per plugin to prevent style conflicts.\n\nflex.setProviders({\n  CustomProvider: (RootComponent) => (props) => {\n    return (\n      <StylesProvider generateClassName={createGenerateClassName({\n        productionPrefix: PLUGIN_NAME,\n        seed: PLUGIN_NAME\n      })}>\n          <RootComponent {...props} />\n        </StylesProvider>\n    );\n  },\n  PasteThemeProvider: CustomizationProvider\n});\n\nDisclaimer\n\nThis software is to be considered \"sample code\", a Type B Deliverable, and is delivered \"as-is\" to the user. Twilio bears no responsibility to support the use or implementation of this software.\n\nSetup\n\nMake sure you have Node.js as well as npm. We support Node >= 10.12 (and recommend the even versions of Node). Afterwards, install the dependencies by running npm install:\n\ncd \n\n# If you use npm\nnpm install\n\nNext, please install the Twilio CLI by running:\n\nbrew tap twilio/brew && brew install twilio\n\nFinally, install the Flex Plugin extension for the Twilio CLI:\n\ntwilio plugins:install @twilio-labs/plugin-flex\nDevelopment\n\nRun twilio flex:plugins --help to see all the commands we currently support. For further details on Flex Plugins refer to our documentation on the Twilio Docs page.",
+      "file_structure": [],
+      "key_files": [],
+      "dependencies": {},
+      "analysis": {
+        "has_tests": false,
+        "has_serverless": false,
+        "has_utils": false,
+        "has_types": false,
+        "framework": "javascript",
+        "structure_type": "unknown"
+      },
+      "github_metadata": {
+        "name": "dremin/plugin-mui-paste",
+        "url": "https://github.com/dremin/plugin-mui-paste",
+        "description": "",
+        "stars": "1",
+        "language": "Unknown"
+      }
+    },
+    {
+      "repo_name": "",
+      "description": "        ",
+      "readme": "Twilio Flex Plugin Builder\n\nMonorepo for all the tooling needed to create a custom Twilio Flex Plugins\n\n     \n\nGetting Started\n\nFlex Plugin Builder requires Node.js. We support and recommend the LTS versions of Node. This is a monorepo project managed by lerna for creating Twilio Flex plugins.\n\n@twilio-labs/plugin-flex: The CLI tool for creating, building, testing, deploying, and managing your plugins\nUser Guide\n\nPlease visit Twilio Docs for the latest docs on Plugins CLI and API.\n\nPlugins CLI\nPlugins API\nTroubleshooting and FAQ\nChangelog\n\nMajor changelogs can be found in the changelog directory.\n\nContributing\n\nCheck out CONTRIBUTING for more information on how to contribute to this project.\n\nLicense\n\nFlex Plugin Builder is licensed under MIT.\n\nContributors\n\nThanks to the wonderful people listed in CONTRIBUTORS.md.\n\nThis project follows the all-contributors specification. Contributions of any kind welcome!",
+      "file_structure": [],
+      "key_files": [],
+      "dependencies": {},
+      "analysis": {
+        "has_tests": false,
+        "has_serverless": false,
+        "has_utils": false,
+        "has_types": false,
+        "framework": "javascript",
+        "structure_type": "unknown"
+      },
+      "github_metadata": {
+        "name": "twilio/flex-plugin-builder",
+        "url": "https://github.com/twilio/flex-plugin-builder",
+        "description": "",
+        "stars": "86",
+        "language": "Unknown"
+      }
+    },
+    {
+      "repo_name": "",
+      "description": "        ",
+      "readme": "Twilio Flex Project Template\n\nThe Flex Project Template is a starting point for Flex solutions of any size. It provides a methodology for managing all the key assets of a Twilio Flex solution:\n\nIt can be used for large projects or simple standalone features\nMany of the most common features requested by Flex customers are already packaged in the template\nEach feature is self-contained and easily removed if desired\nFeatures can be turned on and off using an administration panel\nYou can deploy this solution and use it to build in just a few minutes by providing your account SID, API key, and API secret.\nFlex Project Template Documentation \u00bb\nWhy use this template?\n\nThe Twilio platform is a robust suite of tools that can be orchestrated together to create incredible custom solutions. The biggest challenge is how to automatically configure and orchestrate these different tools together from an single source of truth. This is the problem the template aims to resolve.\n\nThe template provides a means to manage all of the assets which make up a Flex solution. This aggregates the work Twilio Professional Services have done to show how different features can be robustly implemented on the Flex platform. It can take new Flex developers from 0 to 100 by putting them right in the position of developing feature enhancements instead of worrying about how to manage assets and dependencies on the platform.\n\nFurthermore, with the rich library of examples and conventions, developers can quickly see how to approach different problems on the platform by seeing working code that they can easily reverse engineer.\n\nFlex Plugin Library\n\nIf you are primarily looking to add common contact center functionality to Flex, we recommend starting with the plugins from the Flex Plugin Library to support your use case. These plugins are maintained and supported by Twilio, and many are derived from the most popular features included in the template.\n\nUsing plugins from the Plugin Library reduces the custom code footprint and total cost of ownership of your solution. Please be aware they cannot be customized and must be deployed and configured manually via the Flex Admin user interface. In case you have already developed, or plan to develop, custom code that modifies Flex actions or components, it is necessary to validate that those modifications don\u2019t conflict with the standard plugin(s) you are planning to deploy from the Plugin Library. Depending on your use case, you may wish to use only plugins from the Plugin Library, or only the template, or a mix of both.\n\nIf you plan to use plugins from the Plugin Library alongside this template, please remove the corresponding template feature(s) to prevent conflicts.\n\nHow do I get started?\n\nInstalling the template in your Twilio account is fast and easy. Follow this step-by-step guide to install the template in under 10 minutes.\n\nWhen you are ready to customize and extend your Flex solution with the template, get started building with the template!",
+      "file_structure": [],
+      "key_files": [],
+      "dependencies": {},
+      "analysis": {
+        "has_tests": false,
+        "has_serverless": false,
+        "has_utils": false,
+        "has_types": false,
+        "framework": "javascript",
+        "structure_type": "unknown"
+      },
+      "github_metadata": {
+        "name": "twilio-professional-services/flex-project-template",
+        "url": "https://github.com/twilio-professional-services/flex-project-template",
+        "description": "",
+        "stars": "71",
+        "language": "Unknown"
+      }
+    },
+    {
+      "repo_name": "",
+      "description": "        ",
+      "readme": "Screenshots\n\nSupervisor listing all the Agents:\n\nSupervisor adding a new Agent:\n\nSupervisor viewing the Audit Events\n\nAgent logging in:\n\nWhat\n\nThis is a Flex Plugin that allows the Supervisors of your Contact Center to add/remove Agents by their own without the need of having a SaaS Identity Provider (IdP) of the market to manage your Agents.\n\nOf course, if you already have an IdP - especially the ones we support on our SSO configuration Page - it makes no sense to use this Plugin.\n\nThis plugin is meant for those companies who do not have an IdP and want to have Flex running as soon as possible!\n\nDisclaimer: Ask your Developers to validate this Plugin, this is not production-ready code!\n\nHow it works\n\nThis Plugin uses 100% of the Twilio Products and, therefore, makes it easy to have it running quickly!\n\nIt uses Twilio Functions to orchestrate the SSO validation;\nIt uses Twilio Sync for storing the Agents;\nIt uses Twilio Verify to validate the authenticity of the Agents logging into Flex;\nIt uses the new Twilio Paste - which is the base for all future Flex Plugins;\nOh, before installing it:\n\nYou need to enable Flex UI 2.0, the newest version of Flex!\n\nHow to install\n\nWe have to install 2 assets:\n\nThe Twilio Functions (back-end)\nThe Flex Plugin (front-end)\nTo install the Twilio Functions:\n\nclone this repo;\n\nexecute cd ./serverless-sso to go to the Twilio Functions folder.\n\nnpm install to install the packages into your computer.\n\nrename .env-example from this folder to .env and follow the instructions in the .env file.\n\nyou have to generate the public/private pair keys for the SSO. Go to ./serverless-sso/src/assets folder and execute the two commands below:\n\nopenssl genrsa -out privatekey.private.cer 1024\n\nopenssl req -new -x509 -key privatekey.private.cer -out publickey.private.cer -days 900\n\n\nYou should now have two new files in the assets folder: privatekey.private.cer and publickey.private.cer. You know the rules, don't send this private key to anyone.\n\nnpm run deploy to deploy the functions to your Twilio environment.\n\nQuick test to see if you have done it correctly until here. Open Chrome and check if you can visit your https://xxxxxx.twil.io/sso/saml - Change the xxxxxx to your environment that was displayed in your Terminal from step 7 above. You should see an error ERR_REDIRECT_FLOW_BAD_ARGS. For now, this means: Success until here!\n\nNow go to Flex SSO configuration to configure the SSO you just deployed with Flex. Configure with the values below:\n\nX.509 Certificate: Put the content of ./src/assets/publickey.private.cer there.\n\nSingle sign-on URL: https://xxxxxx.twil.io/sso/saml\n\nWill you be hosting your own domain: Leave it unchecked.\n\nTrusted Domains: (it is disabled)\n\nDefault redirect URL: (it is disabled)\n\nLogin using Popup - On: Leave it unchecked.\n\nHit Save button\n\nFinal test: On this same Flex SSO configuration page, there is a link saying Login with SSO: Open this link in Incognito on your Browser, that is the link your agents will use to login on Flex. If everything goes right, you should see the Login page (like this one) - You can even try to log in, you should receive an error saying \"Agent not found\" - This is fine for now.\n\nTo install the Flex Plugin:\nexecute cd ./flex-plugin-sso to go to the Plugin folder.\nnpm install to install the packages into your computer.\nrename .env-example from this folder to .env and follow the instructions in the .env file.\nYou need to have the Twilio CLI. Type twilio in your terminal to see if you have it, if not, install it now.\nYou need the Flex Plugins CLI . Type twilio plugins to make sure you have it, if not, install it.\nYou need to create a new profile for your Twilio CLI, type twilio profiles:list to check if you are using it correctly. If not, add a new profile with the cmd twilio profiles:add.\nnpm run deploy -- --changelog \"first deployment!\" to deploy this Plugin.\nOnce step 8 is finished, it will show the next steps, you will have to run the command mentioned there (something like twilio flex:plugins:release ... etc etc)\nWe are done! Go to https://flex.twilio.com - You should see a new icon on the left-hand side. From there you can add/remove your Agents and ask them to visit the link mentioned on step 10 to log in on Flex.\nRoadmap\n\n[Feature] multi-BPOs concept: in RealTime Queue Dashboard, add the possibility to filter out only the queues from the BPO... Hiding the queues from others.\n\n[Feature] multi-BPOs concept: in the Flex Insights, add the possibility to have reports of their own BPO, using custom embedded dashboards.",
+      "file_structure": [],
+      "key_files": [],
+      "dependencies": {},
+      "analysis": {
+        "has_tests": false,
+        "has_serverless": false,
+        "has_utils": false,
+        "has_types": false,
+        "framework": "javascript",
+        "structure_type": "unknown"
+      },
+      "github_metadata": {
+        "name": "bruno222/twilio-flex-plugin-sso",
+        "url": "https://github.com/bruno222/twilio-flex-plugin-sso",
+        "description": "",
+        "stars": "18",
+        "language": "Unknown"
+      }
+    },
+    {
+      "repo_name": "",
+      "description": "        ",
+      "readme": "flex-plugins\n\nThe Aselo frontend is built as a Twilio Flex Plugin in React and TypeScript. See aselo.org or contact Aselo for more information.\n\ngit-secrets\n\nIn order to prevent sensitive credentials to be leaked, please follow this instructions to setup git-secrets.\n\nInstall git-secrets in your computer.\nGo into the repo root folder.\nRun git secrets --register-aws.\nRun git config --local core.hooksPath .githooks/.\nLocal Development\nRequirements\n\nnvm or nvm-windows docker\n\nWe depend on aws cli running inside of docker for some setup. You will need valid IAM access keys configured on your local machine to run some commands.",
+      "file_structure": [],
+      "key_files": [],
+      "dependencies": {},
+      "analysis": {
+        "has_tests": false,
+        "has_serverless": false,
+        "has_utils": false,
+        "has_types": false,
+        "framework": "javascript",
+        "structure_type": "unknown"
+      },
+      "github_metadata": {
+        "name": "techmatters/flex-plugins",
+        "url": "https://github.com/techmatters/flex-plugins",
+        "description": "",
+        "stars": "13",
+        "language": "Unknown"
+      }
+    }
+  ],
+  "patterns_discovered": {
+    "common_structure": {
+      "unknown": 6
+    },
+    "common_dependencies": {},
+    "testing_approaches": [],
+    "serverless_usage": 0,
+    "typescript_adoption": 0
+  }
+}

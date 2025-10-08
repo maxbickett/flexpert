@@ -1,0 +1,52 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/customize-attachment-behavior",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:42.589885+00:00",
+  "content": {
+    "title": "Customizing Chat Attachment Behavior (Webchat 2.0) | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/customize-attachment-behavior",
+    "text_content": "On this page\nPage Tools\nCustomizing Chat Attachment Behavior (Webchat 2.0)\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\nOnce Webchat 2.0 attachments are enabled you can configure additional details for what agents and customers are allowed to send, including:\n\nThe maximum allowed file size\nRestrict attachments to a limited set of file types.\nConfigure both the agent and customer restrictions independently.\nConfigure the maximum file size for attachments\n\nYou can adjust the maximum file size that can be uploaded by either the agent or the customer. Enter a value in bytes into the maxFileSize value to set the max file size allowed. If no value is provided the default value of 10,485,760 (10Mb) is used.\n\nCopy code block\n1\n// Max file size = 10 mb = 10 x 1024 x 1024 = 10,485,760\n\n2\n\n\n3\ninterface Config {\n\n4\n  fileAttachment?: {\n\n5\n    enabled?: boolean;\n\n6\n    maxFileSize?: number;\n\n7\n  };\n\n8\n}\nConfigure which files types can be attached\n\nYou can also specify a custom set of file extensions that can be uploaded. Enter all the accepted file extensions as an array into the acceptedExtensions value.\n\n(warning)\nWarning\n\nThe client side validation only checks the attached file's size and mime type. You can write business logic to do additional validation of the sent media messages using Programmable Chat webhooks.\n\nAll extensions are supported by Programmable Chat, so you should include all the file types you want to use in your custom array. A custom value entered into the acceptedExtensions array will override the default extensions set.\n\nCopy code block\n1\n// Accepted extensions = .png, .txt, .pdf = [\"png\", \"txt\", \"pdf\"]\n\n2\n\n\n3\ninterface Config {\n\n4\n  fileAttachment?: {\n\n5\n    enabled?: boolean;\n\n6\n    acceptedExtensions?: Array<string>;\n\n7\n  };\n\n8\n}\nExample web chat attachments configuration\n\nAn example of both of these settings is shown below.\n\nCopy code block\n1\nfileAttachment: {\n\n2\n  enabled: true,\n\n3\n  maxFileSize: 26214400,\n\n4\n  acceptedExtensions: [\"png\", \"txt\", \"pdf\"]\n\n5\n}\nActions\n\nThere are four actions that can be invoked programmatically. You can use these to assist agents with quick actions or automate parts of a web chat interaction.\n\nSend media message\n\nSelect and send a file as an attachment in a single action.\n\nCopy code block\nActions.invokeAction(\"SendMediaMessage\", { file: file, channelSid: \"unique_channel_identifier\" });\nAttach a file\n\nAdd a file as an attachment in the message input field.\n\n\u26a0\ufe0f Note: Attaching a file will replace text that was already entered.\n\nCopy code block\nActions.invokeAction(\"AttachFile\", { file: File, channelSid: \"unique_channel_identifier\" });\nDetach an already attached file\n\nRemove an unsent attached from the message input field.\n\n\u26a0\ufe0f Note: Detaching a file will not restore previous text that was replaced using the attach action.\n\nCopy code block\nActions.invokeAction(\"DetachFile\", { file: File, channelSid: \"unique_channel_identifier\" });\nPreview/download media\n\nDownload the file attached to a message. This will return a temporary link that can be used by channel members to download the file. This link is only valid for 5 minutes after which a new temporary link will need to be requested.\n\nCopy code block\nActions.invokeAction(\"DownloadMedia\", { message: message, channelSid: \"unique_channel_identifier\" });\nSend Multiple Files\n\nOnly one file can be sent at a time. You can repeat the attachment process to send multiples or compress the files you wish to send into a single file. Note that if you do this you must allow the chosen extension to be sent (e.g. Zip) in your configuration file.\n\nAdditionally, you must send messages and files separately. If you enter text into the message input element, the Webchat interface will disable the attachment button. If you select a file, you cannot enter any text.\n\nSending / Receiving attachments via Programmable Chat REST API or SDK\n\nThe Attachments feature is built on Programmable Chat media support capabilities. If you have built a custom chat client on Twilio Programmable Chat, you can still use attachment support for agents in Flex UI. All media messages posted in the channel will be rendered in Flex UI for the agent as attachments.\n\nSecurity and Compliance\n\nFlex Media Support is GDPR-compliant. This means:\n\nMetadata logs that contain PII are deleted within 7 days of creation.\nYou can use the Programmable Chat API to delete the message content and associated media.\n\nBoth the agent (Flex UI) and customer (Flex web chat UI) must enable attachments in order to send and receive files. If only one side is enabled, the other will not be able to view the attachments received.\n\nFinally, Flex does not handle any virus scanning or content filtering. As this feature is built on Programmable Chat media support capabilities, you can use your in-house implementation to do additional validation of the sent media messages using Programmable Chat webhooks.\n\nKnown issues / limitations\nSupervisor cannot download attachments when monitoring a live chat.\nSupervisor cannot download attachments from the Insights transcript of a past chat.\nCustomers will not see an error if the file they have selected doesn't meet the size or type restrictions.\nIt is not possible to copy and paste or drag files into the message input field.\nStudio flow does not recognize media messages, so automated responses or \"Send to Flex\" widget will not be triggered by them",
+    "cli_commands": [],
+    "actions": [
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "SendMediaMessage",
+      "AttachFile",
+      "DetachFile",
+      "DownloadMedia"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\n// Max file size = 10 mb = 10 x 1024 x 1024 = 10,485,760\n\n2\n\n\n3\ninterface Config {\n\n4\n  fileAttachment?: {\n\n5\n    enabled?: boolean;\n\n6\n    maxFileSize?: number;\n\n7\n  };\n\n8\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Accepted extensions = .png, .txt, .pdf = [\"png\", \"txt\", \"pdf\"]\n\n2\n\n\n3\ninterface Config {\n\n4\n  fileAttachment?: {\n\n5\n    enabled?: boolean;\n\n6\n    acceptedExtensions?: Array<string>;\n\n7\n  };\n\n8\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nfileAttachment: {\n\n2\n  enabled: true,\n\n3\n  maxFileSize: 26214400,\n\n4\n  acceptedExtensions: [\"png\", \"txt\", \"pdf\"]\n\n5\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Actions.invokeAction(\"SendMediaMessage\", { file: file, channelSid: \"unique_channel_identifier\" });",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Actions.invokeAction(\"AttachFile\", { file: File, channelSid: \"unique_channel_identifier\" });",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Actions.invokeAction(\"DetachFile\", { file: File, channelSid: \"unique_channel_identifier\" });",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Actions.invokeAction(\"DownloadMedia\", { message: message, channelSid: \"unique_channel_identifier\" });",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

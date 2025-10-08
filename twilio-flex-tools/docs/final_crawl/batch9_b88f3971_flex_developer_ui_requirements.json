@@ -1,0 +1,91 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/requirements",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:32.890839+00:00",
+  "content": {
+    "title": "Flex UI Requirements | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/requirements",
+    "text_content": "On this page\nPage Tools\nFlex UI Requirements\nOverview\n\nReview the hardware, software, and network requirements for running Flex UI to make sure your environment meets these standards.\n\nHardware requirements\n\nTo comfortably run the Flex UI, an agent's computer must have the following:\n\n\tCPU\tRAM\tScreen resolution\nMinimum\t2 Ghz\t2 GB\t1024x768\nSoftware requirements\nRequirement\tDescription\nOperating system\t\nWindows 10 and 11\nMacOS\nLinux Ubuntu or Mint 64-bit\n\nBrowser\tUse an up-to-date version of your preferred browser:\n\nGoogle Chrome\nMicrosoft Edge\n\nNote: Only the Flex UI Agent Desktop\n is supported in Edge.\nMake sure you set your browser to full screen or a browser width that's at least 1024. Smaller window sizes may cause some Flex UI pages not to appear correctly.\nNetwork requirements\n\nThis table shows the minimum recommended bandwidth for running Flex UI without significant effect on performance.\n\n\tBandwidth\tPackets dropped\tDelay\nDownload/Upload\t200 kb/s\t1-3%\t200 ms\n\nThis table shows the domains that you need to add to your allowlists for VPNs and proxies to ensure proper access to Flex UI.\n\nDomain\tPurpose\n*.twilio.com\tUsed by a variety of Twilio Services, including ones related to Flex.\n*.ytica.com\tUsed by Flex Insights.\n*.twiliocdn.com\tUsed to serve static assets that we provide. This is commonly used for items such as SDK versions or standard media files.\n*.twil.io\tUsed by Twilio Functions product. It's standard practice for many of our customers to use a Twilio Function and access them from Flex.\n*.segment.com and *.segment.io\tUsed to provide telemetry for Flex.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "",
+          "CPU",
+          "RAM",
+          "Screen resolution"
+        ],
+        "rows": [
+          [
+            "Minimum",
+            "2 Ghz",
+            "2 GB",
+            "1024x768"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Requirement",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Operating system",
+            "Windows 10 and 11\nMacOS\nLinux Ubuntu or Mint 64-bit"
+          ],
+          [
+            "Browser",
+            "Use an up-to-date version of your preferred browser:\n\nGoogle Chrome\nMicrosoft Edge\n\nNote: Only the Flex UI Agent Desktop\n is supported in Edge.\nMake sure you set your browser to full screen or a browser width that's at least 1024. Smaller window sizes may cause some Flex UI pages not to appear correctly."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "",
+          "Bandwidth",
+          "Packets dropped",
+          "Delay"
+        ],
+        "rows": [
+          [
+            "Download/Upload",
+            "200 kb/s",
+            "1-3%",
+            "200 ms"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Domain",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "*.twilio.com",
+            "Used by a variety of Twilio Services, including ones related to Flex."
+          ],
+          [
+            "*.ytica.com",
+            "Used by Flex Insights."
+          ],
+          [
+            "*.twiliocdn.com",
+            "Used to serve static assets that we provide. This is commonly used for items such as SDK versions or standard media files."
+          ],
+          [
+            "*.twil.io",
+            "Used by Twilio Functions product. It's standard practice for many of our customers to use a Twilio Function and access them from Flex."
+          ],
+          [
+            "*.segment.com and *.segment.io",
+            "Used to provide telemetry for Flex."
+          ]
+        ]
+      }
+    ]
+  }
+}

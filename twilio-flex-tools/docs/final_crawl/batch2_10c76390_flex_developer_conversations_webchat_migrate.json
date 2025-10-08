@@ -1,0 +1,103 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/migrate",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:48.405540+00:00",
+  "content": {
+    "title": "Migrate to Webchat 3.x.x | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/migrate",
+    "text_content": "On this page\nPage Tools\nMigrate to Webchat 3.x.x\n\nThis page describes the differences between Webchat 3.x.x and other Flex webchat versions, as well as how to migrate to Webchat 3.x.x from another webchat version.\n\nPreviously, Flex released two other versions of webchat for Flex:\n\nFlex Webchat 2.0 is no longer supported. If you're using Webchat 2.0, migrate to Webchat 3.x.x.\nThe Webchat React app, open-source project that provides an example of how to build, integrate, and use webchat. You can continue using your Webchat React app implementation or migrate to Webchat 3.x.x.\nWebchat app comparison\n\tWebchat 3.x.x\tWebchat React app\tWebchat 2.0 (no longer supported)\nBest for organizations that\tAre setting up webchat for the first time\n\nAre migrating from Webchat 2.0\tWant to fully customize webchat and have development resources to build, deploy, and host it\tn/a\nWorks with\tFlex UI 2.x.x\tFlex UI 2.x.x and 1.x.x\tFlex UI 2.x.x and 1.x.x\nApp type\tFlex native\tOpen-source\tFlex native\nHosted by Twilio\tYes\tNo\tYes\nSupported by Twilio\tYes\tYes (provided code only; additional customizations are not Twilio-supported)\tNo\nBuilt on\u2026\tTwilio Conversations\tTwilio Conversations\tProgrammable Chat (legacy messaging)\nAuto-generated embed code to add webchat to your website\tYes\tNo\tYes\nShields account information with a deployment key\tYes\tNo\tNo\nUses fingerprinting for enhanced security\tYes\tNo\tNo\nChat attachments available\tYes\tYes\tYes, if enabled\nRequires development effort to build\tNo\tYes\tNo\nAbility to include configurable pre-engagement form\tYes\tYes\tYes\nAbility to change the theme, style, and brand of webchat\tNo. You can change to light or dark mode only.\tYes\tYes\nHow to migrate\nIf you're currently using Webchat 2.0\n\nWebchat 2.0 is built on legacy messaging, which is no longer supported. Upgrade to Webchat 3.x.x, which is built on Conversations and includes enhanced security features.\n\nIf you are using Flex UI 1.x.x, you must upgrade to Flex UI 2.x.x before you can use Webchat 3.x.x.\n\nTo migrate to Webchat 3.x.x:\n\nFollow the instructions to set up a new Webchat 3.x.x widget.\nWhen setting up your pre-engagement form, you must re-create your form in Webchat 3.x.x, rather than copying and pasting your Webchat 2.0 pre-engagement form. Because there are so many changes between the two versions, this will save you time.\nIn Webchat 3.1.0 and later, the pre-engagement form is enabled by default. For information about how to configure it or turn it off, see Configure a pre-engagement form and context.\nIn Step 4: Embed the webchat widget on your website, delete your Webchat 2.0 embed code and replace it with Webchat 3.x.x embed code.\n\nYou'll also want to be aware of the following additional differences between Webchat 2.0 and Webchat 3.x.x:\n\nWe have updated the name of the pre-engagement form attributes that control the text at the top of your pre-engagement form:\ntitle: Name or greeting that appears as the heading at the top of the form.\ndescription: Introductory text for the form that appears below the title.\nThe CheckboxItem field type is now available, which enables you to include checkboxes in your forms. The checkbox can include accompanying plain or HTML-formatted text, including links.\nThe new pattern field attribute is now available. This attribute enables you to add custom validation to your fields.\nIf you're currently using the Webchat React app\n\nIf you're using the Webchat React app, you can continue to use your existing webchat or migrate to Webchat 3.x.x. However, Twilio does not provide support for your implementation of the Webchat React app. You may want to migrate to Webchat 3.x.x if you'd like a solution that doesn't require development effort to build or maintain, is hosted by Twilio Flex, and includes enhanced security features.\n\nTo migrate to Webchat 3.x.x:\n\nFollow the instructions to set up a new Webchat 3.x.x widget to create new chat addresses that are linked to deployment keys.\nUpdate your website to remove your existing Webchat React app deployment and add the embed code for the Webchat 3.x.x widget.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "",
+          "Webchat 3.x.x",
+          "Webchat React app",
+          "Webchat 2.0 (no longer supported)"
+        ],
+        "rows": [
+          [
+            "Best for organizations that",
+            "Are setting up webchat for the first time\n\nAre migrating from Webchat 2.0",
+            "Want to fully customize webchat and have development resources to build, deploy, and host it",
+            "n/a"
+          ],
+          [
+            "Works with",
+            "Flex UI 2.x.x",
+            "Flex UI 2.x.x and 1.x.x",
+            "Flex UI 2.x.x and 1.x.x"
+          ],
+          [
+            "App type",
+            "Flex native",
+            "Open-source",
+            "Flex native"
+          ],
+          [
+            "Hosted by Twilio",
+            "Yes",
+            "No",
+            "Yes"
+          ],
+          [
+            "Supported by Twilio",
+            "Yes",
+            "Yes (provided code only; additional customizations are not Twilio-supported)",
+            "No"
+          ],
+          [
+            "Built on\u2026",
+            "Twilio Conversations",
+            "Twilio Conversations",
+            "Programmable Chat (legacy messaging)"
+          ],
+          [
+            "Auto-generated embed code to add webchat to your website",
+            "Yes",
+            "No",
+            "Yes"
+          ],
+          [
+            "Shields account information with a deployment key",
+            "Yes",
+            "No",
+            "No"
+          ],
+          [
+            "Uses fingerprinting for enhanced security",
+            "Yes",
+            "No",
+            "No"
+          ],
+          [
+            "Chat attachments available",
+            "Yes",
+            "Yes",
+            "Yes, if enabled"
+          ],
+          [
+            "Requires development effort to build",
+            "No",
+            "Yes",
+            "No"
+          ],
+          [
+            "Ability to include configurable pre-engagement form",
+            "Yes",
+            "Yes",
+            "Yes"
+          ],
+          [
+            "Ability to change the theme, style, and brand of webchat",
+            "No. You can change to light or dark mode only.",
+            "Yes",
+            "Yes"
+          ]
+        ]
+      }
+    ]
+  }
+}

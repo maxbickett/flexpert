@@ -1,0 +1,446 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/register-interactions-webhooks",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:40.408261+00:00",
+  "content": {
+    "title": "Register a webhook to receive Interactions events | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/register-interactions-webhooks",
+    "text_content": "On this page\nPage Tools\nRegister a webhook to receive Interactions events\n(warning)\nWarning\n\nInteractions API webhooks are not PCI compliant or a HIPAA Eligible Service and should not be used in Flex workflows that are subject to HIPAA or PCI.\n\nOverview\n\nThe Interactions API is part of the architecture that supports Flex Conversations. When developing for Flex Conversations, you may need to receive Interactions events in your Flex development environment to use in building custom workflows.\n\nTo get to Interaction event notifications, use the https://flex-api.twilio.com/v1/Instances/{instanceSid}/InteractionWebhooks API endpoint to register a webhook URL and subscribe to events you need.\n\nRegister an Interaction webhook URL\n\nThere are two types of Interactions webhooks. You determine which to create by setting the Type parameter in the API request to one of the following:\n\nglobal: Get notifications for all events you subscribe to using one webhook URL for your Flex instance. Note that you can also set a global webhook URL and subscribe to event details in the Twilio Console.\ninteraction: Get notifications for events you subscribe to only for a specific interaction. After registering a webhook with the Type set to interaction, the API response provides a ttid value for that webhook. You must then provide this value as the webhook_ttid when you create an Interaction. This associates the webhook to the Interaction so that you get notifications when a subscribed event occurs for that Interaction.\n\nTo register a webhook URL:\n\nExecute the POST /v1/Instances/{instanceSid}/InteractionWebhooks API call, making sure that you set the request parameters according to the type of webhook you want to create. See below for example requests to create a global or an Interaction-specific webhook.\nRequest parameters\nName\tDescription\nFilters\tName of the event to send to the webhook URL. See Event details for a list of events and their associated parameters. You can pass more than one instance of this parameter.\nMethod\tHTTP method used to send the event.\nType\tType of webhook.\n\nPossible values:\n\nglobal: Send a notification every time the subscribed events occur.\ninteraction: Send a notification for the subscribed events when they occur for a specific interaction.\nIf you don't send a value in the request, it defaults to global.\nWebhookUrl\tWebhook URL to send the event details.\nFriendlyName\tA name for the webhook that's easy to recognize and understand.\n\nNote: If you register a global webhook URL for all events and an Interaction-specific webhook URL, when an event you've subscribed to occurs for an Interaction you've subscribed to, Flex sends a notification to both URLs.\n\nThe following are examples of the POST /v1/Instances/{instanceSid}/InteractionWebhooks API call configured by type.\n\nRegister a global Interaction webhook\nPOST API request\nCopy code block\n1\ncurl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks \\\\\n\n2\n--data-urlencode \"WebhookEvents=onChannelStatusUpdated\" \\\\\n\n3\n--data-urlencode \"WebhookEvents=onChannelCreateFailed\" \\\\\n\n4\n--data-urlencode \"WebhookMethod=POST\" \\\\\n\n5\n--data-urlencode \"Type=global\" \\\\\n\n6\n--data-urlencode \"WebhookUrl=https://company.com/action\" \\\\\n\n7\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\nPOST API response\nCopy code block\n1\n{\n\n2\n  \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\", \n\n3\n  \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\", \n\n4\n  \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"webhook_url\": \"https://company.com/filtering-and-permissions\",\n\n6\n  \"webhook_events\": [ \"onChannelStatusUpdated\", \"onChannelCreateFailed\"],\n\n7\n  \"webhook_method\": \"POST\", \"type\": \"global\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"\n\n9\n} \nRegister an Interaction webhook for a specific Interaction\n\nCalling the following API creates an Interaction-specific webhook to receive notifications for subscribed WebhookEvents at the specified WebhookUrl.\n\nThis API returns a ttid value that you must pass in the Interactions API webhook_ttid parameter when you create the Interaction you want to associate with the webhook.\n\nYou must call both this API and the Interactions API for an Interaction-specific webhook to work correctly. After sending this request, you won't receive event notifications until you call the Interactions API to create an interaction and include the ttid value returned by this request. To see an example request that creates an Interaction associated with a webhook, go to the Interactions resource.\n\nPOST API request\nCopy code block\n1\ncurl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks\n\n2\n--data-urlencode \"WebhookEvents=onChannelStatusUpdated\"\n\n3\n--data-urlencode \"WebhookEvents=onChannelCreateFailed\"\n\n4\n--data-urlencode \"WebhookMethod=POST\"\n\n5\n--data-urlencode \"Type=interaction\"\n\n6\n--data-urlencode 'FriendlyName=Friendly Name of webhook'\n\n7\n--data-urlencode \"WebhookUrl=https://company.com/action\"\n\n8\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\nPOST API response\nCopy code block\n1\n{\n\n2\n  \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n3\n  \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n4\n  \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"webhook_url\": \"https://company.com/filtering-and-permissions\",\n\n6\n  \"webhook_events\": [ \"onChannelStatusUpdated\", \"onChannelCreateFailed\" ],\n\n7\n  \"webhook_method\": \"POST\",\n\n8\n  \"friendly_name\": \"Friendly Name of webhook\",\n\n9\n  \"type\": \"interaction\",\n\n10\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks\"\n\n11\n}\nEvent details\nonInteractionCreated\n\nSent when an Interaction is created.\n\nParameter name\tData type\tDescription\nEventType\tString\tValue is always onInteractionCreated.\nAccountSid\tSID\tThe Twilio Account SID of the Interaction.\nInstanceSid\tSID\tThe Flex Instance SID of the Interaction.\nInteractionSid\tSID\tThe Interaction SID.\nMediaChannelSid\tSID\tThe Conversation SID or Conference SID that the Channel is associated with.\nMediaChannelType\tString\tType of Channel the Interaction occurred on. For example: sms, whatsapp, chat, or voice.\nonChannelCreated\n\nSent when a Channel is created.\n\nParameter name\tType\tDescription\nEventType\tString\tValue is always onChannelCreated.\nAccountSid\tSID\tThe Twilio Account SID of the Channel.\nInstanceSid\tSID\tThe Flex Instance SID of the Channel.\nInteractionSid\tSID\tThe Interaction SID of the Channel.\nChannelSid\tSID\tThe SID of the Channel that was created.\nMediaChannelSid\tSID\tThe Conversation SID or Conference SID associated with the Channel.\nMediaChannelType\tString\tType of Channel created. For example, sms, whatsapp, web, chat, or voice.\nonChannelCreateFailed\n\nSent if a Channel can't be created.\n\nParameter name\tType\tDescription\nEventType\tString\tValue is always onChannelCreateFailed.\nAccountSid\tSID\tThe Twilio Account SID of the Channel.\nErrorCode\tInteger\tThe Twilio error code for the reason that Channel creation failed.\nErrorMessage\tString\tThe Twilio error message associated with the reason for the failure.\nInteractionSid\tSID\tThe Interaction SID of the Channel. This parameter is optional.\nChannelSid\tSID\tThe SID of the Channel created. This parameter is optional.\n\nNote In some cases, a ChannelSid is created even though the Channel itself isn't created successfully. For example, this can happen if Channel creation fails because of a failure with a downstream resource.\nMediaChannelSid\tSID\tThe Conversation SID or Conference SID associated with the Channel. This parameter is optional.\nMediaChannelType\tString\tType of Channel that couldn't be created. For example, sms, whatsapp, chat, or voice.\nonChannelStatusUpdated\n\nSent when the Channel status is updated. The status can be active or closed.\n\nParameter name\tType\tDescription\nEventType\tString\tValue is always onChannelStatusUpdated.\nAccountSid\tSID\tThe Twilio Account SID of the Channel.\nInstanceSid\tSID\tThe Flex Instance SID of the Channel.\nInteractionSid\tSID\tThe Interaction SID that the Channel belongs to.\nChannelSid\tSID\tThe SID of the Channel that was updated.\nMediaChannelSid\tSID\tThe Conversation SID or Conference SID associated with the Channel.\nChannelStatus\tSID\tThe current status of the channel. Value can be active or closed.\nMediaChannelType\tString\tType of Channel updated. For example, sms, whatsapp, web, chat, or voice.\nonParticipantJoined\n\nSent when a Participant is added to the Channel. Occurs when:\n\nThe Participant accepts a reservation.\nThe Participant is added using the Add Participant API.\nParameter name\tType\tDescription\nEventType\tString\tValue is always onParticipantJoined.\nAccountSid\tSID\tThe Twilio Account SID that the Participant belongs to.\nInteractionSid\tSID\tThe Interaction SID that the Participant belongs to.\nChannelSid\tSID\tThe Channel SID of the Channel that the Participant belongs to.\nParticipantSid\tSID\tThe SID of the Participant added to the Channel.\nParticipantType\tString\tType of Participant. For example, customer or agent.\nTaskSid\tSID\tThe Task SID associated with the Channel.\nMediaChannelSid\tSID\tThe Conversation SID or Conference SID associated with the Channel.\nMediaChannelType\tString\tType of Channel the Participant joined. For example, sms, whatsapp, web, chat, or voice.\nonParticipantLeft\n\nSent when a Participant leaves the Channel. Occurs when the Participant leaves the Channel.\n\nParameter name\tType\tDescription\nEventType\tString\tValue is always onParticipantLeft.\nAccountSid\tSID\tThe Twilio Account SID that the Participant belongs to.\nInteractionSid\tSID\tThe Interaction SID that the Participant belongs to.\nChannelSid\tSID\tThe Channel SID of the Channel that the Participant belongs to.\nParticipantSid\tSID\tThe SID of the Participant who left the Channel.\nParticipantType\tString\tType of Participant. For example, customer or agent.\nTaskSid\tSID\tThe Task SID associated with the Channel.\nMediaChannelSid\tSID\tThe Conversation SID or Conference SID associated with the Channel.\nMediaChannelType\tString\tType of Channel the Participant left. For example, sms, whatsapp, web, chat, or voice.\nonParticipantUpdated\n\nSent when a Participant's status is updated.\n\nParameter name\tType\tDescription\nEventType\tString\tValue is always onParticipantUpdated.\nAccountSid\tSID\tThe Twilio Account SID that the Participant belongs to.\nInteractionSid\tSID\tThe Interaction SID that the Participant belongs to.\nChannelSid\tSID\tThe Channel SID of the Channel that the Participant belongs to.\nParticipantSid\tSID\tThe SID of the Participant whose status was updated.\nParticipantType\tString\tType of Participant. For example: customer, agent.\nTaskSid\tSID\tThe Task SID associated with the Channel.\nMediaChannelSid\tSID\tThe Conversation SID or Conference SID associated with the Channel.\nMediaChannelType\tString\tType of Channel on which the Participant's status was updated. For example, sms, whatsapp, web, chat, or voice.\nGet a list of all Interaction webhooks registered for your Flex instance\n\nThe GET /v1/Instances/{instanceSid}/InteractionWebhooks API call lets you get a list of all your registered webhooks.\n\nQuery parameter: type\n\nGET API request\nCopy code block\n1\ncurl -X GET https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks{ttid} \\\n\n2\n  -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\nGET API response\nCopy code block\n1\n{\n\n2\n    \"meta\": {\n\n3\n        \"page\": 0,\n\n4\n        \"page_size\": 50,\n\n5\n        \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks?PageSize=50\\&Page=0\",\n\n6\n        \"previous_page_url\": null,\n\n7\n        \"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks?PageSize=50&Page=0\",\n\n8\n        \"next_page_url\": null,\n\n9\n        \"key\": \"data\"\n\n10\n    },\n\n11\n    \"data\": [\n\n12\n        {\n\n13\n            \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n14\n            \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n15\n            \"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n16\n            \"webhook_events\": [\"onInteractionCreated\",\"onChannelCreated\"],\n\n17\n            \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n18\n            \"webhook_method\": \"POST\",\n\n19\n            \"webhook_url\": \"https://interaction-webbhook-6314.twil.io/interaction\",\n\n20\n            \"type\": \"global\"\n\n21\n        },\n\n22\n        {\n\n23\n            \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n24\n            \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n25\n            \"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n26\n            \"webhook_events\": [\"onInteractionCreated\",\"onChannelCreated\"],\n\n27\n            \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n28\n            \"webhook_method\": \"POST\",\n\n29\n            \"webhook_url\": \"https://interaction-webbhook-6314.twil.io/interaction\",\n\n30\n            \"type\": \"interaction\"\n\n31\n        }\n\n32\n    ]\n\n33\n}\nGet details for an Interaction webhook\n\nThe GET /v1/Instances/{instanceSid}/InteractionWebhooks/{ttid} API call lets you get the details for a webhook.\n\nGET API request\nCopy code block\n1\ncurl -X GET https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\n\n2\n\\-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\nGET API response\nCopy code block\n1\n{\n\n2\n\"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\"\n\n3\n\"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n4\n\"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n\"webhook_url\": \"https://company.com/filtering-and-permissions\",\n\n6\n\"webhook_eventsfilters\": [ \"onChannelStatusUpdated\", \"onChannelCreateFailed\" ],\n\n7\n\"webhook_method\": \"POST\",\n\n8\n\"type\": \"global\",\n\n9\n\"url\": \"https://flex-api.twilio.com/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"\n\n10\n}\nUpdate an Interaction webhook\n\nPOST /v1/Instances/{instanceSid}/InteractionWebhooks/{ttid}\n\nPOST API request\nCopy code block\n1\ncurl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/**flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX**\n\n2\n--data-urlencode \"WebhookEvents=onChannelStatusUpdated\"\n\n3\n--data-urlencode \"WebhookEvents=onInteractionCreated\"\n\n4\n--data-urlencode \"WebhookMethod=POST\"\n\n5\n--data-urlencode \"WebhookUrl=https://company.com/action\"\n\n6\n--data-urlencode \"FriendlyName=Friendly Name of webhook\"\n\n7\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\nPOST API response\nCopy code block\n1\n{\n\n2\n\"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\"\n\n3\n\"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n4\n\"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n\"webhook_url\": \"https://company.com/action\",\n\n6\n\"webhook_events\": [ \"onChannelStatusUpdated\", \"onInteractionCreated\" ],\n\n7\n\"webhook_method\": \"POST\",\n\n8\n\"type\": \"global\",\n\n9\n\"friendly_name\": \"Friendly Name of webhook\",\n\n10\n\"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"\n\n11\n}\nDelete an Interaction webhook\n\nThe DELETE /v1/Instances/{instanceSid}/InteractionWebhooks/{ttid} API call lets you delete a webhook.\n\nDELETE API request\nCopy code block\n1\ncurl -X DELETE https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\n\n2\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+    "cli_commands": [
+      "curl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks \\\\",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"",
+      "curl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks\"",
+      "curl -X GET https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks{ttid} \\",
+      "\"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks?PageSize=50\\&Page=0\",",
+      "\"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks?PageSize=50&Page=0\",",
+      "\"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",",
+      "\"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",",
+      "curl -X GET https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx",
+      "\"url\": \"https://flex-api.twilio.com/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"",
+      "curl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/**flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX**",
+      "\"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"",
+      "curl -X DELETE https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\ncurl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks \\\\\n\n2\n--data-urlencode \"WebhookEvents=onChannelStatusUpdated\" \\\\\n\n3\n--data-urlencode \"WebhookEvents=onChannelCreateFailed\" \\\\\n\n4\n--data-urlencode \"WebhookMethod=POST\" \\\\\n\n5\n--data-urlencode \"Type=global\" \\\\\n\n6\n--data-urlencode \"WebhookUrl=https://company.com/action\" \\\\\n\n7\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\", \n\n3\n  \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\", \n\n4\n  \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"webhook_url\": \"https://company.com/filtering-and-permissions\",\n\n6\n  \"webhook_events\": [ \"onChannelStatusUpdated\", \"onChannelCreateFailed\"],\n\n7\n  \"webhook_method\": \"POST\", \"type\": \"global\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"\n\n9\n} ",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks\n\n2\n--data-urlencode \"WebhookEvents=onChannelStatusUpdated\"\n\n3\n--data-urlencode \"WebhookEvents=onChannelCreateFailed\"\n\n4\n--data-urlencode \"WebhookMethod=POST\"\n\n5\n--data-urlencode \"Type=interaction\"\n\n6\n--data-urlencode 'FriendlyName=Friendly Name of webhook'\n\n7\n--data-urlencode \"WebhookUrl=https://company.com/action\"\n\n8\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n3\n  \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n4\n  \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n  \"webhook_url\": \"https://company.com/filtering-and-permissions\",\n\n6\n  \"webhook_events\": [ \"onChannelStatusUpdated\", \"onChannelCreateFailed\" ],\n\n7\n  \"webhook_method\": \"POST\",\n\n8\n  \"friendly_name\": \"Friendly Name of webhook\",\n\n9\n  \"type\": \"interaction\",\n\n10\n  \"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks\"\n\n11\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X GET https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks{ttid} \\\n\n2\n  -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n    \"meta\": {\n\n3\n        \"page\": 0,\n\n4\n        \"page_size\": 50,\n\n5\n        \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks?PageSize=50\\&Page=0\",\n\n6\n        \"previous_page_url\": null,\n\n7\n        \"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks?PageSize=50&Page=0\",\n\n8\n        \"next_page_url\": null,\n\n9\n        \"key\": \"data\"\n\n10\n    },\n\n11\n    \"data\": [\n\n12\n        {\n\n13\n            \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n14\n            \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n15\n            \"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n16\n            \"webhook_events\": [\"onInteractionCreated\",\"onChannelCreated\"],\n\n17\n            \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n18\n            \"webhook_method\": \"POST\",\n\n19\n            \"webhook_url\": \"https://interaction-webbhook-6314.twil.io/interaction\",\n\n20\n            \"type\": \"global\"\n\n21\n        },\n\n22\n        {\n\n23\n            \"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n24\n            \"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n25\n            \"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",\n\n26\n            \"webhook_events\": [\"onInteractionCreated\",\"onChannelCreated\"],\n\n27\n            \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n28\n            \"webhook_method\": \"POST\",\n\n29\n            \"webhook_url\": \"https://interaction-webbhook-6314.twil.io/interaction\",\n\n30\n            \"type\": \"interaction\"\n\n31\n        }\n\n32\n    ]\n\n33\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X GET https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\n\n2\n\\-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n\"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\"\n\n3\n\"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n4\n\"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n\"webhook_url\": \"https://company.com/filtering-and-permissions\",\n\n6\n\"webhook_eventsfilters\": [ \"onChannelStatusUpdated\", \"onChannelCreateFailed\" ],\n\n7\n\"webhook_method\": \"POST\",\n\n8\n\"type\": \"global\",\n\n9\n\"url\": \"https://flex-api.twilio.com/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"\n\n10\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X POST https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/**flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX**\n\n2\n--data-urlencode \"WebhookEvents=onChannelStatusUpdated\"\n\n3\n--data-urlencode \"WebhookEvents=onInteractionCreated\"\n\n4\n--data-urlencode \"WebhookMethod=POST\"\n\n5\n--data-urlencode \"WebhookUrl=https://company.com/action\"\n\n6\n--data-urlencode \"FriendlyName=Friendly Name of webhook\"\n\n7\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n\"ttid\": \"flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\"\n\n3\n\"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n4\n\"instance_sid\": \"GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n5\n\"webhook_url\": \"https://company.com/action\",\n\n6\n\"webhook_events\": [ \"onChannelStatusUpdated\", \"onInteractionCreated\" ],\n\n7\n\"webhook_method\": \"POST\",\n\n8\n\"type\": \"global\",\n\n9\n\"friendly_name\": \"Friendly Name of webhook\",\n\n10\n\"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"\n\n11\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X DELETE https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\n\n2\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Name",
+          "Description"
+        ],
+        "rows": [
+          [
+            "Filters",
+            "Name of the event to send to the webhook URL. See Event details for a list of events and their associated parameters. You can pass more than one instance of this parameter."
+          ],
+          [
+            "Method",
+            "HTTP method used to send the event."
+          ],
+          [
+            "Type",
+            "Type of webhook.\n\nPossible values:\n\nglobal: Send a notification every time the subscribed events occur.\ninteraction: Send a notification for the subscribed events when they occur for a specific interaction.\nIf you don't send a value in the request, it defaults to global."
+          ],
+          [
+            "WebhookUrl",
+            "Webhook URL to send the event details."
+          ],
+          [
+            "FriendlyName",
+            "A name for the webhook that's easy to recognize and understand."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter name",
+          "Data type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "EventType",
+            "String",
+            "Value is always onInteractionCreated."
+          ],
+          [
+            "AccountSid",
+            "SID",
+            "The Twilio Account SID of the Interaction."
+          ],
+          [
+            "InstanceSid",
+            "SID",
+            "The Flex Instance SID of the Interaction."
+          ],
+          [
+            "InteractionSid",
+            "SID",
+            "The Interaction SID."
+          ],
+          [
+            "MediaChannelSid",
+            "SID",
+            "The Conversation SID or Conference SID that the Channel is associated with."
+          ],
+          [
+            "MediaChannelType",
+            "String",
+            "Type of Channel the Interaction occurred on. For example: sms, whatsapp, chat, or voice."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "EventType",
+            "String",
+            "Value is always onChannelCreated."
+          ],
+          [
+            "AccountSid",
+            "SID",
+            "The Twilio Account SID of the Channel."
+          ],
+          [
+            "InstanceSid",
+            "SID",
+            "The Flex Instance SID of the Channel."
+          ],
+          [
+            "InteractionSid",
+            "SID",
+            "The Interaction SID of the Channel."
+          ],
+          [
+            "ChannelSid",
+            "SID",
+            "The SID of the Channel that was created."
+          ],
+          [
+            "MediaChannelSid",
+            "SID",
+            "The Conversation SID or Conference SID associated with the Channel."
+          ],
+          [
+            "MediaChannelType",
+            "String",
+            "Type of Channel created. For example, sms, whatsapp, web, chat, or voice."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "EventType",
+            "String",
+            "Value is always onChannelCreateFailed."
+          ],
+          [
+            "AccountSid",
+            "SID",
+            "The Twilio Account SID of the Channel."
+          ],
+          [
+            "ErrorCode",
+            "Integer",
+            "The Twilio error code for the reason that Channel creation failed."
+          ],
+          [
+            "ErrorMessage",
+            "String",
+            "The Twilio error message associated with the reason for the failure."
+          ],
+          [
+            "InteractionSid",
+            "SID",
+            "The Interaction SID of the Channel. This parameter is optional."
+          ],
+          [
+            "ChannelSid",
+            "SID",
+            "The SID of the Channel created. This parameter is optional.\n\nNote In some cases, a ChannelSid is created even though the Channel itself isn't created successfully. For example, this can happen if Channel creation fails because of a failure with a downstream resource."
+          ],
+          [
+            "MediaChannelSid",
+            "SID",
+            "The Conversation SID or Conference SID associated with the Channel. This parameter is optional."
+          ],
+          [
+            "MediaChannelType",
+            "String",
+            "Type of Channel that couldn't be created. For example, sms, whatsapp, chat, or voice."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "EventType",
+            "String",
+            "Value is always onChannelStatusUpdated."
+          ],
+          [
+            "AccountSid",
+            "SID",
+            "The Twilio Account SID of the Channel."
+          ],
+          [
+            "InstanceSid",
+            "SID",
+            "The Flex Instance SID of the Channel."
+          ],
+          [
+            "InteractionSid",
+            "SID",
+            "The Interaction SID that the Channel belongs to."
+          ],
+          [
+            "ChannelSid",
+            "SID",
+            "The SID of the Channel that was updated."
+          ],
+          [
+            "MediaChannelSid",
+            "SID",
+            "The Conversation SID or Conference SID associated with the Channel."
+          ],
+          [
+            "ChannelStatus",
+            "SID",
+            "The current status of the channel. Value can be active or closed."
+          ],
+          [
+            "MediaChannelType",
+            "String",
+            "Type of Channel updated. For example, sms, whatsapp, web, chat, or voice."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "EventType",
+            "String",
+            "Value is always onParticipantJoined."
+          ],
+          [
+            "AccountSid",
+            "SID",
+            "The Twilio Account SID that the Participant belongs to."
+          ],
+          [
+            "InteractionSid",
+            "SID",
+            "The Interaction SID that the Participant belongs to."
+          ],
+          [
+            "ChannelSid",
+            "SID",
+            "The Channel SID of the Channel that the Participant belongs to."
+          ],
+          [
+            "ParticipantSid",
+            "SID",
+            "The SID of the Participant added to the Channel."
+          ],
+          [
+            "ParticipantType",
+            "String",
+            "Type of Participant. For example, customer or agent."
+          ],
+          [
+            "TaskSid",
+            "SID",
+            "The Task SID associated with the Channel."
+          ],
+          [
+            "MediaChannelSid",
+            "SID",
+            "The Conversation SID or Conference SID associated with the Channel."
+          ],
+          [
+            "MediaChannelType",
+            "String",
+            "Type of Channel the Participant joined. For example, sms, whatsapp, web, chat, or voice."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "EventType",
+            "String",
+            "Value is always onParticipantLeft."
+          ],
+          [
+            "AccountSid",
+            "SID",
+            "The Twilio Account SID that the Participant belongs to."
+          ],
+          [
+            "InteractionSid",
+            "SID",
+            "The Interaction SID that the Participant belongs to."
+          ],
+          [
+            "ChannelSid",
+            "SID",
+            "The Channel SID of the Channel that the Participant belongs to."
+          ],
+          [
+            "ParticipantSid",
+            "SID",
+            "The SID of the Participant who left the Channel."
+          ],
+          [
+            "ParticipantType",
+            "String",
+            "Type of Participant. For example, customer or agent."
+          ],
+          [
+            "TaskSid",
+            "SID",
+            "The Task SID associated with the Channel."
+          ],
+          [
+            "MediaChannelSid",
+            "SID",
+            "The Conversation SID or Conference SID associated with the Channel."
+          ],
+          [
+            "MediaChannelType",
+            "String",
+            "Type of Channel the Participant left. For example, sms, whatsapp, web, chat, or voice."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Parameter name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "EventType",
+            "String",
+            "Value is always onParticipantUpdated."
+          ],
+          [
+            "AccountSid",
+            "SID",
+            "The Twilio Account SID that the Participant belongs to."
+          ],
+          [
+            "InteractionSid",
+            "SID",
+            "The Interaction SID that the Participant belongs to."
+          ],
+          [
+            "ChannelSid",
+            "SID",
+            "The Channel SID of the Channel that the Participant belongs to."
+          ],
+          [
+            "ParticipantSid",
+            "SID",
+            "The SID of the Participant whose status was updated."
+          ],
+          [
+            "ParticipantType",
+            "String",
+            "Type of Participant. For example: customer, agent."
+          ],
+          [
+            "TaskSid",
+            "SID",
+            "The Task SID associated with the Channel."
+          ],
+          [
+            "MediaChannelSid",
+            "SID",
+            "The Conversation SID or Conference SID associated with the Channel."
+          ],
+          [
+            "MediaChannelType",
+            "String",
+            "Type of Channel on which the Participant's status was updated. For example, sms, whatsapp, web, chat, or voice."
+          ]
+        ]
+      }
+    ]
+  }
+}

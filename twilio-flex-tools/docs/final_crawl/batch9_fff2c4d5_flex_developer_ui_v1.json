@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/v1",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:46.161553+00:00",
+  "content": {
+    "title": "Flex UI 1.x.x | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/v1",
+    "text_content": "On this page\nPage Tools\nFlex UI 1.x.x\n(information)\nThis page applies to Flex UI 1.x.x.\n\nFor the Flex UI 2.x.x version of this content, see The Flex UI.\n\nThe Flex UI allows developers to build a custom user experience and custom behaviors for the Flex Agent Desktop and Flex Supervisor Desktop.\n\n(information)\nInfo\n\nAuto-Generated Documentation for the Flex UI\n is now available as a public beta distribution. The auto-generated documentation is accurate and comprehensive, and so may differ from what you see in the official Flex UI documentation.\n\nThe Flex UI Component Library is built in React\n and published on NPM\n. @twilio/flex-ui\n is a node package that provides all the individual elements of the UI at the component level. It also provides a high-level API to interact with bundled SDKs such as the Voice JavaScript SDK, Programmable Chat, and TaskRouter.\n\nOverview\n\nThis documentation provides information about:\n\nConfiguring the UI or customizing default properties for standard Flex components\nCustomizing themes and styles\nControlling localization and templates\nAdding, replacing, or removing components\nTaking advantage of UI actions to listen for, receive, and customize UI events\nCustomizing agent desktop notifications using the Notifications Framework\nModifying the behavior and appearance of native channels and defining custom channels with Task Channel Definition API\nAdding task or theme context to your custom components\nLeveraging the Flex Manager object to get access and control underlying SDKs\nProgrammatically customizing the UI using Plugin Builder\nBuilding with plugins\n\nIf you're building with the Flex UI, chances are you're also using Flex Plugins. The Flex UI documentation will provide you with the programming interfaces and best practices you need to augment the Flex UI. The Plugin docs will explain the development environment, and help set you up to take advantage of the Flex UI's programmability.\n\nNext steps\nBuild your first React-based Flex plugin\nExplore how the Flex UI uses Redux, a state management tool\nDiscover the various components of the Flex UI",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

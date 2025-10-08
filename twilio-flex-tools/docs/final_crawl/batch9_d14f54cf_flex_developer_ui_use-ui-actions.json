@@ -1,0 +1,115 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/use-ui-actions",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:43.943893+00:00",
+  "content": {
+    "title": "Use UI Actions | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/use-ui-actions",
+    "text_content": "On this page\nPage Tools\nUse UI Actions\n\nThe Flex UI is constantly emitting event data that describes how the user is interacting with the Flex UI. As you write Plugins, the Actions Framework allows you to harness these events and define your own logic to describe how you want the Flex UI, CRM Data, or any other data, to change. You can register events before or after an action fires, or even replace the behavior of an Action.\n\nLearn more about UI actions in our API documentation\n.\n\nRegister and Invoke an Action\nCopy code block\nActions.registerAction(name: string, action: ActionFunction, payloadUpdate?: PayloadUpdateFunction)\n\nRegisters a named action and provides the code that should be run when invoking it. The payloadUpdate method is optional, and used for triggering a callback to modify the payload given to action invocation.\n\nCopy code block\nActions.invokeAction(name: string)\n\nInvokes a named action. Returns a Promise.\n\nCopy code block\nActions.addListener(name: string, action: ActionFunction)\n\nImplements a custom function to be triggered either Before or After a specific Action.\n\nAdd and Remove Event Listeners\n\nYou can add and remove event listeners.\n\nEvents supported:\n\nbefore[eventName] (for example \"beforeAcceptTask\")\nCalled when a named action is triggered, but before the action body is run. You can abort the action that is provided with event body.\n\nafter[eventName]\nCalled after the action has stopped executing.\n\nNote, the afterLogout event is not supported. Once the Worker has logged out, they will be returned to the Flex login screen.\n\nReplace an Action\nCopy code block\nActions.replaceAction(name: string, action: ReplacedActionFunction)\n\nReplaces the default implementation of a named action and provides an alternative implementation. The replaced action will be called with the same parameters as the original implementation, so you can add additional logic, then invoke the original action in your replacement function.\n\nCommon use cases and examples\nAdd an Action after a Task is accepted\n\nRaises a JavaScript alert after an Agent has clicked to accept any Task.\n\nCopy code block\n1\nflex.Actions.addListener(\n\n2\n  \"afterAcceptTask\",\n\n3\n  (payload) => alert(\"Triggered after event AcceptTask\")\n\n4\n);\nAsk for confirmation before accepting a Task\n\nGenerates a prompt before Task Acceptance; prevent that Action from running with an abort command if the user doesn't confirm.\n\nCopy code block\n1\nflex.Actions.addListener(\n\n2\n  \"beforeAcceptTask\",\n\n3\n  (payload, abortFunction) => {\n\n4\n    alert(\"Triggered before event AcceptTask\");\n\n5\n    if (!window.confirm(\"Are you sure you want to accept the task?\")) {\n\n6\n      abortFunction();\n\n7\n  }\n\n8\n});\nDetect a running call on Flex UI 2.0\n\nListens for an incoming call within the Flex UI and logs a message to the web console.\n\nCopy code block\n1\nActions.addListener(\"beforeAcceptTask\", (payload) => {\n\n2\n    if (payload.task.taskChannelUniqueName === 'voice') {\n\n3\n        console.log(\"Call detected\");\n\n4\n    }\n\n5\n});\nCustomize an existing Action\n\nReplaces the original Action for AcceptTask. Injects custom logic to alert about the replacement, but executes the original Action.\n\nCopy code block\n1\nflex.Actions.replaceAction(\"AcceptTask\", (payload, original) => {\n\n2\n  return new Promise((resolve, reject) => {\n\n3\n    alert(\"I have replaced this Action\");\n\n4\n    resolve();\n\n5\n  }).then(() => original(payload));\n\n6\n});\n\n7\nRegister a custom Action\n\nRegisters a custom Action called MyAction, which makes an HTTP request. We then add a listener to the action CompleteTask which then invokes this custom Action. For example this could be used to update your CRM system.\n\nCopy code block\n1\nflex.Actions.registerAction(\"MyAction\", (payload) => {\n\n2\n  return \n\n3\n    fetch(\"https://my.server.backend.com/test\")\n\n4\n      .then(response => {\n\n5\n        alert(\"Triggered MyAction with response \" + JSON.stringify(response));\n\n6\n      })\n\n7\n      .catch(error => {\n\n8\n        console.log(error);\n\n9\n        throw error;\n\n10\n      });\n\n11\n});\n\n12\n\n\n13\n\n\n14\nflex.Actions.addListener(\"afterCompleteTask\", (payload) => {\n\n15\n  return flex.Actions.invokeAction(\"MyAction\");\n\n16\n});\nSend a message after a Task is completed\n\nSends a post-conversation message once the task is in a wrap-up state. Could be used to send a survey, or notify a user that the agent closed the session.\n\nCopy code block\n1\nflex.Actions.replaceAction(\"WrapupTask\", (payload, original) => {\n\n2\n  // Only alter chat tasks:\n\n3\n  if(payload.task.taskChannelUniqueName !== \"chat\") {\n\n4\n    original(payload);\n\n5\n  } else {\n\n6\n    return new Promise((resolve, reject) => {\n\n7\n      // Send the message:\n\n8\n      flex.Actions.invokeAction(\"SendMessage\", {\n\n9\n        body: 'Thanks for chatting. Your session is now closed.',\n\n10\n        conversationSid: payload.task.attributes.conversationSid\n\n11\n      }).then((response) => {\n\n12\n        // Wait until the message is sent to wrap-up the task:\n\n13\n        resolve(original(payload));\n\n14\n      });\n\n15\n    });\n\n16\n  }\n\n17\n}); \nSend a rich content message\n\nSends a rich content message using a content template.\n\nName\tDescription\nconversationSid\tThe SID of the conversation to send the message in.\ncontentSid\tThe content template SID to send.\ncontentVariables\tOptional array of name/value pairs for variables. If you don't pass any values, the default values are used.\nmessageAttributes\tOptional parameter for setting message attributes.\nExample\nCopy code block\n1\nActions.invokeAction(\"SendRichContentMessage\", { \n\n2\n     conversationSid: \"unique_conversation_sid\", \n\n3\n     contentSid: \"unique_content_template_sid\" \n\n4\n});\n\n5\n\n\n6\n// with variables\n\n7\nActions.invokeAction(\"SendRichContentMessage\", {\n\n8\n     conversationSid: \"unique_conversation_sid\",\n\n9\n     contentSid: \"unique_content_template_sid\",\n\n10\n     contentVariables: [{ name: \"variable_name\", value: \"variable_value\" }]\n\n11\n);\n\n12",
+    "cli_commands": [],
+    "actions": [
+      "registerAction",
+      "invokeAction",
+      "addListener",
+      "replaceAction",
+      "addListener",
+      "addListener",
+      "addListener",
+      "replaceAction",
+      "registerAction",
+      "addListener",
+      "invokeAction",
+      "replaceAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "AcceptTask",
+      "AcceptTask",
+      "AcceptTask",
+      "Logout",
+      "AcceptTask",
+      "CompleteTask",
+      "AcceptTask",
+      "WrapupTask",
+      "MyAction",
+      "AcceptTask",
+      "WrapupTask",
+      "MyAction",
+      "SendMessage",
+      "SendRichContentMessage",
+      "SendRichContentMessage"
+    ],
+    "code_blocks": [
+      {
+        "content": "Actions.registerAction(name: string, action: ActionFunction, payloadUpdate?: PayloadUpdateFunction)",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Actions.invokeAction(name: string)",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Actions.addListener(name: string, action: ActionFunction)",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Actions.replaceAction(name: string, action: ReplacedActionFunction)",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.addListener(\n\n2\n  \"afterAcceptTask\",\n\n3\n  (payload) => alert(\"Triggered after event AcceptTask\")\n\n4\n);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.addListener(\n\n2\n  \"beforeAcceptTask\",\n\n3\n  (payload, abortFunction) => {\n\n4\n    alert(\"Triggered before event AcceptTask\");\n\n5\n    if (!window.confirm(\"Are you sure you want to accept the task?\")) {\n\n6\n      abortFunction();\n\n7\n  }\n\n8\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nActions.addListener(\"beforeAcceptTask\", (payload) => {\n\n2\n    if (payload.task.taskChannelUniqueName === 'voice') {\n\n3\n        console.log(\"Call detected\");\n\n4\n    }\n\n5\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.replaceAction(\"AcceptTask\", (payload, original) => {\n\n2\n  return new Promise((resolve, reject) => {\n\n3\n    alert(\"I have replaced this Action\");\n\n4\n    resolve();\n\n5\n  }).then(() => original(payload));\n\n6\n});\n\n7",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.registerAction(\"MyAction\", (payload) => {\n\n2\n  return \n\n3\n    fetch(\"https://my.server.backend.com/test\")\n\n4\n      .then(response => {\n\n5\n        alert(\"Triggered MyAction with response \" + JSON.stringify(response));\n\n6\n      })\n\n7\n      .catch(error => {\n\n8\n        console.log(error);\n\n9\n        throw error;\n\n10\n      });\n\n11\n});\n\n12\n\n\n13\n\n\n14\nflex.Actions.addListener(\"afterCompleteTask\", (payload) => {\n\n15\n  return flex.Actions.invokeAction(\"MyAction\");\n\n16\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.Actions.replaceAction(\"WrapupTask\", (payload, original) => {\n\n2\n  // Only alter chat tasks:\n\n3\n  if(payload.task.taskChannelUniqueName !== \"chat\") {\n\n4\n    original(payload);\n\n5\n  } else {\n\n6\n    return new Promise((resolve, reject) => {\n\n7\n      // Send the message:\n\n8\n      flex.Actions.invokeAction(\"SendMessage\", {\n\n9\n        body: 'Thanks for chatting. Your session is now closed.',\n\n10\n        conversationSid: payload.task.attributes.conversationSid\n\n11\n      }).then((response) => {\n\n12\n        // Wait until the message is sent to wrap-up the task:\n\n13\n        resolve(original(payload));\n\n14\n      });\n\n15\n    });\n\n16\n  }\n\n17\n}); ",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nActions.invokeAction(\"SendRichContentMessage\", { \n\n2\n     conversationSid: \"unique_conversation_sid\", \n\n3\n     contentSid: \"unique_content_template_sid\" \n\n4\n});\n\n5\n\n\n6\n// with variables\n\n7\nActions.invokeAction(\"SendRichContentMessage\", {\n\n8\n     conversationSid: \"unique_conversation_sid\",\n\n9\n     contentSid: \"unique_content_template_sid\",\n\n10\n     contentVariables: [{ name: \"variable_name\", value: \"variable_value\" }]\n\n11\n);\n\n12",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Name",
+          "Description"
+        ],
+        "rows": [
+          [
+            "conversationSid",
+            "The SID of the conversation to send the message in."
+          ],
+          [
+            "contentSid",
+            "The content template SID to send."
+          ],
+          [
+            "contentVariables",
+            "Optional array of name/value pairs for variables. If you don't pass any values, the default values are used."
+          ],
+          [
+            "messageAttributes",
+            "Optional parameter for setting message attributes."
+          ]
+        ]
+      }
+    ]
+  }
+}

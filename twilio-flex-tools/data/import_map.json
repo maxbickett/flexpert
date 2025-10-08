@@ -1,0 +1,47 @@
+{
+  "import_map": {
+    "Manager": [
+      "import { Manager } from '@twilio/flex-ui'"
+    ],
+    "Actions": [
+      "import { Actions } from '@twilio/flex-ui'"
+    ],
+    "StylesProvider": [
+      "import { StylesProvider } from '@material-ui/core/styles'"
+    ],
+    "createGenerateClassName": [
+      "import { createGenerateClassName } from '@material-ui/core/styles'"
+    ],
+    "CustomizationProvider": [
+      "import { CustomizationProvider } from '@twilio-paste/core/customization'"
+    ],
+    "twilio": [
+      "import twilio from 'twilio'"
+    ],
+    "FlexPlugin": [
+      "import { FlexPlugin } from 'flex-plugin'"
+    ],
+    "React": [
+      "import React from 'react'"
+    ],
+    "CustomTheme": [
+      "import CustomTheme from './CustomTheme'"
+    ],
+    "Tab": [
+      "import { Tab } from '@twilio/flex-ui'"
+    ],
+    "TaskCardList": [
+      "import { TaskCardList } from '@twilio/flex-ui'"
+    ],
+    "ColumnDefinition": [
+      "import { ColumnDefinition } from '@twilio/flex-ui'"
+    ]
+  },
+  "validation": {
+    "total_examples_scanned": 150,
+    "examples_with_imports": 28,
+    "import_rate": "18.7%",
+    "unique_symbols_found": 12,
+    "total_imports_found": 34
+  }
+}

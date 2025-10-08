@@ -1,0 +1,71 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/email/limitations",
+  "batch_id": 3,
+  "crawled_at": "2025-10-07T20:30:34.647370+00:00",
+  "content": {
+    "title": "Email in Flex limitations | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/email/limitations",
+    "text_content": "On this page\nPage Tools\nEmail in Flex limitations\n(warning)\nNot a HIPAA Eligible Service\n\nEmail in Twilio Flex is not a HIPAA Eligible Service and should not be used in workflows that are subject to HIPAA.\n\nConfiguration\n\nOnce the Twilio account is linked with a SendGrid account, you cannot unlink it yourself. If you need to change, unlink, or delete the linked SendGrid account, contact our support team\n for help.\n\nTaskRouter scalability\n\nPlease discuss TaskRouter scalability with your Twilio team, particularly for managing a backlog of tasks. The maximum number of Tasks in TaskRouter is 25,000.\n\nEmail attachments\n\nThe following file types are supported for attachments: .pdf, .jpg and .jpeg, .png, .gif, .mp3, .mp4, .txt, .heic, and .amr. Other file types are not supported as attachments at this time.\n\nInline attachments--an attached file, such as an image, that appears the body of an email--are currently supported for inbound emails only. For outbound emails, agents must use the paperclip icon to select and add their attachments.\n\nEmail size\nAction\tSize\nEmail size (inbound, including attachments)\t20MB\nEmail size (outbound, including attachments)\t20MB\n\nOut-of-order processing of inbound emails is possible. For example, if an end user sends multiple messages in quick succession, Twilio may process the second message before the first. This limitation is complex and impacted by the implementation of mailbox providers. Additionally, unwanted emails coming from spam senders or a malicious actor may impede the processing of valid emails.\n\nScalability\n\nFollowing are the scalability limitations for Email in Flex:\n\nAction\tRate\nCreate a new email interaction\t20 requests per second\nAccept email reservations\t20 requests per second\nAdd new participants to email conversation\t20 requests per second\nRemove participants from email conversation\t20 requests per second\nConversations\n\nEmail in Flex uses the Conversations API and its associated limits.\n\nAction\tRate\nActions (e.g., new email conversations and new email messages)\t30 actions per second\nInbound email processing\t25 inbound emails per second (subject to change based upon the number of attachments)",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "Action",
+          "Size"
+        ],
+        "rows": [
+          [
+            "Email size (inbound, including attachments)",
+            "20MB"
+          ],
+          [
+            "Email size (outbound, including attachments)",
+            "20MB"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Action",
+          "Rate"
+        ],
+        "rows": [
+          [
+            "Create a new email interaction",
+            "20 requests per second"
+          ],
+          [
+            "Accept email reservations",
+            "20 requests per second"
+          ],
+          [
+            "Add new participants to email conversation",
+            "20 requests per second"
+          ],
+          [
+            "Remove participants from email conversation",
+            "20 requests per second"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Action",
+          "Rate"
+        ],
+        "rows": [
+          [
+            "Actions (e.g., new email conversations and new email messages)",
+            "30 actions per second"
+          ],
+          [
+            "Inbound email processing",
+            "25 inbound emails per second (subject to change based upon the number of attachments)"
+          ]
+        ]
+      }
+    ]
+  }
+}

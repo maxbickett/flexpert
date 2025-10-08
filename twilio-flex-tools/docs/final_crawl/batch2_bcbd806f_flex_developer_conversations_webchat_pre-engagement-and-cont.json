@@ -1,0 +1,130 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/pre-engagement-and-context",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:50.409115+00:00",
+  "content": {
+    "title": "Using pre-engagement form data and context in Webchat 3.x.x | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/pre-engagement-and-context",
+    "text_content": "On this page\nPage Tools\nUsing pre-engagement form data and context in Webchat 3.x.x\n\nWhen using chat as a communications channel for your contact center, you can use a pre-engagement form to gather relevant user information (such as name and email) before the start of a chat. Alternatively, you can gather relevant context from the data you already have, such as a user's login name or HTTP referrer\n. You can use pre-engagement form data and context for routing the task to the right agent or displaying relevant user information to the agent.\n\nThe default pre-engagement form collects the user's name, email address, and query, which are considered to be personally identifiable information (PII). You can configure the pre-engagement form to collect additional information.\n\nBefore you begin\n\nTo initiate a chat with a pre-engagement form, a user's friendlyName and query must be set. The friendlyName attribute is set to \"Anonymous\" in the context object of your default Webchat configuration. The friendlyName and query values are displayed to the agent in the Flex UI. When set in both the Webchat context object and a pre-engagement form, the pre-engagement form value overrides the context object value.\n\nConfigure a pre-engagement form and context\n\nThis section explains how to customize your pre-engagement form to collect the most important data from your customers. The pre-engagement form is enabled by default. If you want to turn off the pre-engagement form, set disablePreEngagementForm: true in your Webchat configuration.\n\nThe following example form shows many types of input fields, including required and optional input fields, a required checkbox for customers to acknowledge terms and conditions, and a submit button with the label \"Let's chat.\" While this example shows many types of fields that you might want to use, we recommend limiting your pre-engagement form to 3-5 fields to avoid overwhelming your customers. However, there is no limit on the number of fields that you can include.\n\nExample pre-engagement form and context\nCopy code block\n1\nconst appConfig = {\n\n2\n// Webchat Config    \n\n3\ndeploymentKey: \"{your_key}\", \n\n4\n    appStatus: \"open\",\n\n5\n    theme: {\n\n6\n        isLight: true\n\n7\n    },\n\n8\n    context: { \n\n9\nlocationOrigin: window.location.origin,\n\n10\nsomeContextProp: \"ContextProp1\",\n\n11\n},\n\n12\n    disablePreEngagementForm: false,\n\n13\n    preEngagementConfig: {\n\n14\n        title: \"Pre-Chat Form\",\n\n15\n        description: \"Complete this form to start the chat\",\n\n16\n        submitLabel: \"Let's chat\",\n\n17\n        footerLabel: \"Powered by Twilio\",\n\n18\n        fields: [\n\n19\n{\n\n20\n   label: \"Name\",\n\n21\n   type: \"InputItem\",\n\n22\n   attributes: {\n\n23\n       name: \"friendlyName\",\n\n24\n       type: \"text\",\n\n25\n       placeholder: \"Enter your name\",\n\n26\n       required: true,\n\n27\n       pattern: \"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$\",\n\n28\n       readOnly: false,\n\n29\n       value: \"Bob\"\n\n30\n   }\n\n31\n},\n\n32\n{\n\n33\n   label: \"Email address\",\n\n34\n   type: \"InputItem\",\n\n35\n   attributes: {\n\n36\n       name: \"email\",\n\n37\n       type: \"email\",\n\n38\n       placeholder: \"Enter your email address\",\n\n39\n       required: true,\n\n40\n       readOnly: false,\n\n41\n       value: \"bob@example.com\",\n\n42\n       pattern: \"{Your_email_pattern}\"\n\n43\n   }\n\n44\n},\n\n45\n{\n\n46\n   label: \"Date of birth\",\n\n47\n   type: \"InputItem\",\n\n48\n   attributes: {\n\n49\n       name: \"dob\",\n\n50\n       type: \"date\",\n\n51\n       placeholder: \"Enter your date of birth\",\n\n52\n       required: false,\n\n53\n       readOnly: false,\n\n54\n       pattern: \"{Your_date_of_birth_pattern}\"\n\n55\n   }\n\n56\n},\n\n57\n{\n\n58\n   label: \"Phone number\",\n\n59\n   type: \"InputItem\",\n\n60\n   attributes: {\n\n61\n       name: \"phone\",\n\n62\n       type: \"tel\",\n\n63\n       placeholder: \"Enter your phone number\",\n\n64\n       required: false,\n\n65\n       readOnly: false,\n\n66\n       value: \"0123456789\",\n\n67\n       pattern: \"{Your_phone_number_pattern}\"\n\n68\n   }\n\n69\n},\n\n70\n{\n\n71\n   label: \"Ask a question\",\n\n72\n   type: \"TextareaItem\",\n\n73\n   attributes: {\n\n74\n       name: \"query\",\n\n75\n       type: \"text\",\n\n76\n       placeholder: \"Type your question here\",\n\n77\n       required: true\n\n78\n   }\n\n79\n},\n\n80\n{\n\n81\n   label: \"Question category\",\n\n82\n   type: \"SelectItem\",\n\n83\n   attributes: {\n\n84\n       name: \"Question category dropdown\",\n\n85\n       required: false,\n\n86\n       readOnly: false\n\n87\n   },\n\n88\n   options: [\n\n89\n       {\n\n90\n           value: \"value1\",\n\n91\n           label: \"label1\",\n\n92\n           selected: false\n\n93\n       },\n\n94\n       {\n\n95\n           value: \"value2\",\n\n96\n           label: \"label2\",\n\n97\n           selected: true\n\n98\n       }\n\n99\n   ]\n\n100\n},\n\n101\n{\n\n102\n   label: \"Agree to our terms and conditions\",\n\n103\n   type: \"CheckboxItem\",\n\n104\n   attributes: {\n\n105\n       name: \"termsCheckbox\",\n\n106\n       required: true,\n\n107\n       refLink:\n\n108\n           \"<span>Review our  <a href='{Your_link_here}' target='_blank'>terms and conditions</a></span>\"\n\n109\n   }\n\n110\n}\n\n111\n        ]\n\n112\n    }\n\n113\n}\nExpand image\nForm attributes\n\nThe following attributes are available for your pre-engagement form:\n\nForm attribute\tDescription\ntitle\tName or greeting that appears as the heading at the top of the form.\ndescription\tIntroductory text for the form.\nsubmitLabel\tLabel that appears on the button to submit the form.\nfooterLabel\tOptional text that appears at the bottom of your form.\nField attributes\nField setting\tDescription\tApplies to these field types\nlabel\tName of the field.\tAll field types\ntype\tThe following field types are supported:\nInputItem\nSelectItem\nTextareaItem\nCheckboxItem\nIf you enter any other field type, it won't be displayed.\tAll field types\noptions\tAdd an array with value, label, and selected elements for each option that users can select. To set a default value, set selected: true for that option.\tSelectItem\nInput attributes and validations\n\nFor the input area of each field, you can set the following attributes and validations:\n\nInput attribute\tDescription\tApplies to these field types\nname\tName of the input.\tAll field types\ntype\tFormat of the input that the user can enter and method of entry:\ntext: A single-line text input.\nemail: Looks like a text input field, but has validation parameters and relevant keyboard in browsers and devices with dynamic keyboards.\nnumber: Accepts numbers only. Users can change the value by entering a number, using keyboard arrow keys and increment buttons.\ntel: An input for entering a telephone number. It displays a telephone keypad in some devices with dynamic keypads.\ndate: An input for entering a date.\ntime: An input for entering a time.\npassword: An input whose value is obscured. This input alerts a user if the site isn't secure.\n\tInputItem, TextareaItem\nplaceholder\tExample text that appears in the field and disappears when the user begins typing.\tInputItem, TextareaItem\nrequired\tValidates whether a form field is required or optional. Can be set to true or false.\tAll field types\npattern\tChecks the validity of the input item against the pattern you specify. Enter the expected pattern as a regular expression (regex).\tInputItem\nreadOnly\tDetermines whether the field can be edited. Set to false in most cases.\n\nWhen set to true, the field can't be edited but can receive focus to allow users to highlight the text in the field. You may want to set a default value with the value attribute.\tAll field types\ndisabled\tSimilar to readOnly, except that this attribute can be dependent on the value entered in another input field. For example, if your form asks whether the chat is about an existing order, you could enable an order number field only if the customer has answered yes.\tAll field types\nvalue\tDefault field value. This is typically used with readOnly fields.\tAll field types\nrefLink\tDescriptive text that optionally includes HTML formatting, such as links. A common use case is to include a checkbox to acknowledge terms and conditions, with a link to your terms and conditions webpage.\tCheckboxItem\nGathering and sending context\n\nYou can use context data to pass additional information, beyond pre-engagement form details, to the Flex platform when a webchat is initiated. This information enables you to provide a more personalized and informed interaction between your customers and your agents.\n\nTo get started, configure the context object in your Webchat configuration. For an example, see the context section in the example pre-engagement form and context section above.\n\nAccessing and using pre-engagement data and context\n\nWhen enabled, pre-engagement form and context data are both automatically saved as Conversations attributes (for example, conversation.ChannelAttributes.pre_engagement_data) when a chat is initiated. Your form and context data can then be accessed in the Studio chat flow\n. See the Studio documentation to learn more about how Studio uses variables.\n\nPre-engagement and context data in Studio\n\nAn incoming chat conversation triggers the Webchat flow for your Flex instance, which you can customize within Twilio Console.\n\nIn the Studio chat flow, you can:\n\nTrigger a bot conversation based on gathered pre-engagement data\nUse pre-engagement data for decisions in the flow, like when to send the conversation to an agent\nAdd pre-engagement data to task attributes for routing decision or information display to an agent in Flex\n\nStudio uses Liquid syntax to access the pre-engagement data in a Studio widget. For example, here's how you would access the question attribute from your pre-engagement form data:\n\nExpand image\nCopy code block\n\"{{trigger.conversation.ChannelAttributes.pre_engagement_data.question}}\"\n\nHere's how you would add the initial user question to your chat task attributes in the Send To Flex widget:\n\nCopy code block\n{\"initial_question\": \"{{trigger.conversation.ChannelAttributes.pre_engagement_data.question}}\"}\nNext Steps\nCheck out the Twilio Studio User Guide",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nconst appConfig = {\n\n2\n// Webchat Config    \n\n3\ndeploymentKey: \"{your_key}\", \n\n4\n    appStatus: \"open\",\n\n5\n    theme: {\n\n6\n        isLight: true\n\n7\n    },\n\n8\n    context: { \n\n9\nlocationOrigin: window.location.origin,\n\n10\nsomeContextProp: \"ContextProp1\",\n\n11\n},\n\n12\n    disablePreEngagementForm: false,\n\n13\n    preEngagementConfig: {\n\n14\n        title: \"Pre-Chat Form\",\n\n15\n        description: \"Complete this form to start the chat\",\n\n16\n        submitLabel: \"Let's chat\",\n\n17\n        footerLabel: \"Powered by Twilio\",\n\n18\n        fields: [\n\n19\n{\n\n20\n   label: \"Name\",\n\n21\n   type: \"InputItem\",\n\n22\n   attributes: {\n\n23\n       name: \"friendlyName\",\n\n24\n       type: \"text\",\n\n25\n       placeholder: \"Enter your name\",\n\n26\n       required: true,\n\n27\n       pattern: \"^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$\",\n\n28\n       readOnly: false,\n\n29\n       value: \"Bob\"\n\n30\n   }\n\n31\n},\n\n32\n{\n\n33\n   label: \"Email address\",\n\n34\n   type: \"InputItem\",\n\n35\n   attributes: {\n\n36\n       name: \"email\",\n\n37\n       type: \"email\",\n\n38\n       placeholder: \"Enter your email address\",\n\n39\n       required: true,\n\n40\n       readOnly: false,\n\n41\n       value: \"bob@example.com\",\n\n42\n       pattern: \"{Your_email_pattern}\"\n\n43\n   }\n\n44\n},\n\n45\n{\n\n46\n   label: \"Date of birth\",\n\n47\n   type: \"InputItem\",\n\n48\n   attributes: {\n\n49\n       name: \"dob\",\n\n50\n       type: \"date\",\n\n51\n       placeholder: \"Enter your date of birth\",\n\n52\n       required: false,\n\n53\n       readOnly: false,\n\n54\n       pattern: \"{Your_date_of_birth_pattern}\"\n\n55\n   }\n\n56\n},\n\n57\n{\n\n58\n   label: \"Phone number\",\n\n59\n   type: \"InputItem\",\n\n60\n   attributes: {\n\n61\n       name: \"phone\",\n\n62\n       type: \"tel\",\n\n63\n       placeholder: \"Enter your phone number\",\n\n64\n       required: false,\n\n65\n       readOnly: false,\n\n66\n       value: \"0123456789\",\n\n67\n       pattern: \"{Your_phone_number_pattern}\"\n\n68\n   }\n\n69\n},\n\n70\n{\n\n71\n   label: \"Ask a question\",\n\n72\n   type: \"TextareaItem\",\n\n73\n   attributes: {\n\n74\n       name: \"query\",\n\n75\n       type: \"text\",\n\n76\n       placeholder: \"Type your question here\",\n\n77\n       required: true\n\n78\n   }\n\n79\n},\n\n80\n{\n\n81\n   label: \"Question category\",\n\n82\n   type: \"SelectItem\",\n\n83\n   attributes: {\n\n84\n       name: \"Question category dropdown\",\n\n85\n       required: false,\n\n86\n       readOnly: false\n\n87\n   },\n\n88\n   options: [\n\n89\n       {\n\n90\n           value: \"value1\",\n\n91\n           label: \"label1\",\n\n92\n           selected: false\n\n93\n       },\n\n94\n       {\n\n95\n           value: \"value2\",\n\n96\n           label: \"label2\",\n\n97\n           selected: true\n\n98\n       }\n\n99\n   ]\n\n100\n},\n\n101\n{\n\n102\n   label: \"Agree to our terms and conditions\",\n\n103\n   type: \"CheckboxItem\",\n\n104\n   attributes: {\n\n105\n       name: \"termsCheckbox\",\n\n106\n       required: true,\n\n107\n       refLink:\n\n108\n           \"<span>Review our  <a href='{Your_link_here}' target='_blank'>terms and conditions</a></span>\"\n\n109\n   }\n\n110\n}\n\n111\n        ]\n\n112\n    }\n\n113\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "\"{{trigger.conversation.ChannelAttributes.pre_engagement_data.question}}\"",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "{\"initial_question\": \"{{trigger.conversation.ChannelAttributes.pre_engagement_data.question}}\"}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Form attribute",
+          "Description"
+        ],
+        "rows": [
+          [
+            "title",
+            "Name or greeting that appears as the heading at the top of the form."
+          ],
+          [
+            "description",
+            "Introductory text for the form."
+          ],
+          [
+            "submitLabel",
+            "Label that appears on the button to submit the form."
+          ],
+          [
+            "footerLabel",
+            "Optional text that appears at the bottom of your form."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Field setting",
+          "Description",
+          "Applies to these field types"
+        ],
+        "rows": [
+          [
+            "label",
+            "Name of the field.",
+            "All field types"
+          ],
+          [
+            "type",
+            "The following field types are supported:\nInputItem\nSelectItem\nTextareaItem\nCheckboxItem\nIf you enter any other field type, it won't be displayed.",
+            "All field types"
+          ],
+          [
+            "options",
+            "Add an array with value, label, and selected elements for each option that users can select. To set a default value, set selected: true for that option.",
+            "SelectItem"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Input attribute",
+          "Description",
+          "Applies to these field types"
+        ],
+        "rows": [
+          [
+            "name",
+            "Name of the input.",
+            "All field types"
+          ],
+          [
+            "type",
+            "Format of the input that the user can enter and method of entry:\ntext: A single-line text input.\nemail: Looks like a text input field, but has validation parameters and relevant keyboard in browsers and devices with dynamic keyboards.\nnumber: Accepts numbers only. Users can change the value by entering a number, using keyboard arrow keys and increment buttons.\ntel: An input for entering a telephone number. It displays a telephone keypad in some devices with dynamic keypads.\ndate: An input for entering a date.\ntime: An input for entering a time.\npassword: An input whose value is obscured. This input alerts a user if the site isn't secure.",
+            "InputItem, TextareaItem"
+          ],
+          [
+            "placeholder",
+            "Example text that appears in the field and disappears when the user begins typing.",
+            "InputItem, TextareaItem"
+          ],
+          [
+            "required",
+            "Validates whether a form field is required or optional. Can be set to true or false.",
+            "All field types"
+          ],
+          [
+            "pattern",
+            "Checks the validity of the input item against the pattern you specify. Enter the expected pattern as a regular expression (regex).",
+            "InputItem"
+          ],
+          [
+            "readOnly",
+            "Determines whether the field can be edited. Set to false in most cases.\n\nWhen set to true, the field can't be edited but can receive focus to allow users to highlight the text in the field. You may want to set a default value with the value attribute.",
+            "All field types"
+          ],
+          [
+            "disabled",
+            "Similar to readOnly, except that this attribute can be dependent on the value entered in another input field. For example, if your form asks whether the chat is about an existing order, you could enable an order number field only if the customer has answered yes.",
+            "All field types"
+          ],
+          [
+            "value",
+            "Default field value. This is typically used with readOnly fields.",
+            "All field types"
+          ],
+          [
+            "refLink",
+            "Descriptive text that optionally includes HTML formatting, such as links. A common use case is to include a checkbox to acknowledge terms and conditions, with a link to your terms and conditions webpage.",
+            "CheckboxItem"
+          ]
+        ]
+      }
+    ]
+  }
+}

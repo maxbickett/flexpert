@@ -1,0 +1,86 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/common-uses",
+  "batch_id": 6,
+  "crawled_at": "2025-10-07T20:30:46.936815+00:00",
+  "content": {
+    "title": "Common Use Cases | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/common-uses",
+    "text_content": "On this page\nPage Tools\nCommon Use Cases\n\nThis guide covers useful commands for interacting with your Flex plugins that are managed with the Flex Plugins CLI.\n\nView all versions of a Flex plugin\nCopy code block\ntwilio flex:plugins:list:plugin-versions --name <plugin name>\nExpand image\nView all Flex plugins you have deployed\n\nThe list command displays all the plugins that can be enabled or disabled.\n\nCopy code block\ntwilio flex:plugins:list:plugins \nExpand image\nView your active plugins\nCopy code block\ntwilio flex:plugins:describe:release --active\nExpand image\nRollback a release\n\nSometimes you push changes to your application that need to be reverted and fixed. You can use the Plugins CLI to return to a previous version of your plugin configuration.\n\nFetch previous releases\nCopy code block\ntwilio flex:plugins:list:releases\nChoose a prior configuration\n\nFrom the list of Releases, choose the one that you want to rollback to. Copy the configuration_sid of that release.\n\nUse the describe command to get details on the Configuration.\n\nCopy code block\ntwilio flex:plugins:describe:configuration --sid <Configuration Sid>\nExpand image\nCreate a new release from your prior configuration\n\nCreate a new Release with the copied configuration_sid.\n\nCopy code block\ntwilio flex:plugins:release --configuration-sid <Configuration Sid>\n\nYou've successfully rolled back your Contact Center to an operational version. Go hunt down that bug, and get ready to cut a new Release with the revised Plugin Code!\n\nDisable a plugin\n\nUse the disable-plugin argument on the release command to disable a plugin on your Flex application. The format it takes is pluginName.\n\nCopy code block\ntwilio flex:plugins:release --disable-plugin plugin-agent-autoresponse --name \"Flex Next\" --description \"Remove Agent Autoresponse Plugin\"\nDeploy multiple plugins\nCopy code block\ntwilio flex:plugins:release --plugin <plugin-name1>@<version> --plugin <plugin name2>@<version> --name \"Sprint Snow Leopard\" --description \"Agent Productivity Tools\"\n\nYou can group multiple plugins into a single Release. The twilio flex:plugins:release command takes multiple plugin names in its argument. Keep in mind that you need to first deploy the versions of the plugins being referred in the command before using it in the release command.\n\nCompare your configuration with the active release\n\nUse the diff command to compare two configurations in your Flex application. If you leave the second parameter blank, it will compare the Configuration to the active Release.\n\nCopy code block\ntwilio flex:plugins:diff <Configuration SID> \nDeploy to your own CDN\n\nThere are two mechanisms you can use to serve plugins external to Twilio Assets. The Flex Configuration Resource provides plugin_service_attributes, which can be used to register external assets for Flex to load.\n\nAttribute\tType\tPurpose\ncustom_plugins\tJSON array of Flex Plugins\tcustom_plugins enable you to statically define a list of Flex Plugins to return to Flex, this may be particularly useful to incorporate as part of a CI/CD workflow.\ncustom_plugins_url\tA valid URL\tcustom_plugins_url must also return a JSON Array of plugins, but by leveraging the JWE token provided via the X-Flex-JWE header you may choose to conditionally return plugins to certain agents to satisfy use-cases such as segmentation by department or canary deployments.\n\nOnly one of these fields is required. This curl example demonstrates the syntax for updating either attribute.\n\nCopy code block\n1\ncurl https://flex-api.twilio.com/v1/Configuration -X POST -u ACxx:auth_token \\\n\n2\n    -H 'Content-Type: application/json' \\\n\n3\n    -d '{\n\n4\n        \"account_sid\": \"ACxx\",\n\n5\n        \"plugin_service_attributes\": {\n\n6\n            \"custom_plugins\": [{\"name\": \"My Plugin\", \"version\": \"0.0.1\", \"src\": \"https://example.com/my-self-hosted-plugin-0.0.1.js\"}],\n\n7\n            \"custom_plugins_url\": \"https://example.com/plugins-list.json\"\n\n8\n        }\n\n9\n    }'\n\n10\n\ncustom_plugins_url takes precedence over custom_plugins in the event that both appear. This allows you to leverage custom_plugins as a fallback if your URL is inaccessible.",
+    "cli_commands": [
+      "twilio flex:plugins:list:plugin-versions --name <plugin name>",
+      "twilio flex:plugins:list:plugins",
+      "twilio flex:plugins:describe:release --active",
+      "twilio flex:plugins:list:releases",
+      "twilio flex:plugins:describe:configuration --sid <Configuration Sid>",
+      "twilio flex:plugins:release --configuration-sid <Configuration Sid>",
+      "twilio flex:plugins:release --disable-plugin plugin-agent-autoresponse --name \"Flex Next\" --description \"Remove Agent Autoresponse Plugin\"",
+      "twilio flex:plugins:release --plugin <plugin-name1>@<version> --plugin <plugin name2>@<version> --name \"Sprint Snow Leopard\" --description \"Agent Productivity Tools\"",
+      "twilio flex:plugins:diff <Configuration SID>",
+      "curl https://flex-api.twilio.com/v1/Configuration -X POST -u ACxx:auth_token \\"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "twilio flex:plugins:list:plugin-versions --name <plugin name>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:list:plugins ",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:describe:release --active",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:list:releases",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:describe:configuration --sid <Configuration Sid>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:release --configuration-sid <Configuration Sid>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:release --disable-plugin plugin-agent-autoresponse --name \"Flex Next\" --description \"Remove Agent Autoresponse Plugin\"",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:release --plugin <plugin-name1>@<version> --plugin <plugin name2>@<version> --name \"Sprint Snow Leopard\" --description \"Agent Productivity Tools\"",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:diff <Configuration SID> ",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl https://flex-api.twilio.com/v1/Configuration -X POST -u ACxx:auth_token \\\n\n2\n    -H 'Content-Type: application/json' \\\n\n3\n    -d '{\n\n4\n        \"account_sid\": \"ACxx\",\n\n5\n        \"plugin_service_attributes\": {\n\n6\n            \"custom_plugins\": [{\"name\": \"My Plugin\", \"version\": \"0.0.1\", \"src\": \"https://example.com/my-self-hosted-plugin-0.0.1.js\"}],\n\n7\n            \"custom_plugins_url\": \"https://example.com/plugins-list.json\"\n\n8\n        }\n\n9\n    }'\n\n10",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Attribute",
+          "Type",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "custom_plugins",
+            "JSON array of Flex Plugins",
+            "custom_plugins enable you to statically define a list of Flex Plugins to return to Flex, this may be particularly useful to incorporate as part of a CI/CD workflow."
+          ],
+          [
+            "custom_plugins_url",
+            "A valid URL",
+            "custom_plugins_url must also return a JSON Array of plugins, but by leveraging the JWE token provided via the X-Flex-JWE header you may choose to conditionally return plugins to certain agents to satisfy use-cases such as segmentation by department or canary deployments."
+          ]
+        ]
+      }
+    ]
+  }
+}

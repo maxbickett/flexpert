@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat",
+  "batch_id": 4,
+  "crawled_at": "2025-10-07T20:31:00.891780+00:00",
+  "content": {
+    "title": "WebChat 2.0 Overview | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat",
+    "text_content": "On this page\nPage Tools\nWebChat 2.0 Overview\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\nWhat is Flex Webchat 2.0?\n\nFlex Webchat 2.0 is a chat widget that you can embed on your website. The widget helps your customers chat with an agent without needing to leave your webpage. It is natively integrated with the Flex Contact Center.\n\nWhat can you do with Webchat 2.0?\n\nThe Flex WebChat experience is fully customizable. WebChat can be customized in the following ways:\n\nChanging the basic configuration of WebChat\nChanging the look and feel of WebChat\nCustomizing forms and gathering contextual information\nCustomizing the UI by adding, replacing or removing components\nCustomizing the behavior of the WebChat by tapping into user actions",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/insights/labels",
+  "batch_id": 3,
+  "crawled_at": "2025-10-07T20:31:01.300168+00:00",
+  "content": {
+    "title": "Label Data for Flex Insights | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/insights/labels",
+    "text_content": "On this page\nPage Tools\nLabel Data for Flex Insights\n(new)\nPublic beta\n\nFlex Insights (also known as Historical Reporting) is currently available as a public beta release and the information contained in the Flex Insights documentation is subject to change. This means that some features are not yet implemented and others may be changed before the product is declared as generally available. Public beta products are not covered by a Twilio SLA.\n\nAny reference to \"Historical Reporting\", \"Flex Insights API\", \"Flex Insights Historical Reporting\", or \"Flex Insights Historical Reporting API\" in the Flex Insights documentation refers to Flex Insights.\n\nLabels are a collection of pre-existing keys for your data that allow you to use Historical Reporting resources more efficiently. You can use up to 10 custom labels for conversations, 3 custom labels for customers and 3 custom labels for agents. In task attributes, these are named conversation_label_x, customer_label_x and agent_label_x, where X is a number for the attribute.\n\nLabel\tMaximum Number\tExample\nConversation\t10\tconversation_label_1\nCustomer\t3\tcustomer_label_1\nAgent\t3\tagent_label_1\nContext: How Historical Reporting Works\n\nHistorical Reporting has a limit of containing 2 billion unique attribute values. This includes any value used in any dataset. If the same value is using multiple times in different records or in different datasets it counts as one towards this limit. When you provide custom data to Historical Reporting you are also consuming unique values from this limit. Values stored as labels do not count towards the 2 billion unique values limit.\n\nFor attributes that contain limited set of values such as Direction, Channel, or Team, the limit is not an issue. However, attributes that contain values that are unique for many conversation or customers consume this limit much faster. Reaching this limit may lead to Flex Insights being unable to load additional data into the affected Workspace. In order to prevent this, Flex Insights may delete older data before it reaches its default retention.\n\nSince labels don't count toward the unique attribute value limit, they're useful for capturing IDs and similar values (like CallSID, ChannelSID, or an external ID of a customer.)\n\nUsing Labels\nLabel Only for Unique Values\n\nWhen using the label only, as shown in the code sample below, Flex Insights will use segment ID as the attribute value. We recommend using this for high cardinality attributes, such as IDs.\n\nCopy code block\n1\n{\n\n2\n    \"conversation_label_1\": \"ID-123456789\"\n\n3\n}\n\nThe example above is equivalent to providing this in task attributes:\n\nCopy code block\n1\n{\n\n2\n    \"conversation_attribute_1\": \"<segment ID>\",\n\n3\n    \"conversation_label_1\": \"ID-123456789\"\n\n4\n}\n\nAll reports segmented by conversation_attribute_1 will show individual segments.\n\nAttribute Only for Categorical Values\n\nWhen using the attribute only, Flex Insights will use the same value for the attribute label. We recommend using this to bucket conversations and customers into categories. The number of categories can be in thousands or millions. As long as they are not almost unique per conversations they will have limited impact on the 2 billion unique values limit.\n\nCopy code block\n1\n{\n\n2\n    \"conversation_attribute_1\": \"Green Category\"\n\n3\n}\n\nThe example above is equivalent to providing this in task attributes:\n\nCopy code block\n1\n{\n\n2\n    \"conversation_attribute_1\": \"Green Category\",\n\n3\n    \"conversation_label_1\": \"Green Category\"\n\n4\n}\nAttribute and Label for User Friendly Reporting\n\nYou can provide both attribute and label and Flex Insights will push these as you provide them into Flex Insights. Providing the attribute and the label are useful if the attribute value is a fairly technical text (such as category ID in your system) and you want to have more user-friendly labels in reports, instead of showing the ID. Another possible use is to have label in an alternate language.\n\nCopy code block\n1\n{\n\n2\n    \"conversation_attribute_1\": \"Very technical representation of a category\",\n\n3\n    \"conversation_label_1\": \"Human readable category name\"\n\n4\n}\nLimitations\nIf the same label is used for multiple attribute values the label will be shown multiple times in filters.\nLabels cannot be used for segmenting reports. The report would be still segmented by the underlying attribute value. This means that if you use the same label value for multiple attribute value you will see multiple metrics with the same label in reports.\nNext Steps\nContinue organizing your TaskRouter Data to enhance your Insights implementation\nLearn more about the basics of implementing a TaskRouter Workspace\nLearn more about how the Flex Insights Data Model meets the analytics needs of your contact center",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\n{\n\n2\n    \"conversation_label_1\": \"ID-123456789\"\n\n3\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n    \"conversation_attribute_1\": \"<segment ID>\",\n\n3\n    \"conversation_label_1\": \"ID-123456789\"\n\n4\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n    \"conversation_attribute_1\": \"Green Category\"\n\n3\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n    \"conversation_attribute_1\": \"Green Category\",\n\n3\n    \"conversation_label_1\": \"Green Category\"\n\n4\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n    \"conversation_attribute_1\": \"Very technical representation of a category\",\n\n3\n    \"conversation_label_1\": \"Human readable category name\"\n\n4\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Label",
+          "Maximum Number",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Conversation",
+            "10",
+            "conversation_label_1"
+          ],
+          [
+            "Customer",
+            "3",
+            "customer_label_1"
+          ],
+          [
+            "Agent",
+            "3",
+            "agent_label_1"
+          ]
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/debugging-with-vscode",
+  "batch_id": 6,
+  "crawled_at": "2025-10-07T20:31:01.862422+00:00",
+  "content": {
+    "title": "Debugging a Flex Plugin with VS Code | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/debugging-with-vscode",
+    "text_content": "On this page\nPage Tools\nDebugging a Flex Plugin with VS Code\n\nThis is a guide on how to set up VS Code\n to debug your Flex Plugin locally. This tutorial builds off of the Plugin from the Plugin Development Quickstart.\n\nWhen debugging your Plugin, it is useful to set breakpoints in your application and to walk through it step-by-step. Luckily, VS Code already comes with a built-in debugger.\n\nThis tutorial requires that you have an existing Flex Plugin. It also requires that you already have VS Code installed on your operating system.\n\nCreate launch.json\n\nOpen your Plugin folder in VS Code, then switch to the Debugger panel. There are currently no launch.json files. Click on the Run and Debug button and select Web App (Chrome). This will automatically create a launch.json inside .vscode folder and open the file for you.\n\nExpand image\n\nThen, replace the value of URL in launch.json with http://localhost:3000 and save the file.\n\nStart Debugging\n\nNow that we have the Debugger set up, it's time to run our dev-server and launch the debugger.\n\nFirst, start your Flex plugin using twilio flex:plugins:start. You may close the browser that this script starts as we'll launch another one shortly.\n\nNext, go to the Debugger panel of your VS Code again. This time, in the dropdown menu, you should see a Chrome or Launch Chrome option. Make sure it is selected, and press the green play button.\n\nExpand image\n\nThis will launch a new Chrome page and start your application. You can now log into your Flex instance.\n\nSet Breakpoints\n\nWhile running in debug mode, you will see a debugger toolbox in the top center of the VS Code editor.\n\nExpand image\n\nOpen the file where you'd like to set a breakpoint. Hover your cursor to the left of the line number. A little red dot should appear. Click to place the breakpoint. Now, click the green \"refresh\" button on the toolbox to restart the app.\n\nExpand image\n\nThat's it! You now have a breakpoint at this step of your application. You should be able to see the variables and the call stack, as well as step into the methods.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

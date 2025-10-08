@@ -1,0 +1,219 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/20-enhancements",
+  "batch_id": 7,
+  "crawled_at": "2025-10-07T20:30:58.989080+00:00",
+  "content": {
+    "title": "Flex UI 2.0.x Enhancements Overview | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/20-enhancements",
+    "text_content": "On this page\nPage Tools\nFlex UI 2.0.x Enhancements Overview\n(information)\nInfo\n\nThis summary of features will continue to evolve as we make further enhancements to Flex UI 2.0.x. For details on how to migrate from Flex UI 1.x.x, see our migration guide. Also refer to the Flex UI Release Notes for v2.x.x for changes not outlined in this table.\n\nComponent library\nFlex UI 1.0.x\tFlex UI 2.0.x\nMaterialUI\n\tTwilio Paste\n\nEnhancements in Flex UI 2.0.x: Built using Twilio Paste tokens, primitives, components, and compositions that are completely composable.\n\nState management\nFlex UI 1.0.x\tFlex UI 2.0.x\nRedux\n\tRedux Toolkit\n\nEnhancements in Flex UI 2.0.x: New tools provide some guardrails for your state management, helping you set up boilerplate code with better defaults.\n\nTheme and branding\nFlex UI 1.0.x\tFlex UI 2.0.x\n\nconfig.colorTheme\nconfig.colorTheme.overrides\n\t\nconfig.theme\nconfig.theme.componentThemeOverride\n\nEnhancements in Flex UI 2.0.x: New theming structure promotes consistency, customization, and web accessibility. See Theme and Branding for a list of configuration and property changes.\n\nPlugin development\nFlex UI 1.0.x\tFlex UI 2.0.x\n\nExample Flex UI 1.x.x package.json\nFlex CLI 4.1.2 or lower\nReact v16 or higher\n\t\nExample Flex UI 2.x.x package.json\nFlex CLI 4.1.3 or higher\nReact v17 or higher\nReact & ReactDOM are now peer dependencies\n\nEnhancements in Flex UI 2.0.x: Built on upgraded components and dependencies. Click the link for each Flex version to view the example package.json files. You can now use the Flex Plugin Library which includes ready-to-install plugins.\n\nMessaging channels\nFlex UI 1.0.x\tFlex UI 2.0.x\n\nProgrammable Chat and Proxy\nChannel attachments (web chat only)\n\t\nConversations SDK\nAttachments configurable for each messaging channel\nWhatsApp as a native channel\nFor Flex UI 2.4.x and newer, Facebook Messenger as a native channel (public beta)\n\nEnhancements in Flex UI 2.0.x: While Flex UI 2.0.x supports Legacy Messaging, you will need to use Flex Conversations and the new Interactions API. Issues with stale or 1-participant chats have been resolved by Flex Conversations. Read the Getting Started guide for a list of enhanced messaging features. For a list of identified Chat SDK properties and methods that have been changed, removed, or deprecated, see Conversations SDK in the migration guide.\n\nWeb accessibility\nFlex UI 1.0.x\tFlex UI 2.0.x\nN/A\tWCAG 2.1 AA\n\nEnhancements in Flex UI 2.0.x: Enables customers to conform with Web Content Accessibility Guidelines (WCAG) 2.1 AA\n with limited development work. See Flex UI web accessibility for more details.\n\nDegraded mode\nFlex UI 1.0.x\tFlex UI 2.0.x\nIntroduced in 1.31.0\tEnabled for all minor versions\n\nEnhancements in Flex UI 2.0.x: Flex UI will initialize with limited capabilities, even if some of the components like SDKs (TaskRouter, Conversations, Voice, or Sync) are down. See Degraded mode for more details.\n\nUser and Activity controls\nFlex UI 1.0.x\tFlex UI 2.0.x\n\nActivity controls\n in the MainHeader component\nTheme\n for user Activity controls in the NoTaskCanvas\n\t\nAdded Programmable component Activity to MainHeader\n component\nDeprecated theme for user Activity controls\nRemoved Activity controls from the NoTaskCanvas\n\nEnhancements in Flex UI 2.0.x: The User Controls component was split out into two components: user-controls now just refers to the little profile pic widget which opens up a popover with the Logout button, and activity displays the current activity and drops down to allow for selecting a different activity. These controls have been updated for easier access and improved programmability. As this is a potentially breaking change, see User and activity controls in the migration guide for more detailed steps on working with UI 2.0.x.\n\nMessaging UI\nFlex UI 1.0.x\tFlex UI 2.0.x\nMessageInput\n\tMessageInputV2\n\nEnhancements in Flex UI 2.0.x: Moving to Flex Conversations offers more customization options for the Messaging UI. There is a new dynamic Component structure and default props. See Flex Messaging UI v2 changes for more details.\n\nTaskRouter SDK wrappers\nFlex UI 1.0.x\tFlex UI 2.0.x\nN/A\tNew Actions and Flex Events TaskRouter SDK upgraded to ^0.5.9\n\nEnhancements in Flex UI 2.0.x: In Flex UI 2.0.x, new Flex actions and events have been added to the Flex UI Actions Framework\n saving the need to access the TaskRouter SDK directly. See New Actions and Flex Events for TaskRouter SDK.\n\nAppConfig\nFlex UI 1.0.x\tFlex UI 2.0.x\n\nNotifications.browser\nwarmTransfer\ncolorTheme\n\t\nNotifications.enabled\nRemoved warmTransfer\ntheme\n\nEnhancements in Flex UI 2.0.x: You need to update your AppConfig structure to utilize the new config structure's names and capabilities.\n\nDownloadMedia Action\nFlex UI 1.0.x\tFlex UI 2.0.x\nRequires a message object\n in the payload\tRequires a media file\n as it uses Twilio Conversations\n\nEnhancements in Flex UI 2.0.x: Uses Twilio Conversations under the hood.\n\nInsightsPlayer Actions\nFlex UI 1.0.x\tFlex UI 2.0.x\nConvention: InsightsPlayer:<action>\tConvention: InsightsPlayer<action>\n\nEnhancements in Flex UI 2.0.x: See Renamed actions for the full list of renamed Insights Player actions.\n\nOther Flex Actions\nFlex UI 1.0.x\tFlex UI 2.0.x\n\nApplyListFilters and ApplyListFiltersPayload\nRemoveListFilters\nSendMediaMessage and ChatActionSendMediaMessagePayload\nAttachFile\n\t\nRemoved ApplyListFilters and ApplyListFiltersPayload\nRemoved RemoveListFilters\nDeprecated SendMediaMessage\nNew AttachFiles allows an array of files to be passed\n\nEnhancements in Flex UI 2.0.x: Some Flex actions have been removed, deprecated, and updated for flexibility.\n\nVoice SDK\nFlex UI 1.0.x\tFlex UI 2.0.x\ntwilio-client\n\ttwilio-voice\n\nEnhancements in Flex UI 2.0.x: Uses the Voice SDK which allows you to set Opus as your preferred codec. Opus generally requires less bandwidth and provides better audio quality in restrained network conditions. See Voice SDK in the migration guide for details on what's changed.\n\nFlex Events\nFlex UI 1.0.x\tFlex UI 2.0.x\nyticaTokenUpdated\tRemoved yticaTokenUpdated\n\nEnhancements in Flex UI 2.0.x: Some Flex events have been removed.\n\nDialpad\nFlex UI 1.0.x\tFlex UI 2.0.x\nLegacy Dialpad Native Dialpad introduced in 1.18.0\tFlex Dialpad\n\nEnhancements in Flex UI 2.0.x: Legacy Dialpad implementations are no longer supported. Please migrate to the native Flex Dialpad.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "MaterialUI",
+            "Twilio Paste"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Redux",
+            "Redux Toolkit"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "config.colorTheme\nconfig.colorTheme.overrides",
+            "config.theme\nconfig.theme.componentThemeOverride"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Example Flex UI 1.x.x package.json\nFlex CLI 4.1.2 or lower\nReact v16 or higher",
+            "Example Flex UI 2.x.x package.json\nFlex CLI 4.1.3 or higher\nReact v17 or higher\nReact & ReactDOM are now peer dependencies"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Programmable Chat and Proxy\nChannel attachments (web chat only)",
+            "Conversations SDK\nAttachments configurable for each messaging channel\nWhatsApp as a native channel\nFor Flex UI 2.4.x and newer, Facebook Messenger as a native channel (public beta)"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "N/A",
+            "WCAG 2.1 AA"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Introduced in 1.31.0",
+            "Enabled for all minor versions"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Activity controls\n in the MainHeader component\nTheme\n for user Activity controls in the NoTaskCanvas",
+            "Added Programmable component Activity to MainHeader\n component\nDeprecated theme for user Activity controls\nRemoved Activity controls from the NoTaskCanvas"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "MessageInput",
+            "MessageInputV2"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "N/A",
+            "New Actions and Flex Events TaskRouter SDK upgraded to ^0.5.9"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Notifications.browser\nwarmTransfer\ncolorTheme",
+            "Notifications.enabled\nRemoved warmTransfer\ntheme"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Requires a message object\n in the payload",
+            "Requires a media file\n as it uses Twilio Conversations"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Convention: InsightsPlayer:<action>",
+            "Convention: InsightsPlayer<action>"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "ApplyListFilters and ApplyListFiltersPayload\nRemoveListFilters\nSendMediaMessage and ChatActionSendMediaMessagePayload\nAttachFile",
+            "Removed ApplyListFilters and ApplyListFiltersPayload\nRemoved RemoveListFilters\nDeprecated SendMediaMessage\nNew AttachFiles allows an array of files to be passed"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "twilio-client",
+            "twilio-voice"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "yticaTokenUpdated",
+            "Removed yticaTokenUpdated"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0.x",
+          "Flex UI 2.0.x"
+        ],
+        "rows": [
+          [
+            "Legacy Dialpad Native Dialpad introduced in 1.18.0",
+            "Flex Dialpad"
+          ]
+        ]
+      }
+    ]
+  }
+}

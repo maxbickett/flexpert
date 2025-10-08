@@ -1,0 +1,39 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/plugins-resource-limits",
+  "batch_id": 7,
+  "crawled_at": "2025-10-07T20:30:41.699769+00:00",
+  "content": {
+    "title": "Plugins Resource Limits | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/plugins-resource-limits",
+    "text_content": "On this page\nPage Tools\nPlugins Resource Limits\n\nFlex Plugins has default limits on the number of plugins, versions and the size of your plugin package being uploaded on your Flex application. Archive your unused plugins and plugin versions if you run into these limits. If archiving is not an option, please reach out to our support team\n. We're happy to help work with you to increase some of these limits or help optimize how you use plugins on your Flex application.\n\nResource Limits\n\nThe following limits will apply when developing Plugins on your Twilio account.\n\nResource\tDefault Limit\tNotes\nPlugins\t25\tUsed to extend and modify the Flex UI's capabilities. This is per account.\nPlugin Versions\t500\tUsed to track the modifications to a Plugin's code. This is per account.\nPlugin Package Size\t10MB\tThe file size of the plugin boilerplate and additional code.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "Resource",
+          "Default Limit",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "Plugins",
+            "25",
+            "Used to extend and modify the Flex UI's capabilities. This is per account."
+          ],
+          [
+            "Plugin Versions",
+            "500",
+            "Used to track the modifications to a Plugin's code. This is per account."
+          ],
+          [
+            "Plugin Package Size",
+            "10MB",
+            "The file size of the plugin boilerplate and additional code."
+          ]
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,407 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/configuration",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:38.558254+00:00",
+  "content": {
+    "title": "Configure the Flex WebChat 2.0 UI | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/configuration",
+    "text_content": "On this page\nPage Tools\nConfigure the Flex WebChat 2.0 UI\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\n(information)\nInfo\n\nAuto-Generated Documentation for the Flex Webchat UI\n is now available as a public beta distribution. The auto-generated documentation is accurate and comprehensive but may differ from what you see in the official Flex Webchat UI documentation.\n\nYou can change the Flex WebChat 2.0 look, feel, and behavior via configuration settings. You can override any of the default configuration values.\n\nThere are two ways to configure the Flex UI:\n\nvia componentProps in the Configuration Object\nvia the defaultProps API\nUsing the Basic Configuration\n\nBasic configuration allows you to do customizations to WebChat display options and behavior. With a few lines of code you can make changes like:\n\nShow or hide the logo in the header\nChange the properties of any WebChat component\nPass context for routing or to be displayed to an agent\nConfigure how the author of the message is displayed\nShow or hide a typing indicator or message read receipt\n\nand much more.\n\nConfiguration object\n\nIn the configuration object, you can define default properties to WebChat Components (listed below) and also configure properties that are not tied to specific Components.\n\nWebChat default configuration\nCopy code block\n1\nconst defaultConfiguration: Config = {\n\n2\n    disableLocalStorage: false,\n\n3\n    available: true,\n\n4\n    colorTheme: {\n\n5\n        baseName: \"BlueMediumTheme\"\n\n6\n    },\n\n7\n    componentProps: {\n\n8\n        MessagingCanvas: {\n\n9\n            avatarCallback: (identity: string) => SessionActions.getAgentAvatar(identity),\n\n10\n            showTrayOnInactive: true\n\n11\n        },\n\n12\n        MessageCanvasTray: {\n\n13\n            onButtonClick: () => Actions.invokeAction(\"RestartEngagement\")\n\n14\n        }\n\n15\n    },\n\n16\n    tokenServerUrl: \"https://iam.twilio.com/v1/Accounts/{accountSid}/Tokens\",\n\n17\n    flexWebChannelsUrl: \"https://flex-api.twilio.com/v1/WebChannels\",\n\n18\n    context: {\n\n19\n        friendlyName: \"Anonymous\"\n\n20\n    },\n\n21\n    startEngagementOnInit: true,\n\n22\n    sdkOptions: {\n\n23\n        chat: {}\n\n24\n    }\n\n25\n};\nWebChat basic configuration properties\nVariable name\tType\tDescription\naccountSid\tstring\tThe identifier for the Twilio account to which you want to connect the Webchat instance.\nflexFlowSid\tstring\tThe unique identifier for the Flex Flow that will handle messages.\nchatFriendlyName\tstring\tFriendly name to use for created chat channels\navailable\tBoolean\tChat service availability. It sets whether to display the EntryPoint or not\nlogLevel\tstring\tSpecificity of log output 0 - 'trace'\n\n1 - 'debug'\n\n2 - 'info'\n\n3 - 'warn'\n\n4 - 'error'\n\n5 - 'silent'\ncontext\tjson object\tContext object. Metadata that gets passed to backend about the request\ncolorTheme\tjson object\tTheme configuration\n\n\ndisableLocalStorage\tBoolean\tConfiguration to disable local storage\npreEngagementConfig\tjson object\tpre-engagement form\n\n\nstartEngagementOnInit\tBoolean\tpre-engagement form on/off\n\n\ncomponentProps\tjson object\tRepresents defaultProps of each component in WebChat. See above for an example\nsdkOptions\n\n\tjson object\tTailor SDK parameters\n\n{ voice: {}, worker: {}, chat: {}, insights: {} }\nmarkdownSupport\tjson object\tDisabled by default. Config object needs to be enabled for Chat Markdown Support:\n\n{ enabled: true }\ntokenServerUrl\tstring\tToken server URL\nflexWebChannelsUrl\tstring\tFlex WebChannels URL\nReact default props API\n\nYou may also configure default properties for components using the React defaultprops API.\n\nCopy code block\ncomponentProps: { [Component Name]: { [Prop Name]: [PropValue] } }\n\nExamples of setting props for Components:\n\nCopy code block\nFlexWebChat.MainHeader.defaultProps.showImage = true;\n\nThis example sets logo to be shown in the main header\n\nComponent props\n\nYou can find the full list of WebChat components here. Below are the lists of component-specific props for the following components:\n\nMainContainer\nEntryPoint\nMainHeader\nMessagingCanvas\nMessageListItem\nMessageInput\nMessageCanvasTray\nMainContainer\nProp Name\tType\tDescription\nstartEngagementOnInit\tBoolean\tpre-engagement form on, on chat startup\nheight\tstring\tHeight of the expanded webchat\nwidth\tstring\tWidth of the expanded webchat\nbottom\tstring\tDistance from webchat bottom to the bottom of the screen\nright\tstring\tDistance from webchat right side to right edge of the screen\nEntryPoint\nProp Name\tType\tDescription\nhideTaglineWhenExpanded\tBoolean\tTells if the tagline has to be hidden when expended\niconClosed\tstring\tRepresents icon to be shown when not expanded. Example: \"MessageBold\"\ncollapsedIconAriaProps\tAriaProps\tCollapsed icon aria props.\nopenedIconAriaProps\tAriaProps\tOpened icon aria props.\niconExpanded\tstring\tRepresents icon to be shown when expanded. Example: \"ArrowDown\"\ntagline\tstring\ttagline content\nMainHeader\nProp Name\tType\tDescription\ntitleText\tstring\tOverride header title of the expanded webchat\nimageUrl\tstring\tOverride header logo of the expanded webchat\nshowTitle\tBoolean\tShould the title be displayed in the header\nshowImage\tBoolean\tShould the logo be displayed in the header\ncloseCallback\tFunction\tA callback to trigger when close button is clicked. Example:\n\ncloseCallback: () => { Actions.invokeAction(\"MinimizeChat\"); }\nMessagingCanvas\nProp Name\tType\tDescription\nPredefinedMessage\tjson object\tRepresents an initial automated message, shown in the chat. See below for an example.\navatarCallback\t(identity: string) => string\tCallback function to return avatar URL of a member\nmemberDisplayOptions\tjson object\tAllows to override chat participant names, e.g. setting agent to Agent and customer to Customer. See an example below.\nmessageStyle\tstring\tDefines the visual style of the message area. Options are \"Rounded\", \"Squared\", and \"Minimal\"\nshowReadStatus\tBoolean\tControls if message read indicator will be shown\nshowTypingIndicator\tBoolean\tControls if [SomeOne] is typing will be shown\nshowWelcomeMessage\tBoolean\tControls if welcome message will be shown at the beginning of the conversation\nwelcomeMessageText\tCompiledTemplate\tText displayed as a welcome message\nshowTrayOnInactive\tBoolean\tDisplay message tray component, indicating that the chat is no longer active whenever channel status is inactive\ncharLimit\tnumber\tIdentifies character limit for a single message\ninputDisabledReason\tstring\tA reason on why the input element is disabled\nautoInitChannel\tMessagingCanvas.autoInitChannel\tShould the component automatically initialize chat channel if not initialized already.\nPredefinedMessage\n\nPredefinedMessage represents an initial automated message, shown in the chat\n\nbody - content of the message\nauthorName - name of the author\nisFromMe - whether it appears as message from the current user or not\n\nTurning the PredefinedMessage off:\n\nCopy code block\nFlexWebChat.MessagingCanvas.defaultProps.predefinedMessage = false;\nmemberDisplayOptions\n\nAllows to override chat participant names, e.g. setting agent to Agent and customer to Customer.\n\nExample of setting a default message author instead of using member friendlyName:\n\nCopy code block\n1\n{\n\n2\n  yourDefaultName: 'You',\n\n3\n  theirDefaultName: 'Agent',\n\n4\n  yourFriendlyNameOverride: false,\n\n5\n  theirFriendlyNameOverride: false\n\n6\n}\nMessageListItem\nProp Name\tType\tDescription\nuseFriendlyName\tBoolean\tOverride chat participant name with a friendly name\nmessageStyle\tstring\tVisual style of the individual message. Options are \"Rounded\", \"Squared\", and \"Minimal\"\nauthorName\tstring\tA custom author name to be used\nuseFriendlyName\tBoolean\tUse friendlyName as author name instead of custom authorName\navatarUrl\t\tURL to the avatar of the author\nmessage\t\tAn object which represents a single message.\nMessageInput\nProp Name\tType\tDescription\nareaStyle\tstring\tVisual style of the text input element.\ndisabledReason\tstring\tA reason on why MessageInput is disabled.\nsendButtonAriaProps\tAriaProps\tSendButton aria props\ntextAreaAriaProps\tAriaProps\tTextArea aria props\ncharLimit\tnumber\tIdentifies character limit for a single message.\nreturnKeySendsMessage\tBoolean\tWhether pressing the return key should send a message\nuseLocalState\tBoolean\tIf set to true, it keeps the message value in the local component state, instead of the Redux state. Please set it to false if you want to set the input value using the \"SetInputText\" action.\nMessageCanvasTray\nProp Name\tType\tDescription\nshowButton\tBoolean\tDisplay a 'Start new chat' button in the tray\nonButtonClick\t() => void\tA handler for a 'Start new chat' button click",
+    "cli_commands": [
+      "tokenServerUrl: \"https://iam.twilio.com/v1/Accounts/{accountSid}/Tokens\",",
+      "flexWebChannelsUrl: \"https://flex-api.twilio.com/v1/WebChannels\","
+    ],
+    "actions": [
+      "getAgentAvatar",
+      "invokeAction",
+      "invokeAction",
+      "RestartEngagement",
+      "MinimizeChat"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\nconst defaultConfiguration: Config = {\n\n2\n    disableLocalStorage: false,\n\n3\n    available: true,\n\n4\n    colorTheme: {\n\n5\n        baseName: \"BlueMediumTheme\"\n\n6\n    },\n\n7\n    componentProps: {\n\n8\n        MessagingCanvas: {\n\n9\n            avatarCallback: (identity: string) => SessionActions.getAgentAvatar(identity),\n\n10\n            showTrayOnInactive: true\n\n11\n        },\n\n12\n        MessageCanvasTray: {\n\n13\n            onButtonClick: () => Actions.invokeAction(\"RestartEngagement\")\n\n14\n        }\n\n15\n    },\n\n16\n    tokenServerUrl: \"https://iam.twilio.com/v1/Accounts/{accountSid}/Tokens\",\n\n17\n    flexWebChannelsUrl: \"https://flex-api.twilio.com/v1/WebChannels\",\n\n18\n    context: {\n\n19\n        friendlyName: \"Anonymous\"\n\n20\n    },\n\n21\n    startEngagementOnInit: true,\n\n22\n    sdkOptions: {\n\n23\n        chat: {}\n\n24\n    }\n\n25\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "componentProps: { [Component Name]: { [Prop Name]: [PropValue] } }",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "FlexWebChat.MainHeader.defaultProps.showImage = true;",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "FlexWebChat.MessagingCanvas.defaultProps.predefinedMessage = false;",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  yourDefaultName: 'You',\n\n3\n  theirDefaultName: 'Agent',\n\n4\n  yourFriendlyNameOverride: false,\n\n5\n  theirFriendlyNameOverride: false\n\n6\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Variable name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "accountSid",
+            "string",
+            "The identifier for the Twilio account to which you want to connect the Webchat instance."
+          ],
+          [
+            "flexFlowSid",
+            "string",
+            "The unique identifier for the Flex Flow that will handle messages."
+          ],
+          [
+            "chatFriendlyName",
+            "string",
+            "Friendly name to use for created chat channels"
+          ],
+          [
+            "available",
+            "Boolean",
+            "Chat service availability. It sets whether to display the EntryPoint or not"
+          ],
+          [
+            "logLevel",
+            "string",
+            "Specificity of log output 0 - 'trace'\n\n1 - 'debug'\n\n2 - 'info'\n\n3 - 'warn'\n\n4 - 'error'\n\n5 - 'silent'"
+          ],
+          [
+            "context",
+            "json object",
+            "Context object. Metadata that gets passed to backend about the request"
+          ],
+          [
+            "colorTheme",
+            "json object",
+            "Theme configuration"
+          ],
+          [
+            "disableLocalStorage",
+            "Boolean",
+            "Configuration to disable local storage"
+          ],
+          [
+            "preEngagementConfig",
+            "json object",
+            "pre-engagement form"
+          ],
+          [
+            "startEngagementOnInit",
+            "Boolean",
+            "pre-engagement form on/off"
+          ],
+          [
+            "componentProps",
+            "json object",
+            "Represents defaultProps of each component in WebChat. See above for an example"
+          ],
+          [
+            "sdkOptions",
+            "json object",
+            "Tailor SDK parameters\n\n{ voice: {}, worker: {}, chat: {}, insights: {} }"
+          ],
+          [
+            "markdownSupport",
+            "json object",
+            "Disabled by default. Config object needs to be enabled for Chat Markdown Support:\n\n{ enabled: true }"
+          ],
+          [
+            "tokenServerUrl",
+            "string",
+            "Token server URL"
+          ],
+          [
+            "flexWebChannelsUrl",
+            "string",
+            "Flex WebChannels URL"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Prop Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "startEngagementOnInit",
+            "Boolean",
+            "pre-engagement form on, on chat startup"
+          ],
+          [
+            "height",
+            "string",
+            "Height of the expanded webchat"
+          ],
+          [
+            "width",
+            "string",
+            "Width of the expanded webchat"
+          ],
+          [
+            "bottom",
+            "string",
+            "Distance from webchat bottom to the bottom of the screen"
+          ],
+          [
+            "right",
+            "string",
+            "Distance from webchat right side to right edge of the screen"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Prop Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "hideTaglineWhenExpanded",
+            "Boolean",
+            "Tells if the tagline has to be hidden when expended"
+          ],
+          [
+            "iconClosed",
+            "string",
+            "Represents icon to be shown when not expanded. Example: \"MessageBold\""
+          ],
+          [
+            "collapsedIconAriaProps",
+            "AriaProps",
+            "Collapsed icon aria props."
+          ],
+          [
+            "openedIconAriaProps",
+            "AriaProps",
+            "Opened icon aria props."
+          ],
+          [
+            "iconExpanded",
+            "string",
+            "Represents icon to be shown when expanded. Example: \"ArrowDown\""
+          ],
+          [
+            "tagline",
+            "string",
+            "tagline content"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Prop Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "titleText",
+            "string",
+            "Override header title of the expanded webchat"
+          ],
+          [
+            "imageUrl",
+            "string",
+            "Override header logo of the expanded webchat"
+          ],
+          [
+            "showTitle",
+            "Boolean",
+            "Should the title be displayed in the header"
+          ],
+          [
+            "showImage",
+            "Boolean",
+            "Should the logo be displayed in the header"
+          ],
+          [
+            "closeCallback",
+            "Function",
+            "A callback to trigger when close button is clicked. Example:\n\ncloseCallback: () => { Actions.invokeAction(\"MinimizeChat\"); }"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Prop Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "PredefinedMessage",
+            "json object",
+            "Represents an initial automated message, shown in the chat. See below for an example."
+          ],
+          [
+            "avatarCallback",
+            "(identity: string) => string",
+            "Callback function to return avatar URL of a member"
+          ],
+          [
+            "memberDisplayOptions",
+            "json object",
+            "Allows to override chat participant names, e.g. setting agent to Agent and customer to Customer. See an example below."
+          ],
+          [
+            "messageStyle",
+            "string",
+            "Defines the visual style of the message area. Options are \"Rounded\", \"Squared\", and \"Minimal\""
+          ],
+          [
+            "showReadStatus",
+            "Boolean",
+            "Controls if message read indicator will be shown"
+          ],
+          [
+            "showTypingIndicator",
+            "Boolean",
+            "Controls if [SomeOne] is typing will be shown"
+          ],
+          [
+            "showWelcomeMessage",
+            "Boolean",
+            "Controls if welcome message will be shown at the beginning of the conversation"
+          ],
+          [
+            "welcomeMessageText",
+            "CompiledTemplate",
+            "Text displayed as a welcome message"
+          ],
+          [
+            "showTrayOnInactive",
+            "Boolean",
+            "Display message tray component, indicating that the chat is no longer active whenever channel status is inactive"
+          ],
+          [
+            "charLimit",
+            "number",
+            "Identifies character limit for a single message"
+          ],
+          [
+            "inputDisabledReason",
+            "string",
+            "A reason on why the input element is disabled"
+          ],
+          [
+            "autoInitChannel",
+            "MessagingCanvas.autoInitChannel",
+            "Should the component automatically initialize chat channel if not initialized already."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Prop Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "useFriendlyName",
+            "Boolean",
+            "Override chat participant name with a friendly name"
+          ],
+          [
+            "messageStyle",
+            "string",
+            "Visual style of the individual message. Options are \"Rounded\", \"Squared\", and \"Minimal\""
+          ],
+          [
+            "authorName",
+            "string",
+            "A custom author name to be used"
+          ],
+          [
+            "useFriendlyName",
+            "Boolean",
+            "Use friendlyName as author name instead of custom authorName"
+          ],
+          [
+            "avatarUrl",
+            "",
+            "URL to the avatar of the author"
+          ],
+          [
+            "message",
+            "",
+            "An object which represents a single message."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Prop Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "areaStyle",
+            "string",
+            "Visual style of the text input element."
+          ],
+          [
+            "disabledReason",
+            "string",
+            "A reason on why MessageInput is disabled."
+          ],
+          [
+            "sendButtonAriaProps",
+            "AriaProps",
+            "SendButton aria props"
+          ],
+          [
+            "textAreaAriaProps",
+            "AriaProps",
+            "TextArea aria props"
+          ],
+          [
+            "charLimit",
+            "number",
+            "Identifies character limit for a single message."
+          ],
+          [
+            "returnKeySendsMessage",
+            "Boolean",
+            "Whether pressing the return key should send a message"
+          ],
+          [
+            "useLocalState",
+            "Boolean",
+            "If set to true, it keeps the message value in the local component state, instead of the Redux state. Please set it to false if you want to set the input value using the \"SetInputText\" action."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Prop Name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "showButton",
+            "Boolean",
+            "Display a 'Start new chat' button in the tray"
+          ],
+          [
+            "onButtonClick",
+            "() => void",
+            "A handler for a 'Start new chat' button click"
+          ]
+        ]
+      }
+    ]
+  }
+}

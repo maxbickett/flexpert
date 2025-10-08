@@ -1,0 +1,60 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/v1/manager",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:59.349872+00:00",
+  "content": {
+    "title": "Flex Manager | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/v1/manager",
+    "text_content": "On this page\nPage Tools\nFlex Manager\n(information)\nThis page applies to Flex UI 1.x.x.\n\nFor the Flex UI 2.x.x version of this content, see Manager in the overview of Flex UI programmability options.\n\nThe Flex Manager is the access point for controlling your Flex instance and all of the underlying Twilio products used for communications and assigning tasks. This means that within your Flex project, you can access the TaskRouter or Chat client directly through the Flex Manager.\n\nAside from Flex itself, Manager also gives you access to the Programmable Chat, Sync, Client, and TaskRouter SDKs.\n\nManager class\n\nFor a full list of attributes and methods, see the Manager class\n documentation in the Flex UI API Reference.\n\nObtain the Manager instance\n\nYou can access the Manager using these methods:\n\nthe getInstance method\nthe create method\nthe init method\nCall the getInstance method\nCopy code block\nFlex.Manager.getInstance()\nCall the create method when initializing Flex\nCopy code block\n1\nreturn Flex\n\n2\n  .provideLoginInfo(configuration, \"#container\")\n\n3\n  .then(() => Flex.Manager.create(configuration))\n\n4\n  .then(manager => {\n\n5\n    // use manager here\n\n6\n  })\n\n7\n  .catch(error => handleError(error));\n\nYou can check out the sample project\n on how to initialize Flex.\n\nCall the init method of your plugin\nCopy code block\n1\ninit(flex, manager) {\n\n2\n  // use manager here\n\n3\n}\nSubscribe to Manager events\n\nYou can use Flex Manager to subscribe to events that occur from Flex. For more details, see Flex Events\n in the Flex UI API Reference.\n\nCopy code block\n1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\n\n\n4\nmanager.events.addListener('eventName', (payload) => {\n\n5\n  // implement logic here\n\n6\n});\n\n7\n\nFor example, you can subscribe to the pluginsLoaded event to know when all Flex plugins have loaded.\n\nCopy code block\n1\nmanager.events.addListener(\"pluginsLoaded\", () => {\n\n2\n  console.log(\"Plugins have been loaded!\");\n\n3\n});\n\n4\nCommon use cases and examples\n\nThis example logs connect in the browser's console whenever the agent connects to a call:\n\nCopy code block\n1\nFlex.Manager.getInstance().voiceClient.on('connect', () => {\n\n2\n  console.log('connect');\n\n3\n});\n\n4\n\nBy mixing calls to the Manager with the actions framework, you can perform more complex tasks like this example that automatically accepts all inbound chats for agents:\n\nCopy code block\n1\nFlex.Manager.getInstance().workerClient.on(\"reservationCreated\", reservation => {\n\n2\n  if (reservation.task.taskChannelUniqueName === 'chat' && reservation.task.direction === 'inbound') {\n\n3\n    Flex.Actions.invokeAction(\"AcceptTask\", {sid: reservation.sid});\n\n4\n    Flex.Actions.invokeAction(\"SelectTask\", {sid: reservation.sid});\n\n5\n  }\n\n6\n});\ninsightsClient\n\nThe insightsClient provide access to the Twilio Sync SDK. For Flex accounts, this gives access to workers and tasks data through the use of two classes:\n\nLiveQuery\n class: to query Flex data and receives pushed updates whenever new (or updated) records would match the given expression\nInstantQuery\n class: to get a static snapshot of Flex data\n\nBoth classes needs two arguments:\n\nIndex name: data set the query is executed against. Currently supported index names for Flex are: tr-task, tr-worker, tr-reservation, tr-queue.\nQuery: this is the query used to filter the data from the index. The syntax for the query is documented here. The query can be an empty string: in this case the whole data set is returned (e.g. all workers.)\nLiveQuery example\n\nIn this example, the insightsClient is used to query the workers with activity_name set to Available and subscribe to changes. That means that every time a worker change its status to Available, an event itemUpdated is fired. If a worker changes its status from Available to any other status, the itemRemoved event is fired.\n\nCopy code block\n1\nFlex.Manager.insightsClient\n\n2\n  .liveQuery('tr-worker', 'data.activity_name == \"Available\"')\n\n3\n  .then(function (args) {\n\n4\n    console.log(\n\n5\n      'Subscribed to live data updates for worker in \"Available\" activity'\n\n6\n    );\n\n7\n    args.on('itemRemoved', function (args) {\n\n8\n      console.log('Worker ' + args.key + ' is no longer \"Available\"');\n\n9\n    });\n\n10\n    args.on('itemUpdated', function (args) {\n\n11\n      console.log('Worker ' + args.key + ' is now \"Available\"');\n\n12\n    });\n\n13\n  })\n\n14\n  .catch(function (err) {\n\n15\n    console.log('Error when subscribing to live updates', err);\n\n16\n  });\n\n17\nInstantQuery example\n\nIn this example, the insightsClient is used to query the workers with specific skills inside its attributes. This returns an array of workers that can be used to provide static data.\n\nCopy code block\n1\nmanager.insightsClient.instantQuery('tr-worker').then((q) => {\n\n2\n  q.on('searchResult', (items) => {\n\n3\n    // Do something with the results\n\n4\n  });\n\n5\n  q.search('data.attributes.languages contains \"english\"');\n\n6\n});",
+    "cli_commands": [
+      "import { Manager } from \"@twilio/flex-ui\";"
+    ],
+    "actions": [
+      "invokeAction",
+      "invokeAction",
+      "AcceptTask",
+      "SelectTask",
+      "AcceptTask",
+      "SelectTask"
+    ],
+    "code_blocks": [
+      {
+        "content": "Flex.Manager.getInstance()",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nreturn Flex\n\n2\n  .provideLoginInfo(configuration, \"#container\")\n\n3\n  .then(() => Flex.Manager.create(configuration))\n\n4\n  .then(manager => {\n\n5\n    // use manager here\n\n6\n  })\n\n7\n  .catch(error => handleError(error));",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ninit(flex, manager) {\n\n2\n  // use manager here\n\n3\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\n\n\n4\nmanager.events.addListener('eventName', (payload) => {\n\n5\n  // implement logic here\n\n6\n});\n\n7",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nmanager.events.addListener(\"pluginsLoaded\", () => {\n\n2\n  console.log(\"Plugins have been loaded!\");\n\n3\n});\n\n4",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Manager.getInstance().voiceClient.on('connect', () => {\n\n2\n  console.log('connect');\n\n3\n});\n\n4",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Manager.getInstance().workerClient.on(\"reservationCreated\", reservation => {\n\n2\n  if (reservation.task.taskChannelUniqueName === 'chat' && reservation.task.direction === 'inbound') {\n\n3\n    Flex.Actions.invokeAction(\"AcceptTask\", {sid: reservation.sid});\n\n4\n    Flex.Actions.invokeAction(\"SelectTask\", {sid: reservation.sid});\n\n5\n  }\n\n6\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Manager.insightsClient\n\n2\n  .liveQuery('tr-worker', 'data.activity_name == \"Available\"')\n\n3\n  .then(function (args) {\n\n4\n    console.log(\n\n5\n      'Subscribed to live data updates for worker in \"Available\" activity'\n\n6\n    );\n\n7\n    args.on('itemRemoved', function (args) {\n\n8\n      console.log('Worker ' + args.key + ' is no longer \"Available\"');\n\n9\n    });\n\n10\n    args.on('itemUpdated', function (args) {\n\n11\n      console.log('Worker ' + args.key + ' is now \"Available\"');\n\n12\n    });\n\n13\n  })\n\n14\n  .catch(function (err) {\n\n15\n    console.log('Error when subscribing to live updates', err);\n\n16\n  });\n\n17",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nmanager.insightsClient.instantQuery('tr-worker').then((q) => {\n\n2\n  q.on('searchResult', (items) => {\n\n3\n    // Do something with the results\n\n4\n  });\n\n5\n  q.search('data.attributes.languages contains \"english\"');\n\n6\n});",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

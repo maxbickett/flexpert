@@ -1,0 +1,31 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/insights/api/export-data",
+  "batch_id": 3,
+  "crawled_at": "2025-10-07T20:30:40.790572+00:00",
+  "content": {
+    "title": "Export Data from Flex Insights via API | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/insights/api/export-data",
+    "text_content": "On this page\nPage Tools\nExport Data from Flex Insights via API\n(new)\nPublic beta\n\nFlex Insights (also known as Historical Reporting) is currently available as a public beta release and the information contained in the Flex Insights documentation is subject to change. This means that some features are not yet implemented and others may be changed before the product is declared as generally available. Public beta products are not covered by a Twilio SLA.\n\nAny reference to \"Historical Reporting\", \"Flex Insights API\", \"Flex Insights Historical Reporting\", or \"Flex Insights Historical Reporting API\" in the Flex Insights documentation refers to Flex Insights.\n\nLearn how to export reports from within Insights to store the data in a warehouse of your own with this guide.\n\nThe export process consists of the following steps:\n\nLog in to the API to retrieve a Super Secret Token (SST)\nRetrieve a Temporary Token (TT) used for subsequent API calls\nExport the report\nLog out\nPrerequisites\n\nBefore you start exporting data you will need to have:\n\na provisioned Flex Insights Workspace\nthe credentials of a user with access to the Insights Workspace\na table report that contains data you need to export\nREST API client support for cookies that are used to pass authentication tokens\nAPI Authentication\n\nEnsure that you are authenticated against the Flex Insights API by having a valid TT (temporary token).\n\nThe procedure is detailed at API General Usage\n\nExport the raw report\n\nExporting the raw report is useful for getting machine-friendly data from any report created from your Flex Insights Analytics Portal\n. You will need the ID of the workspace and ID of the report object to export the data.\n\nWorkspace ID: Log in to the Analytics Portal\n and check the URL in the browser address bar. For example:\n\nExpand image\n\nThe workspace ID is the string appearing between the #s=/gdc/workspaces/ segment and the vertical bar. In this case, the workspace ID qx8vgewnj2hyemje8f6bkrkbyqk8psrf.\n\nObject ID: Within Analytics Portal navigate to the report you'd like to export, and check the URL in the address bar. It may look like this:\n\nExpand image\n\nObject ID is the numerical expression at the very end of the URL and is typically preceded by obj/ segment. In the example above, Object ID is 643040.\n\n(warning)\nWarning\n\nThe maximum report size for raw exports is 1GB. Exporting a report of this size may take minutes.\n\nFlex Insights - Get link of the raw report\ncurl\nReport code block\nCopy code block\n1\ncurl --location --request POST 'https://analytics.ytica.com/gdc/app/projects/{workspace_id}/execute/raw' \\\n\n2\n--header 'Accept: application/json' \\\n\n3\n--header 'Content-Type: application/json' \\\n\n4\n--header 'Cookie: GDCAuthTT=XXXXX-XXXXX-XXXXX' \\\n\n5\n--data-raw '{\n\n6\n  \"report_req\": {\n\n7\n    \"report\": \"/gdc/md/{workspace_id}/obj/{object_id}\"\n\n8\n  }\n\n9\n}'\nOutput\nCopy output\n1\n{\n\n2\n  \"uri\": \"/gdc/projects/{workspace_id}/execute/raw/{download_id}\"\n\n3\n}\nDownload the report\n\nDownload the report by using URI from previous export.\n\n(information)\nInfo\n\nIf you receive 202 response from API, it means that the request is accepted, but not ready to be delivered (still computing or preparing the CSV).\nSince the export API can take several seconds, or minutes in edge cases, depending on the volume of data and number of columns, you need to add a retry in case the server returns 202. The data is only ready to download when the server returns 200.\n\nFlex Insights - Download the report\ncurl\nReport code block\nCopy code block\n1\ncurl --location --request GET 'https://analytics.ytica.com/{URI}' \\\n\n2\n--header 'Cookie: GDCAuthTT=XXXXX-XXXXX-XXXXX'\nOutput\nCopy output\n1\n# CSV format\n\n2\nAgent,Date,Amount\n\n3\nJack,02/15,45\n\n4\nEmma,02/16,123\n\n5\nLudwig,02/25,13",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\ncurl --location --request POST 'https://analytics.ytica.com/gdc/app/projects/{workspace_id}/execute/raw' \\\n\n2\n--header 'Accept: application/json' \\\n\n3\n--header 'Content-Type: application/json' \\\n\n4\n--header 'Cookie: GDCAuthTT=XXXXX-XXXXX-XXXXX' \\\n\n5\n--data-raw '{\n\n6\n  \"report_req\": {\n\n7\n    \"report\": \"/gdc/md/{workspace_id}/obj/{object_id}\"\n\n8\n  }\n\n9\n}'",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"uri\": \"/gdc/projects/{workspace_id}/execute/raw/{download_id}\"\n\n3\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl --location --request GET 'https://analytics.ytica.com/{URI}' \\\n\n2\n--header 'Cookie: GDCAuthTT=XXXXX-XXXXX-XXXXX'",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n# CSV format\n\n2\nAgent,Date,Amount\n\n3\nJack,02/15,45\n\n4\nEmma,02/16,123\n\n5\nLudwig,02/25,13",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

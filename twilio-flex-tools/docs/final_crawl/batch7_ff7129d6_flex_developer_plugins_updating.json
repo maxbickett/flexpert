@@ -1,0 +1,65 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/updating",
+  "batch_id": 7,
+  "crawled_at": "2025-10-07T20:30:45.692776+00:00",
+  "content": {
+    "title": "Keeping Plugins Up-To-Date | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/updating",
+    "text_content": "On this page\nPage Tools\nKeeping Plugins Up-To-Date\n\nWhen developing Flex Plugins, there are three sets of versions that you want to keep updated:\n\nThe Flex Plugins CLI version that provides the tooling required for building and managing plugins\nThe flex-plugin version of your plugin's development environment\nThe versions of the plugins you create\n\nEach of these is managed independently. Updating the Flex Plugins CLI won't automatically update the development environment of your existing plugins. This allows you to trial new features in your latest plugins without risking backwards-incompatible changes in your other codebases.\n\nUpgrade Flex Plugins CLI\n\nTo identify the latest version release available, run the following command:\n\nCopy code block\n1\n$ npm show @twilio-labs/plugin-flex\n\n2\n\n\n3\n1.0.0\n\nTo identify the version installed in your development environment, run the following command:\n\nCopy code block\n1\n$ twilio plugins\n\n2\n\n\n3\n@twilio-labs/plugin-flex 4.8.0\n\nRefer to our Upgrade Guide if your installed version is behind the latest available version.\n\n(warning)\nWarning\n\nIf you aren't using the Flex Plugins CLI or don't have the Twilio CLI installed to run the twilio command, then you may be running Flex using legacy plugins. Refer to our migration guide for updating your plugins to use the Flex Plugins CLI.\n\nUpgrade flex-plugin dependencies\n\nExisting plugin directories are not automatically updated to use the latest features from the Flex Plugins CLI. These must be individually migrated to add new build scripts or apply updated dependencies. You can verify the version of your plugin by checking the flex-plugin dependency within your plugin's package.json.\n\nCopy code block\n1\n\"dependencies\": {\n\n2\n    \"flex-plugin\": \"4.0.0\",\n\n3\n    ...,\n\n4\n}\n\nIn your plugin directory, run the following command using the CLI. This command upgrades and installs your plugin dependencies to be compatible to use the latest version of Plugins CLI.\n\nCopy code block\ntwilio flex:plugins:upgrade-plugin --install\n\nThe command updates the scripts and the dependencies in the package.json of your plugin. This command will not override any of the changes you made in the package.json.\n\nTo upgrade your plugin to be compatible with Flex UI 2.x, run the following command:\n\nCopy code block\ntwilio flex:plugins:upgrade-plugin --flexui2\n\nCheck out our Migration Guide to determine the necessary steps for your plugin upgrade.\n\nCheck additional dependencies\n\nAs you develop your plugins, you may include dependencies in addition to the ones we've provided as part of the create-flex-plugin template. The npm-check-updates\n package can check all of the dependencies in your package.json and identify the latest available versions. To use this package:\n\nInstall npm-check-updates globally.\nCopy code block\nnpm install -g npm-check-updates\nRun the ncu command in the root directory of your plugin to display any new dependencies for the project.\nCopy code block\n1\nncu \n\n2\nChecking ~/plugin-sample/package.json\n\n3\n[====================] 21/21 100%\n\n4\n\n\n5\n craco-config-flex-plugin  ^3.0.0  \u2192  ^3.0.1\n\n6\n\n\n7\nRun ncu -u to upgrade package.json\nUpdate any of the identified dependencies in your package.json and run another npm install.\nUpgrade which plugin versions are live\n\nIf you have been using the Flex Plugins CLI to deploy and release your plugins, you can confirm which versions are live by running the following command.\n\nCopy code block\ntwilio flex:plugins:describe:release --active\n\nAn example output is shown below:\n\nExpand image\n\nFor each active plugin, you can identify the latest available version using the describe:plugin command. For example:\n\nCopy code block\ntwilio flex:plugins:describe:plugin --name plugin-agent-notes\nExpand image\n\nYou must generate a new plugin release to update Flex to use the latest version of your plugins. If we wanted to update plugin-agent-notes, and this is the only plugin active for your agents, you'd use the following command:\n\nCopy code block\ntwilio flex:plugins:release --description \"Integrating notes with CRM\" --name \"Agent Notes v5\" --plugin plugin-agent-notes@5.0.0\n\nYou can also change the version of a plugin by using the Plugins Dashboard. Refer to the Plugins Dashboard Usage Guide for more details.",
+    "cli_commands": [
+      "$ npm show @twilio-labs/plugin-flex",
+      "$ twilio plugins",
+      "@twilio-labs/plugin-flex 4.8.0",
+      "twilio flex:plugins:upgrade-plugin --install",
+      "twilio flex:plugins:upgrade-plugin --flexui2",
+      "npm install -g npm-check-updates",
+      "twilio flex:plugins:describe:release --active",
+      "twilio flex:plugins:describe:plugin --name plugin-agent-notes",
+      "twilio flex:plugins:release --description \"Integrating notes with CRM\" --name \"Agent Notes v5\" --plugin plugin-agent-notes@5.0.0"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\n$ npm show @twilio-labs/plugin-flex\n\n2\n\n\n3\n1.0.0",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n$ twilio plugins\n\n2\n\n\n3\n@twilio-labs/plugin-flex 4.8.0",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n\"dependencies\": {\n\n2\n    \"flex-plugin\": \"4.0.0\",\n\n3\n    ...,\n\n4\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:upgrade-plugin --install",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:upgrade-plugin --flexui2",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "npm install -g npm-check-updates",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nncu \n\n2\nChecking ~/plugin-sample/package.json\n\n3\n[====================] 21/21 100%\n\n4\n\n\n5\n craco-config-flex-plugin  ^3.0.0  \u2192  ^3.0.1\n\n6\n\n\n7\nRun ncu -u to upgrade package.json",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:describe:release --active",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:describe:plugin --name plugin-agent-notes",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:release --description \"Integrating notes with CRM\" --name \"Agent Notes v5\" --plugin plugin-agent-notes@5.0.0",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

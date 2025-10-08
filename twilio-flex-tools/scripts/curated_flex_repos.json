@@ -1,0 +1,65 @@
+{
+  "description": "Curated list of high-value Flex plugin repositories for pattern extraction",
+  "repositories": [
+    {
+      "name": "flex-project-template",
+      "url": "https://github.com/twilio-professional-services/flex-project-template",
+      "owner": "twilio-professional-services",
+      "why": "Official PS template with production patterns and common features",
+      "version": "2.x",
+      "value": "HIGH - shows how real projects structure Flex solutions"
+    },
+    {
+      "name": "flex-plugin-library-ai-chatbot-helper",
+      "url": "https://github.com/twilio/flex-plugin-library-ai-chatbot-helper",
+      "owner": "twilio",
+      "why": "Official Twilio plugin showing AI integration patterns",
+      "version": "2.x",
+      "value": "HIGH - official integration pattern"
+    },
+    {
+      "name": "flex-plugin-library-callback-and-voicemail",
+      "url": "https://github.com/twilio/flex-plugin-library-callback-and-voicemail",
+      "owner": "twilio",
+      "why": "Official callback/voicemail handling patterns",
+      "version": "2.x",
+      "value": "HIGH - complex async task management"
+    },
+    {
+      "name": "flex-plugin-builder",
+      "url": "https://github.com/twilio/flex-plugin-builder",
+      "owner": "twilio",
+      "why": "The official CLI tool - shows internal patterns and conventions",
+      "version": "2.x",
+      "value": "MEDIUM - more about tooling than plugins"
+    },
+    {
+      "name": "plugin-emoji-picker-2.x",
+      "url": "https://github.com/twilio-labs/plugin-emoji-picker-2.x",
+      "owner": "twilio-labs",
+      "why": "Shows Paste design system integration (2.x requirement)",
+      "version": "2.x",
+      "value": "MEDIUM - good UI component example"
+    },
+    {
+      "name": "plugin-mui-paste",
+      "url": "https://github.com/dremin/plugin-mui-paste",
+      "owner": "dremin",
+      "why": "Migration pattern: MaterialUI 1.x → Paste 2.x",
+      "version": "2.x migration",
+      "value": "HIGH - shows real migration pain points"
+    }
+  ],
+  "patterns_to_extract": [
+    "Project structure (how folders/files are organized)",
+    "Common helper utilities (what they build on top of Flex APIs)",
+    "Error handling patterns (try/catch, fallbacks, validation)",
+    "Testing approaches (unit tests, integration tests)",
+    "Configuration management (environment variables, feature flags)",
+    "Serverless integration (how they call backend functions)",
+    "State management (Redux patterns, Manager usage)",
+    "Component patterns (HOCs, hooks, composition)",
+    "Action patterns (when to register vs replace, error recovery)",
+    "Build/deployment scripts (package.json scripts, CI/CD)"
+  ]
+}

@@ -1,0 +1,346 @@
+{
+  "action_payloads": {
+    "SetWorkerAttributes": {
+      "total_invocations": 1,
+      "all_properties": [
+        "attributes",
+        "mergeExisting"
+      ],
+      "likely_required": [
+        "attributes",
+        "mergeExisting"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "attributes: {}, mergeExisting: true",
+          "properties": [
+            "attributes",
+            "mergeExisting"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "attributes": 1,
+        "mergeExisting": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "UpdateWorkerToken": {
+      "total_invocations": 1,
+      "all_properties": [
+        "token"
+      ],
+      "likely_required": [
+        "token"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "token: \"newToken\"",
+          "properties": [
+            "token"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "token": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "SetTaskAttributes": {
+      "total_invocations": 1,
+      "all_properties": [
+        "sid",
+        "attributes",
+        "mergeExisting"
+      ],
+      "likely_required": [
+        "sid",
+        "attributes",
+        "mergeExisting"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "sid: \"WRxxxxx\", attributes: {}, mergeExisting: true",
+          "properties": [
+            "sid",
+            "attributes",
+            "mergeExisting"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "sid": 1,
+        "attributes": 1,
+        "mergeExisting": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "IssueCallToWorker": {
+      "total_invocations": 1,
+      "all_properties": [
+        "callerId",
+        "twiMLUrl",
+        "options"
+      ],
+      "likely_required": [
+        "callerId",
+        "twiMLUrl",
+        "options"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "callerId: \"callerId\", twiMLUrl: \"twiMLUrl\", options: {}",
+          "properties": [
+            "callerId",
+            "twiMLUrl",
+            "options"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "callerId": 1,
+        "twiMLUrl": 1,
+        "options": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "DequeueTask": {
+      "total_invocations": 1,
+      "all_properties": [
+        "options"
+      ],
+      "likely_required": [
+        "options"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "options: {}",
+          "properties": [
+            "options"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "options": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "RedirectCallTask": {
+      "total_invocations": 1,
+      "all_properties": [
+        "callSid",
+        "twiMLUrl",
+        "options"
+      ],
+      "likely_required": [
+        "callSid",
+        "twiMLUrl",
+        "options"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "callSid: \"callSid\", twiMLUrl: \"twiMLUrl\", options: {}",
+          "properties": [
+            "callSid",
+            "twiMLUrl",
+            "options"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "callSid": 1,
+        "twiMLUrl": 1,
+        "options": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "UpdateWorkerParticipant": {
+      "total_invocations": 1,
+      "all_properties": [
+        "options"
+      ],
+      "likely_required": [
+        "options"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "options: {}",
+          "properties": [
+            "options"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "options": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "UpdateCustomerParticipant": {
+      "total_invocations": 1,
+      "all_properties": [
+        "options"
+      ],
+      "likely_required": [
+        "options"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "options: {}",
+          "properties": [
+            "options"
+          ],
+          "code_snippet": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nA...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+        }
+      ],
+      "property_frequencies": {
+        "options": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+      ]
+    },
+    "AttachFiles": {
+      "total_invocations": 1,
+      "all_properties": [
+        "files"
+      ],
+      "likely_required": [
+        "files"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "2\n   files: [file1, file2],\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5",
+          "properties": [
+            "files"
+          ],
+          "code_snippet": "1\nFlex.Actions.invokeAction(\"AttachFiles\", {\n\n2\n   files: [file1, file2],\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+          "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+        }
+      ],
+      "property_frequencies": {
+        "files": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+      ]
+    },
+    "DownloadMedia": {
+      "total_invocations": 1,
+      "all_properties": [
+        "media"
+      ],
+      "likely_required": [
+        "media"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "2\n   media: media,\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5",
+          "properties": [
+            "media"
+          ],
+          "code_snippet": "1\nFlex.Actions.invokeAction(\"DownloadMedia\", {\n\n2\n   media: media,\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+          "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+        }
+      ],
+      "property_frequencies": {
+        "media": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+      ]
+    },
+    "StartOutboundEmailTask": {
+      "total_invocations": 1,
+      "all_properties": [
+        "destination"
+      ],
+      "likely_required": [
+        "destination"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "2\n   destination: \"customer@address.com\",\n\n3\n   queueSid: \"WQxxxx\",\n\n4\n   from: \"contactCenter@address.com\",\n\n5\n   fromName: \"My contact center name\",\n\n6\n   taskAttributes: {}\n\n7",
+          "properties": [
+            "destination"
+          ],
+          "code_snippet": "1\nFlex.Actions.invokeAction(\"StartOutboundEmailTask\", {\n\n2\n   destination: \"customer@address.com\",\n\n3\n   queueSid: \"WQxxxx\",\n\n4\n   from: \"contactCenter@address.com\",\n\n5\n   fromName: \"My contact center...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+        }
+      ],
+      "property_frequencies": {
+        "destination": 1
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+      ]
+    },
+    "SetInputText": {
+      "total_invocations": 2,
+      "all_properties": [
+        "body"
+      ],
+      "likely_required": [
+        "body"
+      ],
+      "payload_examples": [
+        {
+          "payload_str": "4\n   body: <div><p>Your message here</p><p style='margin-top:20px; border-top: 2px dashed; color: tomato; padding-top:20px'>${full_name} - ${email}</p><p style='color:#333333;'>Engineer</p></div>,\n\n5\n...",
+          "properties": [
+            "body"
+          ],
+          "code_snippet": "1\nconst { full_name, email } = Twilio.Flex.Manager.getInstance().workerClient.attributes;\n\n2\n\n\n3\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n4\n   body: <div><p>Your message here</p><p style='m...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+        },
+        {
+          "payload_str": "5\n   body: <div><p>Hi ${task.attributes.customerName},  thanks for your email. </p><p>Regards,  Owl Customer Centre</p></div>,\n\n6\n   conversationSid,\n\n7",
+          "properties": [
+            "body"
+          ],
+          "code_snippet": "1\nconst conversationSid = \"CH...\"\n\n2\nconst task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(conversationSid);\n\n3\n\n\n4\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n5\n   body: <div><p>Hi $...",
+          "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+        }
+      ],
+      "property_frequencies": {
+        "body": 2
+      },
+      "source_urls": [
+        "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+      ]
+    }
+  },
+  "validation": {
+    "total_examples_scanned": 150,
+    "examples_with_actions": 6,
+    "action_rate": "4.0%",
+    "unique_actions_found": 12
+  }
+}

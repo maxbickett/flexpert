@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/components",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:36.531396+00:00",
+  "content": {
+    "title": "Flex WebChat 2.0 Components | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/components",
+    "text_content": "On this page\nPage Tools\nFlex WebChat 2.0 Components\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\nFlex WebChat 2.0 UI is a library of programmable or dynamic components that exposes a content property and allows you to add, replace, and remove any component and its children.\n\nWhat can you do with dynamic components?\nAdd, replace, remove any component and its children\nSpecify direction on where to add components new components\nSpecify condition on which to add, replace and remove components\n\nLearn more about dynamic components in Flex UI Components\n\nWebChat components\nEntryPoint\nExpand image\n\nDirection: Horizontal\n\nMainContainer\nExpand image\n\nDirection: Horizontal\n\nMainHeader\nExpand image\n\nDirection: Vertical\n\nPreengagementCanvas\nExpand image\n\nDirection: Vertical\n\nPendingEngagementCanvas\nExpand image\n\nDirection: Vertical\n\nMessagingCanvas\nExpand image\n\nDirection: Vertical\n\nMessageList\nExpand image\n\nDirection: Horizontal\n\nMessageList.WelcomeMessage\nExpand image\n\nDirection: Vertical\n\nMessageListItem\nExpand image\n\nDirection: Vertical\n\nMessageBubble\nExpand image\n\nDirection: Vertical\n\nMessageInput\nExpand image\n\nDirection: Vertical\n\nMessageCanvasTray\nExpand image\n\nDirection: Vertical",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

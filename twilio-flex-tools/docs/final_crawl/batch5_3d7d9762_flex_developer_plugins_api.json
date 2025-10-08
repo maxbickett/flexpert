@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/api",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:54.657819+00:00",
+  "content": {
+    "title": "The Plugins API | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/api",
+    "text_content": "On this page\nPage Tools\nThe Plugins API\n(information)\nInfo\n\nCheck out the Flex Plugin Library. It requires Flex UI 2.x.x and gives you access to ready-to-install plugins without using the CLI.\n\nThe Plugins API defines which plugins the Flex UI will load during initialization. Flex Plugins are bundled JavaScript or TypeScript customizations that change the presentation and behavior of the Flex UI.\n\nThe Plugins API is used by the Flex Plugin CLI and the Custom Plugins Dashboard to simplify common workflows like:\n\nDefining a plugin and each incremental version that you develop\nControl which plugins are enabled for your agents\nTrack your version and release history as you update Flex\nQuickly revert to a previously known working configuration when troubleshooting agent issues\nResources\n\nA Release enables your plugin configuration. Only one release can be active within your account.\n\nA Configuration contains the collection of plugin versions that you want to roll out to your contact center.\n\nA Plugin Version contains all the information about a particular version of a plugin: the link to the plugin package, the version number, and which plugin it relates to. Plugin Versions can be hosted on Twilio Assets or at any other destination you prefer.\n\nA Plugin contains information about a plugin, like its name and description.\n\nThe diagram below shows the relationship between each of the resources mentioned above:\n\nExpand image\nNext Steps\n\nWhile it's useful to know about the Plugins API for advanced use cases, the Flex Plugins CLI makes it a lot easier to interact with it. Head over to the Flex Plugins CLI docs to learn more. If you would rather use a UI to manage your plugins, refer to the Custom Plugins Dashboard usage guide to get started.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

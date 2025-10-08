@@ -1,0 +1,39 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/localize-a-plugin",
+  "batch_id": 7,
+  "crawled_at": "2025-10-07T20:30:35.307385+00:00",
+  "content": {
+    "title": "Localize a plugin (Public Beta) | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/localize-a-plugin",
+    "text_content": "On this page\nPage Tools\nLocalize a plugin (Public Beta)\n(new)\nPublic Beta notice\n\nLocalization is currently available as a Public Beta product and the information contained in this document is subject to change. Some features are not yet implemented and others may be changed before the product is declared as Generally Available. Public Beta products are not covered by a SLA.\n\nOverview\n\nUse this guide to localize your plugins so they display in the same language as the native Flex UI when a user changes their language setting.\n\nTo render plugin text in a different language, follow these steps:\n\nAdd a file with localized static strings for each language that's available.\nIn the same file, add localized dynamic strings.\nIn your plugin file, add code to read Flex's current locale so the plugin can determine which language to use.\nUpdate your plugin components to use the localized strings.\nPlugin directory structure\n\nThis guide assumes your plugin uses a file structure similar to this:\n\nPluginName\nsrc\ncomponents: directory that contains your plugin components.\nlocales: directory that contains your localization files.\nes-MX.js: file that contains the localized strings for Espa\u00f1ol (M\u00e9xico).\nen-US.js: file that contains the localized strings for English (US).\npt-BR.js: file that contains the localized strings for Portugu\u00eas (Brasil).\nindex.ts\nPluginName.ts: file that contains the plugin code, including the code to read Flex's locale setting.\nStep 1: Add your language files and localized static strings\nIn your locales directory, add a file for each supported language.\nIn each file, define your custom strings and their translations.\n\nThe code samples below show an example string for Espa\u00f1ol (M\u00e9xico) and for English (US), respectively.\n\nes-MX.js\nCopy code block\n1\nexport const mexicanSpanishStrings = {\n\n2\n    WelcomeButton: \"Bienvenido\"\n\n3\n};\nen-US.js\nCopy code block\n1\nexport const usEnglishStrings = {\n\n2\n    WelcomeButton: \"Welcome\"\n\n3\n};\nStep 2: Add localized dynamic strings\n\nTo localize dynamic strings, such as agent status, add strings and their translations to the localization file for each language using the following format. You can localize both default and custom strings.\n\nes-MX.js\nCopy code block\n1\n if (manager.localization.localeTag === \"es-MX\") {\n\n2\n                manager.strings = {\n\n3\n                    ...manager.strings,\n\n4\n                    tr_activity_Available: \"Disponible\",\n\n5\n                    tr_activity_Offline: \"Desconectado\",\n\n6\n                    \"tr_activity_On vacation\": \"De vacaciones\"\n\n7\n                };\n\n8\n            }\npt-BR.js\nCopy code block\n1\nif (manager.localization.localeTag === \"pt-BR\") {\n\n2\n                manager.strings = {\n\n3\n                    ...manager.strings,\n\n4\n                    tr_activity_Available: \"Dispon\u00edvel\",\n\n5\n                    tr_activity_Offline: \"Desconectado\",\n\n6\n                    \"tr_activity_On vacation\": \"De f\u00e9rias\"\n\n7\n                };\n\n8\n            }\nStep 3: Read Flex's current locale\n\nYour plugin can read Flex's current locale setting from the manager object at manager.localization.localeTag. The localeTag property defines the Internet Engineering Task Force (IETF) language tag of the current UI locale. For example, en-US.\n\nTo read Flex's current locale:\n\nIn your plugin file, add code to read the locale and apply the defined strings based on the localeTag value.\n\nCopy code block\n1\n// Read Flex's locale setting\n\n2\nconst localeTag = manager.localization.localeTag; // e.g. \"en-US\"\n\n3\n// Conditionally apply the relevant strings\n\n4\nswitch (localeTag) {\n\n5\ncase \"en-US\":\n\n6\nmanager.strings = {...usEnglishStrings, ...manager.strings }\n\n7\nbreak;\n\n8\ncase \"es-MX\":\n\n9\nmanager.strings = {...mexicanSpanishStrings, ...manager.strings }\n\n10\nbreak;\n\n11\n}\n(Optional) If you want to make other locale-related customizations, see the Flex UI API reference\n for more information about these available properties:\navailableLocales: The list of locales the user sees when setting their language. Currently, this list is read-only.\nsetLocalePreference: A method to save the user's locale preference without using the native language selector. You can use this for implementing a custom locale selection widget.\nStep 4: Localize your plugin components\n\nIn the definition for each component, add the custom string label you defined to localize that component. For example, step 1 shows how to define a string for WelcomeButton, and the code sample below shows how to add that string to the WelcomeButton component.\n\nCopy code block\n1\n// Use your localized strings in a component\n\n2\nconst WelcomeButton = ({strings}) => (<Button>{strings.WelcomeButton}</Button>));\n\n3\n...\n\n4\n<WelcomeButton strings={customStrings}/>\n\nThis lets Flex show the locale-specific string based on the current UI locale.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nexport const mexicanSpanishStrings = {\n\n2\n    WelcomeButton: \"Bienvenido\"\n\n3\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nexport const usEnglishStrings = {\n\n2\n    WelcomeButton: \"Welcome\"\n\n3\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n if (manager.localization.localeTag === \"es-MX\") {\n\n2\n                manager.strings = {\n\n3\n                    ...manager.strings,\n\n4\n                    tr_activity_Available: \"Disponible\",\n\n5\n                    tr_activity_Offline: \"Desconectado\",\n\n6\n                    \"tr_activity_On vacation\": \"De vacaciones\"\n\n7\n                };\n\n8\n            }",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nif (manager.localization.localeTag === \"pt-BR\") {\n\n2\n                manager.strings = {\n\n3\n                    ...manager.strings,\n\n4\n                    tr_activity_Available: \"Dispon\u00edvel\",\n\n5\n                    tr_activity_Offline: \"Desconectado\",\n\n6\n                    \"tr_activity_On vacation\": \"De f\u00e9rias\"\n\n7\n                };\n\n8\n            }",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Read Flex's locale setting\n\n2\nconst localeTag = manager.localization.localeTag; // e.g. \"en-US\"\n\n3\n// Conditionally apply the relevant strings\n\n4\nswitch (localeTag) {\n\n5\ncase \"en-US\":\n\n6\nmanager.strings = {...usEnglishStrings, ...manager.strings }\n\n7\nbreak;\n\n8\ncase \"es-MX\":\n\n9\nmanager.strings = {...mexicanSpanishStrings, ...manager.strings }\n\n10\nbreak;\n\n11\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Use your localized strings in a component\n\n2\nconst WelcomeButton = ({strings}) => (<Button>{strings.WelcomeButton}</Button>));\n\n3\n...\n\n4\n<WelcomeButton strings={customStrings}/>",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

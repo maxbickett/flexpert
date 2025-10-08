@@ -1,0 +1,43 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/cookies-and-web-storage",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:46.418414+00:00",
+  "content": {
+    "title": "Cookies and the Web Storage API in Webchat 3.x.x | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat/cookies-and-web-storage",
+    "text_content": "On this page\nPage Tools\nCookies and the Web Storage API in Webchat 3.x.x\n\nFlex Webchat 3.x.x persists some client-side data to create a better user experience. This can cause some issues when your customers have the Web Storage API disabled. This page discusses cookies, local storage, and session storage, and how Flex Webchat uses each one.\n\nOverview\n\nFlex Webchat uses each storage strategy in the following ways:\n\nCookies\n\nFlex Webchat does not use cookies. If your users block the browser from using cookies, this should not cause any issues.\n\nLocal storage\n\nUsed to persist chat after page reload and for error logging. Disabling local storage will cause a degraded experience, especially on page reloads, but Webchat should still function.\n\nSession storage\n\nRequired for the proper functioning of Webchat (e.g., opening and maintaining the WebSocket). Disabling session storage prevents Webchat from functioning.\n\nDefinitions\nStorage Type\tDefinition\tMax Size\tExpiration\nCookies\tStores data that has to be sent back to the server with subsequent XHR requests\t4KB\tExpires at a chosen expiration date, or when the session ends in the case of a session cookie\nLocal Storage\tStores data in the browser across sessions. Opening two tabs with the same URL will share local storage. Data is never sent to the backend\tUp to 5 MB of data in the browser in key/value pairs\tData never expires but can be cleared by the user\nSession Storage\tTemporarily stores data in the browser. Data does not persist across sessions (i.e., two tabs with the same URL will have different session storage.) Data is never sent to the backend.\tStores up to 10 MB of data in the browser in key/value pairs\tData expires when the session ends, e.g., if the browser tab is closed\nInformation stored in local storage\ntwilio-flex-cf\nloglevel:twilio-flex-webchat-ui\nloglevel\nInformation stored in session storage in Webchat\n<id>::map::<id>.channels\n<id>::map::<id>.info\n<id>::document::<id>.channel\n<id>::map::<id>.roster\n<id>::list::<id>.messages",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "Storage Type",
+          "Definition",
+          "Max Size",
+          "Expiration"
+        ],
+        "rows": [
+          [
+            "Cookies",
+            "Stores data that has to be sent back to the server with subsequent XHR requests",
+            "4KB",
+            "Expires at a chosen expiration date, or when the session ends in the case of a session cookie"
+          ],
+          [
+            "Local Storage",
+            "Stores data in the browser across sessions. Opening two tabs with the same URL will share local storage. Data is never sent to the backend",
+            "Up to 5 MB of data in the browser in key/value pairs",
+            "Data never expires but can be cleared by the user"
+          ],
+          [
+            "Session Storage",
+            "Temporarily stores data in the browser. Data does not persist across sessions (i.e., two tabs with the same URL will have different session storage.) Data is never sent to the backend.",
+            "Stores up to 10 MB of data in the browser in key/value pairs",
+            "Data expires when the session ends, e.g., if the browser tab is closed"
+          ]
+        ]
+      }
+    ]
+  }
+}

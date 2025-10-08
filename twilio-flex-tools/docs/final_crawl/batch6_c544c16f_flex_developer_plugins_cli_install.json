@@ -1,0 +1,36 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/install",
+  "batch_id": 6,
+  "crawled_at": "2025-10-07T20:30:50.982551+00:00",
+  "content": {
+    "title": "Install Flex Plugins CLI | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/install",
+    "text_content": "On this page\nPage Tools\nInstall Flex Plugins CLI\nInstall the Flex Plugins CLI\n\nThe Flex Plugins CLI is available via the Twilio CLI. You can install it using the twilio plugins command:\n\nCopy code block\ntwilio plugins:install @twilio-labs/plugin-flex\n\nThis will use the Twilio CLI's plugin functionality to install the Flex Plugins CLI capabilities. Under the hood, the Flex Plugins CLI uses the Flex Plugins API.\n\nPrerequisites\n\nIn order to install the Flex Plugins CLI, you'll need:\n\nAny macOS, Linux, or Windows machine\nNPM version 6.0.0 or later (type npm -v in your terminal to check)\nNode versions 16, 18, or 20 (type node -v in your terminal to check)\nThe Twilio CLI. Refer to the Quick Start Guide for installation instructions.\nChecking your installed version\n\nThe twilio plugins command will return details on all plugins you've installed on the Twilio CLI:\n\nCopy code block\n1\ntwilio plugins\n\n2\n\nThe Flex Plugins CLI is installed if the plugin-flex version is 1.0.0 or greater:\n\nCopy code block\n@twilio-labs/plugin-flex 7.0.0\nUninstalling legacy versions of the Plugins Builder\n\nLegacy plugins were created by directly using the create-flex-plugin node package. The Flex Plugins CLI manages this dependency for you, and you can remove any prior installations you may have created. You can remove a global installation with:\n\nCopy code block\nnpm uninstall -g create-flex-plugin\nWhat's next?\n\nNow that you have installed the Plugins CLI, it is time to it learn how to use it with Flex Plugins. Migrate any existing plugins you have developed, review common development workflows, and get started with a new plugin.",
+    "cli_commands": [
+      "twilio plugins:install @twilio-labs/plugin-flex",
+      "twilio plugins",
+      "@twilio-labs/plugin-flex 7.0.0",
+      "npm uninstall -g create-flex-plugin"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "twilio plugins:install @twilio-labs/plugin-flex",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ntwilio plugins\n\n2",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "@twilio-labs/plugin-flex 7.0.0",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "npm uninstall -g create-flex-plugin",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/unified-profiles-container",
+  "batch_id": 10,
+  "crawled_at": "2025-10-07T20:30:41.907639+00:00",
+  "content": {
+    "title": "Unified Profiles Container (Public Beta) | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/unified-profiles-container",
+    "text_content": "On this page\nPage Tools\nUnified Profiles Container (Public Beta)\n(new)\nPublic Beta\n\nUnified Profiles in Flex is currently available as a Public Beta product and the information contained in this document is subject to change. This means that some features are not yet implemented and others may be changed before the product is declared as Generally Available. Public Beta products are not covered by a Twilio SLA.\n\n(warning)\nNot a HIPAA Eligible Service or PCI Compliant\n\nUnified Profiles in Flex is not a HIPAA Eligible Service or PCI compliant and should not be used in Flex or Segment workflows that are subject to HIPAA or PCI.\n\nOverview\n\nThe Unified Profiles container is the parent container for all Unified Profiles-related UI components:\n\nCustomer header\nCustomer details\nCustomer history\nCustom highlights (provided by Agent Copilot)\n\nThe Unified Profiles container is turned off by default, meaning that none of these UI components are visible to your agents until you turn on the Unified Profiles container.\n\nIn the agent desktop components hierarchy, the Unified Profiles container replaces Panel2 when enabled.\n\nUse Unified Profiles container capabilities\n to programmatically customize your agent experiences in Unified Profiles. With the UnifiedProfilesContainer.ProfileTabs component, you can:\n\nAdd a new custom tab\nUpdate the tab display name\nRemove an existing tab by child key\nUpdate the order (index) of the built-in tabs\nExpand image\n\nAll normal programmability actions (add, remove, replace) are also available for this component and its content.\n\nVisit Flex's programmability docs to learn more about how to update Flex UI programmatically.\n\nRecommended use\n\nIf you want to use the right side of your agent desktop for tabbed content (for example, multiple plugins and custom tabs), we recommend adopting the Unified Profiles container. This provides an out-of-the-box way to integrate Twilio-provided UI components with your custom plugins in a tabbed panel. It also enables admin-level control over the built-in UI components from the Flex Console, without needing code changes to your contact center to turn components on or off.\n\nUsing the Unified Profiles container as a tabbed container\n\nAdditionally, you can use the Unified Profiles container solely as a tabbed container for the Flex UI, without adopting any of the Twilio-provided Unified Profiles UI components. We recommend this over creating your own tabbed container, as this approach makes it easier to enable Twilio-provided UI components (like Customer details or Customer history) going forward. To do so, follow the documentation below to add your custom tabs.\n\nMaintaining compatibility for your Flex UI plugins\n\nIf you're not going to use the Unified Profiles container now, there are steps you can take to make Unified Profiles or other tabbed content on the right side of the Flex agent desktop easier to adopt in the future.\n\nIf you're customizing the Panel2 area of the agent desktop, we recommend putting your customizations into the CRMContainer component (and not replacing the whole Panel2). This provides future flexibility to switch to the Unified Profiles container and allows your customizations to automatically move to the In-house tab.\n\nTurn on the Unified Profiles container\n\nAfter you've connected your Unified Profiles space, you need to turn on the Unified Profiles container, which is off by default. This allows your agents to use the Unified Profiles-related agent UI.\n\nTo turn on the Unified Profiles container:\n\nIn Console, navigate to Flex > Contact center settings > Unified Profiles.\nToggle on Enable Unified Profiles container in Flex UI to turn on the Unified Profiles container.\n\nIn the agent desktop components hierarchy, enabling the Unified Profiles container will apply these changes:\n\nThe Unified Profiles container replaces Panel2\n.\nThe CRMContainer\n, a child component of the Panel2, moves from Panel2 into the In-house tab of the Unified Profiles container.\nCopy code block\n1\n\n\n2\n// With Unified Profiles container off. Any customizations outside of this CRMContainer will be replaced if you turn on the Unified Profiles container.   \n\n3\n\n\n4\n<Panel2>\n\n5\n\t<crmContainer></crmContainer>\n\n6\n</Panel2>\n\n7\n\n\n8\n// With the Unified Profiles container on. Custom content inside the CRMContainer is moved into a tab within the Unified Profiles container. \n\n9\n\n\n10\n<Panel2>\n\n11\n\t<UnifiedProfilesContainer>\n\n12\n\t\t<ProfileTabs>\n\n13\n\t\t\t<InHouseTab>\n\n14\n\t\t\t\t<crmContainer></crmContainer>\n\n15\n\t\t\t</InHouseTab>\n\n16\n\t\t</ProfileTabs>\n\n17\n\t</UnifiedProfilesContainer>\n\n18\n</Panel2>\n\n19\n\nIf you had previously placed Flex UI customizations onto the Panel2 level (and not in the CRMContainer level), your customizations are hidden when the Unified Profiles container is on.\n\nIf you have agent UI customizations for your Flex instance, test the effect of turning on the Unified Profiles container in your staging environment or during periods of reduced activity first.\nIf enabling the Unified Profiles container unexpectedly hides any of your customizations, update your plugin code to attach the customizations to either the CRMContainer, which becomes the In-house tab, or add them as a custom tab on the Unified Profiles container.\n(information)\nInfo\n\nIf turning on the Unified Profiles container has any adverse effects on your Flex agent UI, you can use the same toggle as above to turn it off again. Note that Unified Profiles UI components such as Customer details and Customer history are not displayed when the Unified Profiles container is off.\n\nUnified Profiles container programmability\n\nThe Unified Profiles container has the following child keys:\n\nName\tKey\tNotes\nAlert Banner\talert\t\nCan only be removed/styled\n\nLoading View\tloading-view\t\nCan only be removed/styled\n\nProfile Header and Link Menu\tprofile-header-and-link-menu\t\nCan only be removed/styled\n\n\nRemoving this key affects the replace/unlink profiles experience\n\nProfile Highlights\tprofile-highlights\t\nCan only be removed/styled\n\nProfile Connector Tabs\tprofile-connector-tabs\t\nCan only be removed/styled\n\nProfile Not Found View\tprofile-not-found-view\t\nCan only be removed/styled\n\n\nRemoving this key affects the profile search experience\n\nProfile Unlink Modal\tprofile-unlink-modal\t\nCan only be removed/styled\n\n\nRemoving this key affects the replace/unlink profile experience\n\nSearch View\tsearch-view\t\nCan only be removed/styled\n\n\nRemoving this key affects the profile search experience\nProfile Highlights\n\nUse ProfileHighlights to update the highlights component in your container.\n\nProfile Highlights has the following child keys:\n\nName\tKey\tNotes\nHighlights Icon\thighlights-icon\t\nCan only be removed/styled\n\nHighlights Title\thighlights-title\t\nCan be renamed with the title default prop in the profileHighlightsTitle component\n\n\nCan only be removed/styled\n\nHighlights Chevron\thighlights-chevron\t\nCan only be removed/styled\n\nHighlights Summary\thighlights-summary\t\nCan only be removed/styled\nProfile Header\n\nYou can use ProfileHeader to update the profile header. For example:\n\nFlex.UnifiedProfilesContainer.ProfileHeader.Content.remove(\"header-avatar\");\n\nProfile Header has the following child keys:\n\nName\tKey\tNotes\nHeader Avatar\theader-avatar\t\nCan only be removed/styled\n\nHeader Text\theader-text\t\nCan only be removed/styled\n\n\nContains the profile header text (profile name and subtitle)\n\n\nAdditional configuration handled in the Twilio Console\nProfile Header Text\n\nYou can use ProfileHeaderText to update the profile header name and subtitle. For example:\n\nFlex.UnifiedProfilesContainer.ProfileHeaderText.Content.remove(\"header-name\");\nFlex.UnifiedProfilesContainer.ProfileHeaderText.Content.remove(\"header-subtitle\");\n\nProfile Header Text has the following child keys:\n\nName\tKey\tNotes\nHeader Name\theader-name\t\nCan only be removed/styled\n\nHeader Subtitle\theader-subtitle\t\nCan only be removed/styled\nAdditional configuration handled in the Twilio Console\nCommon use cases\nReorder an In-house tab first and rename it\n\nTo reorder an In-house tab first in the container and rename it, add the following code to your plugin:\n\nCopy code block\n1\nFlex.UnifiedProfilesContainer.ProfileTabs.defaultProps.crmViewTabProps = {\n\n2\n                label: \"Custom CRM\",\n\n3\n                index: 1\n\n4\n            };\n\n5\n\n\n6\n            Flex.UnifiedProfilesContainer.ProfileTabs.defaultProps.timelineViewTabProps = {\n\n7\n                index: 2\n\n8\n            };\n\n9\n\n\n10\n            Flex.UnifiedProfilesContainer.ProfileTabs.defaultProps.profileViewTabProps = {\n\n11\n                index: 3\n\n12\n            };\n\nNote that you must set all container tabs together to reorder them.\n\nAdd a custom tab\n\nDepending on your use case, you might want to add a custom tab alongside the tabs provided out of the box, giving you more control over your experience.\n\nTo create a custom tab, first create a new Tab component in your plugin code:\n\nCopy code block\n1\nimport React from \"react\";\n\n2\n//IMPORTANT: The top most element in your component must be the <Tab> from \"@twilio/flex-ui\", or the custom tab will not work.\n\n3\nimport { Tab } from \"@twilio/flex-ui\";\n\n4\n\n\n5\nexport const CustomUnifiedProfilesTab = (props: any) => (\n\n6\n\t<Tab key={props.label} uniqueName={props.uniqueName} data-testid=\"my-new-tab\" label={props.label}>\n\n7\n    \t  <div style={{ backgroundColor: props.color, height: 80, width: 80 }} />\n\n8\n        //Add any additional content you want. The div above this creates an 80X80 pixel box, colored by the prop, so that you can more easily visualize the content area of your new tab.\n\n9\n\t</Tab>\n\n10\n);\n\n11\n\nNext, import the component and add it to the ProfileTabs:\n\nCopy code block\n1\nimport { CustomUnifiedProfilesTab } from \"./MyCustomTabComponent\";\n\n2\n\n\n3\n//Other plugin boilerplate \n\n4\n\n\n5\n\n\n6\nFlex.UnifiedProfilesContainer.ProfileTabs.Content.add(\n\n7\n            \t<CustomUnifiedProfilesTab\n\n8\n                \tlabel=\"New Tab\"\n\n9\n                \tuniqueName=\"Unique Name 1\"\n\n10\n                \tkey=\"New Tab\"\n\n11\n                \tcolor=\"red\"\n\n12\n                \tindex={0}\n\n13\n            \t/>\n\n14\n        \t);\n\nThis displays a new custom tab in the far-left (first) position of all of the tabs, with a red 80x80 pixel square. You can add whatever custom properties you want to pass in data, customize the look and feel, and more.",
+    "cli_commands": [
+      "import { Tab } from \"@twilio/flex-ui\";"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\n\n\n2\n// With Unified Profiles container off. Any customizations outside of this CRMContainer will be replaced if you turn on the Unified Profiles container.   \n\n3\n\n\n4\n<Panel2>\n\n5\n\t<crmContainer></crmContainer>\n\n6\n</Panel2>\n\n7\n\n\n8\n// With the Unified Profiles container on. Custom content inside the CRMContainer is moved into a tab within the Unified Profiles container. \n\n9\n\n\n10\n<Panel2>\n\n11\n\t<UnifiedProfilesContainer>\n\n12\n\t\t<ProfileTabs>\n\n13\n\t\t\t<InHouseTab>\n\n14\n\t\t\t\t<crmContainer></crmContainer>\n\n15\n\t\t\t</InHouseTab>\n\n16\n\t\t</ProfileTabs>\n\n17\n\t</UnifiedProfilesContainer>\n\n18\n</Panel2>\n\n19",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.UnifiedProfilesContainer.ProfileTabs.defaultProps.crmViewTabProps = {\n\n2\n                label: \"Custom CRM\",\n\n3\n                index: 1\n\n4\n            };\n\n5\n\n\n6\n            Flex.UnifiedProfilesContainer.ProfileTabs.defaultProps.timelineViewTabProps = {\n\n7\n                index: 2\n\n8\n            };\n\n9\n\n\n10\n            Flex.UnifiedProfilesContainer.ProfileTabs.defaultProps.profileViewTabProps = {\n\n11\n                index: 3\n\n12\n            };",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport React from \"react\";\n\n2\n//IMPORTANT: The top most element in your component must be the <Tab> from \"@twilio/flex-ui\", or the custom tab will not work.\n\n3\nimport { Tab } from \"@twilio/flex-ui\";\n\n4\n\n\n5\nexport const CustomUnifiedProfilesTab = (props: any) => (\n\n6\n\t<Tab key={props.label} uniqueName={props.uniqueName} data-testid=\"my-new-tab\" label={props.label}>\n\n7\n    \t  <div style={{ backgroundColor: props.color, height: 80, width: 80 }} />\n\n8\n        //Add any additional content you want. The div above this creates an 80X80 pixel box, colored by the prop, so that you can more easily visualize the content area of your new tab.\n\n9\n\t</Tab>\n\n10\n);\n\n11",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { CustomUnifiedProfilesTab } from \"./MyCustomTabComponent\";\n\n2\n\n\n3\n//Other plugin boilerplate \n\n4\n\n\n5\n\n\n6\nFlex.UnifiedProfilesContainer.ProfileTabs.Content.add(\n\n7\n            \t<CustomUnifiedProfilesTab\n\n8\n                \tlabel=\"New Tab\"\n\n9\n                \tuniqueName=\"Unique Name 1\"\n\n10\n                \tkey=\"New Tab\"\n\n11\n                \tcolor=\"red\"\n\n12\n                \tindex={0}\n\n13\n            \t/>\n\n14\n        \t);",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Name",
+          "Key",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "Alert Banner",
+            "alert",
+            "Can only be removed/styled"
+          ],
+          [
+            "Loading View",
+            "loading-view",
+            "Can only be removed/styled"
+          ],
+          [
+            "Profile Header and Link Menu",
+            "profile-header-and-link-menu",
+            "Can only be removed/styled\n\n\nRemoving this key affects the replace/unlink profiles experience"
+          ],
+          [
+            "Profile Highlights",
+            "profile-highlights",
+            "Can only be removed/styled"
+          ],
+          [
+            "Profile Connector Tabs",
+            "profile-connector-tabs",
+            "Can only be removed/styled"
+          ],
+          [
+            "Profile Not Found View",
+            "profile-not-found-view",
+            "Can only be removed/styled\n\n\nRemoving this key affects the profile search experience"
+          ],
+          [
+            "Profile Unlink Modal",
+            "profile-unlink-modal",
+            "Can only be removed/styled\n\n\nRemoving this key affects the replace/unlink profile experience"
+          ],
+          [
+            "Search View",
+            "search-view",
+            "Can only be removed/styled\n\n\nRemoving this key affects the profile search experience"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Key",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "Highlights Icon",
+            "highlights-icon",
+            "Can only be removed/styled"
+          ],
+          [
+            "Highlights Title",
+            "highlights-title",
+            "Can be renamed with the title default prop in the profileHighlightsTitle component\n\n\nCan only be removed/styled"
+          ],
+          [
+            "Highlights Chevron",
+            "highlights-chevron",
+            "Can only be removed/styled"
+          ],
+          [
+            "Highlights Summary",
+            "highlights-summary",
+            "Can only be removed/styled"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Key",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "Header Avatar",
+            "header-avatar",
+            "Can only be removed/styled"
+          ],
+          [
+            "Header Text",
+            "header-text",
+            "Can only be removed/styled\n\n\nContains the profile header text (profile name and subtitle)\n\n\nAdditional configuration handled in the Twilio Console"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Key",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "Header Name",
+            "header-name",
+            "Can only be removed/styled"
+          ],
+          [
+            "Header Subtitle",
+            "header-subtitle",
+            "Can only be removed/styled\nAdditional configuration handled in the Twilio Console"
+          ]
+        ]
+      }
+    ]
+  }
+}

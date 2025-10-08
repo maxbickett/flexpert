@@ -1,0 +1,61 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/limits",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:32.482146+00:00",
+  "content": {
+    "title": "File Attachments and API Limits | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/limits",
+    "text_content": "On this page\nPage Tools\nFile Attachments and API Limits\n(information)\nInfo\n\nFlex Conversations requires Flex UI 2.0.x. If you are on Flex UI 1.x.x, refer to the Messaging in Flex pages.\n\nFile Attachments and API Limits\n\nFor enabling file attachments on your Flex account, see \"How do I enable and configure file attachments?\" in the Conversations FAQ and Troubleshooting page.\n\nAddress Type\tNumber of attachments\tMax File Size (bytes)\tMax Total File Size (bytes)\tAccepted Extensions\nweb\t1\t16777216\t67108864\t\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\", \"txt\", \"gif\"\nsms\t1\t2097152\t5242880\t\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\"\nwhatsapp\t1\t16777216\t67108864\t\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\", \"oga\"\nemail\t10\t157286400\t157286400\t\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\", \"txt\", \"gif\"\nmessenger (public beta)\t1\t26214400\t26214400\t\"jpg\", \"jpeg\", \"png\", \"mp3\", \"mp4\", \"pdf\" Rich text, voice clips, and reactions are not supported.\n(information)\nInfo\n\nYou cannot send both text and an image in the same message (applies to all Flex Conversations channels).\n\nConversations API Limits\n\nSee Conversations Limits for a detailed list on length, media, and other limits.\n\nInteractions Endpoint Limits\n\nGET actions are not accessible for the API endpoints.\n\nDue to various limitations and concerns, Flex Conversations will constrain certain actions.\n\nRate limits on API endpoints\n\nThe Interactions API has a limit of 20 requests per second per endpoint per account. The API returns an HTTP 429 status when rate limits are exceeded and should be handled accordingly on the customer side.\n\nWebchats Endpoint Limits\n\nThe Flex Webchat orchestrator currently has a rate limit of 5 requests per second beyond which the customer can get throttled. When exceeded, the API returns an HTTP 429.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "Address Type",
+          "Number of attachments",
+          "Max File Size (bytes)",
+          "Max Total File Size (bytes)",
+          "Accepted Extensions"
+        ],
+        "rows": [
+          [
+            "web",
+            "1",
+            "16777216",
+            "67108864",
+            "\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\", \"txt\", \"gif\""
+          ],
+          [
+            "sms",
+            "1",
+            "2097152",
+            "5242880",
+            "\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\""
+          ],
+          [
+            "whatsapp",
+            "1",
+            "16777216",
+            "67108864",
+            "\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\", \"oga\""
+          ],
+          [
+            "email",
+            "10",
+            "157286400",
+            "157286400",
+            "\"jpg\", \"jpeg\", \"png\", \"amr\", \"mp3\", \"mp4\", \"pdf\", \"heic\", \"txt\", \"gif\""
+          ],
+          [
+            "messenger (public beta)",
+            "1",
+            "26214400",
+            "26214400",
+            "\"jpg\", \"jpeg\", \"png\", \"mp3\", \"mp4\", \"pdf\" Rich text, voice clips, and reactions are not supported."
+          ]
+        ]
+      }
+    ]
+  }
+}

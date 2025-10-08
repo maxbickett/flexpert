@@ -1,0 +1,36 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/enable-attachments",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:44.593914+00:00",
+  "content": {
+    "title": "Enable Chat Attachments (Webchat 2.0) | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/enable-attachments",
+    "text_content": "On this page\nPage Tools\nEnable Chat Attachments (Webchat 2.0)\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\n(information)\nInfo\n\nThis Twilio product is currently available as a Public Beta release. Some features are not yet implemented and others may be changed before the product is declared as Generally Available. Beta products are not covered by a Twilio SLA. Learn more about beta product support\n.\n\nAttachment support in the Flex UI allows agents and customers to share files such as documents and images over a chat channel. To enable the web chat attachment pilot you'll need to be on Flex UI 1.20 and Flex Web Chat 2.5.\n\nYou have to enable chat attachments in both the Flex UI and Web Chat UI.\n\nExpand image\nEnable attachments in Flex UI\n\nTo turn on chat attachments in Flex UI:\n\nFrom Twilio Console, navigate to the Opt-in features\n page.\nOn the Beta tab, turn on Image and file sharing for WebChat.\nEnable attachments in Webchat UI\n\nTo enable sending attachments between agents and customers, add the following code to Flex Web Chat UI webchat-appConfig.js configuration files.\n\nCopy code block\n1\nfileAttachment: {\n\n2\n  enabled: true\n\n3\n}\nEnable read-only mode for Flex UI or WebChat UI\n\nIf you want to limit users (customers or agents) from sending attachments but still want them to be able to see and download attachments sent to them, configure attachments to be in readOnly mode.\n\nCopy code block\n1\nfileAttachment: {\n\n2\n  readOnly: true\n\n3\n}\nDefault configuration\n\nThe default configuration allows the following files types. Individual files can be up to 10Mb in size.\n\nImages\tDocuments\n.jpeg, .jpg, .png, .gif\t.txt, .pdf\nNext steps\nCustomize your Webchat attachments\nLearn how to send and receive attachments\nLearn more about Programmable Chat Media Support",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nfileAttachment: {\n\n2\n  enabled: true\n\n3\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nfileAttachment: {\n\n2\n  readOnly: true\n\n3\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Images",
+          "Documents"
+        ],
+        "rows": [
+          [
+            ".jpeg, .jpg, .png, .gif",
+            ".txt, .pdf"
+          ]
+        ]
+      }
+    ]
+  }
+}

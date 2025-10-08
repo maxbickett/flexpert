@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:44.421621+00:00",
+  "content": {
+    "title": "Webchat 3.x.x overview | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/conversations/webchat",
+    "text_content": "On this page\nPage Tools\nWebchat 3.x.x overview\nOverview\n\nFlex Webchat is a chat widget that you can embed on your website. The widget helps your customers chat with an agent without leaving your webpage. Flex Webchat is natively integrated with Flex UI, built on Flex Conversations, and hosted by Twilio.\n\nTo set up Webchat 3.x.x, you create a deployment key, connect it to a messaging address, and then copy the Flex-generated embed code to your website. Webchat 3.x.x also includes enhanced security.\n\nWebchat 3.x.x is available on Flex UI 2.0.x and later.\n\nWhen an incoming message is sent to the chat channel, it triggers the Flex integration that's set for the chat address on the Flex > Messaging\n page. By default, this is the Chat Flow in Studio, which you can customize in Twilio Console\n.\n\nDemo webchat\n\nYou can try out webchat without building or deploying anything. In Console, navigate to Flex > Channel management > Webchat. If you already have a deployment key, click Launch Demo to start a webchat. If you don't have a deployment key yet, create one, then click Launch Demo. Your chat appears in Flex UI as an incoming chat task. You can send and view messages as the agent and the customer to see how it works.\n\nWhat about other Flex webchat versions?\n\nIf you are starting out with webchat, begin with Webchat 3.x.x. It's an out-of-the-box solution that meets standard webchat needs for most customers.\n\nPreviously, Flex released two other webchat versions for Flex:\n\nThe Webchat React app is an open-source project that provides an example of how to build, integrate, and use webchat. If Webchat 3.x.x's out-of-the-box functionality doesn't fully meet your requirements and you need extensive customization, consider building with the Webchat React app.\nWebChat 2.0 is no longer supported. Don't use it for new webchat implementations. If you're already using Webchat 2.0, migrate to the latest version of Webchat 3.x.x.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

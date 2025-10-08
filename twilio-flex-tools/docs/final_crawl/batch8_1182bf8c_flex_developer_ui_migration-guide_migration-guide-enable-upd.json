@@ -1,0 +1,32 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-enable-update",
+  "batch_id": 8,
+  "crawled_at": "2025-10-07T20:30:50.346807+00:00",
+  "content": {
+    "title": "Enable Flex UI 2.x.x on your account | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-enable-update",
+    "text_content": "On this page\nPage Tools\nEnable Flex UI 2.x.x on your account\n\nThis page explains how to enable Flex UI 2.x.x on your Flex application. For more information about the entire migration process, see Migrate from Flex UI 1.x.x to 2.x.x.\n\nEnable Flex UI 2.x.x on your account\nUsing the Flex UI versions page\n\nYou can install Flex UI 2.x.x on the Flex UI versions\n page in Twilio Console.\n\nIf you're running a 1.x.x version, select 2.x.x and click Confirm. If you're on a public beta version of 2.x.x, install 2.x.x by clicking on the 2.x.x version link and then Install.\n\nUsing the Configuration service API\n\nTo change the ui_version and reset your ui_dependencies, you can make the following curl request. Change the version number in this curl request (2.x.x) to the current version number that you're migrating to. You can retrieve your account SID and auth token from the Twilio Console\n.\n\nCopy code block\n1\ncurl --request POST \\\n\n2\n --url https://flex-api.twilio.com/v1/Configuration \\\n\n3\n -u ACXXXXXXXXXXXXXXXXXXXXX:auth_token \\\n\n4\n --header 'accountsid: ACXXXXXXXXXXXXXXXXXXXXX' \\\n\n5\n --header 'content-type: application/json' \\\n\n6\n --header 'i-twilio-auth-account: ACXXXXXXXXXXXXXXXXXXXXX' \\\n\n7\n --data '{\n\n8\n   \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXX\",\n\n9\n   \"ui_version\": \"~2.x.x\",\n\n10\n   \"ui_dependencies\": {}\n\n11\n}'\nSelf-hosted Flex\n\nYou can install Flex UI 2.x.x via yarn or npm:\n\nyarn\nnpm\nCopy code block\nyarn add @twilio/flex-ui@^2\n\nRefer to Upgraded dependencies if you run into compatibility issues which you will need to resolve.\n\nUsing the flex-ui-sample package\n\nTo use the flex-ui-sample package for bootstrapping your project, make sure to pull the latest from the main branch of the flex-ui sample repo\n which requires the @twilio/flex-ui@^2 package. We've also bumped React to version 17 to satisfy the Flex 2.x.x requirements. This means that on any existing project, you have to resolve compatibility issues in your code should they occur.",
+    "cli_commands": [
+      "--url https://flex-api.twilio.com/v1/Configuration \\",
+      "--header 'i-twilio-auth-account: ACXXXXXXXXXXXXXXXXXXXXX' \\",
+      "yarn add @twilio/flex-ui@^2",
+      "1npm install @twilio/flex-ui@^2"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\ncurl --request POST \\\n\n2\n --url https://flex-api.twilio.com/v1/Configuration \\\n\n3\n -u ACXXXXXXXXXXXXXXXXXXXXX:auth_token \\\n\n4\n --header 'accountsid: ACXXXXXXXXXXXXXXXXXXXXX' \\\n\n5\n --header 'content-type: application/json' \\\n\n6\n --header 'i-twilio-auth-account: ACXXXXXXXXXXXXXXXXXXXXX' \\\n\n7\n --data '{\n\n8\n   \"account_sid\": \"ACXXXXXXXXXXXXXXXXXXXXX\",\n\n9\n   \"ui_version\": \"~2.x.x\",\n\n10\n   \"ui_dependencies\": {}\n\n11\n}'",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "yarn add @twilio/flex-ui@^2",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1npm install @twilio/flex-ui@^2\n2",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

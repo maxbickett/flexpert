@@ -1,0 +1,973 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api",
+  "batch_id": 10,
+  "crawled_at": "2025-10-07T20:30:44.005136+00:00",
+  "content": {
+    "title": "Flex Teams API (public beta) | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api",
+    "text_content": "On this page\nPage Tools\nFlex Teams API (public beta)\n\nThe Flex Teams API resource contains code showing how to create, fetch (get), read (list), update, and delete teams in your Flex instance.\n\n(new)\nFlex Teams API in public beta\n\nTeams, including the Flex Teams API, is currently available as a public beta product and the information contained in this document is subject to change. This means that some features are not yet implemented and others may be changed before the product is declared as generally available. Public beta products are not covered by an SLA.\n\n(warning)\nDo not use Personally Identifiable Information (PII) for the `FriendlyName` or `Description` fields\n\nAvoid using a person's name, home address, email, phone number, or other PII in the FriendlyName or Description fields. Instead, use some form of pseudonymized identifier.\n\nLearn more about how we process your data in our privacy policy\n.\n\nTeams resource\n\nFlex Teams are configurable grouping structures applied to agents and supervisors to facilitate fine-grained access control policies based on group memberships.\n\nThis page details the Flex Team API resource. Check out the additional documentation to learn more about working with Flex Teams.\n\nList Teams\n\nTo review your account's current Flex Team configuration, fetch the Team resource instance by making a GET request to the /Teams endpoint.\n\n(information)\nInfo\n\nBy default, all Flex users in a Flex instance are automatically added to the default team. The default team is a system-generated team that cannot be deleted.\n\nRequest body parameters\n\nEncoding type:application/x-www-form-urlencoded\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nQuery parameters\nName\tType\tDescription\tPII?\nPageSize\tInteger or Null <=1000\tThe page size. The default value is 50.\tNot PII\nPageToken\tInteger or Null\tPage token for pagination.\tNot PII\nOwner\tString or Null\tTeam owner in FlexUserSid format. If not provided, will return all teams in the instance, otherwise will return teams owned by the owner.\tNot PII\nIncludeTransitive\tBoolean or Null\tWhen listing teams for an owner, indicating True will include teams transitively owned by the owner. For example, if turned on, it will return all level 2 and level 1 teams under the level 3 team owner. The default is false.\tNot PII\nTeam response schema\nSchema name\tType\tDescription\tPII?\nteam_sid\tString\tThe unique ID that identifies this resource.\tNot PII\nfriendly_name\tString\tThe human-readable name of this team.\tPII MTL: 30 days\nmember_count\tInteger\tRepresents the total number of members.\tNot PII\naccount_sid\tString\tThe unique ID of the account responsible for the team.\tNot PII\ninstance_sid\tString\tThe unique ID of the Flex related resources responsible for the team.\tNot PII\ndate_created\tString\tThe date that this resource was created.\tNot PII\ndate_updated\tString\tThe date that this resource was updated.\tNot PII\nversion\tInteger\tRepresents the current iteration of the team's configuration, incrementing with each update to reflect changes.\tNot PII\nlevel\tInteger or Null\tAllows teams to be categorized into different hierarchical structures, enabling better organization and role-based access control.\tNot PII\nparent_team_sid\tString or Null\tThe unique ID that uniquely identifies the parent team of this resource.\tNot PII\ndescription\tString or Null\tDescription of the team providing a brief summary of the team's purpose and focus.\tPII MTL: 30 days\nExample request and response\n\nGET request\n\nCopy code block\n1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"teams\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"friendly_name\": \"default\",\n\n10\n      \"member_count\": 10,\n\n11\n      \"description\": \"default team\",\n\n12\n      \"level\": 1,\n\n13\n      \"parent_team_sid\": null,\n\n14\n      \"date_created\": \"2024-08-01T22:10:40Z\",\n\n15\n      \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n16\n      \"version\": 1\n\n17\n    }\n\n18\n  ],\n\n19\n  \"meta\": {\n\n20\n    \"key\": \"teams\",\n\n21\n    \"page\": 0,\n\n22\n    \"page_size\": 50,\n\n23\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",\n\n24\n    \"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",\n\n25\n    \"next_page_url\": null,\n\n26\n    \"previous_page_url\": null\n\n27\n  }\n\n28\n}\nFetch a Team\n\nRetrieve information about a specific team by making a GET request to the /Teams endpoint.\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nSchema\nSchema name\tType\tDescription\tPII?\nteam_sid\tString\tThe unique ID that uniquely identifies this resource.\tNot PII\naccount_sid\tString\tThe unique ID of the account responsible for the team.\tNot PII\ninstance_sid\tString\tThe unique ID of the Flex related resources responsible for the team.\tNot PII\nfriendly_name\tString\tThe human-readable name of this team.\tPII MTL: 30 days\ndescription\tString or Null\tDescription of the team providing a brief summary of the team's purpose and focus.\tPII MTL: 30 days\nlevel\tInteger or Null\tTeam level.\tNot PII\nparent_team_sid\tString or Null\tThe unique ID that uniquely identifies the parent team of this resource.\tNot PII\nmember_count\tInteger\tRepresents the total number of members.\tNot PII\ndate_created\tString\tThe date that this resource was created.\tNot PII\ndate_updated\tString\tThe date that this resource was updated.\tNot PII\nversion\tInteger\tRepresents the current iteration of the team's configuration, incrementing with each update to reflect changes.\tNot PII\nExample GET request and response\n\nGET request\n\nCopy code block\n1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"friendly_name\": \"default\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"default team\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}\nFetch all Team Members for a Team\n\nTo review all team Members assigned to a team, fetch the Team resource instance by making a GET request to the /Members endpoint.\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nQuery parameters\nName\tType\tDescription\tPII?\nPageSize\tInteger or Null <=1000\tPage size. The default value is 50.\tNot PII\nPageToken\tInteger or Null\tPage token for pagination.\tNot PII\nMember array response schema\nSchema name\tType\tDescription\tPII?\nflex_user_sid\tString\tThe unique ID of the Flex User.\tNot PII\naccount_sid\tString\tThe unique ID of the account responsible for the team.\tNot PII\ninstance_sid\tString\tThe unique ID of the Flex related resources responsible for the team.\tNot PII\nteam_sid\tString or Null\tA 34 character string that uniquely identifies this resource.\tNot PII\nfriendly_name\tString or Null\tThe human-readable name of the Flex user.\tPII MTL: 30 days\nemail\tString or Null\tUniquely identifies a team member user through their email address.\tPII MTL: 30 days\nworker_sid\tString or Null\tThe SID of the Worker resource.\tNot PII\nExample request and response\n\nGET request\n\nCopy code block\n1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"members\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n10\n      \"friendly_name\": \"userName\",\n\n11\n      \"email\": \"test@twilio.com\",\n\n12\n      \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n13\n    }\n\n14\n  ],\n\n15\n  \"meta\": {\n\n16\n    \"list_key\": \"members\",\n\n17\n    \"page\": 0,\n\n18\n    \"page_size\": 50,\n\n19\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",\n\n20\n    \"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",\n\n21\n    \"next_page_url\": null,\n\n22\n    \"previous_page_url\": null\n\n23\n  }\n\n24\n}\nFetch all Team Owners for a Team\n\nTo review all team owners assigned to a team, fetch the Team resource instance by making a GET request to the /Owners endpoint.\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nQuery parameters\nName\tType\tDescription\tPII?\nIncludeTransitive\tBoolean or Null\tIndicating True will include teams \"transitively\" owned by the owner. For example, if turned on, it will return all level 2 and level 1 teams under the level 3 team owner.\tNot PII\nOwner response array schema\nSchema name\tType\tDescription\tPII\nflex_user_sid\tString\tThe unique ID of the Flex User.\tNot PII\naccount_sid\tString\tThe unique ID of the account responsible for the team.\tNot PII\ninstance_sid\tString\tThe unique ID of the Flex related resources responsible for the team.\tNot PII\nteam_sid\tString or Null\tA 34 character string that uniquely identifies this resource.\tNot PII\nfriendly_name\tString or Null\tThe human-readable name of the Flex user.\tPII MTL: 30 days\nemail\tString or Null\tUniquely identifies a team member user through their email address.\tPII MTL: 30 days\nworker_sid\tString or Null\tThe SID of the Worker resource.\tNot PII\nExample request and response\n\nGET request\n\nCopy code block\n1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"owners\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n10\n      \"friendly_name\": \"userName\",\n\n11\n      \"email\": \"test@twilio.com\",\n\n12\n      \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n13\n    }\n\n14\n  ],\n\n15\n  \"meta\": {\n\n16\n    \"direct_token\": true,\n\n17\n    \"key\": \"owners\",\n\n18\n    \"next_token\": null,\n\n19\n    \"page_token\": null,\n\n20\n    \"previous_token\": null\n\n21\n  }\n\n22\n}\nCreate a Team\n\nTo create a team make a POST request to the /Teams endpoint.\n\n(information)\nInfo\n\nThe Team API uses the level field to organize teams into a three-tiered hierarchy for better structure and access control. Level 3 represents the top-level hierarchy of groups containing only owners and serving as the parent for Level 2 groups of teams. Level 3 cannot have a parent team. Level 2, forms the middle tier, containing only owners and acting as the parent for Level 1 teams. Level 1, the \"team\" level, is the bottom tier where both members and owners reside.\n\nRequest body parameters\n\nEncoding type:application/x-www-form-urlencoded\n\nPath parameters\nName\tType\tDescription\tPII\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nRequest schema\nSchema name\tType\tDescription\tPII\nFriendlyName (required)\tString [1 .. 100] characters\tA descriptive string that you create to describe the team. Must be unique.\tPII MTL: 30 days\nDescription\tString [1 .. 1000] characters\tDescription of the team providing a brief summary of the team's purpose and focus.\tPII MTL: 30 days\nLevel\tInteger <int32> [ 1 .. 3 ]\tHierarchy level of the resource. Bottom level is 1. The middle level group of teams is 2 and the top level hierarchy of groups is 3. Default is 1.\tNot PII\nParentTeamSid\tstring\tThe unique sid ID that identifies the parent team of this resource. Level 3 hierarchy cannot have a parent resource.\tNot PII\nExample request and response\n\nPOST request\n\nCopy code block\n1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FriendlyName\": \"teamName\",\n\n6\n  \"Description\": \"description\",\n\n7\n  \"Level\": 1,\n\n8\n  \"ParentTeamSid\": \"QO00000000000000000000000000000001\"\n\n9\n}\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000002\",\n\n5\n  \"friendly_name\": \"teamName\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"description\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}\nUpdate a Team\n\nUpdate a team by making a POST request to the /Teams endpoint.\n\nRequest body parameters\n\nEncoding type:application/x-www-form-urlencoded\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nRequest schema\nSchema name\tType\tDescription\tPII?\nFriendlyName (required)\tString [1 \u2026100] characters\tA descriptive string that you create to describe the Flex Team. Must be unique.\tPII MTL: 30 days\nDescription (required)\tString [0 \u2026 1000] characters\tA description for the team.\tPII MTL: 30 days\nParentTeamSid (required)\tString\tParent team sid.\tNot PII\nTeam response schema\nSchema name\tType\tDescription\tPII\nteam_sid\tString\tThe unique ID that uniquely identifies this resource.\tNot PII\naccount_sid\tString\tThe unique ID of the account responsible for the team.\tNot PII\ninstance_sid\tString\tThe unique ID of the Flex related resources responsible for the team.\tNot PII\nfriendly_name\tString\tThe human-readable name of this team.\tPII MTL: 30 days\ndescription\tString or Null\tDescription of the team providing a brief summary of the team's purpose and focus.\tPII MTL: 30 days\nlevel\tInteger or Null\tAllows teams to be categorized into different hierarchical structures, enabling better organization and role-based access control.\tNot PII\nparent_team_sid\tString or Null\tThe unique ID that uniquely identifies the parent team of this resource.\tNot PII\nmember_count\tInteger\tRepresents the total number of members.\tNot PII\ndate_created\tString\tThe date that this resource was created.\tNot PII\ndate_updated\tString\tThe date that this resource was updated.\tNot PII\nversion\tInteger\tRepresents the current iteration of the team's configuration, incrementing with each update to reflect changes.\tNot PII\nExample request and response\n\nPOST request\n\nCopy code block\n1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FriendlyName\": \"newTeamName\",\n\n6\n  \"Description\": \"description\",\n\n7\n  \"ParentTeamSid\": \"QO00000000000000000000000000000001\"\n\n8\n}\n\n9\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"team_sid\": \"QO00000000000000000000000000000002\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"friendly_name\": \"newTeamName\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"description\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}\nAdd Owner to a Team\n\nAdd an Owner to a Team by making a POST request to the /Owners endpoint.\n\n(information)\nInfo\n\nTeam owners are typically supervisors. Owners can be an owner of multiple teams. Owners can also be a member of a team. Limit of 100 owners per team.\n\nRequest body parameters\n\nEncoding type:application/x-www-form-urlencoded\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nSchema\nSchema name\tType\tDescription\nFlexUserSid (required)\tString\tUser SID of the Flex user to add to the team as an owner.\nOwner response schema\nSchema name\tType\tDescription\tPII\naccount_sid\tString\tThe unique ID of the account responsible for the team.\tNot PII\ninstance_sid\tString\tThe unique ID of the Flex related resources responsible for the team.\tNot PII\nflex_user_sid\tString\tThe unique ID of the Flex User.\tNot PII\nteam_sid\tString or Null\tA 34 character string that uniquely identifies this resource.\tNot PII\nfriendly_name\tString or Null\tThe human-readable name of the Flex user.\tPII MTL: 30 days\nemail\tString or Null\tUniquely identifies a team member user through their email address.\tPII MTL: 30 days\nworker_sid\tString or Null\tThe SID of the Worker resource.\tNot PII\nExample request and response\n\nPOST request\n\nCopy code block\n1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FlexUserSid\": \"FU00000000000000000000000000000000\"\n\n6\n}\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n5\n  \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n6\n  \"friendly_name\": \"userName\",\n\n7\n  \"email\": \"test@twilio.com\",\n\n8\n  \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n9\n}\n\n10\nAdd Member to Team\n\nAdd a user as a Member to a Team by making a POST request to the /Members endpoint.\n\n(information)\nInfo\n\nThe /Members endpoint should be used to remove users from a team by reassigning them to another team, as there is no dedicated Delete Member API.\n\nTo remove members from a team:\n\nAssign them to a different team using the /Members endpoint.\nIf the member should no longer belong to a specific team but is still a part of the organization, they can be moved back to the default team.\nRequest body parameters\n\nEncoding type:application/x-www-form-urlencoded\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nSchema\nSchema name\tType\tDescription\nFlexUserSid (required)\tString\tTeam member's Flex User SID.\nResponse schema\nSchema name\tType\tDescription\tPII?\naccount_sid\tString\tThe unique ID of the account responsible for the team.\tNot PII\ninstance_sid\tString\tThe unique ID of the Flex related resources responsible for the team.\tNot PII\nteam_sid\tString or Null\tA 34 character string that uniquely identifies this resource.\tNot PII\nflex_user_sid\tString\tThe unique ID of the Flex user.\tNot PII\nfriendly_name\tString or Null\tThe human-readable name of the Flex user.\tPII MTL: 30 days\nemail\tString or Null\tUniquely identifies a team member user through their email address.\tPII MTL: 30 days\nExample POST request and response\n\nPOST request\n\nCopy code block\n1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FlexUserSid\": \"FU00000000000000000000000000000000\"\n\n6\n}\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n5\n  \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n6\n  \"friendly_name\": \"userName\",\n\n7\n  \"email\": \"test@twilio.com\",\n\n8\n  \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n9\n}\nDelete Team Owner\n\nDelete an Owner of a team by making a DELETE request to the /Owners endpoint.\n\nRequest body parameters\n\nEncoding type:application/x-www-form-urlencoded\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nFlexUserSid (required)\tString\tThe unique ID of the Flex User.\tNot PII\nExample DELETE request and response\n\nDelete request\n\nCopy code block\n1\ncurl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners/{FlexUserSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n\nResponse\n\n204 Successfully deleted team owner.\n\nDelete a Team\n\nDelete a team by making a DELETE request to the /Teams endpoint.\n\nRequest body parameters\n\nEncoding type:application/x-www-form-urlencoded\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nTeamSid (required)\tString\tA 34 character string that uniquely identifies this resource.\tNot PII\nExample DELETE request and response\n\nDELETE request\n\nCopy code block\n1\ncurl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\nResponse\n\n204 Successfully deleted.\n\nGet Teams Context\n\nGet teams context by making a GET request to the /Context endpoint.\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nExample GET request and response\n\nGET request\n\nCopy code block\n1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"team_setup_complete\": true\n\n3\n}\nSet Team Context\n\nSet team context by making a POST request to the /Context endpoint.\n\nPath parameters\nName\tType\tDescription\tPII?\nInstanceSid (required)\tString\tA 34 character string that identifies the Flex related resource responsible for the team.\tNot PII\nSchema\nSchema name\tType\tDescription\nTeamSetupComplete (required)\tBoolean\tIndicates team setup to be displayed in Flex UI. When set to True, controls whether Teams View is displayed in Flex. The default setting is False.\nExample POST request and response\n\nPOST request\n\nCopy code block\n1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"TeamSetupComplete\": true\n\n6\n}\n\nResponse\n\nCopy code block\n1\n{\n\n2\n  \"team_setup_complete\": true\n\n3\n}",
+    "cli_commands": [
+      "curl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\",
+      "\"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",",
+      "\"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",",
+      "curl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\",
+      "curl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\",
+      "\"email\": \"test@twilio.com\",",
+      "\"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",",
+      "\"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",",
+      "curl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\",
+      "\"email\": \"test@twilio.com\",",
+      "curl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\",
+      "curl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\",
+      "curl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\",
+      "\"email\": \"test@twilio.com\",",
+      "curl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\",
+      "\"email\": \"test@twilio.com\",",
+      "curl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners/{FlexUserSid}\" \\",
+      "curl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\",
+      "curl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\",
+      "curl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"teams\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"friendly_name\": \"default\",\n\n10\n      \"member_count\": 10,\n\n11\n      \"description\": \"default team\",\n\n12\n      \"level\": 1,\n\n13\n      \"parent_team_sid\": null,\n\n14\n      \"date_created\": \"2024-08-01T22:10:40Z\",\n\n15\n      \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n16\n      \"version\": 1\n\n17\n    }\n\n18\n  ],\n\n19\n  \"meta\": {\n\n20\n    \"key\": \"teams\",\n\n21\n    \"page\": 0,\n\n22\n    \"page_size\": 50,\n\n23\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",\n\n24\n    \"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",\n\n25\n    \"next_page_url\": null,\n\n26\n    \"previous_page_url\": null\n\n27\n  }\n\n28\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"friendly_name\": \"default\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"default team\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"members\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n10\n      \"friendly_name\": \"userName\",\n\n11\n      \"email\": \"test@twilio.com\",\n\n12\n      \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n13\n    }\n\n14\n  ],\n\n15\n  \"meta\": {\n\n16\n    \"list_key\": \"members\",\n\n17\n    \"page\": 0,\n\n18\n    \"page_size\": 50,\n\n19\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",\n\n20\n    \"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",\n\n21\n    \"next_page_url\": null,\n\n22\n    \"previous_page_url\": null\n\n23\n  }\n\n24\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"owners\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n10\n      \"friendly_name\": \"userName\",\n\n11\n      \"email\": \"test@twilio.com\",\n\n12\n      \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n13\n    }\n\n14\n  ],\n\n15\n  \"meta\": {\n\n16\n    \"direct_token\": true,\n\n17\n    \"key\": \"owners\",\n\n18\n    \"next_token\": null,\n\n19\n    \"page_token\": null,\n\n20\n    \"previous_token\": null\n\n21\n  }\n\n22\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FriendlyName\": \"teamName\",\n\n6\n  \"Description\": \"description\",\n\n7\n  \"Level\": 1,\n\n8\n  \"ParentTeamSid\": \"QO00000000000000000000000000000001\"\n\n9\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000002\",\n\n5\n  \"friendly_name\": \"teamName\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"description\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FriendlyName\": \"newTeamName\",\n\n6\n  \"Description\": \"description\",\n\n7\n  \"ParentTeamSid\": \"QO00000000000000000000000000000001\"\n\n8\n}\n\n9",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"team_sid\": \"QO00000000000000000000000000000002\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"friendly_name\": \"newTeamName\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"description\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FlexUserSid\": \"FU00000000000000000000000000000000\"\n\n6\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n5\n  \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n6\n  \"friendly_name\": \"userName\",\n\n7\n  \"email\": \"test@twilio.com\",\n\n8\n  \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n9\n}\n\n10",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FlexUserSid\": \"FU00000000000000000000000000000000\"\n\n6\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n5\n  \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n6\n  \"friendly_name\": \"userName\",\n\n7\n  \"email\": \"test@twilio.com\",\n\n8\n  \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n9\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners/{FlexUserSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n  \"team_setup_complete\": true\n\n3\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"TeamSetupComplete\": true\n\n6\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "PageSize",
+            "Integer or Null <=1000",
+            "The page size. The default value is 50.",
+            "Not PII"
+          ],
+          [
+            "PageToken",
+            "Integer or Null",
+            "Page token for pagination.",
+            "Not PII"
+          ],
+          [
+            "Owner",
+            "String or Null",
+            "Team owner in FlexUserSid format. If not provided, will return all teams in the instance, otherwise will return teams owned by the owner.",
+            "Not PII"
+          ],
+          [
+            "IncludeTransitive",
+            "Boolean or Null",
+            "When listing teams for an owner, indicating True will include teams transitively owned by the owner. For example, if turned on, it will return all level 2 and level 1 teams under the level 3 team owner. The default is false.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "team_sid",
+            "String",
+            "The unique ID that identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "friendly_name",
+            "String",
+            "The human-readable name of this team.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "member_count",
+            "Integer",
+            "Represents the total number of members.",
+            "Not PII"
+          ],
+          [
+            "account_sid",
+            "String",
+            "The unique ID of the account responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "instance_sid",
+            "String",
+            "The unique ID of the Flex related resources responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "date_created",
+            "String",
+            "The date that this resource was created.",
+            "Not PII"
+          ],
+          [
+            "date_updated",
+            "String",
+            "The date that this resource was updated.",
+            "Not PII"
+          ],
+          [
+            "version",
+            "Integer",
+            "Represents the current iteration of the team's configuration, incrementing with each update to reflect changes.",
+            "Not PII"
+          ],
+          [
+            "level",
+            "Integer or Null",
+            "Allows teams to be categorized into different hierarchical structures, enabling better organization and role-based access control.",
+            "Not PII"
+          ],
+          [
+            "parent_team_sid",
+            "String or Null",
+            "The unique ID that uniquely identifies the parent team of this resource.",
+            "Not PII"
+          ],
+          [
+            "description",
+            "String or Null",
+            "Description of the team providing a brief summary of the team's purpose and focus.",
+            "PII MTL: 30 days"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "team_sid",
+            "String",
+            "The unique ID that uniquely identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "account_sid",
+            "String",
+            "The unique ID of the account responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "instance_sid",
+            "String",
+            "The unique ID of the Flex related resources responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "friendly_name",
+            "String",
+            "The human-readable name of this team.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "description",
+            "String or Null",
+            "Description of the team providing a brief summary of the team's purpose and focus.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "level",
+            "Integer or Null",
+            "Team level.",
+            "Not PII"
+          ],
+          [
+            "parent_team_sid",
+            "String or Null",
+            "The unique ID that uniquely identifies the parent team of this resource.",
+            "Not PII"
+          ],
+          [
+            "member_count",
+            "Integer",
+            "Represents the total number of members.",
+            "Not PII"
+          ],
+          [
+            "date_created",
+            "String",
+            "The date that this resource was created.",
+            "Not PII"
+          ],
+          [
+            "date_updated",
+            "String",
+            "The date that this resource was updated.",
+            "Not PII"
+          ],
+          [
+            "version",
+            "Integer",
+            "Represents the current iteration of the team's configuration, incrementing with each update to reflect changes.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "PageSize",
+            "Integer or Null <=1000",
+            "Page size. The default value is 50.",
+            "Not PII"
+          ],
+          [
+            "PageToken",
+            "Integer or Null",
+            "Page token for pagination.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "flex_user_sid",
+            "String",
+            "The unique ID of the Flex User.",
+            "Not PII"
+          ],
+          [
+            "account_sid",
+            "String",
+            "The unique ID of the account responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "instance_sid",
+            "String",
+            "The unique ID of the Flex related resources responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "team_sid",
+            "String or Null",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "friendly_name",
+            "String or Null",
+            "The human-readable name of the Flex user.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "email",
+            "String or Null",
+            "Uniquely identifies a team member user through their email address.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "worker_sid",
+            "String or Null",
+            "The SID of the Worker resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "IncludeTransitive",
+            "Boolean or Null",
+            "Indicating True will include teams \"transitively\" owned by the owner. For example, if turned on, it will return all level 2 and level 1 teams under the level 3 team owner.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII"
+        ],
+        "rows": [
+          [
+            "flex_user_sid",
+            "String",
+            "The unique ID of the Flex User.",
+            "Not PII"
+          ],
+          [
+            "account_sid",
+            "String",
+            "The unique ID of the account responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "instance_sid",
+            "String",
+            "The unique ID of the Flex related resources responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "team_sid",
+            "String or Null",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "friendly_name",
+            "String or Null",
+            "The human-readable name of the Flex user.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "email",
+            "String or Null",
+            "Uniquely identifies a team member user through their email address.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "worker_sid",
+            "String or Null",
+            "The SID of the Worker resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII"
+        ],
+        "rows": [
+          [
+            "FriendlyName (required)",
+            "String [1 .. 100] characters",
+            "A descriptive string that you create to describe the team. Must be unique.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "Description",
+            "String [1 .. 1000] characters",
+            "Description of the team providing a brief summary of the team's purpose and focus.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "Level",
+            "Integer <int32> [ 1 .. 3 ]",
+            "Hierarchy level of the resource. Bottom level is 1. The middle level group of teams is 2 and the top level hierarchy of groups is 3. Default is 1.",
+            "Not PII"
+          ],
+          [
+            "ParentTeamSid",
+            "string",
+            "The unique sid ID that identifies the parent team of this resource. Level 3 hierarchy cannot have a parent resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "FriendlyName (required)",
+            "String [1 \u2026100] characters",
+            "A descriptive string that you create to describe the Flex Team. Must be unique.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "Description (required)",
+            "String [0 \u2026 1000] characters",
+            "A description for the team.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "ParentTeamSid (required)",
+            "String",
+            "Parent team sid.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII"
+        ],
+        "rows": [
+          [
+            "team_sid",
+            "String",
+            "The unique ID that uniquely identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "account_sid",
+            "String",
+            "The unique ID of the account responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "instance_sid",
+            "String",
+            "The unique ID of the Flex related resources responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "friendly_name",
+            "String",
+            "The human-readable name of this team.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "description",
+            "String or Null",
+            "Description of the team providing a brief summary of the team's purpose and focus.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "level",
+            "Integer or Null",
+            "Allows teams to be categorized into different hierarchical structures, enabling better organization and role-based access control.",
+            "Not PII"
+          ],
+          [
+            "parent_team_sid",
+            "String or Null",
+            "The unique ID that uniquely identifies the parent team of this resource.",
+            "Not PII"
+          ],
+          [
+            "member_count",
+            "Integer",
+            "Represents the total number of members.",
+            "Not PII"
+          ],
+          [
+            "date_created",
+            "String",
+            "The date that this resource was created.",
+            "Not PII"
+          ],
+          [
+            "date_updated",
+            "String",
+            "The date that this resource was updated.",
+            "Not PII"
+          ],
+          [
+            "version",
+            "Integer",
+            "Represents the current iteration of the team's configuration, incrementing with each update to reflect changes.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "FlexUserSid (required)",
+            "String",
+            "User SID of the Flex user to add to the team as an owner."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII"
+        ],
+        "rows": [
+          [
+            "account_sid",
+            "String",
+            "The unique ID of the account responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "instance_sid",
+            "String",
+            "The unique ID of the Flex related resources responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "flex_user_sid",
+            "String",
+            "The unique ID of the Flex User.",
+            "Not PII"
+          ],
+          [
+            "team_sid",
+            "String or Null",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "friendly_name",
+            "String or Null",
+            "The human-readable name of the Flex user.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "email",
+            "String or Null",
+            "Uniquely identifies a team member user through their email address.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "worker_sid",
+            "String or Null",
+            "The SID of the Worker resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "FlexUserSid (required)",
+            "String",
+            "Team member's Flex User SID."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "account_sid",
+            "String",
+            "The unique ID of the account responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "instance_sid",
+            "String",
+            "The unique ID of the Flex related resources responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "team_sid",
+            "String or Null",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "flex_user_sid",
+            "String",
+            "The unique ID of the Flex user.",
+            "Not PII"
+          ],
+          [
+            "friendly_name",
+            "String or Null",
+            "The human-readable name of the Flex user.",
+            "PII MTL: 30 days"
+          ],
+          [
+            "email",
+            "String or Null",
+            "Uniquely identifies a team member user through their email address.",
+            "PII MTL: 30 days"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ],
+          [
+            "FlexUserSid (required)",
+            "String",
+            "The unique ID of the Flex User.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ],
+          [
+            "TeamSid (required)",
+            "String",
+            "A 34 character string that uniquely identifies this resource.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Name",
+          "Type",
+          "Description",
+          "PII?"
+        ],
+        "rows": [
+          [
+            "InstanceSid (required)",
+            "String",
+            "A 34 character string that identifies the Flex related resource responsible for the team.",
+            "Not PII"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Schema name",
+          "Type",
+          "Description"
+        ],
+        "rows": [
+          [
+            "TeamSetupComplete (required)",
+            "Boolean",
+            "Indicates team setup to be displayed in Flex UI. When set to True, controls whether Teams View is displayed in Flex. The default setting is False."
+          ]
+        ]
+      }
+    ]
+  }
+}

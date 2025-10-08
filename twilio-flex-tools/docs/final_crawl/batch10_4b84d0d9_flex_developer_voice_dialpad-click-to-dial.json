@@ -1,0 +1,59 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/voice/dialpad-click-to-dial",
+  "batch_id": 10,
+  "crawled_at": "2025-10-07T20:30:47.989709+00:00",
+  "content": {
+    "title": "How to Implement Click-to-Dial | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/voice/dialpad-click-to-dial",
+    "text_content": "On this page\nPage Tools\nHow to Implement Click-to-Dial\n\nWhile Flex offers its own Dialpad to allow you to insert touch-tone numbers and place calls from Flex, you may want users to be able to click a phone number in a system outside of Flex that launches a phone call using Flex.\n\nYou can implement this functionality using Flex's native outbound dialing capabilities. Read on to learn how to implement click-to-dial.\n\nThe Outbound Call Action\n\nThe StartOutboundCall Action allows you to define your own logic to trigger outbound calls, and will be key to implementing click-to-dial functionality. StartOutboundCall requires a destination phone number \u2014 we have to call somebody, after all \u2014 but it also includes additional parameters for defining details like custom Task attributes and the caller ID that should make the call.\n\n(warning)\nWarning\n\nEnsure a reservation has been created before updating the attributes of a StartOutboundCall task\n.\n\nMaking a call from a CRM embedded in Flex\n\nYou've embedded your CRM by developing a React component. You want agents to be able to click on a phone number in the CRM Plugin to start an outbound call in Flex.\n\nExpand image\nThe Outbound Call Action\n\nIn your Flex Plugin code, you might write a function like this:\n\nCopy code block\n1\nfunction clickToDial(destinationNumber) {\n\n2\n  Flex.Actions.invokeAction(\"StartOutboundCall\", {\n\n3\n    destination: destinationNumber\n\n4\n  });\n\n5\n}\n\nYour destinationNumber can either be an E.164 phone number or a SIP URI in this format: sip:<sip_uri>. Once you've defined how you want to invoke StartOutboundCall, you can set this function as the onClick attribute for any number, button, or other clickable element in your UI. For example, in your Plugin code, you might have a CustomerNumber component that takes the click-to-dial function:\n\nCopy code block\n1\n<CustomerNumber\n\n2\n  number={props.customerNumber}\n\n3\n  onClick={(e) => clickToDial(props.customerNumber, e)}\n\n4\n/>\n\nWhen an agent clicks on the rendered CustomerNumber component, clickToDial will fire with the customer number, and Flex will invoke the StartOutboundCall action and initiate the call for you.\n\nCustomize the Outbound Call Action\n\nWe can also use the Actions Framework to extend StartOutboundCall. For example, we might want to use a specific caller ID (from number) depending on the agent that is placing the call. Using replaceAction we can modify this for our custom click-to-dial button, as well as the Flex Dialpad component's call button:\n\nCopy code block\n1\nasync init(flex, manager) {\n\n2\n  flex.Actions.replaceAction(\"StartOutboundCall\", (payload, original) => {\n\n3\n    var newPayload = payload;\n\n4\n    newPayload.callerId = manager.workerClient.attributes.phone_number;\n\n5\n    original(newPayload);\n\n6\n  });\n\n7\n}\n\nNow that we have replaced StartOutboundCall, all calls will be made with the caller ID specified by the phone_number attribute on the agent's TaskRouter worker.\n\nMaking a call when Flex is embedded in your CRM\n\nIn this case, you've embedded Flex in your CRM. Agents should be able to click on a phone number in the CRM to launch Flex and make a call.\n\nExpand image\nThe postMessage() function\n\nBy default, most browsers can use the Window.postMessage() function\n to communicate between iframe elements. You can utilize the postMessage() to help Flex understand that something was clicked in your CRM and establish an outbound call. The flow might look like this:\n\nAn agent clicks a UI element to start a call.\nThis click event triggers a postMessage() call that communicates with Flex through an iframe:\nCopy code block\n1\n// Store the Flex iframe element in a variable\n\n2\nconst flexIframe = document.getElementById('flex').contentWindow;\n\n3\n\n\n4\nfunction sendMessage(e) {\n\n5\n  // Prevent any default browser behavior.\n\n6\n  e.preventDefault();\n\n7\n\n\n8\n  // Send a message to the iframe with the phone number\n\n9\n  flexIframe.postMessage(document.getElementById('phoneNumber').value, *);\n\n10\n}\n(warning)\nWarning\n\nNote that this code sample uses * (a wildcard) as the targetOrigin, meaning that any malicious site could read the contents of your message. Always use a specific URL in production to keep your data safe!\n\nFlex receives the message, along with the associated message payload:\nCopy code block\n1\n// Flex in an iFrame\n\n2\nif (window.self !== window.top) {\n\n3\n  // Define a function for what to do when a message from postMessage() comes in\n\n4\n  function receiveMessage(event) {\n\n5\n    // Invoke the Flex Outbound Call Action\n\n6\n    flex.Actions.invokeAction(\"StartOutboundCall\", {destination: event.data});\n\n7\n  }\n\n8\n\n\n9\n  // Add an event listener to associate the postMessage() data with the receiveMessage logic\n\n10\n  window.addEventListener(\"message\", receiveMessage, false);\n\n11\n}\nFlex initiates the outbound call.\nCommon integrations\n\nSome CRM tools offer their own APIs for enabling click-to-dial that you can integrate with Flex. For example, Salesforce's OpenCTI API, for example, offers a series of functions for enabling outbound dialing.\n\nSoftware\tClick-To-Dial Platform\nSalesforce\tOpenCTI\nZendesk\tZAF\n\nThis list will continue to be updated as we learn about other software's click-to-dial platforms.\n\nNext steps\n\nNow that you've got some ideas for how to implement click-to-dial, you may be curious about the details of building with Flex. Why not...\n\nStart building a click to call plugin.\nLearn more about the outbound dialer.\nLearn about other actions available in the Actions Framework.",
+    "cli_commands": [],
+    "actions": [
+      "invokeAction",
+      "replaceAction",
+      "invokeAction",
+      "StartOutboundCall",
+      "StartOutboundCall",
+      "StartOutboundCall"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\nfunction clickToDial(destinationNumber) {\n\n2\n  Flex.Actions.invokeAction(\"StartOutboundCall\", {\n\n3\n    destination: destinationNumber\n\n4\n  });\n\n5\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n<CustomerNumber\n\n2\n  number={props.customerNumber}\n\n3\n  onClick={(e) => clickToDial(props.customerNumber, e)}\n\n4\n/>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nasync init(flex, manager) {\n\n2\n  flex.Actions.replaceAction(\"StartOutboundCall\", (payload, original) => {\n\n3\n    var newPayload = payload;\n\n4\n    newPayload.callerId = manager.workerClient.attributes.phone_number;\n\n5\n    original(newPayload);\n\n6\n  });\n\n7\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Store the Flex iframe element in a variable\n\n2\nconst flexIframe = document.getElementById('flex').contentWindow;\n\n3\n\n\n4\nfunction sendMessage(e) {\n\n5\n  // Prevent any default browser behavior.\n\n6\n  e.preventDefault();\n\n7\n\n\n8\n  // Send a message to the iframe with the phone number\n\n9\n  flexIframe.postMessage(document.getElementById('phoneNumber').value, *);\n\n10\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n// Flex in an iFrame\n\n2\nif (window.self !== window.top) {\n\n3\n  // Define a function for what to do when a message from postMessage() comes in\n\n4\n  function receiveMessage(event) {\n\n5\n    // Invoke the Flex Outbound Call Action\n\n6\n    flex.Actions.invokeAction(\"StartOutboundCall\", {destination: event.data});\n\n7\n  }\n\n8\n\n\n9\n  // Add an event listener to associate the postMessage() data with the receiveMessage logic\n\n10\n  window.addEventListener(\"message\", receiveMessage, false);\n\n11\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Software",
+          "Click-To-Dial Platform"
+        ],
+        "rows": [
+          [
+            "Salesforce",
+            "OpenCTI"
+          ],
+          [
+            "Zendesk",
+            "ZAF"
+          ]
+        ]
+      }
+    ]
+  }
+}

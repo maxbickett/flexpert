@@ -1,0 +1,43 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/environment-variables",
+  "batch_id": 7,
+  "crawled_at": "2025-10-07T20:30:32.893762+00:00",
+  "content": {
+    "title": "Environment variables in Flex Plugins | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/environment-variables",
+    "text_content": "On this page\nPage Tools\nEnvironment variables in Flex Plugins\n\nWe recommend that you manage your Flex application by using multiple accounts to represent different environments. For example: development, staging, and production. You can deploy each plugin you build to your different environments based on your testing strategy. The Plugins CLI helps you manage profiles to store your Twilio account credentials.\n\nEach environment often has different values for certain parameters like the location of an API server, whether a feature is enabled, or the SID of a necessary resource. Environment variables help you integrate these into your plugin.\n\nSet up support for environment variables\n\nYou need to modify your webpack configuration\n to enable environment variables. This allows you to use a standard .env file for managing your variables.\n\nStep 1: install dotenv\n\nWe recommend the dotenv-webpack\n package for managing environment variables with the Plugins CLI. Combined with webpack, which is natively used within the Plugins CLI, this package lets you access environment variables from within your plugin code. To install dotenv-webpack, run the following command from within your plugin directory:\n\nCopy code block\nnpm install dotenv-webpack --save\n\nIn addition to installing dotenv-webpack, this also adds the library as a dependency within your plugin's package.json file. If you are attempting a global installation or already have this package installed, make sure to update the package.json file for each plugin you are updating.\n\nStep 2: create .env files\n\nEach Twilio account (that is, each profile in your CLI) is mapped to a single .env file. Create a new file in the root directory for your plugin and provide a distinctive name like .Dev.env, .Stage.env, and .Production.env.\n\nThe following is an example of a .env file:\n\nCopy code block\nTWILIO_WORKFLOW_SID=WWXXXXXXX\n(information)\nInfo\n\nKeep in mind that the environment variable names are required to start with TWILIO_, FLEX_ or REACT_\n\n(warning)\nStoring .env files in source code\n\nNever commit your .env files to your source code repository. These files can contain sensitive information, like secrets and API keys, and you don't want to expose these credentials. Include the .env files in your .gitignore or the appropriate tool for your version control.\n\nWithout the .env files, the developers on your team will need to know which environment variables are required for your application. Create and commit a .env.sample file in your repository with variable names and placeholder values. Your team members can duplicate and update this file when they pull the source code.\n\nStep 3: update webpack\n\nYou must customize webpack to map your active CLI profile to one of the .env files you created. In the root directory for your plugin, replace webpack.config.js with the following code:\n\nCopy code block\n1\nconst DotEnvWebpack = require('dotenv-webpack');\n\n2\nmodule.exports = (config, { isProd, isDev, isTest }) => {\n\n3\n    /**\n\n4\n     * Customize the webpack by modifying the config object.\n\n5\n     * Consult https://webpack.js.org/configuration for more information\n\n6\n     */\n\n7\n    // We dynamically change the path to the .env that contains the file corresponding to our profile\n\n8\n    let envPath;\n\n9\n    switch (process.env.TWILIO_PROFILE) {\n\n10\n        case 'Dev':\n\n11\n            envPath = `.Dev.env`;\n\n12\n            break;\n\n13\n        case 'Stage':\n\n14\n            envPath = '.Stage.env';\n\n15\n            break;\n\n16\n        case 'Production':\n\n17\n            envPath = '.Production.env';\n\n18\n            break;\n\n19\n    }\n\n20\n    // If path was set, use the dotenv-webpack to inject the variables\n\n21\n    if (envPath) {\n\n22\n        config.plugins.push(new DotEnvWebpack({\n\n23\n            path: envPath\n\n24\n        }));\n\n25\n    }\n\n26\n    return config;\n\n27\n}\n\nThen, customize the switch statement based on the names of your CLI profiles and the filenames for your .env files.\n\nStep 4: deploy plugin\n\nTo deploy your plugin to specific accounts and environments, use the following commands:\n\nCopy code block\ntwilio flex:plugins:deploy --profile=StageProfileName\nCopy code block\ntwilio flex:plugins:deploy --profile=ProdProfileName\nRead environment variables\n\nAll variables that you define in your .env files are accessible within your plugin via process.env. Use these variables directly within your code:\n\nCopy code block\nconsole.log(process.env.TWILIO_WORKFLOW_SID);\n(warning)\nString Replacement\n\nThe dotenv-webpack package\n works by running a string replacement within your plugin code when the plugin is bundled. This has two side effects:\n\nAny sensitive values, like API keys, are visible to any user or system that has access to the bundled code for your plugin\nThe variables aren't dynamic if the bundled plugin (the final .js file) is shared and deployed to multiple accounts directly\n\nIn these situations, it's better to use a remotely-accessed environment variable. One option is to add these variables within the attributes field of your Flex Configuration.",
+    "cli_commands": [
+      "npm install dotenv-webpack --save",
+      "twilio flex:plugins:deploy --profile=StageProfileName",
+      "twilio flex:plugins:deploy --profile=ProdProfileName"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "npm install dotenv-webpack --save",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "TWILIO_WORKFLOW_SID=WWXXXXXXX",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst DotEnvWebpack = require('dotenv-webpack');\n\n2\nmodule.exports = (config, { isProd, isDev, isTest }) => {\n\n3\n    /**\n\n4\n     * Customize the webpack by modifying the config object.\n\n5\n     * Consult https://webpack.js.org/configuration for more information\n\n6\n     */\n\n7\n    // We dynamically change the path to the .env that contains the file corresponding to our profile\n\n8\n    let envPath;\n\n9\n    switch (process.env.TWILIO_PROFILE) {\n\n10\n        case 'Dev':\n\n11\n            envPath = `.Dev.env`;\n\n12\n            break;\n\n13\n        case 'Stage':\n\n14\n            envPath = '.Stage.env';\n\n15\n            break;\n\n16\n        case 'Production':\n\n17\n            envPath = '.Production.env';\n\n18\n            break;\n\n19\n    }\n\n20\n    // If path was set, use the dotenv-webpack to inject the variables\n\n21\n    if (envPath) {\n\n22\n        config.plugins.push(new DotEnvWebpack({\n\n23\n            path: envPath\n\n24\n        }));\n\n25\n    }\n\n26\n    return config;\n\n27\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:deploy --profile=StageProfileName",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:deploy --profile=ProdProfileName",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "console.log(process.env.TWILIO_WORKFLOW_SID);",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

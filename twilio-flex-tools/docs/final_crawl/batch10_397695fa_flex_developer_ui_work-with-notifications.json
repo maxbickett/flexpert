@@ -1,0 +1,88 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/work-with-notifications",
+  "batch_id": 10,
+  "crawled_at": "2025-10-07T20:30:39.701484+00:00",
+  "content": {
+    "title": "Work with Notifications | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/work-with-notifications",
+    "text_content": "On this page\nPage Tools\nWork with Notifications\n\nFlex UI provides a client-side API to manage notifications in Flex UI.\n\nWhat is a notification in Flex?\n\nA notification is an alert that tells the user what state change or error has occurred to a component or page when they are no longer viewing that component or page\n\nUsers can be notified in Flex using a Notification Bar or Browser notifications or both.\n\nWith notifications framework, you can:\n\nRegister custom notifications including browser notifications\nCustomize standard notifications\nTurn off standard UI notifications\nOverride standard notifications per Task Channel Definition\nCustomize how standard UI notifications are displayed\nRegister your custom UI notifications and specify how to render them\nNotificationBar\n\nNotificationBar is an in-app way to alert user. NotificationBar has a variety of options like icon, actions, timeout.\n\nExpand image\nBrowser Notifications\n\nFlex uses the standard Browser Notification API\n as the basis for its browser notifications implementation. Browser notifications can be enabled in the Admin Dashboard of the Flex UI.\n\nBrowser notifications are shown if Flex is minimized.\n\nNote, due to security constraints across browsers\n, Browser Notifications are not supported when Flex is iframed within a cross-domain webpage. This includes the Salesforce and Zendesk integrations.\n\nRequesting permissions\n\nTo start showing browser notifications, the user needs to first grant permissions. By default, Flex will request user for permissions if they are not granted or blocked.\n\nIf you want to add custom logic around requesting permissions, like request it based on some user action in the UI, then you can dispatch Notification.requestPermission() from your custom code.\n\nBrowser notifications handler\n\nTo display a browser notification, use the options key with a browser tag in it. Flex API docs contain an exhaustive list of available properties\n. If no browser key is passed to options, Flex will not show any browser notifications.\n\nNotificationBar actions\n\nA helper component NotificationBar.Action, that can be used for providing clickable action to notification definition.\n\nCopy code block\n1\ninterface NotificationBarActionProps {\n\n2\n    label: React.ReactText; // Can be simple text string or a template string\n\n3\n    onClick: NotificationBarActionCallback;\n\n4\n    icon?: string;\n\n5\n}\n\nThe full reference for the Notification Manager\n and a list of standard notifications\n are available in Flex API docs.\n\nRegister a custom notification with Browser notification handler\nCopy code block\n1\nFlex.Notifications.registerNotification({\n\n2\n    id: \"customNotification\",\n\n3\n    closeButton: true,\n\n4\n    content: \"Custom Notification\",\n\n5\n    timeout: 0,\n\n6\n    type: NotificationType.warning,\n\n7\n    actions: [\n\n8\n        <NotificationBar.Action\n\n9\n            onClick={(_, notification) => {\n\n10\n                Flex.Notifications.dismissNotification(notification);\n\n11\n            }}\n\n12\n            label=\"Hello World\"\n\n13\n            icon=\"Bell\"\n\n14\n        />\n\n15\n    ],\n\n16\n    options: {\n\n17\n      browser: {\n\n18\n          title: \"Custom Notification\",\n\n19\n          body: \"Hello World!\"\n\n20\n      }\n\n21\n  }\n\n22\n});\nOverride standard notifications for a specific task type using Task Channel Definitions API\nUse custom notification for new reservation of a Call task\nCopy code block\n1\nFlex.DefaultTaskChannels.Call.notifications.override.IncomingTask = () => {\n\n2\n  Flex.Notifications.showNotification(\"customNotification\");\n\n3\n}\nChange content of a standard notification for incoming call task\nCopy code block\n1\nconst originalIncomingTaskNotification = Flex.DefaultTaskChannels.Call.notifications.override.IncomingTask;\n\n2\nFlex.DefaultTaskChannels.Call.notifications.override.IncomingTask = (notification, cancel) => {\n\n3\n  originalIncomingTaskNotification(notification, cancel);\n\n4\n  notification.content = \"Some text\";\n\n5\n};\nChange content of a standard notification for new chat message\nCopy code block\n1\nconst originalIncomingTaskNotification = Flex.DefaultTaskChannels.Chat.notifications.override.IncomingTask;\n\n2\nFlex.DefaultTaskChannels.Chat.notifications.override.IncomingTask = (notification, cancel) => {\n\n3\n  Object.assign(notification, {\n\n4\n    ...originalIncomingTaskNotification,\n\n5\n    content: \"some text\"\n\n6\n  });\n\n7\n};\nTurn off Standard Notifications\nDo not show notificationBar notifications\nCopy code block\nFlex.MainContainer.defaultProps.showNotificationBar = false;\nDisable notification by ID\nCopy code block\nFlex.Notifications.registeredNotifications.delete(\"notification_id\");\nCustomize Standard Notifications\nChange text of the notification\nCopy code block\n1\nconst notification = Flex.Notifications.registeredNotifications.get(\"notificationId\");\n\n2\nif (notification) {\n\n3\n   notification.content = \"Display some text\";\n\n4\n}\nChange text of the notification with template\nCopy code block\n1\nflex.manager.getInstance().strings.myNotification = \"Current time: {{time}}\"\n\n2\nconst notification = Flex.Notifications.registeredNotifications.get(\"notificationId\");\n\n3\nif (notification) {\n\n4\n  notification.content = \"myNotification\";\n\n5\n}\n\n6\nFlex.Notifications.showNotification(\"notificationId\", {time: Date.now()})\n\nRead more about overriding strings in Overview of Flex UI programmability.\n\nRender custom component in a notification\nCopy code block\n1\nconst notification = Flex.Notifications.registeredNotifications.get(\"notificationId\");\n\n2\nif (notification) {\n\n3\n   notification.content = <MyAwesomePopup/>;\n\n4\n}\nChange props of the notification\nCopy code block\n1\nconst notification = Flex.Notifications.registeredNotifications.get(\"PendingReservationsOnActivityStateChange\");\n\n2\nif (notification) {\n\n3\n   notification.content = \"Some text to display\";\n\n4\n   notification.backgroundColor = \"blue\";\n\n5\n   notification.closeButton = false;\n\n6\n}\nRegister Custom Notifications\nOption 1: string\nCopy code block\n1\nFlex.Notifications.registerNotification({\n\n2\n  id: \"myNotificationId\",\n\n3\n  content: \"Custom content\", // string\n\n4\n  type: NotificationType.error\n\n5\n});\nOption 2: template\nCopy code block\n1\nFlex.Notifications.registerNotification({\n\n2\n  id: \"myNotificationId\",\n\n3\n  content: \"NotificationMessage\", // template\n\n4\n  type: NotificationType.error\n\n5\n});\n\nRead more about overriding strings in Overview of Flex UI programmability.\n\nOption 3: custom React component\nCopy code block\n1\ninterface CustomNotificationProps extends NotificationContentProps {\n\n2\n   customProp?: string;\n\n3\n   notificationContext?: any;\n\n4\n}\n\n5\n\n\n6\nexport class CustomNotificationElement extends React.Component<CustomNotificationProps, undefined> {\n\n7\n   render() {\n\n8\n       const { customProp, notificationContext } = this.props;\n\n9\n       return(\n\n10\n           <div>\n\n11\n               {notificationContext.message}\n\n12\n               <div />\n\n13\n               {customProp}\n\n14\n           </div>\n\n15\n       );\n\n16\n   }\n\n17\n}\n\n18\n\n\n19\n\n\n20\nFlex.Notifications.registerNotification({\n\n21\n    id: \"myNotificationId\",\n\n22\n    content: <CustomNotificationElement customProp=\"custom prop\" />,\n\n23\n    type: NotificationType.error\n\n24\n    }\n\n25\n);\nDispatch Custom Notifications\nOption 1: string\nCopy code block\nFlex.Notifications.showNotification(\"myNotificationId\", undefined);\nOption 2 & 3: template & custom React component\nCopy code block\nFlex.Notifications.showNotification(\"myNotificationId\", { message: \"custom context\" } );\nAdd Custom Notification Event Listeners\nCopy code block\n1\nimport * as Flex from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.Notifications.addListener(\"beforeAddNotification\", (payload) => {\n\n4\n  console.log(\"<---beforeTransferTask Listener--->\", payload);\n\n5\n});",
+    "cli_commands": [
+      "import * as Flex from \"@twilio/flex-ui\";"
+    ],
+    "actions": [
+      "AddNotification",
+      "TransferTask"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\ninterface NotificationBarActionProps {\n\n2\n    label: React.ReactText; // Can be simple text string or a template string\n\n3\n    onClick: NotificationBarActionCallback;\n\n4\n    icon?: string;\n\n5\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Notifications.registerNotification({\n\n2\n    id: \"customNotification\",\n\n3\n    closeButton: true,\n\n4\n    content: \"Custom Notification\",\n\n5\n    timeout: 0,\n\n6\n    type: NotificationType.warning,\n\n7\n    actions: [\n\n8\n        <NotificationBar.Action\n\n9\n            onClick={(_, notification) => {\n\n10\n                Flex.Notifications.dismissNotification(notification);\n\n11\n            }}\n\n12\n            label=\"Hello World\"\n\n13\n            icon=\"Bell\"\n\n14\n        />\n\n15\n    ],\n\n16\n    options: {\n\n17\n      browser: {\n\n18\n          title: \"Custom Notification\",\n\n19\n          body: \"Hello World!\"\n\n20\n      }\n\n21\n  }\n\n22\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.DefaultTaskChannels.Call.notifications.override.IncomingTask = () => {\n\n2\n  Flex.Notifications.showNotification(\"customNotification\");\n\n3\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst originalIncomingTaskNotification = Flex.DefaultTaskChannels.Call.notifications.override.IncomingTask;\n\n2\nFlex.DefaultTaskChannels.Call.notifications.override.IncomingTask = (notification, cancel) => {\n\n3\n  originalIncomingTaskNotification(notification, cancel);\n\n4\n  notification.content = \"Some text\";\n\n5\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst originalIncomingTaskNotification = Flex.DefaultTaskChannels.Chat.notifications.override.IncomingTask;\n\n2\nFlex.DefaultTaskChannels.Chat.notifications.override.IncomingTask = (notification, cancel) => {\n\n3\n  Object.assign(notification, {\n\n4\n    ...originalIncomingTaskNotification,\n\n5\n    content: \"some text\"\n\n6\n  });\n\n7\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.MainContainer.defaultProps.showNotificationBar = false;",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.Notifications.registeredNotifications.delete(\"notification_id\");",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst notification = Flex.Notifications.registeredNotifications.get(\"notificationId\");\n\n2\nif (notification) {\n\n3\n   notification.content = \"Display some text\";\n\n4\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nflex.manager.getInstance().strings.myNotification = \"Current time: {{time}}\"\n\n2\nconst notification = Flex.Notifications.registeredNotifications.get(\"notificationId\");\n\n3\nif (notification) {\n\n4\n  notification.content = \"myNotification\";\n\n5\n}\n\n6\nFlex.Notifications.showNotification(\"notificationId\", {time: Date.now()})",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst notification = Flex.Notifications.registeredNotifications.get(\"notificationId\");\n\n2\nif (notification) {\n\n3\n   notification.content = <MyAwesomePopup/>;\n\n4\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst notification = Flex.Notifications.registeredNotifications.get(\"PendingReservationsOnActivityStateChange\");\n\n2\nif (notification) {\n\n3\n   notification.content = \"Some text to display\";\n\n4\n   notification.backgroundColor = \"blue\";\n\n5\n   notification.closeButton = false;\n\n6\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Notifications.registerNotification({\n\n2\n  id: \"myNotificationId\",\n\n3\n  content: \"Custom content\", // string\n\n4\n  type: NotificationType.error\n\n5\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Notifications.registerNotification({\n\n2\n  id: \"myNotificationId\",\n\n3\n  content: \"NotificationMessage\", // template\n\n4\n  type: NotificationType.error\n\n5\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ninterface CustomNotificationProps extends NotificationContentProps {\n\n2\n   customProp?: string;\n\n3\n   notificationContext?: any;\n\n4\n}\n\n5\n\n\n6\nexport class CustomNotificationElement extends React.Component<CustomNotificationProps, undefined> {\n\n7\n   render() {\n\n8\n       const { customProp, notificationContext } = this.props;\n\n9\n       return(\n\n10\n           <div>\n\n11\n               {notificationContext.message}\n\n12\n               <div />\n\n13\n               {customProp}\n\n14\n           </div>\n\n15\n       );\n\n16\n   }\n\n17\n}\n\n18\n\n\n19\n\n\n20\nFlex.Notifications.registerNotification({\n\n21\n    id: \"myNotificationId\",\n\n22\n    content: <CustomNotificationElement customProp=\"custom prop\" />,\n\n23\n    type: NotificationType.error\n\n24\n    }\n\n25\n);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.Notifications.showNotification(\"myNotificationId\", undefined);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.Notifications.showNotification(\"myNotificationId\", { message: \"custom context\" } );",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport * as Flex from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.Notifications.addListener(\"beforeAddNotification\", (payload) => {\n\n4\n  console.log(\"<---beforeTransferTask Listener--->\", payload);\n\n5\n});",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

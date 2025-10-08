@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "flexpert": {
+      "command": "node",
+      "args": ["/Users/maxmac/Projects/flexpert/mcp-server/index.js"]
+    }
+  }
+}

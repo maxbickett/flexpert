@@ -1,0 +1,80 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/sound-and-audio",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:35.170606+00:00",
+  "content": {
+    "title": "Sounds and audio in Flex | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/sound-and-audio",
+    "text_content": "On this page\nPage Tools\nSounds and audio in Flex\nOverview\n\nThere are many reasons you might want to play a sound in Flex UI. You can use the following Flex APIs to define custom sounds based on your needs:\n\nUse the SoundManager API to customize the Flex ringtone that plays for inbound tasks. Specifically, this API lets you play custom sounds for inbound tasks on different task channels.\nUse the AudioPlayerManager API to create other custom sounds. For example, you can use this API to configure sound to indicate that participants have joined or left a conference.\nSoundManager API\n\nFlex provides a default ringtone that plays the same sound for inbound tasks on all task channels. If you don't need to differentiate your sounds by channel, you can enable the default ringtone by turning on the Play ringtone for inbound tasks in Flex setting in Console.\n\nTo play custom notification sounds in Flex, you can use the SoundManager API to do the following:\n\nConfigure sounds by channel: Set sounds for different communication channels like voice, chat, SMS, WhatsApp, and others. The sounds you configure apply to incoming tasks with a pending status. For each channel, you can customize:\nWhether to play a custom URL or use the default ringtone.\nWhether the sound repeats or only plays once.\nUse the default sound across channels: Call the SoundManager API without parameters to apply the default configuration where incoming tasks with a pending status play a default ringtone on all the channels you use. This provides the same behavior as the inbound task notification setting in Flex Console.\n\nTo call the SoundManager API, you must create a custom plugin to execute your configuration at runtime.\n\nNote: The SoundManager API takes precedence over the inbound task notification setting in Console. If you call the SoundManager API, Flex uses the configuration you pass, even if the Console setting is turned off.\n\nYou can call the SoundManager API using the SoundManager.configure() method with the definition for the task channel. See the following code samples as an example. For the list of available properties, see the Flex UI API reference\n.\n\nConfigure sounds by task channel\n\nThe following shows the SoundConfig definition, which defines the configuration for a specified task channel or channels.\n\nCopy code block\n1\ntype SoundConfig = {  \n\n2\n  taskChannelName?: string;  // The task channel for which the sound settings will be applied. (Optional)  \n\n3\n  reservationSounds: ReservationSound[];  // A list of reservation sounds for different statuses.  \n\n4\n};\n\nThe reservationSounds parameter contains these fields.\n\nField\tDescription\nreservationStatus [required]\tYou must set this to ReservationStatuses.Pending. The SoundManager API currently only supports sounds for tasks with a pending status.\nurl [optional]\tThe URL of the custom sound file. If you don't provide a URL, Flex plays the default ringtone.\nrepeatable [optional]\tA Boolean value that indicates whether the sound repeats or only plays once. Defaults to true.\nExample configuration for the voice and chat channels\nCopy code block\n1\nSoundManager.configure([\n\n2\n  {\n\n3\n    taskChannelName: \"call\",  // Configuring sound for the 'Call' task channel\n\n4\n    reservationSounds: [\n\n5\n      { \n\n6\n        reservationStatus: ReservationStatuses.Pending,  \n\n7\n        url: \"https://example.com/call-accepted.mp3\",    // URL of the custom sound file\n\n8\n        repeatable: false                                // Sound will play only once\n\n9\n      }\n\n10\n    ]\n\n11\n  },\n\n12\n  {\n\n13\n    taskChannelName: \"chat\",  // Configuring sound for the 'Chat' task channel\n\n14\n    reservationSounds: [\n\n15\n      { \n\n16\n        reservationStatus: ReservationStatuses.Pending,  \n\n17\n        url: \"https://example.com/chat-accepted.mp3\",      // URL of the custom sound file\n\n18\n        repeatable: false                                 // Sound will play only once\n\n19\n      }\n\n20\n    ]\n\n21\n  }\n\n22\n]);\nAudioPlayerManager API\n\nTo play custom sounds that aren't associated with an inbound task, use the AudioPlayerManager API. This API supports playing, stopping, and muting sounds.\n\nSounds are either repeatable or non-repeatable:\n\nRepeatable media play in a loop, like a phone ringing that doesn't stop. The only way to stop repeatable media is to manually call the stop method.\nNon-repeatable media play once, like a beep or bleep. Non-repeatable media automatically stop after being played once.\n\nThe media to play is defined as follows:\n\nCopy code block\n1\nexport interface MediaData {\n\n2\n    url: string;\n\n3\n    repeatable: boolean;\n\n4\n}\n\nTo play media, you must specify the URL where the media file is located and declare whether or not the sound is repeatable:\n\nCopy code block\n1\nconst mediaId = Flex.AudioPlayerManager.play(\n\n2\n{\n\n3\n    url: \"sound-url\",\n\n4\n    repeatable: true\n\n5\n},\n\n6\n(error: Flex.AudioPlayerError) => {\n\n7\n    // handle error\n\n8\n}\n\n9\n);\n\n10\nHandling errors\n\nIf there is an error while playing the media, a notification appears with the error. Some possible errors include:\n\nError\tMessage\tCause\nNotAllowed\tCan't play sound because permissions for playback of media weren't given or were denied. To find out more about how to fix this error, see the Troubleshooting section.\tThe user hasn't interacted with the site and the browser doesn't allow sound to play.\nInvalidMedia\tCan't play sound. Provided media isn't valid.\tThe provided media isn't valid; this could be an incorrect file type, an incorrect URL path, or a corrupted file.\nOther\tError playing media.\tOther exceptions. This could depend on browser implementation details, media player implementation, or other factors.\nStop media playback\n\nTo stop media playback, use the mediaId returned from the play method (described above):\n\nFlex.AudioPlayerManager.stop(mediaId);\n\nMute media\n\nTo mute or unmute sounds, use the following method:\n\nFlex.AudioPlayerManager.toggleSound(true/false);\n\nMute or unmute won't stop media that's playing. The audio still plays but the volume is set to zero.\n\nRepeatable and non-repeatable media\n\nRepeatable and non-repeatable media can play at the same time, but there can only be one repeatable and one non-repeatable media playing at a given time. This configuration means that only two media can play at once: one repeatable and one non-repeatable media.\n\nIf the media is repeatable, calls to Flex.AudioPlayerManager.play enqueue the media and play them one after another. You can stop a repeatable media that isn't playing (but is enqueued) to remove it from the queue. Stopping a repeatable media that's playing stops the sound and plays the next media in the queue (if the queue isn't empty).\n\nIf the media is non-repeatable, it plays only if no other non-repeatable media is already playing. Non-repeatable media are not enqueued. You can stop a non-repeatable media that's playing to stop the sound.\n\nFor example, to play a sound when a chat message comes in:\n\nCopy code block\n1\nFlex.Manager.getInstance().chatClient.on(\"messageAdded\", () => {\n\n2\n    const mediaId = Flex.AudioPlayerManager.play({\n\n3\n        url: \"sound-url\",\n\n4\n        repeatable: true\n\n5\n    });\n\n6\n})\nTroubleshooting\nBrowsers may block sound and media autoplay\n\nBrowsers, especially Google Chrome\n, have strict policies that limit when sound or media can play automatically. Media may not play if:\n\nThe tab was refreshed and has not received any user input.\nFlex automatically reopened in a separate window or tab and hasn't received user input.\nThe tab was opened a long time ago.\nThere are multiple tabs playing sounds at the same time.\nSounds play with interaction\n\nFor sounds to play, the agent must first interact with Flex UI, such as clicking anywhere on the page. If a sound is triggered before the agent interacts with the site, it will start playing automatically after the first interaction.\n\nHow queued media play\nRepeatable media: The first triggered media will play. After it finishes, the next in the queue will play.\nNon-repeatable media: The first triggered media that hasn't been stopped will play.\nSample scenarios for repeatable medias\nExpand image\nExpand image\nSample scenario for non-repeatable medias\nExpand image\nWorkarounds\nChrome\nAllow the hostname: Add the hostname at chrome://settings/content/sound to allow it to play sound. Note: This doesn't require enterprise policies.\nChange enterprise policies: Add the hostname to the list of allowed hostnames\n. Note: This requires enterprise policies.\nFirefox\n\nAllow hostname: Add the hostname in the audio settings list\n about:preferences#privacy and allow it to always play sound.\n\nSafari\n\nAllow autoplay sound for hostname\n: In the Safari app, choose Safari > Settings for This_Website. Under Auto-Play, select Allow All Auto-Play.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\ntype SoundConfig = {  \n\n2\n  taskChannelName?: string;  // The task channel for which the sound settings will be applied. (Optional)  \n\n3\n  reservationSounds: ReservationSound[];  // A list of reservation sounds for different statuses.  \n\n4\n};",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nSoundManager.configure([\n\n2\n  {\n\n3\n    taskChannelName: \"call\",  // Configuring sound for the 'Call' task channel\n\n4\n    reservationSounds: [\n\n5\n      { \n\n6\n        reservationStatus: ReservationStatuses.Pending,  \n\n7\n        url: \"https://example.com/call-accepted.mp3\",    // URL of the custom sound file\n\n8\n        repeatable: false                                // Sound will play only once\n\n9\n      }\n\n10\n    ]\n\n11\n  },\n\n12\n  {\n\n13\n    taskChannelName: \"chat\",  // Configuring sound for the 'Chat' task channel\n\n14\n    reservationSounds: [\n\n15\n      { \n\n16\n        reservationStatus: ReservationStatuses.Pending,  \n\n17\n        url: \"https://example.com/chat-accepted.mp3\",      // URL of the custom sound file\n\n18\n        repeatable: false                                 // Sound will play only once\n\n19\n      }\n\n20\n    ]\n\n21\n  }\n\n22\n]);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nexport interface MediaData {\n\n2\n    url: string;\n\n3\n    repeatable: boolean;\n\n4\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst mediaId = Flex.AudioPlayerManager.play(\n\n2\n{\n\n3\n    url: \"sound-url\",\n\n4\n    repeatable: true\n\n5\n},\n\n6\n(error: Flex.AudioPlayerError) => {\n\n7\n    // handle error\n\n8\n}\n\n9\n);\n\n10",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Manager.getInstance().chatClient.on(\"messageAdded\", () => {\n\n2\n    const mediaId = Flex.AudioPlayerManager.play({\n\n3\n        url: \"sound-url\",\n\n4\n        repeatable: true\n\n5\n    });\n\n6\n})",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Field",
+          "Description"
+        ],
+        "rows": [
+          [
+            "reservationStatus [required]",
+            "You must set this to ReservationStatuses.Pending. The SoundManager API currently only supports sounds for tasks with a pending status."
+          ],
+          [
+            "url [optional]",
+            "The URL of the custom sound file. If you don't provide a URL, Flex plays the default ringtone."
+          ],
+          [
+            "repeatable [optional]",
+            "A Boolean value that indicates whether the sound repeats or only plays once. Defaults to true."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Error",
+          "Message",
+          "Cause"
+        ],
+        "rows": [
+          [
+            "NotAllowed",
+            "Can't play sound because permissions for playback of media weren't given or were denied. To find out more about how to fix this error, see the Troubleshooting section.",
+            "The user hasn't interacted with the site and the browser doesn't allow sound to play."
+          ],
+          [
+            "InvalidMedia",
+            "Can't play sound. Provided media isn't valid.",
+            "The provided media isn't valid; this could be an incorrect file type, an incorrect URL path, or a corrupted file."
+          ],
+          [
+            "Other",
+            "Error playing media.",
+            "Other exceptions. This could depend on browser implementation details, media player implementation, or other factors."
+          ]
+        ]
+      }
+    ]
+  }
+}

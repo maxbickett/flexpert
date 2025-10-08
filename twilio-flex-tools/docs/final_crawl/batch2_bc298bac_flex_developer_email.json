@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/email",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:31:00.421746+00:00",
+  "content": {
+    "title": "Building with Email in Twilio Flex | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/email",
+    "text_content": "Page Tools\nBuilding with Email in Twilio Flex\n(warning)\nNot a HIPAA Eligible Service\n\nEmail in Twilio Flex is not a HIPAA Eligible Service and should not be used in workflows that are subject to HIPAA.\n\nTwilio Flex orchestrates inbound and outbound emails for your contact center. Alongside Conversations, it's one of the key asynchronous channels for your contact center and offers options for customization.\n\nTo start customizing Email in Flex, you'll need some basic familiarity with the Conversations API and the Flex UI. Conversations help you access the actual messages being sent in the Flex UI, while the Flex UI allows you to control how emails are rendered for your contact center agents.\n\n(information)\nInfo\n\nEmail in Flex requires Flex UI version 2.5.0 or later.\n\n< Email admin index page",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

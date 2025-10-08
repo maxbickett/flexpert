@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/use-legacy-messaging",
+  "batch_id": 4,
+  "crawled_at": "2025-10-07T20:30:58.871819+00:00",
+  "content": {
+    "title": "Switch from Flex Conversations to Legacy Messaging | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/use-legacy-messaging",
+    "text_content": "On this page\nPage Tools\nSwitch from Flex Conversations to Legacy Messaging\nOverview\n\nFlex Conversations is turned on by default for new accounts. If you are running Flex UI 2.x.x or later and need to use Legacy Messaging instead, follow the instructions below to switch your account from using Conversations to using Messaging.\n\nConvert Conversations Addresses to Legacy Addresses\n\nTo convert Conversations Addresses to Legacy Addresses in your account:\n\nIn the Twilio Console, navigate to Flex > Channel management > Messaging\n and select the Conversations Addresses tab.\nBefore deleting each Conversation Address, note the details. You will have to recreate these addresses in the Legacy Addresses tab.\nNotice the Address type filter, and then go through the Address types and remove Conversations Addresses for all types (by default, there is one SMS Address and one Chat Address).\nSelect Legacy Addresses.\nFor each address, click Create new Address, and then create a Legacy Address to match the former Conversations Address. Follow these instructions:\nManage SMS Addresses (skip buying a number, as you want to reuse your existing one)\nManage WebChat Addresses\n(warning)\nWarning\n\nThe Twilio Webchat React repository\n is only compatible with Flex 2.0.x. Flex UI 1.x.x uses the legacy webchat widget.\n\nConfigure Studio Flow\n\nWhen creating a Legacy Address, you can reuse the same Studio Flow\n previously associated with a Conversations Address.\n\nTo do this, make sure that the Send to Flex widget:\n\nConnects to the Incoming Message trigger.\nUses the attributes structure for Messaging and Chat Studio Flows. Original out-of-box Studio Flows are configured like this by default.\n\nSee the image below for an illustration of a Flex Flow with the Incoming Message trigger connected to the Send to Flex widget.\n\nExpand image\nConfigure your phone number to use the Flex Proxy Service for incoming Messages\n\nAfter updating the address configuration for your phone number:\n\nNavigate to Phone Numbers > Manage > Active Numbers.\nMake sure your number uses the Flex Proxy Service for handling inbound messages.",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

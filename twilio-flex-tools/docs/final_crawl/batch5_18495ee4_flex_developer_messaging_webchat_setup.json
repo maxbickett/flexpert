@@ -1,0 +1,130 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/setup",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:50.660407+00:00",
+  "content": {
+    "title": "Set up and use Flex Webchat 2.0 | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/setup",
+    "text_content": "On this page\nPage Tools\nSet up and use Flex Webchat 2.0\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\n(information)\nInfo\n\nAuto-Generated Documentation for the Flex Webchat UI\n is now available as a Public Beta distribution. The auto-generated documentation is accurate and comprehensive but may differ from what you see in the official Flex Webchat UI documentation.\n\n(information)\nInfo\n\nFlex WebChat is not supported on mobile devices.\n\nGetting started with Webchat\n\nThere are currently two ways to consume Flex Webchat 2.0:\n\nCDN\nnpm\nPrerequisites\n\nTo get access and set up Flex Webchat, you will need to complete the Flex Quickstart first.\n\nConsuming from CDN\n\nThere are 2 ways to add Flex Webchat from CDN:\n\nOption 1\n\nThe following steps are the quickest way to add Flex Webchat to your app. However, a CDN setup will not allow for more advanced programmability of the initialization flow for Flex Webchat.\n\nAdd the following script tag to the index.html head tag to include Webchat bundle from CDN.\n\nYou can optionally include an integrity token\n to verify that Flex Webchat is delivered without unexpected manipulation. If so, make sure to include \"integrity\" and \"crossorigin\" keys in the script.\n\nCopy code block\n<script src=\"https://assets.flex.twilio.com/releases/flex-webchat-ui/2.9.1/twilio-flex-webchat.min.js\" integrity=\"sha512-yBmOHVWuWT6HOjfgPYkFe70bboby/BTj9TGHXTlEatWnYkW5fFezXqW9ZgNtuRUqHWrzNXVsqu6cKm3Y04kHMA==\" crossorigin></script>\n\nThe following table displays the integrity tokens of previous versions (starting from v2.2.0).\n\nVersion\tIntegrity Token\n2.9.4\tsha512-dTCuWmpLM5hU93AkDjgZjRGT0dKNwJZgriDAVq6ToVtdr3SBFByDMqlRxg7BuXAuv2sgNcWZdUGt5mWjHK3x1A==\n2.9.3\tsha512-lL9Ihx5WpKGmP1wzno3O9BMWAnKJDxfNfoE7/HnVfESbtBAzA6jUhAOU+b4Nq3WvZthSf7mOH3SNo7+zVP7BVQ==\n2.9.2\tsha512-tJ0ckYeprEDAU9/Lx+11oITGmYQvu9eIyhzNtYrmWcOHYW0Wexkry26dvl0Z+3ypj9ErNuv3o8x7OeSMtaGZnw==\n2.9.1\tsha512-yBmOHVWuWT6HOjfgPYkFe70bboby/BTj9TGHXTlEatWnYkW5fFezXqW9ZgNtuRUqHWrzNXVsqu6cKm3Y04kHMA==\n2.9.0\tsha512-gfk5re40mGDic7co5dfTc4ZVtL2sQ0xFrzsJsMg1QbDisA3UyQB5Crd7Yyk7AOeGvdX1pltln7pq/aADzTJD4g==\n2.8.1\tsha512-KzpB56iRohSbDOkfM/V0PTp9DGHMno2EJJx6Zg8Ul3byOV3xtAurIZ+NibcO+cc0SEDvodI/5SKMSv2p+gwSYw==\n2.8.0\tsha512-442DGR3EEEkHK5QAlm+JpfehHr8+x3wq5TAbypQRbmEE5oHl0LeAtCVk3xfZ6bV+QjrlwKGkbT51zQ+v1A2Ueg==\n2.7.1\tsha512-uxirrFUoGuvGOOIkCX5ZzQ5WfEuDqRwtherlm5QjZxNeVoFgzL3KZXA98NHV8RsAdR2awLmOmBN1r/QCgEFvhA==\n2.7.0\tsha512-DWeN99d0UwyKwY/cBk9bMrjwdU6XFWynM4kQ+Yee6dZNwf0ZVzLJhJs2d6GbG/W3VOw6mUVS0JhSw4WI2wVeyA==\n2.6.1\tsha512-cQHsT9wKBmSjqHJxF85LdMKQiTXW6Bvmvq8mgg05lvcq0RMZmIdAe/hBjlmwZR1WgZVbq1CW2e+8DWfifDdiLw==\n2.6.0\tsha512-E1OX3Cyq3KaDo4WM6fITGRv2eiGQbK40AJxNdsvC6BRxkUGp7f4RchZeOAVXHTTA3+4KjSeZDJB1cFpikR5EVw==\n2.5.1\tsha512-PtzV20UxBmoawZw6NrwzeHTrGYUBTVOe2dRO1PFnhilM48HKgbQ6BId5QURWoK3d3Fjgw03h8xTl3YvBvqzIuQ==\n2.5.0\tsha512-aJbAHiYQxwqK+Hi32EnFKywUXDp8bPtKNwm/pSgd5Eie7OW28RQlKxmKqvDhiekVRD0reJNSbzF5wjK4VG85sQ==\n2.4.0\tsha512-sJe2ZYbixQ0qDkEDC0c0DWjEAo6a5+fwPjCVQ4uWAj89hnFsYZgwbG/AFWlbNzFKkue7lM5oWqXjMp7p6Fi0KQ==\n2.3.1\tsha512-v+iq1pWN5HHQtNoUKDnQCVJhTgmbozCgRKkIdCI4Ub8bKuXs7TmPDoEAtPZJXExY+0CNw4vU+TlosD6MEvNn+g==\n2.3.0\tsha512-G4oFESS6nt1URwN23X670e1N7UIgiGJyINEsyrexNp28GSSrJ6GVwJCDElIDaZUIHOJiEwoJPdi2iT5S03XzKw==\n2.2.1\tsha512-q5oRRUPjLeW69a3nlGBt0iR4V5yBY/7ALQ85veEPFRh1xfp8LPy6/JwITfHJVqfNnDOqXpvnyiijNGWYlK8dSw==\n2.2.0\tsha512-bOmqok+FZdtlOKVEy830tV9tNvTm7dknDYWwZLcB/O4q3Cg5oS7jDoZO4zzHL2nAjlc5Im4Ws+4RZNemvetSHA==\nAdd the following script tag to the index.html body tag to initialize Webchat.\nCopy code block\n1\n<script>\n\n2\n    const appConfig = {\n\n3\n        accountSid:\"AC...\",\n\n4\n        flexFlowSid:\"FO...\"\n\n5\n    };\n\n6\n    Twilio.FlexWebChat.renderWebChat(appConfig);\n\n7\n</script>\nOption 2\n\nThe following steps will allow you to customize the FlexWebChat initialization flow before you render the Webchat, as it consists of two parts: initialize and render. This option allows you to tap into customization before the render method executes.\n\nCopy code block\n1\nTwilio.FlexWebChat.createWebChat(appConfig).then(webchat => {\n\n2\n    const { manager } = webchat;\n\n3\n\n\n4\n    // Posting question from preengagement form as users first chat message\n\n5\n    Twilio.FlexWebChat.Actions.on(\"afterStartEngagement\", (payload) => {\n\n6\n        const { question } = payload.formData;\n\n7\n        if (!question)\n\n8\n            return;\n\n9\n\n\n10\n        const { channelSid } = manager.store.getState().flex.session;\n\n11\n        manager\n\n12\n            .chatClient.getChannelBySid(channelSid)\n\n13\n            .then(channel => channel.sendMessage(question));\n\n14\n    });\n\n15\n    // Changing the Welcome message\n\n16\n    manager.strings.WelcomeMessage = \"New text for welcome message\";\n\n17\n\n\n18\n    // Render WebChat\n\n19\n    webchat.init();\n\n20\n  });\n\nWhile logged into Flex as an administrator, you can find the flexFlowSid and accountSid in the Flex admin\n (https://flex.twilio.com/admin/developers). You can learn more about Projects in the Twilio Support Documentation\n.\n\nConsuming from NPM and running locally\n\nTo get you started with consuming the @twilio/flex-webchat-ui package from npm, we provide a sample project\n based on create-react-app\n.\n\nRun the following steps to get started using the sample project:\n\nClone the sample project from GitHub.\nCopy code block\ngit clone https://github.com/twilio/flex-webchat-ui-sample.git\nChange into the flex-webchat-ui-sample directory, then install dependencies.\nCopy code block\n1\ncd flex-webchat-ui-sample\n\n2\nnpm install\nCopy the sample configuration and edit webchat-appConfig.js accordingly to your Twilio account.\nCopy code block\ncp public/assets/webchat-appConfig.sample.js public/assets/webchat-appConfig.js\nStart the test server.\nCopy code block\nnpm start\nYour local Flex UI will be running on http://localhost:8081.\nWebChat default behavior\nExpand image\n\nOut of the box, the Webchat is configured to initiate chat (trigger startEngagement action) on user entryPoint click. The following steps happen on start of the engagement:\n\nToken is issued\nChat channel is created\nProgrammable chat user is created with default friendlyName and added as a member to the channel\nMessagingCanvas is loaded with the created channelSid\nA predefined message is shown to the user as a call to action\n\nWebchat is one of the channels that is integrated with Flex out of the box. When an incoming message is sent to the chat channel, it triggers a Studio Flow. By default, this is the Webchat Flow, which you can customize within the Twilio Console\n.\n\nThe first incoming message on the chat channel will trigger a new execution on the Studio Flow. Here you can automate a conversation using the Send & Wait for Reply widget before passing the conversation directly to an agent with the Send to Flex widget.\n\nThe Send to Flex widget then creates a TaskRouter task with the attributes provided, and removes the chat channel webhook so that future incoming messages won't retrigger the Studio flow.\n\nPre-engagement data can be accessed by Studio's Liquid syntax. For example, you could include in the Send to Flex widget:\n\nCopy code block\n1\n{\"question\": \"{{trigger.message.ChannelAttributes.pre_engagement_data.question}}\"}\n\n2\nWhat's next?\n\nNow that you have Webchat running, you can:\n\nChange the look and feel to your web page style.\nCustomize chat behavior with basic configuration or actions framework.\nAdd a pre-engagement form to ask the user for additional data before starting the chat.\nGather and send contextual data of the user to be used in routing the chat to an agent or displaying it to an agent.",
+    "cli_commands": [
+      "<script src=\"https://assets.flex.twilio.com/releases/flex-webchat-ui/2.9.1/twilio-flex-webchat.min.js\" integrity=\"sha512-yBmOHVWuWT6HOjfgPYkFe70bboby/BTj9TGHXTlEatWnYkW5fFezXqW9ZgNtuRUqHWrzNXVsqu6cKm3Y04kHMA==\" crossorigin></script>",
+      "git clone https://github.com/twilio/flex-webchat-ui-sample.git",
+      "npm install"
+    ],
+    "actions": [
+      "StartEngagement"
+    ],
+    "code_blocks": [
+      {
+        "content": "<script src=\"https://assets.flex.twilio.com/releases/flex-webchat-ui/2.9.1/twilio-flex-webchat.min.js\" integrity=\"sha512-yBmOHVWuWT6HOjfgPYkFe70bboby/BTj9TGHXTlEatWnYkW5fFezXqW9ZgNtuRUqHWrzNXVsqu6cKm3Y04kHMA==\" crossorigin></script>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n<script>\n\n2\n    const appConfig = {\n\n3\n        accountSid:\"AC...\",\n\n4\n        flexFlowSid:\"FO...\"\n\n5\n    };\n\n6\n    Twilio.FlexWebChat.renderWebChat(appConfig);\n\n7\n</script>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nTwilio.FlexWebChat.createWebChat(appConfig).then(webchat => {\n\n2\n    const { manager } = webchat;\n\n3\n\n\n4\n    // Posting question from preengagement form as users first chat message\n\n5\n    Twilio.FlexWebChat.Actions.on(\"afterStartEngagement\", (payload) => {\n\n6\n        const { question } = payload.formData;\n\n7\n        if (!question)\n\n8\n            return;\n\n9\n\n\n10\n        const { channelSid } = manager.store.getState().flex.session;\n\n11\n        manager\n\n12\n            .chatClient.getChannelBySid(channelSid)\n\n13\n            .then(channel => channel.sendMessage(question));\n\n14\n    });\n\n15\n    // Changing the Welcome message\n\n16\n    manager.strings.WelcomeMessage = \"New text for welcome message\";\n\n17\n\n\n18\n    // Render WebChat\n\n19\n    webchat.init();\n\n20\n  });",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "git clone https://github.com/twilio/flex-webchat-ui-sample.git",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ncd flex-webchat-ui-sample\n\n2\nnpm install",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "cp public/assets/webchat-appConfig.sample.js public/assets/webchat-appConfig.js",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\"question\": \"{{trigger.message.ChannelAttributes.pre_engagement_data.question}}\"}\n\n2",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Version",
+          "Integrity Token"
+        ],
+        "rows": [
+          [
+            "2.9.4",
+            "sha512-dTCuWmpLM5hU93AkDjgZjRGT0dKNwJZgriDAVq6ToVtdr3SBFByDMqlRxg7BuXAuv2sgNcWZdUGt5mWjHK3x1A=="
+          ],
+          [
+            "2.9.3",
+            "sha512-lL9Ihx5WpKGmP1wzno3O9BMWAnKJDxfNfoE7/HnVfESbtBAzA6jUhAOU+b4Nq3WvZthSf7mOH3SNo7+zVP7BVQ=="
+          ],
+          [
+            "2.9.2",
+            "sha512-tJ0ckYeprEDAU9/Lx+11oITGmYQvu9eIyhzNtYrmWcOHYW0Wexkry26dvl0Z+3ypj9ErNuv3o8x7OeSMtaGZnw=="
+          ],
+          [
+            "2.9.1",
+            "sha512-yBmOHVWuWT6HOjfgPYkFe70bboby/BTj9TGHXTlEatWnYkW5fFezXqW9ZgNtuRUqHWrzNXVsqu6cKm3Y04kHMA=="
+          ],
+          [
+            "2.9.0",
+            "sha512-gfk5re40mGDic7co5dfTc4ZVtL2sQ0xFrzsJsMg1QbDisA3UyQB5Crd7Yyk7AOeGvdX1pltln7pq/aADzTJD4g=="
+          ],
+          [
+            "2.8.1",
+            "sha512-KzpB56iRohSbDOkfM/V0PTp9DGHMno2EJJx6Zg8Ul3byOV3xtAurIZ+NibcO+cc0SEDvodI/5SKMSv2p+gwSYw=="
+          ],
+          [
+            "2.8.0",
+            "sha512-442DGR3EEEkHK5QAlm+JpfehHr8+x3wq5TAbypQRbmEE5oHl0LeAtCVk3xfZ6bV+QjrlwKGkbT51zQ+v1A2Ueg=="
+          ],
+          [
+            "2.7.1",
+            "sha512-uxirrFUoGuvGOOIkCX5ZzQ5WfEuDqRwtherlm5QjZxNeVoFgzL3KZXA98NHV8RsAdR2awLmOmBN1r/QCgEFvhA=="
+          ],
+          [
+            "2.7.0",
+            "sha512-DWeN99d0UwyKwY/cBk9bMrjwdU6XFWynM4kQ+Yee6dZNwf0ZVzLJhJs2d6GbG/W3VOw6mUVS0JhSw4WI2wVeyA=="
+          ],
+          [
+            "2.6.1",
+            "sha512-cQHsT9wKBmSjqHJxF85LdMKQiTXW6Bvmvq8mgg05lvcq0RMZmIdAe/hBjlmwZR1WgZVbq1CW2e+8DWfifDdiLw=="
+          ],
+          [
+            "2.6.0",
+            "sha512-E1OX3Cyq3KaDo4WM6fITGRv2eiGQbK40AJxNdsvC6BRxkUGp7f4RchZeOAVXHTTA3+4KjSeZDJB1cFpikR5EVw=="
+          ],
+          [
+            "2.5.1",
+            "sha512-PtzV20UxBmoawZw6NrwzeHTrGYUBTVOe2dRO1PFnhilM48HKgbQ6BId5QURWoK3d3Fjgw03h8xTl3YvBvqzIuQ=="
+          ],
+          [
+            "2.5.0",
+            "sha512-aJbAHiYQxwqK+Hi32EnFKywUXDp8bPtKNwm/pSgd5Eie7OW28RQlKxmKqvDhiekVRD0reJNSbzF5wjK4VG85sQ=="
+          ],
+          [
+            "2.4.0",
+            "sha512-sJe2ZYbixQ0qDkEDC0c0DWjEAo6a5+fwPjCVQ4uWAj89hnFsYZgwbG/AFWlbNzFKkue7lM5oWqXjMp7p6Fi0KQ=="
+          ],
+          [
+            "2.3.1",
+            "sha512-v+iq1pWN5HHQtNoUKDnQCVJhTgmbozCgRKkIdCI4Ub8bKuXs7TmPDoEAtPZJXExY+0CNw4vU+TlosD6MEvNn+g=="
+          ],
+          [
+            "2.3.0",
+            "sha512-G4oFESS6nt1URwN23X670e1N7UIgiGJyINEsyrexNp28GSSrJ6GVwJCDElIDaZUIHOJiEwoJPdi2iT5S03XzKw=="
+          ],
+          [
+            "2.2.1",
+            "sha512-q5oRRUPjLeW69a3nlGBt0iR4V5yBY/7ALQ85veEPFRh1xfp8LPy6/JwITfHJVqfNnDOqXpvnyiijNGWYlK8dSw=="
+          ],
+          [
+            "2.2.0",
+            "sha512-bOmqok+FZdtlOKVEy830tV9tNvTm7dknDYWwZLcB/O4q3Cg5oS7jDoZO4zzHL2nAjlc5Im4Ws+4RZNemvetSHA=="
+          ]
+        ]
+      }
+    ]
+  }
+}

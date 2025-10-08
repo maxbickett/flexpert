@@ -1,0 +1,173 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/copilot-webhooks",
+  "batch_id": 2,
+  "crawled_at": "2025-10-07T20:30:58.431886+00:00",
+  "content": {
+    "title": "Agent Copilot: wrap-up notes webhook (Public Beta) | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/copilot-webhooks",
+    "text_content": "On this page\nPage Tools\nAgent Copilot: wrap-up notes webhook (Public Beta)\n(new)\nPublic Beta\n\nAgent Copilot is currently available as a Public Beta product and the information contained in this document is subject to change. This means that some features are not yet implemented and others may be changed before the product is declared as Generally Available. Public Beta products are not covered by a SLA.\n\n(warning)\nNot a HIPAA Eligible Service or PCI Compliant\n\nAgent Copilot is not a HIPAA Eligible Service or PCI compliant and should not be used in Flex workflows that are subject to HIPAA or PCI. However, we offer mitigation tools such as PII redaction. To learn more, see AI data use.\n\nOverview\n\nYou can use a webhook so that notes flow from Flex to your own system, like a CRM or database. When a note is created and an agent clicks Complete, Twilio sends your web application an HTTP request to the URL you specify.\n\nTo learn more about Agent Copilot, see Agent Copilot for administrators.\n\nAdd a webhook URL\nIn Twilio Console\n, go to Flex > AI features > Agent Copilot.\nUnder Wrap-up notes, click Manage auto-generation service.\nUnder Wrap-up notes webhook URL, enter your URL where you'd like data sent.\nSelect your preferred method: HTTP POST or HTTP GET. Regardless of the request method, Twilio sends the same request headers and payload to your webhook URL.\nClick Save.\nTo receive data, make sure to validate the request against the signature.\n\nTo learn more about testing your configuration, see Getting Started with Twilio Webhooks.\n\nNote events\n\nThe webhook will trigger when either of the following events occurs:\n\nEvent\tDescription\nnote_created\tTriggers when a note is created. This includes when the note is auto-generated, or if an agent chooses to manually enter a note instead.\nnote_updated\tTriggers when an agent clicks Complete. Any updates or edits to the auto-generated note are included in the event payload.\nnote_created\n\nPayload sent when a note is created in Flex.\n\nExample response\n\nCopy code block\n1\n{\n\n2\n    \"sid\": \"KQxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n3\n    \"event_type\": \"note_created\",\n\n4\n    \"instance_sid\": \"GOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n5\n    \"interaction_sid\": \"KDxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n6\n    \"channel_sid\": \"UOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n7\n    \"participant_sid\": \"UTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n8\n    \"profile_connect_sid\": \"YIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n9\n    \"summary\": null,\n\n10\n    \"sentiment\": null,\n\n11\n    \"disposition_code_sid\": null,\n\n12\n    \"generated_summary\": \"The customer requested a return for a shoe.\",\n\n13\n    \"detected_language\": \"en-US\",\n\n14\n    \"generated_sentiment\": \"neutral\",\n\n15\n    \"generated_disposition_code_sid\": null,\n\n16\n    \"codes\": {\n\n17\n      \"generated\": [\n\n18\n        {\n\n19\n          \"disposition_code\": \"DC Name\",\n\n20\n          \"topic_path\": \"Topic 1|Sub Topic 2\"\n\n21\n        }\n\n22\n      ],\n\n23\n      \"selected\": [\n\n24\n        {\n\n25\n          \"disposition_code\": \"DC Name\",\n\n26\n          \" topic_path\": \"Topic 1|Sub Topic 2\"\n\n27\n        }\n\n28\n      ]\n\n29\n    },\n\n30\n    \"type\": \"wrapup\",\n\n31\n    \"date_created\": \"2024-01-17T21:09:00Z\",\n\n32\n    \"date_updated\": \"2024-01-17T21:09:00Z\",\n\n33\n    \"version\": 1,\n\n34\n    \"context\": {\n\n35\n        \"task_sid\": \"WTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n\n36\n    }\n\n37\n}\nnote_updated\n\nPayload sent when an agent edits or updates a note in Flex.\n\nExample response\n\nCopy code block\n1\n{\n\n2\n    \"sid\": \"KQxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n3\n    \"event_type\": \"note_updated\",\n\n4\n    \"instance_sid\": \"GOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n5\n    \"interaction_sid\": \"KDxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n6\n    \"channel_sid\": \"UOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n7\n    \"participant_sid\": \"UTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n8\n    \"profile_connect_sid\": \"YIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n9\n    \"summary\": \"test1\",\n\n10\n    \"sentiment\": \"positive\",\n\n11\n    \"disposition_code_sid\": null,\n\n12\n    \"generated_summary\": \"The customer requested a return for a shoe.\",\n\n13\n    \"detected_language\": \"en-US\",\n\n14\n    \"generated_sentiment\": \"neutral\",\n\n15\n    \"generated_disposition_code_sid\": null,\n\n16\n    \"codes\": {\n\n17\n      \"generated\": [\n\n18\n        {\n\n19\n          \"disposition_code\": \"DC Name\",\n\n20\n          \"topic_path\": \"Topic 1|Sub Topic 2\"\n\n21\n        }\n\n22\n      ],\n\n23\n      \"selected\": [\n\n24\n        {\n\n25\n          \"disposition_code\": \"DC Name\",\n\n26\n          \" topic_path\": \"Topic 1|Sub Topic 1\"\n\n27\n        }\n\n28\n      ]\n\n29\n    },\n\n30\n    \"type\": \"wrapup\",\n\n31\n    \"date_created\": \"2024-01-17T21:09:42Z\",\n\n32\n    \"date_updated\": \"2024-01-17T21:09:00Z\",\n\n33\n    \"version\": 2,\n\n34\n    \"context\": {\n\n35\n        \"task_sid\": \"WTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n\n36\n    }\n\n37\n}\nParameters\nProperty\tDescription\t\nsid\tNote identifier.\t\nevent_type\tThe type of action that triggered this webhook event. Either note_created or note_updated.\t\ninstance_sid\tFlex instance identifier.\t\nchannel_sid\tInteraction channel identifier.\t\nparticipant_sid\t(Optional) Identifier for the agent who creates the note.\t\nprofile_connect_sid\t(Optional) Customer Profile identifier.\t\nsummary\t(Optional) The summary content.\n\nValue is the summary present when an agent clicks Complete. Can be auto-generated or edited by the agent.\t\nsentiment\t(Optional) The customer sentiment associated with the channel.\n\nValue is the sentiment present when an agent clicks Complete. Can be auto-generated or edited by the agent.\n\nValues can be: Positive, Neutral, Negative.\t\ndisposition_code_sid\t(Optional) The unique ID of a disposition code resource associated with the outcome of a channel.\n\nValue is the disposition code present when an agent clicks Complete. Can be auto-generated or edited by the agent.\t\ngenerated_summary\tSummary generated by the LLM.\t\ndetected_language\tThe supported language detected by the LLM. Values can be en-US, es-MX, and pt-BR.\t\ngenerated_sentiment\tThe customer sentiment associated with the channel. Generated by the LLM. Values can be: Positive, Neutral, Negative.\t\ngenerated_disposition_code_sid\tThe unique ID of a disposition code resource associated with the outcome of a channel. Generated by the LLM.\t\ncodes\tThe generated or selected topics and disposition codes for a note.\t\ndisposition_code\tThe disposition code for the note.\t\ntopic_path\tThe topic path for the note, represented as a combined string of topic and subtopic. For example, topic|subtopic.\t\ntype\tType of the note. Currently can be wrapup.\t\ndate_created\tDate note was created. ISO8601 time.\t\ndate_updated\tLast modification date of the note. ISO8601 time.\t\nversion\tThe version of the wrap-up note resource.\t\ncontext.task_sid\tUnique task identifier.\t\nConstraints\nSentiment\n\nValues can be:\n\nPositive\nNeutral\nNegative\nTopics, subtopics, and disposition codes\n72 character max for names\n256 character max for descriptions for AI\nSummary limit\nMax 3000 characters\nNotes rate limit\n\nAgent Copilot can generate 20 notes per second. If you hit the rate limit, you'll see a 429 error.\n\nErrors\n\nIf the webhook fails, the default behavior is to retry once. You can override this behavior as instructed in Webhooks (HTTP callbacks): Connection Overrides.\n\nIn Console Debugger, you can configure an optional webhook to receive data about errors in real-time. The debugger event\n generated contains all necessary information to retry wrap-up notes. To learn more, see Debugging Webhook Events.\n\nSome frontend errors you may encounter are:\n\nError case\tError name\tAgent action\nNotes failed to generate\t45600 - Flex UI error\tAdd notes manually then complete task\nNotes submission failed\t45600 - Flex UI error\tClick complete without notes or dismiss error and try again",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\n{\n\n2\n    \"sid\": \"KQxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n3\n    \"event_type\": \"note_created\",\n\n4\n    \"instance_sid\": \"GOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n5\n    \"interaction_sid\": \"KDxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n6\n    \"channel_sid\": \"UOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n7\n    \"participant_sid\": \"UTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n8\n    \"profile_connect_sid\": \"YIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n9\n    \"summary\": null,\n\n10\n    \"sentiment\": null,\n\n11\n    \"disposition_code_sid\": null,\n\n12\n    \"generated_summary\": \"The customer requested a return for a shoe.\",\n\n13\n    \"detected_language\": \"en-US\",\n\n14\n    \"generated_sentiment\": \"neutral\",\n\n15\n    \"generated_disposition_code_sid\": null,\n\n16\n    \"codes\": {\n\n17\n      \"generated\": [\n\n18\n        {\n\n19\n          \"disposition_code\": \"DC Name\",\n\n20\n          \"topic_path\": \"Topic 1|Sub Topic 2\"\n\n21\n        }\n\n22\n      ],\n\n23\n      \"selected\": [\n\n24\n        {\n\n25\n          \"disposition_code\": \"DC Name\",\n\n26\n          \" topic_path\": \"Topic 1|Sub Topic 2\"\n\n27\n        }\n\n28\n      ]\n\n29\n    },\n\n30\n    \"type\": \"wrapup\",\n\n31\n    \"date_created\": \"2024-01-17T21:09:00Z\",\n\n32\n    \"date_updated\": \"2024-01-17T21:09:00Z\",\n\n33\n    \"version\": 1,\n\n34\n    \"context\": {\n\n35\n        \"task_sid\": \"WTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n\n36\n    }\n\n37\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n{\n\n2\n    \"sid\": \"KQxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n3\n    \"event_type\": \"note_updated\",\n\n4\n    \"instance_sid\": \"GOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n5\n    \"interaction_sid\": \"KDxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n6\n    \"channel_sid\": \"UOxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n7\n    \"participant_sid\": \"UTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n8\n    \"profile_connect_sid\": \"YIxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n\n9\n    \"summary\": \"test1\",\n\n10\n    \"sentiment\": \"positive\",\n\n11\n    \"disposition_code_sid\": null,\n\n12\n    \"generated_summary\": \"The customer requested a return for a shoe.\",\n\n13\n    \"detected_language\": \"en-US\",\n\n14\n    \"generated_sentiment\": \"neutral\",\n\n15\n    \"generated_disposition_code_sid\": null,\n\n16\n    \"codes\": {\n\n17\n      \"generated\": [\n\n18\n        {\n\n19\n          \"disposition_code\": \"DC Name\",\n\n20\n          \"topic_path\": \"Topic 1|Sub Topic 2\"\n\n21\n        }\n\n22\n      ],\n\n23\n      \"selected\": [\n\n24\n        {\n\n25\n          \"disposition_code\": \"DC Name\",\n\n26\n          \" topic_path\": \"Topic 1|Sub Topic 1\"\n\n27\n        }\n\n28\n      ]\n\n29\n    },\n\n30\n    \"type\": \"wrapup\",\n\n31\n    \"date_created\": \"2024-01-17T21:09:42Z\",\n\n32\n    \"date_updated\": \"2024-01-17T21:09:00Z\",\n\n33\n    \"version\": 2,\n\n34\n    \"context\": {\n\n35\n        \"task_sid\": \"WTxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n\n36\n    }\n\n37\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Event",
+          "Description"
+        ],
+        "rows": [
+          [
+            "note_created",
+            "Triggers when a note is created. This includes when the note is auto-generated, or if an agent chooses to manually enter a note instead."
+          ],
+          [
+            "note_updated",
+            "Triggers when an agent clicks Complete. Any updates or edits to the auto-generated note are included in the event payload."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Property",
+          "Description",
+          ""
+        ],
+        "rows": [
+          [
+            "sid",
+            "Note identifier.",
+            ""
+          ],
+          [
+            "event_type",
+            "The type of action that triggered this webhook event. Either note_created or note_updated.",
+            ""
+          ],
+          [
+            "instance_sid",
+            "Flex instance identifier.",
+            ""
+          ],
+          [
+            "channel_sid",
+            "Interaction channel identifier.",
+            ""
+          ],
+          [
+            "participant_sid",
+            "(Optional) Identifier for the agent who creates the note.",
+            ""
+          ],
+          [
+            "profile_connect_sid",
+            "(Optional) Customer Profile identifier.",
+            ""
+          ],
+          [
+            "summary",
+            "(Optional) The summary content.\n\nValue is the summary present when an agent clicks Complete. Can be auto-generated or edited by the agent.",
+            ""
+          ],
+          [
+            "sentiment",
+            "(Optional) The customer sentiment associated with the channel.\n\nValue is the sentiment present when an agent clicks Complete. Can be auto-generated or edited by the agent.\n\nValues can be: Positive, Neutral, Negative.",
+            ""
+          ],
+          [
+            "disposition_code_sid",
+            "(Optional) The unique ID of a disposition code resource associated with the outcome of a channel.\n\nValue is the disposition code present when an agent clicks Complete. Can be auto-generated or edited by the agent.",
+            ""
+          ],
+          [
+            "generated_summary",
+            "Summary generated by the LLM.",
+            ""
+          ],
+          [
+            "detected_language",
+            "The supported language detected by the LLM. Values can be en-US, es-MX, and pt-BR.",
+            ""
+          ],
+          [
+            "generated_sentiment",
+            "The customer sentiment associated with the channel. Generated by the LLM. Values can be: Positive, Neutral, Negative.",
+            ""
+          ],
+          [
+            "generated_disposition_code_sid",
+            "The unique ID of a disposition code resource associated with the outcome of a channel. Generated by the LLM.",
+            ""
+          ],
+          [
+            "codes",
+            "The generated or selected topics and disposition codes for a note.",
+            ""
+          ],
+          [
+            "disposition_code",
+            "The disposition code for the note.",
+            ""
+          ],
+          [
+            "topic_path",
+            "The topic path for the note, represented as a combined string of topic and subtopic. For example, topic|subtopic.",
+            ""
+          ],
+          [
+            "type",
+            "Type of the note. Currently can be wrapup.",
+            ""
+          ],
+          [
+            "date_created",
+            "Date note was created. ISO8601 time.",
+            ""
+          ],
+          [
+            "date_updated",
+            "Last modification date of the note. ISO8601 time.",
+            ""
+          ],
+          [
+            "version",
+            "The version of the wrap-up note resource.",
+            ""
+          ],
+          [
+            "context.task_sid",
+            "Unique task identifier.",
+            ""
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Error case",
+          "Error name",
+          "Agent action"
+        ],
+        "rows": [
+          [
+            "Notes failed to generate",
+            "45600 - Flex UI error",
+            "Add notes manually then complete task"
+          ],
+          [
+            "Notes submission failed",
+            "45600 - Flex UI error",
+            "Click complete without notes or dismiss error and try again"
+          ]
+        ]
+      }
+    ]
+  }
+}

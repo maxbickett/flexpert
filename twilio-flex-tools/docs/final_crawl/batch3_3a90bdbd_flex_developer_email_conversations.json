@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/email/conversations",
+  "batch_id": 3,
+  "crawled_at": "2025-10-07T20:30:32.619334+00:00",
+  "content": {
+    "title": "Manage email conversations | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/email/conversations",
+    "text_content": "On this page\nPage Tools\nManage email conversations\n(warning)\nNot a HIPAA Eligible Service\n\nEmail in Twilio Flex is not a HIPAA Eligible Service and should not be used in workflows that are subject to HIPAA.\n\nEmail in Flex uses the Conversations API as a basis for message orchestration. You do not need to do any additional development work to migrate the agent experience, but any future development to modify the Email channel or implement custom channels should be done using the Conversations API.\n\nThe following use cases are common scenarios that you may want to manage using Conversations.\n\nModify inbound message bodies with Conversations webhooks\n\nModifying message bodies is helpful for moderating incoming content. You can modify the body of an incoming message by intercepting it with the onMessageAdd Conversations Webhook. This webhook will POST the contents of any incoming message to the URI or endpoint of your choosing. The endpoint can include a JSON containing the updated values in its response.\n\nAutomatically close the Conversation when completing the Task\n\nWhen an agent completes an email task, the Conversation state automatically changes from Active to Closed. If a customer replies to a closed Conversation, the email triggers a new inbound email Task and a new Conversation SID.\n\nThe agent handling the new Task may still see prior messages. If the customer replies to the previous email thread, the thread is included in the contents of the new Task and new Conversation, and the agent can see the context of the prior conversation.\n\nNext Steps\nDive deeper into the Conversations API\nChange how the Conversation is rendered in the Flex UI Email Components\n\n< Email index page",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}

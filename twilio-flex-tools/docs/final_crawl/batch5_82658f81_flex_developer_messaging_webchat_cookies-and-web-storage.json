@@ -1,0 +1,123 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/cookies-and-web-storage",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:40.581687+00:00",
+  "content": {
+    "title": "Cookies and the Web Storage API (Webchat 2.0) | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/cookies-and-web-storage",
+    "text_content": "On this page\nPage Tools\nCookies and the Web Storage API (Webchat 2.0)\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\nFlex Webchat 2.0 persists some client-side data to create a better user experience. This can cause some issues when your customers have the Web Storage API disabled. This page discusses cookies, local storage, and session storage, and how Flex Webchat utilizes each one.\n\nOverview\n\nFlex Webchat utilizes each storage strategy in the following ways:\n\nCookies\n\nFlex Webchat does not use cookies. If your users block the browser from using Cookies, this should not cause any issues.\n\nLocal Storage\n\nUsed to persist chat after page reload and for error logging. Disabling local storage will cause degraded experience, especially on page reloads, but Webchat should still function.\n\nSession Storage\n\nRequired for the proper functioning of Webchat (e.g., opening and maintaining the WebSocket.) Disabling session storage prevents Webchat from functioning.\n\nDefinitions\nStorage Type\tDefinition\tMax Size\tExpiration\nCookies\tStores data that has to be sent back to the server with subsequent XHR requests\t4KB\tExpires at a chosen expiration date, or when the session ends in the case of a session cookie\nLocal Storage\tStores data in the browser across sessions. Opening two tabs with the same URL will share local storage. Data is never sent to the backend\tUp to 5 MB of data in the browser in key/value pairs\tData never expires but can be cleared by the user\nSession Storage\tTemporarily stores data in the browser. Data does not persist across sessions (i.e., two tabs with the same URL will have different session storage.) Data is never sent to the backend.\tStores up to 10 MB of data in the browser in key/value pairs\tData expires when the session ends, e.g., if the browser tab is closed\nInformation stored in local storage\nKey/name\tValue\tFunction\tRequired for functionality of Webchat\ntwilio-flex-cf\tObject\tKey to the behavior of the UI in persisting state across page reloads. Contains: - ID of the current user - Channel SID -Whether chat window expanded or not - Current state of chat engagement - Whether to ignore previous chat sessions on page refresh - Map of user avatars - JSON Web Token (JWT) for making API calls\tFor a better UX experience like persisting chat after reloading, yes. Otherwise, no.\nloglevel:twilio-flex-webchat-ui\tEnum\tFor debugging flex-webchat-ui; determines the level of logs that will be printed to the console\tNo\nloglevel\tEnum\tFor debugging; determines the level of logs that will be printed to the console\tNo\nInformation stored in session storage in Webchat\nKey/name\tValue\tFunction\tRequired for functionality of Webchat\ntwilio_twilsock_token_storage\tBoolean\tIndicates initialization state of twilsock token storage.\tYes\ntwilio_continuation_token_ip_messaging\tJWT\tA Continuation Token from previous connection in JSON Web Token format, allows client to reuse same endpoint-id for messaging\tYes\n<id>::map::<id>.channels\tObject\tContains uri and id data for sending/fetching channel information\tYes\n<id>::map::<id>.info\tObject\tContains uri and id data for sending/fetching channel information\tYes\n<id>::document::<id>.channel\tObject\tContains uri and id data for sending/fetching channel information\tYes\n<id>::map::<id>.roster\tObject\tContains uri and id data for sending/fetching channel information\tYes\n<id>::list::<id>.messages\tObject\tContains uri and id data for sending/fetching message information\tYes",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": [
+      {
+        "headers": [
+          "Storage Type",
+          "Definition",
+          "Max Size",
+          "Expiration"
+        ],
+        "rows": [
+          [
+            "Cookies",
+            "Stores data that has to be sent back to the server with subsequent XHR requests",
+            "4KB",
+            "Expires at a chosen expiration date, or when the session ends in the case of a session cookie"
+          ],
+          [
+            "Local Storage",
+            "Stores data in the browser across sessions. Opening two tabs with the same URL will share local storage. Data is never sent to the backend",
+            "Up to 5 MB of data in the browser in key/value pairs",
+            "Data never expires but can be cleared by the user"
+          ],
+          [
+            "Session Storage",
+            "Temporarily stores data in the browser. Data does not persist across sessions (i.e., two tabs with the same URL will have different session storage.) Data is never sent to the backend.",
+            "Stores up to 10 MB of data in the browser in key/value pairs",
+            "Data expires when the session ends, e.g., if the browser tab is closed"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Key/name",
+          "Value",
+          "Function",
+          "Required for functionality of Webchat"
+        ],
+        "rows": [
+          [
+            "twilio-flex-cf",
+            "Object",
+            "Key to the behavior of the UI in persisting state across page reloads. Contains: - ID of the current user - Channel SID -Whether chat window expanded or not - Current state of chat engagement - Whether to ignore previous chat sessions on page refresh - Map of user avatars - JSON Web Token (JWT) for making API calls",
+            "For a better UX experience like persisting chat after reloading, yes. Otherwise, no."
+          ],
+          [
+            "loglevel:twilio-flex-webchat-ui",
+            "Enum",
+            "For debugging flex-webchat-ui; determines the level of logs that will be printed to the console",
+            "No"
+          ],
+          [
+            "loglevel",
+            "Enum",
+            "For debugging; determines the level of logs that will be printed to the console",
+            "No"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Key/name",
+          "Value",
+          "Function",
+          "Required for functionality of Webchat"
+        ],
+        "rows": [
+          [
+            "twilio_twilsock_token_storage",
+            "Boolean",
+            "Indicates initialization state of twilsock token storage.",
+            "Yes"
+          ],
+          [
+            "twilio_continuation_token_ip_messaging",
+            "JWT",
+            "A Continuation Token from previous connection in JSON Web Token format, allows client to reuse same endpoint-id for messaging",
+            "Yes"
+          ],
+          [
+            "<id>::map::<id>.channels",
+            "Object",
+            "Contains uri and id data for sending/fetching channel information",
+            "Yes"
+          ],
+          [
+            "<id>::map::<id>.info",
+            "Object",
+            "Contains uri and id data for sending/fetching channel information",
+            "Yes"
+          ],
+          [
+            "<id>::document::<id>.channel",
+            "Object",
+            "Contains uri and id data for sending/fetching channel information",
+            "Yes"
+          ],
+          [
+            "<id>::map::<id>.roster",
+            "Object",
+            "Contains uri and id data for sending/fetching channel information",
+            "Yes"
+          ],
+          [
+            "<id>::list::<id>.messages",
+            "Object",
+            "Contains uri and id data for sending/fetching message information",
+            "Yes"
+          ]
+        ]
+      }
+    ]
+  }
+}

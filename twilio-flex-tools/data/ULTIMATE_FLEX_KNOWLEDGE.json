@@ -1,0 +1,1733 @@
+{
+  "metadata": {
+    "generated_at": "2025-10-07T20:58:23.389114+00:00",
+    "version": "1.0.0-ultimate",
+    "sources": {
+      "official_docs_pages": 143,
+      "code_examples": 753,
+      "production_features": 47,
+      "gotchas_documented": 14
+    }
+  },
+  "api_reference": {
+    "actions": {
+      "count": 44,
+      "all": [
+        [
+          "invokeAction",
+          42
+        ],
+        [
+          "AcceptTask",
+          31
+        ],
+        [
+          "addListener",
+          17
+        ],
+        [
+          "replaceAction",
+          10
+        ],
+        [
+          "SendMessage",
+          7
+        ],
+        [
+          "SelectTask",
+          6
+        ],
+        [
+          "registerAction",
+          5
+        ],
+        [
+          "WrapupTask",
+          4
+        ],
+        [
+          "MyAction",
+          4
+        ],
+        [
+          "removeListener",
+          3
+        ],
+        [
+          "DownloadMedia",
+          3
+        ],
+        [
+          "StartEngagement",
+          3
+        ],
+        [
+          "getAgentAvatar",
+          3
+        ],
+        [
+          "RestartEngagement",
+          3
+        ],
+        [
+          "SendMediaMessage",
+          3
+        ],
+        [
+          "StartOutboundCall",
+          3
+        ],
+        [
+          "DequeueTask",
+          2
+        ],
+        [
+          "RedirectCallTask",
+          2
+        ],
+        [
+          "StartOutboundEmailTask",
+          2
+        ],
+        [
+          "SetInputText",
+          2
+        ],
+        [
+          "AttachFile",
+          2
+        ],
+        [
+          "AddNotification",
+          2
+        ],
+        [
+          "TransferTask",
+          2
+        ],
+        [
+          "Logout",
+          2
+        ],
+        [
+          "CompleteTask",
+          2
+        ],
+        [
+          "SendRichContentMessage",
+          2
+        ],
+        [
+          "emit",
+          1
+        ],
+        [
+          "invokeActionsinstead",
+          1
+        ],
+        [
+          "removeAllListeners",
+          1
+        ],
+        [
+          "SetWorkerAttributes",
+          1
+        ]
+      ],
+      "methods": [
+        [
+          "invokeAction",
+          42
+        ],
+        [
+          "removeListener",
+          3
+        ],
+        [
+          "replaceAction",
+          10
+        ],
+        [
+          "addListener",
+          17
+        ],
+        [
+          "registerAction",
+          5
+        ]
+      ]
+    },
+    "cli_commands": {
+      "count": 248,
+      "deployment": [
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases/FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+          7
+        ],
+        [
+          "twilio flex:plugins:deploy --major --changelog \"Using the latest version of React\"",
+          1
+        ],
+        [
+          "twilio flex:plugins:release --plugin plugin-sample@1.0.0 --name \"Plugin Sample Release\" --description \"Testing React upgrade\"",
+          1
+        ],
+        [
+          "\"first_page_url\": \"https://flex-api.twilio.com/v1/PluginService/Releases?PageSize=50&Page=0\",",
+          2
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases?PageSize=50&Page=0\",",
+          2
+        ],
+        [
+          "url = \"https://iam.twilio.com/v1/Accounts/{}/Tokens/validate\".",
+          1
+        ],
+        [
+          "<script src=\"https://assets.flex.twilio.com/releases/flex-webchat-ui/2.9.1/twilio-flex-webchat.min.js\" integrity=\"sha512-yBmOHVWuWT6HOjfgPYkFe70bboby/BTj9TGHXTlEatWnYkW5fFezXqW9ZgNtuRUqHWrzNXVsqu6cKm3Y04kHMA==\" crossorigin></script>",
+          1
+        ],
+        [
+          "twilio flex:plugins:deploy --major --changelog \"Version notes\" --description \"Plugin functionality\"",
+          1
+        ],
+        [
+          "twilio flex:plugins:release --plugin <plugin-name>@<version> --name \"Release name\" --description \"Description of this Flex plugin configuration.\"",
+          1
+        ],
+        [
+          "twilio flex:plugins:describe:release --active",
+          3
+        ],
+        [
+          "twilio flex:plugins:list:releases",
+          2
+        ],
+        [
+          "twilio flex:plugins:release --description \"Integrating notes with CRM\" --name \"Agent Notes v5\" --plugin plugin-agent-notes@5.0.0",
+          1
+        ],
+        [
+          "twilio flex:plugins:release --configuration-sid <Configuration Sid>",
+          2
+        ],
+        [
+          "twilio flex:plugins:release --disable-plugin plugin-agent-autoresponse --name \"Flex Next\" --description \"Remove Agent Autoresponse Plugin\"",
+          1
+        ],
+        [
+          "twilio flex:plugins:release --plugin <plugin-name1>@<version> --plugin <plugin name2>@<version> --name \"Sprint Snow Leopard\" --description \"Agent Productivity Tools\"",
+          1
+        ]
+      ],
+      "essential": [
+        [
+          "const twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";",
+          69
+        ],
+        [
+          "const client = twilio(accountSid, authToken);",
+          69
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/FlexFlows/FOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+          8
+        ],
+        [
+          "import { Actions } from \"@twilio/flex-ui\";",
+          7
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases/FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+          7
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",",
+          6
+        ],
+        [
+          "\"channels\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels\"",
+          6
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",",
+          5
+        ],
+        [
+          "\"plugins\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Plugins\"",
+          5
+        ],
+        [
+          "import { ColumnDefinition } from \"@twilio/flex-ui\";",
+          5
+        ],
+        [
+          "* @param flex { typeof import('@twilio/flex-ui') }",
+          5
+        ],
+        [
+          "* @param manager { import('@twilio/flex-ui').Manager }",
+          5
+        ],
+        [
+          "import * as Flex from \"@twilio/flex-ui\";",
+          5
+        ],
+        [
+          "import { CustomizationProvider } from \"@twilio-paste/core/customization\";",
+          4
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",",
+          4
+        ],
+        [
+          "\"plugin_versions\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions\"",
+          4
+        ],
+        [
+          "\"email\": \"test@twilio.com\",",
+          4
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/Channels/CHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+          4
+        ],
+        [
+          "flex: Flex.FlexReducer,",
+          4
+        ],
+        [
+          "import { Manager } from \"@twilio/flex-ui\";",
+          3
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions/FVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+          3
+        ],
+        [
+          "twilio plugins:install @twilio-labs/plugin-flex",
+          3
+        ],
+        [
+          "tokenServerUrl: \"https://iam.twilio.com/v1/Accounts/{accountSid}/Tokens\",",
+          3
+        ],
+        [
+          "flexWebChannelsUrl: \"https://flex-api.twilio.com/v1/WebChannels\",",
+          3
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\",",
+          3
+        ],
+        [
+          "\"participants\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants\",",
+          3
+        ],
+        [
+          "\"invites\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Invites\",",
+          3
+        ],
+        [
+          "\"transfers\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Transfers\"",
+          3
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/Interactions/KDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Channels/UOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1/Participants/UTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa1\"",
+          3
+        ],
+        [
+          "import Flex from \"@twilio/flex-ui\";",
+          3
+        ],
+        [
+          "twilio flex:plugins:describe:release --active",
+          3
+        ],
+        [
+          "import { styled } from \"@twilio/flex-ui\";",
+          3
+        ],
+        [
+          "\"first_page_url\": \"https://flex-api.twilio.com/v1/PluginService/Releases?PageSize=50&Page=0\",",
+          2
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases?PageSize=50&Page=0\",",
+          2
+        ],
+        [
+          "import { Tab } from \"@twilio/flex-ui\"",
+          2
+        ],
+        [
+          "import { TaskCardList, ColumnDefinition } from \"@twilio/flex-ui\";",
+          2
+        ],
+        [
+          ".logoUrl = \"https://static0.twilio.com/marketing/bundles/archetype.alpha/img/logo-wordmark--red.svg\";",
+          2
+        ],
+        [
+          "$ npm show @twilio-labs/plugin-flex",
+          2
+        ],
+        [
+          "$ twilio plugins",
+          2
+        ],
+        [
+          "\"url\": \"https://proxy.twilio.com/v1/Services/KSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Sessions/KCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",",
+          2
+        ],
+        [
+          "\"interactions\": \"https://proxy.twilio.com/v1/Services/KSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Sessions/KCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Interactions\",",
+          2
+        ],
+        [
+          "\"participants\": \"https://proxy.twilio.com/v1/Services/KSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Sessions/KCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Participants\"",
+          2
+        ],
+        [
+          "\"url\": \"https://proxy.twilio.com/v1/Services/KSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Sessions/KCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Participants/KPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",",
+          2
+        ],
+        [
+          "\"message_interactions\": \"https://proxy.twilio.com/v1/Services/KSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Sessions/KCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Participants/KPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/MessageInteractions\"",
+          2
+        ],
+        [
+          "\"first_page_url\": \"https://flex-api.twilio.com/v1/FlexFlows?PageSize=50&Page=0\",",
+          2
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/FlexFlows?PageSize=50&Page=0\",",
+          2
+        ],
+        [
+          "npm install",
+          2
+        ],
+        [
+          "import { TeamsView } from \"@twilio/flex-ui\";",
+          2
+        ],
+        [
+          "import { FiltersListItemType } from \"@twilio/flex-ui\";",
+          2
+        ],
+        [
+          "import Flex from '@twilio/flex-ui';",
+          2
+        ],
+        [
+          "curl -X POST https://flex-api.twilio.com/v1/Interactions/KDXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Channels/UOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Invites \\",
+          2
+        ],
+        [
+          "npm uninstall -g create-flex-plugin",
+          2
+        ],
+        [
+          "twilio flex:plugins:list:releases",
+          2
+        ],
+        [
+          "twilio flex:plugins:describe:configuration --sid <Configuration Sid>",
+          2
+        ],
+        [
+          "twilio flex:plugins:list:plugins",
+          2
+        ],
+        [
+          "twilio flex:plugins:release --configuration-sid <Configuration Sid>",
+          2
+        ],
+        [
+          "curl -X POST https://flex-api.twilio.com/v1/Configuration \\",
+          2
+        ],
+        [
+          "twilio flex:plugins:start",
+          2
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/Interactions/Webhooks)/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_xxxx\"",
+          2
+        ],
+        [
+          "\"url\": \"https://flex-api.twilio.com/v1/Instances/GOXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/InteractionWebhooks/flex_interactionwebhook_XXXXXXXXXXXXXXXXXXX\",",
+          2
+        ]
+      ]
+    }
+  },
+  "official_examples": [
+    {
+      "code": "1\n   namespace Device {\n\n2\n   isBusy: boolean;\n\n3\n   enum State {\n\n4\n     Unregistered = 'unregistered';\n\n5\n     Registering = 'registering';\n\n6\n     Registered = 'registered';\n\n7\n     Destroyed = 'destroyed';\n\n8\n   }\n\n9\n }",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nconst manager = Flex.Manager.getInstance();\n\n2\nmanager.voiceClient.on('incoming', onVoiceClientConnectListener);\n\n3\n\n\n4\n// Listener function\n\n5\nfunction onVoiceClientConnectListener (){\n\n6\n  console.log(\"Call detected\");\n\n7\n  // Do something\n\n8\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "manager.store.getState().flex.session.loginHandler.on('tokenUpdated', (token) => {});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\nmanager.events.addListener(\"tokenUpdated\", (tokenPayload) => {});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nActions.invokeAction(\"UpdateWorkerToken\", { token: \"newToken\" });\n\n8\n\n\n9\n// Update task attributes\n\n10\nActions.invokeAction(\"SetTaskAttributes\", { sid: \"WRxxxxx\", attributes: {}, mergeExisting: true });\n\n11\n\n\n12\n// Issue a Call to a Worker\n\n13\nActions.invokeAction(\"IssueCallToWorker\", { callerId: \"callerId\", twiMLUrl: \"twiMLUrl\", options: {} });\n\n14\n\n\n15\n// Dequeue the Reservation to the Worker.\n\n16\n// This will perform telephony to dequeue a Task that was enqueued using the Enqueue TwiML verb.\n\n17\n// A contact_uri must exist in the Worker's attributes for this call to go through.\n\n18\nActions.invokeAction(\"DequeueTask\", { options: {} })\n\n19\n\n\n20\n// Redirect the active Call tied to this Reservation\n\n21\nActions.invokeAction(\"RedirectCallTask\", { callSid: \"callSid\", twiMLUrl: \"twiMLUrl\", options: {} });\n\n22\n\n\n23\n// Update the Worker's leg in the Conference associated to this Reservation\n\n24\nActions.invokeAction(\"UpdateWorkerParticipant\", { options: {} });\n\n25\n\n\n26\n// Update the Customer leg in the Conference associated to this Task\n\n27\nActions.invokeAction(\"UpdateCustomerParticipant\", { options: {} });",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\n\n\n4\n// Emitted when a worker receives a new task\n\n5\nmanager.events.addListener(\"taskReceived\", (task: ITask) => {});\n\n6\n\n\n7\n// Emitted when the worker's activity changes\n\n8\nmanager.events.addListener(\"workerActivityUpdated\", (activity: Activity, allActivities: Map<string, Activity>) => {});\n\n9\n\n\n10\n// Emitted when the worker's attributes changes\n\n11\nmanager.events.addListener(\"workerAttributesUpdated\", (newAttributes: Record<string, any>) => {});\n\n12\n\n\n13\n// Emitted when the worker's task status gets updated\n\n14\nmanager.events.addListener(\"taskUpdated\", (task:ITask) => {});\n\n15\n\n\n16\n// Emitted when the worker's task gets set to 'accepted'\n\n17\nmanager.events.addListener(\"taskAccepted\", (task:ITask) => {});\n\n18\n\n\n19\n// Emitted when the worker's task gets set to 'canceled'\n\n20\nmanager.events.addListener(\"taskCanceled\", (task:ITask) => {});\n\n21\n\n\n22\n// Emitted when the worker's task gets set to 'completed'\n\n23\nmanager.events.addListener(\"taskCompleted\", (task:ITask) => {});\n\n24\n\n\n25\n// Emitted when the worker's task gets set to 'rejected'\n\n26\nmanager.events.addListener(\"taskRejected\", (task:ITask) => {});\n\n27\n\n\n28\n// Emitted when the worker's task gets set to 'rescinded'\n\n29\nmanager.events.addListener(\"taskRescinded\", (task:ITask) => {});\n\n30\n\n\n31\n// Emitted when the worker's task gets set to 'timeout'\n\n32\nmanager.events.addListener(\"taskTimeout\", (task:ITask) => {});\n\n33\n\n\n34\n// Emitted when the worker's task gets set to 'wrapup'\n\n35\nmanager.events.addListener(\"taskWrapup\", (task:ITask) => {});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\ninterface Tokens {\n\n2\n   backgroundColors: BackgroundColors;\n\n3\n   textColors: TextColors;\n\n4\n   borderColors: BorderColors;\n\n5\n   borderWidths: typeof BorderWidth;\n\n6\n   radii: typeof BorderRadius;\n\n7\n   fontSizes: typeof FontSize;\n\n8\n   fontWeights: typeof FontWeight;\n\n9\n   lineHeights: typeof LineHeight;\n\n10\n   sizings: typeof Sizing;\n\n11\n   spacings: typeof Spacing;\n\n12\n\n\n13\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nconst deprecatedTokens = [\n\n2\n   \"errorColor\",\n\n3\n   \"errorGlow\",\n\n4\n   \"buttonHoverColor\",\n\n5\n   \"tabSelectedColor\",\n\n6\n   \"connectingColor\",\n\n7\n   \"disconnectedColor\",\n\n8\n   \"notificationBackgroundColorInformation\",\n\n9\n   \"notificationBackgroundColorSuccess\",\n\n10\n   \"notificationBackgroundColorWarning\",\n\n11\n   \"notificationBackgroundColorError\",\n\n12\n   \"notificationIconColorError\",\n\n13\n   \"notificationIconColorWarning\",\n\n14\n   \"userAvailableColor\",\n\n15\n   \"userUnavailableColor\",\n\n16\n   \"defaultButtonColor\",\n\n17\n   \"lightTextColor\",\n\n18\n   \"darkTextColor\",\n\n19\n   \"disabledColor\",\n\n20\n   \"focusColor\",\n\n21\n   \"focusGlow\",\n\n22\n   \"holdColor\",\n\n23\n   \"declineColor\",\n\n24\n   \"acceptColor\",\n\n25\n   \"declineTextColor\",\n\n26\n   \"acceptTextColor\",\n\n27\n   \"completeTaskColor\",\n\n28\n   \"flexBlueColor\",\n\n29\n   \"agentBusyColor\"\n\n30\n];",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nconst deprecatedChannelColors = [\n\n2\n   \"inactive\",\n\n3\n   \"call\",\n\n4\n   \"video\",\n\n5\n   \"chat\",\n\n6\n   \"sms\",\n\n7\n   \"facebook\",\n\n8\n   \"line\",\n\n9\n   \"whatsapp\",\n\n10\n   \"custom\"\n\n11\n];",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nimport { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';\n\n2\n\n\n3\nFlex.setProviders({\n\n4\n      CustomProvider: (RootComponent) => (props) => {\n\n5\n          return (\n\n6\n            <StylesProvider generateClassName={createGenerateClassName({\n\n7\n              productionPrefix: 'pluginXYZ',\n\n8\n              seed: 'pluginXYZ',\n\n9\n            })}>\n\n10\n                  <RootComponent {...props} />\n\n11\n              </StylesProvider>\n\n12\n          );\n\n13\n      }\n\n14\n});\n\n15",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nimport { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';\n\n2\nimport { CustomizationProvider } from \"@twilio-paste/core/customization\";\n\n3\n\n\n4\nFlex.setProviders({\n\n5\n      CustomProvider: (RootComponent) => (props) => {\n\n6\n          return (\n\n7\n            <StylesProvider generateClassName={createGenerateClassName({\n\n8\n              productionPrefix: 'pluginXYZ',\n\n9\n              seed: 'pluginXYZ',\n\n10\n            })}>\n\n11\n                  <RootComponent {...props} />\n\n12\n              </StylesProvider>\n\n13\n          );\n\n14\n      },\n\n15\n      PasteThemeProvider: CustomizationProvider\n\n16\n});\n\n17",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\n<MessageInputV2>\n\n2\n    <MessageInputArea key=\"textarea\"/>\n\n3\n    <MessageInputActions key=\"actions\"/>\n\n4\n</MessageInputV2>",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nconst MyComponent = (props) => {\n\n2\n   const viewState = useFlexSelector(state => state.view);\n\n3\n   return (\n\n4\n       {viewState.isSideNavOpen &&\n\n5\n           <div>My Custom Code</div>\n\n6\n       }\n\n7\n   )\n\n8\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "1\nconst MyComponent = (props) => {\n\n2\n   const viewState = useFlexSelector(state => state.view);\n\n3\n   const dispatch = useFlexDispatch();\n\n4\n   return (\n\n5\n       {viewState.isSideNavOpen &&\n\n6\n               <button onClick={() => dispatch({type: 'close_side_bar'})}>My Custom Code</button>\n\n7\n       }\n\n8\n   )\n\n9\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates"
+    },
+    {
+      "code": "https://taskrouter.twilio.com/v1/Workspaces/WSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/Tasks/WTXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createTask() {\n\n11\n  const task = await client.taskrouter.v1\n\n12\n    .workspaces(\"WSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n13\n    .tasks.create({\n\n14\n      attributes: JSON.stringify({\n\n15\n        conversations: {\n\n16\n          media: [\n\n17\n            {\n\n18\n              type: \"Referenced\",\n\n19\n              url: \"https://externalsystem.com/record-id2\",\n\n20\n              title: \"External Ticket\",\n\n21\n            },\n\n22\n          ],\n\n23\n        },\n\n24\n      }),\n\n25\n    });\n\n26\n\n\n27\n  console.log(task.accountSid);\n\n28\n}\n\n29\n\n\n30\ncreateTask();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"age\": 25200,\n\n4\n  \"assignment_status\": \"pending\",\n\n5\n  \"attributes\": \"{ \\\"conversations\\\": { \\\"media\\\": [ { \\\"type\\\": \\\"Referenced\\\", \\\"url\\\": \\\"https://externalsystem.com/record-id2\\\", \\\"title\\\": \\\"External Ticket\\\" } ] } }\",\n\n6\n  \"date_created\": \"2014-05-14T18:50:02Z\",\n\n7\n  \"date_updated\": \"2014-05-15T07:26:06Z\",\n\n8\n  \"task_queue_entered_date\": null,\n\n9\n  \"virtual_start_time\": \"2014-05-14T18:50:02Z\",\n\n10\n  \"priority\": 1,\n\n11\n  \"reason\": \"Test Reason\",\n\n12\n  \"sid\": \"WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n13\n  \"task_queue_sid\": \"WQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n14\n  \"task_channel_sid\": \"TCaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n15\n  \"task_channel_unique_name\": \"unique\",\n\n16\n  \"timeout\": 60,\n\n17\n  \"url\": \"https://taskrouter.twilio.com/v1/Workspaces/WSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Tasks/WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n18\n  \"workspace_sid\": \"WSXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n19\n  \"workflow_sid\": \"WWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n20\n  \"workflow_friendly_name\": \"Example Workflow\",\n\n21\n  \"task_queue_friendly_name\": \"Example Task Queue\",\n\n22\n  \"ignore_capacity\": false,\n\n23\n  \"routing_target\": \"WKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n24\n  \"addons\": \"{}\",\n\n25\n  \"links\": {\n\n26\n    \"task_queue\": \"https://taskrouter.twilio.com/v1/Workspaces/WSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/TaskQueues/WQaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n27\n    \"workflow\": \"https://taskrouter.twilio.com/v1/Workspaces/WSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Workflows/WWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n28\n    \"workspace\": \"https://taskrouter.twilio.com/v1/Workspaces/WSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n29\n    \"reservations\": \"https://taskrouter.twilio.com/v1/Workspaces/WSaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Tasks/WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Reservations\"\n\n30\n  }\n\n31\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"conversations\": {\n\n3\n    \"media\": [\n\n4\n      // media links list goes here\n\n5\n    ]\n\n6\n  }\n\n7\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"reservation_attributes\": {\n\n3\n    \"<reservation_sid_1>\": {\n\n4\n      \"media\": [\n\n5\n         // media links list goes here\n\n6\n      ]\n\n7\n    }\n\n8\n  }\n\n9\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"conversations\": {\n\n3\n    \"media\": [\n\n4\n      {\n\n5\n        \"type\": \"Raw\",\n\n6\n        \"url\": \"https://example.com/record-id\",\n\n7\n        \"title\": \"CRM Conversation Record\"\n\n8\n      }\n\n9\n    ]\n\n10\n  }\n\n11\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"conversations\": {\n\n3\n    \"media\": [\n\n4\n      {\n\n5\n        \"type\": \"Embedded\",\n\n6\n        \"url\": \"https://example.com/tickets/ticket-id\",\n\n7\n        \"title\": \"Support Ticket\"\n\n8\n      }\n\n9\n    ]\n\n10\n  }\n\n11\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"conversations\": {\n\n3\n    \"media\": [\n\n4\n      {\n\n5\n        \"type\": \"Referenced\",\n\n6\n        \"url\": \"https://externalsystem.com/record-id\",\n\n7\n        \"title\": \"External Ticket\"\n\n8\n      }\n\n9\n    ]\n\n10\n  }\n\n11\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"conversations\": {\n\n3\n    \"media\": [\n\n4\n      {\n\n5\n        \"type\": \"VoiceRecording\",\n\n6\n        \"url\": \"https://exampleurl.com\",\n\n7\n        \"start_time\": 1574350320000,\n\n8\n        \"channels\": [\n\n9\n          \"customer\",\n\n10\n          \"others\"\n\n11\n        ],\n\n12\n        \"title\": \"Dual channel recording\"\n\n13\n      }\n\n14\n    ]\n\n15\n  }\n\n16\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"conversations\": {\n\n3\n    \"media\": [\n\n4\n      {\n\n5\n        \"type\": \"ChatTranscript\",\n\n6\n        \"sid\": \"CHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n\n7\n      }\n\n8\n    ]\n\n9\n  }\n\n10\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"conversations\": {\n\n3\n    \"media\": [\n\n4\n      {\n\n5\n        \"type\": \"Embedded\",\n\n6\n        \"url\": \"https://example.com/ticket-id\",\n\n7\n        \"title\": \"Support Ticket\"\n\n8\n      },\n\n9\n      {\n\n10\n        \"type\": \"ChatTranscript\",\n\n11\n        \"sid\": \"CHxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"\n\n12\n      },\n\n13\n      {\n\n14\n        \"type\": \"VoiceRecording\",\n\n15\n        \"url\": \"https://exampleurl.com\"\n\n16\n      }\n\n17\n    ]\n\n18\n  }\n\n19\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\nimport { Actions } from \"@twilio/flex-ui\"\n\n2\n\n\n3\nActions.replaceAction(\"HistoricalReportingView\", async (url, original) => {\n\n4\n\n\n5\n    // implement your own handling of URL or call original(url) to use the original handler\n\n6\n})",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPlugin() {\n\n11\n  const plugin = await client.flexApi.v1.plugins.create({\n\n12\n    description: \"My first plugin\",\n\n13\n    friendlyName: \"Sample Plugin\",\n\n14\n    uniqueName: \"plugin-sample\",\n\n15\n  });\n\n16\n\n\n17\n  console.log(plugin.sid);\n\n18\n}\n\n19\n\n\n20\ncreatePlugin();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"unique_name\": \"plugin-sample\",\n\n5\n  \"friendly_name\": \"Sample Plugin\",\n\n6\n  \"description\": \"My first plugin\",\n\n7\n  \"archived\": false,\n\n8\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n9\n  \"date_updated\": \"2020-01-10T20:00:00Z\",\n\n10\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n11\n  \"links\": {\n\n12\n    \"plugin_versions\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions\"\n\n13\n  }\n\n14\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPluginVersion() {\n\n11\n  const pluginVersion = await client.flexApi.v1\n\n12\n    .plugins(\"PluginSid\")\n\n13\n    .pluginVersions.create({\n\n14\n      pluginUrl:\n\n15\n        \"https://default-3254-f021k.twil.io/plugins/plugin-sample/0.0.1/bundle.js\",\n\n16\n      private: true,\n\n17\n      version: \"0.0.1\",\n\n18\n    });\n\n19\n\n\n20\n  console.log(pluginVersion.sid);\n\n21\n}\n\n22\n\n\n23\ncreatePluginVersion();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"plugin_sid\": \"PluginSid\",\n\n5\n  \"version\": \"0.0.1\",\n\n6\n  \"plugin_url\": \"https://default-3254-f021k.twil.io/plugins/plugin-sample/0.0.1/bundle.js\",\n\n7\n  \"changelog\": \"the changelog\",\n\n8\n  \"private\": true,\n\n9\n  \"archived\": false,\n\n10\n  \"validated\": false,\n\n11\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n12\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions/FVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n13\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPluginConfiguration() {\n\n11\n  const pluginConfiguration =\n\n12\n    await client.flexApi.v1.pluginConfigurations.create({\n\n13\n      name: \"Miss Christine Morgan\",\n\n14\n      plugins: [\n\n15\n        {\n\n16\n          plugin_version: \"FV00000000000000000000000000000000\",\n\n17\n        },\n\n18\n      ],\n\n19\n    });\n\n20\n\n\n21\n  console.log(pluginConfiguration.sid);\n\n22\n}\n\n23\n\n\n24\ncreatePluginConfiguration();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"name\": \"Miss Christine Morgan\",\n\n5\n  \"description\": \"description\",\n\n6\n  \"archived\": false,\n\n7\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n9\n  \"links\": {\n\n10\n    \"plugins\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Plugins\"\n\n11\n  }\n\n12\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPluginRelease() {\n\n11\n  const pluginRelease = await client.flexApi.v1.pluginReleases.create({\n\n12\n    configurationId: \"FJ00000000000000000000000000000000\",\n\n13\n  });\n\n14\n\n\n15\n  console.log(pluginRelease.sid);\n\n16\n}\n\n17\n\n\n18\ncreatePluginRelease();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"configuration_sid\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n6\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases/FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n7\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide"
+    },
+    {
+      "code": "1\nconst configuration = {\n\n2\n        colorTheme: {\n\n3\n            baseName: \"FlexDark\"\n\n4\n        }\n\n5\n};",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/themes-branding-styling"
+    },
+    {
+      "code": "1\nconst configuration = {\n\n2\n    colorTheme: {\n\n3\n        baseName: \"GreyDark\",\n\n4\n        colors: {\n\n5\n            base0: \"#000000\",\n\n6\n            base1: \"#222222\",\n\n7\n            base2: \"#444444\",\n\n8\n            base3: \"#d4d4d4\",\n\n9\n            base4: \"#e0e0e0\",\n\n10\n            base5: \"#efefef\",\n\n11\n            base6: \"#ffffff\",\n\n12\n            darkTextColor: \"#222222\",\n\n13\n            buttonHoverColor: \"rgba(0, 0, 0, 0.2)\",\n\n14\n            tabSelectedColor: \"#009cff\",\n\n15\n            connectingColor: \"#ff9800\",\n\n16\n            disconnectedColor: \"#c0192d\"\n\n17\n        }\n\n18\n    }\n\n19\n};",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/themes-branding-styling"
+    },
+    {
+      "code": "1\nconst configuration = {\n\n2\n    colorTheme: {\n\n3\n        overrides: {\n\n4\n            MainHeader: {\n\n5\n                Container: {\n\n6\n                    background: \"#2f5771\",\n\n7\n                    color: \"#ffffff\"\n\n8\n                }\n\n9\n            },\n\n10\n            SideNav: {\n\n11\n                Container: {\n\n12\n                    background: \"#4a4e60\"\n\n13\n                },\n\n14\n                Button: {\n\n15\n                    background: \"#4a4e60\"\n\n16\n                },\n\n17\n            }\n\n18\n        }\n\n19\n    }\n\n20\n};\n\n21",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/themes-branding-styling"
+    },
+    {
+      "code": "1\nexport default {\n\n2\n    baseName: \"GreyDark\",\n\n3\n    colors: {\n\n4\n        base0: \"#000000\",\n\n5\n        base1: \"#222222\",\n\n6\n        base2: \"#444444\"\n\n7\n    },\n\n8\n    overrides: {\n\n9\n        MainHeader: {\n\n10\n            Container: {\n\n11\n                background: \"#2f5771\",\n\n12\n                color: \"#ffffff\"\n\n13\n            }\n\n14\n        },\n\n15\n        SideNav: {\n\n16\n            Container: {\n\n17\n                background: \"#4a4e60\"\n\n18\n            },\n\n19\n            Button: {\n\n20\n                background: \"#4a4e60\"\n\n21\n            },\n\n22\n        }\n\n23\n    }\n\n24\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/themes-branding-styling"
+    },
+    {
+      "code": "1\nimport { FlexPlugin } from 'flex-plugin';\n\n2\nimport React from 'react';\n\n3\nimport CustomTheme from './CustomTheme'\n\n4\n\n\n5\nconst PLUGIN_NAME = 'ThemePlugin';\n\n6\n\n\n7\nexport default class ThemePlugin extends FlexPlugin {\n\n8\n  constructor() {\n\n9\n    super(PLUGIN_NAME);\n\n10\n  }\n\n11\n\n\n12\n  init(flex, manager) {\n\n13\n    const configuration = {\n\n14\n        colorTheme: CustomTheme\n\n15\n    };\n\n16\n\n\n17\n    // apply theme\n\n18\n    manager.updateConfig(configuration);\n\n19\n  }\n\n20\n}\n\n21",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/themes-branding-styling"
+    },
+    {
+      "code": "1\nconst configuration = {\n\n2\n    colorTheme: {\n\n3\n        baseTheme: 'FlexDark'\n\n4\n    }\n\n5\n}\n\n6\n\n\n7\nTwilio.Flex.runDefault(configuration);",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/themes-branding-styling"
+    },
+    {
+      "code": "twilio flex:plugins:create plugin-sample --install --flexui2",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "twilio flex:plugins:create plugin-sample --install --flexui1",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "npm install react@17.0.2 react-dom@17.0.2",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "npm install react@16.13.1 react-dom@16.13.1",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "1\n\"dependencies\": {\n\n2\n    \"craco-config-flex-plugin\": \"latest\",\n\n3\n    \"flex-plugin\": \"latest\",\n\n4\n    \"flex-plugin-scripts\": \"latest\",\n\n5\n    \"react\": \"^17.0.2\",\n\n6\n    \"react-dom\": \"^17.0.2\",\n\n7\n    \"react-scripts\": \"latest\"\n\n8\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "1\"dependencies\": {\n2    \"craco-config-flex-plugin\": \"latest\",\n3    \"flex-plugin\": \"latest\",\n4    \"flex-plugin-scripts\": \"latest\",\n5    \"react\": \"^16.13.1\",\n6    \"react-dom\": \"^16.13.1\",\n7    \"react-scripts\": \"latest\"\n8}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "twilio flex:plugins:deploy --major --changelog \"Using the latest version of React\"",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "twilio flex:plugins:release --plugin plugin-sample@1.0.0 --name \"Plugin Sample Release\" --description \"Testing React upgrade\"",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions"
+    },
+    {
+      "code": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"teams\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"friendly_name\": \"default\",\n\n10\n      \"member_count\": 10,\n\n11\n      \"description\": \"default team\",\n\n12\n      \"level\": 1,\n\n13\n      \"parent_team_sid\": null,\n\n14\n      \"date_created\": \"2024-08-01T22:10:40Z\",\n\n15\n      \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n16\n      \"version\": 1\n\n17\n    }\n\n18\n  ],\n\n19\n  \"meta\": {\n\n20\n    \"key\": \"teams\",\n\n21\n    \"page\": 0,\n\n22\n    \"page_size\": 50,\n\n23\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",\n\n24\n    \"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams?PageSize=50&Page=0\",\n\n25\n    \"next_page_url\": null,\n\n26\n    \"previous_page_url\": null\n\n27\n  }\n\n28\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"friendly_name\": \"default\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"default team\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"members\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n10\n      \"friendly_name\": \"userName\",\n\n11\n      \"email\": \"test@twilio.com\",\n\n12\n      \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n13\n    }\n\n14\n  ],\n\n15\n  \"meta\": {\n\n16\n    \"list_key\": \"members\",\n\n17\n    \"page\": 0,\n\n18\n    \"page_size\": 50,\n\n19\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",\n\n20\n    \"url\": \"https://flex-api.twilio.com/v1/Instances/GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Teams/QO00000000000000000000000000000000/Members?PageSize=50&Page=0\",\n\n21\n    \"next_page_url\": null,\n\n22\n    \"previous_page_url\": null\n\n23\n  }\n\n24\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"owners\": [\n\n5\n    {\n\n6\n      \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n      \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n8\n      \"team_sid\": \"QO00000000000000000000000000000000\",\n\n9\n      \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n10\n      \"friendly_name\": \"userName\",\n\n11\n      \"email\": \"test@twilio.com\",\n\n12\n      \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n13\n    }\n\n14\n  ],\n\n15\n  \"meta\": {\n\n16\n    \"direct_token\": true,\n\n17\n    \"key\": \"owners\",\n\n18\n    \"next_token\": null,\n\n19\n    \"page_token\": null,\n\n20\n    \"previous_token\": null\n\n21\n  }\n\n22\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FriendlyName\": \"teamName\",\n\n6\n  \"Description\": \"description\",\n\n7\n  \"Level\": 1,\n\n8\n  \"ParentTeamSid\": \"QO00000000000000000000000000000001\"\n\n9\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000002\",\n\n5\n  \"friendly_name\": \"teamName\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"description\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FriendlyName\": \"newTeamName\",\n\n6\n  \"Description\": \"description\",\n\n7\n  \"ParentTeamSid\": \"QO00000000000000000000000000000001\"\n\n8\n}\n\n9",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"team_sid\": \"QO00000000000000000000000000000002\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"friendly_name\": \"newTeamName\",\n\n6\n  \"member_count\": 10,\n\n7\n  \"description\": \"description\",\n\n8\n  \"level\": 1,\n\n9\n  \"parent_team_sid\": \"QO00000000000000000000000000000001\",\n\n10\n  \"date_created\": \"2024-08-01T22:10:40Z\",\n\n11\n  \"date_updated\": \"2024-08-01T22:10:40Z\",\n\n12\n  \"version\": 1\n\n13\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FlexUserSid\": \"FU00000000000000000000000000000000\"\n\n6\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n5\n  \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n6\n  \"friendly_name\": \"userName\",\n\n7\n  \"email\": \"test@twilio.com\",\n\n8\n  \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n9\n}\n\n10",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Members\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"FlexUserSid\": \"FU00000000000000000000000000000000\"\n\n6\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"instance_sid\": \"GOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"team_sid\": \"QO00000000000000000000000000000000\",\n\n5\n  \"flex_user_sid\": \"FU00000000000000000000000000000000\",\n\n6\n  \"friendly_name\": \"userName\",\n\n7\n  \"email\": \"test@twilio.com\",\n\n8\n  \"worker_sid\": \"WK00000000000000000000000000000000\"\n\n9\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}/Owners/{FlexUserSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X DELETE \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/{TeamSid}\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X GET \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"team_setup_complete\": true\n\n3\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\ncurl -X POST \"https://flex-api.twilio.com/v1/Instances/{InstanceSid}/Teams/Context\" \\\n\n2\n    -u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN\n\n3\n\n\n4\n{\n\n5\n  \"TeamSetupComplete\": true\n\n6\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api"
+    },
+    {
+      "code": "1\n{\n\n2\n    \"conversation_label_1\": \"ID-123456789\"\n\n3\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/labels"
+    },
+    {
+      "code": "1\n{\n\n2\n    \"conversation_attribute_1\": \"<segment ID>\",\n\n3\n    \"conversation_label_1\": \"ID-123456789\"\n\n4\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/labels"
+    },
+    {
+      "code": "1\n{\n\n2\n    \"conversation_attribute_1\": \"Green Category\"\n\n3\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/labels"
+    },
+    {
+      "code": "1\n{\n\n2\n    \"conversation_attribute_1\": \"Green Category\",\n\n3\n    \"conversation_label_1\": \"Green Category\"\n\n4\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/labels"
+    },
+    {
+      "code": "1\n{\n\n2\n    \"conversation_attribute_1\": \"Very technical representation of a category\",\n\n3\n    \"conversation_label_1\": \"Human readable category name\"\n\n4\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/labels"
+    },
+    {
+      "code": "{\n  \"ConfigurationId\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPluginRelease() {\n\n11\n  const pluginRelease = await client.flexApi.v1.pluginReleases.create({\n\n12\n    configurationId: \"ConfigurationId\",\n\n13\n  });\n\n14\n\n\n15\n  console.log(pluginRelease.sid);\n\n16\n}\n\n17\n\n\n18\ncreatePluginRelease();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"configuration_sid\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n6\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases/FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n7\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchPluginRelease() {\n\n11\n  const pluginRelease = await client.flexApi.v1.pluginReleases(\"Sid\").fetch();\n\n12\n\n\n13\n  console.log(pluginRelease.sid);\n\n14\n}\n\n15\n\n\n16\nfetchPluginRelease();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"Sid\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"configuration_sid\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n6\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases/FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n7\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function listPluginRelease() {\n\n11\n  const pluginReleases = await client.flexApi.v1.pluginReleases.list({\n\n12\n    limit: 20,\n\n13\n  });\n\n14\n\n\n15\n  pluginReleases.forEach((p) => console.log(p.sid));\n\n16\n}\n\n17\n\n\n18\nlistPluginRelease();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"releases\": [],\n\n3\n  \"meta\": {\n\n4\n    \"page\": 0,\n\n5\n    \"page_size\": 50,\n\n6\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/PluginService/Releases?PageSize=50&Page=0\",\n\n7\n    \"previous_page_url\": null,\n\n8\n    \"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases?PageSize=50&Page=0\",\n\n9\n    \"next_page_url\": null,\n\n10\n    \"key\": \"releases\"\n\n11\n  }\n\n12\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release"
+    },
+    {
+      "code": "1\ncurl -X POST https://conversations.twilio.com/v1/Conversations \\\n\n2\n--data-urlencode \"MessagingServiceSid=MGXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\" \\\n\n3\n--data-urlencode \"FriendlyName=My First Custom Chat Conversation\" \\\n\n4\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "1\nSID                                 Chat Service SID                    Friendly Name                      Date Created\n\n2\nCH1cbf85a0e7c844fca4cb4d2fad880196  IScf002bd40e59480bb62024d8fa161dbb  My First Custom Chat Conversation  Feb 17 2022 17:01:06 GMT-0800",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "1\ntwilio api:conversations:v1:conversations:participants:create \\\n\n2\n    --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196 \\\n\n3\n    --identity=customer",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "1\nSID                                 Messaging Binding\n\n2\nMBb3469eabc7d040dbadc89a7876eb263f  null",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "twilio api:conversations:v1:conversations:webhooks:create --target=studio --configuration.flow-sid=FWd945421fea3b172bb9c5889a22d2f410 --configuration.filters='onMessageAdded' --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "1\nSID                                 Target\n\n2\nWH3bd00957227d499991c9a4ce5cd303e9  studio",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "twilio api:conversations:v1:conversations:messages:create --author=customer --body=hello --conversation-sid=CH1cbf85a0e7c844fca4cb4d2fad880196 --x-twilio-webhook-enabled=true ",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "1\nCHANNEL=$(cat << EOF\n\n2\n{\n\n3\n    \"type\": \"web\",\n\n4\n    \"initiated_by\": \"Customer\",\n\n5\n    \"properties\": {\n\n6\n        \"media_channel_sid\": \"CHXXX\"\n\n7\n        }\n\n8\n}\n\n9\nEOF\n\n10\n)\n\n11\n\n\n12\nROUTING=$(cat << EOF\n\n13\n{\n\n14\n    \"type\": \"TaskRouter\",\n\n15\n    \"properties\": {\n\n16\n        \"workspace_sid\": \"WSXXX\",\n\n17\n        \"workflow_sid\": \"WWXXX\",\n\n18\n        \"attributes\": {\n\n19\n            \"channelType\": \"web\",\n\n20\n            \"from\": \"customer\"\n\n21\n        }\n\n22\n    }\n\n23\n}\n\n24\nEOF\n\n25\n)\n\n26\n\n\n27\ncurl -X POST \"https://flex-api.twilio.com/v1/Interactions\" \\\n\n28\n--data-urlencode \"Channel=$CHANNEL\" \\\n\n29\n--data-urlencode \"Routing=$ROUTING\" \\\n\n30\n-u $TWILIO_ACCOUNT_SID:$TWILIO_AUTH_TOKEN",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex"
+    },
+    {
+      "code": "1\nconst CustomMessage = (props: EmailMessageItemChildrenProps) => {\n\n2\n    return <div>custom message</div>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailMessageItem.Content.replace(<CustomMessage key=\"custom\" />);\n\n6\n\n\n7",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nexport interface EmailMessageItemChildrenProps {\n\n2\n   message: MessageState;\n\n3\n   defaultOpen?: boolean;\n\n4\n   avatarUrl: string;\n\n5\n   conversationSid: string;\n\n6\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nconst CustomEditor = (props: EmailEditorChildrenProps) => {\n\n2\n   return <textarea>custom content</textarea>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailEditor.Content.replace(<CustomMessage key=\"custom\" />);",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nexport interface EmailEditorChildrenProps {\n\n2\n   disabledReason: string;\n\n3\n   charLimit: number;\n\n4\n   conversationSid: string;\n\n5\n   conversation: ConversationState;\n\n6\n   messageState: MessageState;\n\n7\n   connectionState: string;\n\n8\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nFlex.Actions.invokeAction(\"AttachFiles\", {\n\n2\n   files: [file1, file2],\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nFlex.Actions.invokeAction(\"DownloadMedia\", {\n\n2\n   media: media,\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nFlex.Actions.invokeAction(\"StartOutboundEmailTask\", {\n\n2\n   destination: \"customer@address.com\",\n\n3\n   queueSid: \"WQxxxx\",\n\n4\n   from: \"contactCenter@address.com\",\n\n5\n   fromName: \"My contact center name\",\n\n6\n   taskAttributes: {}\n\n7\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nconst { full_name, email } = Twilio.Flex.Manager.getInstance().workerClient.attributes;\n\n2\n\n\n3\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n4\n   body: <div><p>Your message here</p><p style='margin-top:20px; border-top: 2px dashed; color: tomato; padding-top:20px'>${full_name} - ${email}</p><p style='color:#333333;'>Engineer</p></div>,\n\n5\n   conversationSid: \"CH049a1c27f2f14bc5b8eba3244a846a05\"\n\n6\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nconst conversationSid = \"CH...\"\n\n2\nconst task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(conversationSid);\n\n3\n\n\n4\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n5\n   body: <div><p>Hi ${task.attributes.customerName},  thanks for your email. </p><p>Regards,  Owl Customer Centre</p></div>,\n\n6\n   conversationSid,\n\n7\n})",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   payload.htmlBody += <p style=\"font-size:10px; color:#666; margin-top:20px;\">CONFIDENTIAL: This email and any files transmitted [....]</p>;\n\n3\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   const task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(payload.conversationSid);\n\n3\n   payload.htmlBody = payload.htmlBody.replace(/\\$CUSTOMER_NAME\\$/g, task.attributes.customerName);\n\n4\n})",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/email/ui-customization"
+    },
+    {
+      "code": "1\nconst AccessToken = require('twilio').jwt.AccessToken;\n\n2\nconst ChatGrant = AccessToken.ChatGrant;\n\n3\n\n\n4\n// Used when generating any kind of tokens\n\n5\n// To set up environmental variables, see http://twil.io/secure\n\n6\nconst twilioAccountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst twilioApiKey = process.env.TWILIO_API_KEY;\n\n8\nconst twilioApiSecret = process.env.TWILIO_API_SECRET;\n\n9\n\n\n10\n// Used specifically for creating Chat tokens\n\n11\nconst serviceSid = process.env.TWILIO_CHAT_SERVICE_SID;\n\n12\nconst identity = 'user@example.com';\n\n13\n\n\n14\n// Create a \"grant\" which enables a client to use Chat as a given user,\n\n15\n// on a given device\n\n16\nconst chatGrant = new ChatGrant({\n\n17\n  serviceSid: serviceSid,\n\n18\n});\n\n19\n\n\n20\n// Create an access token which we will sign and return to the client,\n\n21\n// containing the grant we just created\n\n22\nconst token = new AccessToken(\n\n23\n  twilioAccountSid,\n\n24\n  twilioApiKey,\n\n25\n  twilioApiSecret,\n\n26\n  {identity: identity}\n\n27\n);\n\n28\n\n\n29\ntoken.addGrant(chatGrant);\n\n30\n\n\n31\n// Serialize the token to a JWT string\n\n32\nconsole.log(token.toJwt());",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/messaging/integrate-custom-chat-client"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createChannel() {\n\n11\n  const channel = await client.flexApi.v1.channel.create({\n\n12\n    chatFriendlyName: \"Chat with abc123\",\n\n13\n    chatUserFriendlyName: \"Jane\",\n\n14\n    flexFlowSid: \"FOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n15\n    identity: \"abc123\",\n\n16\n    target: \"abc123\",\n\n17\n  });\n\n18\n\n\n19\n  console.log(channel.accountSid);\n\n20\n}\n\n21\n\n\n22\ncreateChannel();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/messaging/integrate-custom-chat-client"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"flex_flow_sid\": \"FOaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"sid\": \"CHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"task_sid\": \"WTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n6\n  \"user_sid\": \"USaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n7\n  \"date_created\": \"2016-08-01T22:10:40Z\",\n\n8\n  \"date_updated\": \"2016-08-01T22:10:40Z\",\n\n9\n  \"url\": \"https://flex-api.twilio.com/v1/Channels/CHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n10\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/messaging/integrate-custom-chat-client"
+    },
+    {
+      "code": "{\n  \"Version\": \"1.0.0\",\n  \"PluginUrl\": \"https://sample.twil.io/plugin.js\",\n  \"Changelog\": \"the changelog\",\n  \"Private\": true\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPluginVersion() {\n\n11\n  const pluginVersion = await client.flexApi.v1\n\n12\n    .plugins(\"PluginSid\")\n\n13\n    .pluginVersions.create({\n\n14\n      pluginUrl: \"https://www.example.com\",\n\n15\n      version: \"Version\",\n\n16\n    });\n\n17\n\n\n18\n  console.log(pluginVersion.sid);\n\n19\n}\n\n20\n\n\n21\ncreatePluginVersion();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"plugin_sid\": \"PluginSid\",\n\n5\n  \"version\": \"Version\",\n\n6\n  \"plugin_url\": \"https://www.example.com\",\n\n7\n  \"changelog\": \"the changelog\",\n\n8\n  \"private\": true,\n\n9\n  \"archived\": false,\n\n10\n  \"validated\": false,\n\n11\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n12\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions/FVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n13\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchPluginVersion() {\n\n11\n  const pluginVersion = await client.flexApi.v1\n\n12\n    .plugins(\"PluginSid\")\n\n13\n    .pluginVersions(\"Sid\")\n\n14\n    .fetch();\n\n15\n\n\n16\n  console.log(pluginVersion.sid);\n\n17\n}\n\n18\n\n\n19\nfetchPluginVersion();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"Sid\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"plugin_sid\": \"PluginSid\",\n\n5\n  \"version\": \"1.0.0\",\n\n6\n  \"plugin_url\": \"https://sample.twil.io/plugin.js\",\n\n7\n  \"changelog\": \"the changelog\",\n\n8\n  \"private\": false,\n\n9\n  \"archived\": false,\n\n10\n  \"validated\": false,\n\n11\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n12\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions/FVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n13\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function listPluginVersion() {\n\n11\n  const pluginVersions = await client.flexApi.v1\n\n12\n    .plugins(\"PluginSid\")\n\n13\n    .pluginVersions.list({ limit: 20 });\n\n14\n\n\n15\n  pluginVersions.forEach((p) => console.log(p.sid));\n\n16\n}\n\n17\n\n\n18\nlistPluginVersion();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"plugin_versions\": [],\n\n3\n  \"meta\": {\n\n4\n    \"page\": 0,\n\n5\n    \"page_size\": 50,\n\n6\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions?PageSize=50&Page=0\",\n\n7\n    \"previous_page_url\": null,\n\n8\n    \"url\": \"https://flex-api.twilio.com/v1/PluginService/Plugins/FPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Versions?PageSize=50&Page=0\",\n\n9\n    \"next_page_url\": null,\n\n10\n    \"key\": \"plugin_versions\"\n\n11\n  }\n\n12\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version"
+    },
+    {
+      "code": "1\nFlex.Component.Content.add(<MyComponent key=\"demo-component\"/>, {options});\n\n2\nFlex.Component.Content.replace(<MyComponent key=\"demo-component\"/>, {options});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1,\n\n3\n  align: \"end\"\n\n4\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "Flex.Component.Content.remove(key, {options});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "Flex.MainHeader.Content.remove(\"mute\");",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  if : props => props.task.source.taskChannelUniqueName === \"custom1\"\n\n3\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1\n\n3\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  align: \"end\"\n\n3\n});",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.DefaultTaskChannels.Chat.addedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  component: <Flex.IconButton key=\"eye_button\" icon=\"Eye\" />\n\n4\n}];",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.DefaultTaskChannels.Chat.addedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  component: <Flex.IconButton key=\"eye_button\" icon=\"Eye\" />,\n\n4\n  options: { if: props.task.status === \"accepted\" }\n\n5\n}];\n\n6",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.DefaultTaskChannels.Chat.removedComponents = [{\n\n2\n  target: \"TaskListButtons\",\n\n3\n  key: \"reject\"\n\n4\n}];",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nimport { Tab } from \"@twilio/flex-ui\"\n\n2\n\n\n3\ninit(flex, manager) {\n\n4\n  const Img = <img src=\"http://someimage.jpg\" />;\n\n5\n\n\n6\n  flex.TaskCanvasTabs.Content.add(\n\n7\n    <Tab icon={Img} iconActive={Img} key=\"my-new-tab\">\n\n8\n      <MyNewTabComponent/>\n\n9\n    </Tab>\n\n10\n  );\n\n11\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.WorkerDirectory.Tabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\n// Filter Agents by Worker Attributes or activity_name\n\n2\nFlex.WorkerDirectoryTabs.defaultProps.hiddenWorkerFilter = 'data.attributes.team_name CONTAINS \"sales\"'\n\n3\nFlex.WorkerDirectoryTabs.defaultProps.hiddenWorkerFilter = 'data.activity_name CONTAINS \"Available\"'\n\n4\n\n\n5\n// Filter Queues by queue_name or queue_sid\n\n6\nFlex.WorkerDirectoryTabs.defaultProps.hiddenQueueFilter = 'data.queue_name CONTAINS \"sales\"'",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "Flex.WorkerDirectoryTabs.defaultProps.queueFilter = (queue) => queue.queueName.includes(\"HR\")",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nimport { TaskCardList, ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(\n\n4\n       <ColumnDefinition key=\"calls\" header={\"My Custom Header\"} content={(items, context) => <TaskCardList tasks={items.tasks} />} />);",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nexport interface TaskCardListProps {\n\n2\n   compareFunction?: (a: TaskData, b: TaskData) => number;\n\n3\n   filter?: (task: TaskData) => boolean;\n\n4\n   tasks: TaskData[];\n\n5\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"hello\" header={\"Helloxxx\"} content={<div>hello</div>}/>);",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nimport { ColumnDefinition } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nFlex.WorkersDataTable.Content.add(<ColumnDefinition key=\"team\" header={\"Team\"} content={item => item.worker.attributes.team_name}/>);",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\n   componentProps: {\n\n2\n        WorkersDataTable: {\n\n3\n            filters: [\n\n4\n                {\n\n5\n                    query: 'data.activity_name == \"Break\"',\n\n6\n                    text: \"Workers on break\"\n\n7\n                }\n\n8\n            ]\n\n9\n        }\n\n10\n    },...",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.WorkersDataTable.defaultProps.filters = [\n\n2\n                {\n\n3\n                    query: 'data.activity_name == \"Break\"',\n\n4\n                    text: \"Workers on break\"\n\n5\n                },...\n\n6\n            ]",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\nFlex.Supervisor.TaskCanvasTabs.Content.add(\n\n2\n  <Flex.Tab key=\"my-tab\" label=\"My Tab\">\n\n3\n        <div> \"Hello World\"\n\n4\n        </div>\n\n5\n  </Flex.Tab>\n\n6\n);",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/components"
+    },
+    {
+      "code": "1\n{ \n\n2\n  \"type\": \"inbound\",\n\n3\n  \"name\": \"{{trigger.call.From}}\"\n\n4\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/enable-dual-channel-recordings"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"type\": \"inbound\",\n\n3\n  \"name\": \"{{trigger.call.From}}\",\n\n4\n  \"conversations\": {\n\n5\n    \"media\": [\n\n6\n      {\n\n7\n        \"url\": \"https://api.twilio.com/2010-04-01/Accounts/{{widgets.CallRecording.AccountSid}}/Recordings/{{widgets.CallRecording.Sid}}\",\n\n8\n        \"type\": \"VoiceRecording\",\n\n9\n        \"start_time\": \"{{widgets.CallRecording.StartTime}}\",\n\n10\n        \"channels\": [\"customer\", \"others\"]\n\n11\n      }\n\n12\n    ]\n\n13\n  }\n\n14\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/insights/enable-dual-channel-recordings"
+    },
+    {
+      "code": "1\n{\n\n2\n \"name\": \"plugin-sample\",\n\n3\n \"version\": \"0.0.0\",\n\n4\n \"private\": true,\n\n5\n \"scripts\": {\n\n6\n   \"postinstall\": \"flex-plugin pre-script-check\"\n\n7\n },\n\n8\n \"dependencies\": {\n\n9\n   \"@twilio/flex-plugin-scripts\": \"5.1.1\",\n\n10\n   \"react\": \"16.5.2\",\n\n11\n   \"react-dom\": \"16.5.2\",\n\n12\n   \"react-emotion\": \"9.2.12\"\n\n13\n },\n\n14\n \"devDependencies\": {\n\n15\n   \"@twilio/flex-ui\": \"^1\",\n\n16\n   \"react-test-renderer\": \"16.5.2\"\n\n17\n }\n\n18",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-update-plugins"
+    },
+    {
+      "code": "1{\n2  \"name\": \"plugin-sample\",\n3  \"version\": \"0.0.0\",\n4  \"private\": true,\n5  \"scripts\": {\n6    \"postinstall\": \"flex-plugin pre-script-check\"\n7  },\n8  \"dependencies\": {\n9    \"@twilio/flex-plugin\": \"7.1.0\",\n10    \"react\": \"17.0.2\",\n11    \"react-dom\": \"17.0.2\",\n12    \"prop-types\": \"^15.7.2\",\n13    \"@twilio-paste/core\": \"^15.3.1\",\n14    \"@twilio-paste/icons\": \"^9.2.0\"\n15  },\n16  \"devDependencies\": {\n17    \"@twilio/flex-plugin-scripts\": \"7.1.0\",\n18    \"@twilio/flex-ui\": \"2.10.0\",\n19    \"react-test-renderer\": \"17.0.2\",\n20    \"typescript\": \"^4\"\n21  }\n22}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-update-plugins"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchPluginRelease() {\n\n11\n  const pluginRelease = await client.flexApi.v1\n\n12\n    .pluginReleases(\"Active\")\n\n13\n    .fetch();\n\n14\n\n\n15\n  console.log(pluginRelease.sid);\n\n16\n}\n\n17\n\n\n18\nfetchPluginRelease();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"Active\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"configuration_sid\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n6\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases/FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n7\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function fetchPluginConfiguration() {\n\n11\n  const pluginConfiguration = await client.flexApi.v1\n\n12\n    .pluginConfigurations(\"FJXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\")\n\n13\n    .fetch();\n\n14\n\n\n15\n  console.log(pluginConfiguration.sid);\n\n16\n}\n\n17\n\n\n18\nfetchPluginConfiguration();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FJXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"name\": \"some name\",\n\n5\n  \"description\": \"description\",\n\n6\n  \"archived\": false,\n\n7\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n9\n  \"links\": {\n\n10\n    \"plugins\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Plugins\"\n\n11\n  }\n\n12\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function listConfiguredPlugin() {\n\n11\n  const plugins = await client.flexApi.v1\n\n12\n    .pluginConfigurations(\"FJ10000000000000000000000000000000\")\n\n13\n    .plugins.list({ limit: 20 });\n\n14\n\n\n15\n  plugins.forEach((p) => console.log(p.accountSid));\n\n16\n}\n\n17\n\n\n18\nlistConfiguredPlugin();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"plugins\": [],\n\n3\n  \"meta\": {\n\n4\n    \"page\": 0,\n\n5\n    \"page_size\": 50,\n\n6\n    \"first_page_url\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Plugins?PageSize=50&Page=0\",\n\n7\n    \"previous_page_url\": null,\n\n8\n    \"url\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Plugins?PageSize=50&Page=0\",\n\n9\n    \"next_page_url\": null,\n\n10\n    \"key\": \"plugins\"\n\n11\n  }\n\n12\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPluginConfiguration() {\n\n11\n  const pluginConfiguration =\n\n12\n    await client.flexApi.v1.pluginConfigurations.create({\n\n13\n      description: \"This is a new configuration\",\n\n14\n      name: \"Miss Christine Morgan\",\n\n15\n      plugins: [\n\n16\n        {\n\n17\n          plugin_version: \"FV00000000000000000000000000000000\",\n\n18\n        },\n\n19\n        {\n\n20\n          plugin_version: \"FV10000000000000000000000000000001\",\n\n21\n        },\n\n22\n      ],\n\n23\n    });\n\n24\n\n\n25\n  console.log(pluginConfiguration.sid);\n\n26\n}\n\n27\n\n\n28\ncreatePluginConfiguration();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"name\": \"Miss Christine Morgan\",\n\n5\n  \"description\": \"This is a new configuration\",\n\n6\n  \"archived\": false,\n\n7\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n8\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n9\n  \"links\": {\n\n10\n    \"plugins\": \"https://flex-api.twilio.com/v1/PluginService/Configurations/FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Plugins\"\n\n11\n  }\n\n12\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n// Download the helper library from https://www.twilio.com/docs/node/install\n\n2\nconst twilio = require(\"twilio\"); // Or, for ESM: import twilio from \"twilio\";\n\n3\n\n\n4\n// Find your Account SID and Auth Token at twilio.com/console\n\n5\n// and set the environment variables. See http://twil.io/secure\n\n6\nconst accountSid = process.env.TWILIO_ACCOUNT_SID;\n\n7\nconst authToken = process.env.TWILIO_AUTH_TOKEN;\n\n8\nconst client = twilio(accountSid, authToken);\n\n9\n\n\n10\nasync function createPluginRelease() {\n\n11\n  const pluginRelease = await client.flexApi.v1.pluginReleases.create({\n\n12\n    configurationId: \"FJ10000000000000000000000000000001\",\n\n13\n  });\n\n14\n\n\n15\n  console.log(pluginRelease.sid);\n\n16\n}\n\n17\n\n\n18\ncreatePluginRelease();",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\n{\n\n2\n  \"sid\": \"FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n3\n  \"account_sid\": \"ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n4\n  \"configuration_sid\": \"FJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n\n5\n  \"date_created\": \"2020-01-10T20:00:00Z\",\n\n6\n  \"url\": \"https://flex-api.twilio.com/v1/PluginService/Releases/FKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n\n7\n}",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/plugins/api/release-update"
+    },
+    {
+      "code": "1\nvar appConfig = {\n\n2\n  serviceBaseUrl: \"https://dancing-owl-1234.twil.io/\",\n\n3\n  sso: {\n\n4\n    accountSid: \"ACXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\"\n\n5\n  },\n\n6\n  sdkOptions: {\n\n7\n      chat: {},\n\n8\n      insights: {},\n\n9\n      voice: {},\n\n10\n      worker: {}\n\n11\n  },\n\n12\n  logLevel: \"debug\",\n\n13\n  colorTheme: {\n\n14\n    baseName: \"GreyDark\",\n\n15\n    colors: {},\n\n16\n    light: false,\n\n17\n    overrides: {}\n\n18\n  },\n\n19\n  componentProps: {\n\n20\n    CRMContainer: {\n\n21\n      uriCallback: (task) => task\n\n22\n        ? `https://www.bing.com/search?q=${task.attributes.name}`\n\n23\n        : \"http://bing.com\"\n\n24\n    }\n\n25\n  },\n\n26\n  router: {\n\n27\n    type: \"memory\",\n\n28\n    history: {\n\n29\n      initialEntries: [ \"/agent-desktop\" ]\n\n30\n    }\n\n31\n  }\n\n32\n};",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/configuration"
+    },
+    {
+      "code": "1\nappConfig.colorTheme = {\n\n2\n  baseName: \"GreyDark\",\n\n3\n  colors: { base2: \"red\"},\n\n4\n  light: true,\n\n5\n  overrides: {\n\n6\n    MainHeader: {\n\n7\n      Container: {\n\n8\n        background: \"green\"\n\n9\n      }\n\n10\n    }\n\n11\n  }\n\n12\n};",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/configuration"
+    },
+    {
+      "code": "1\nappConfig.componentProps = {\n\n2\n  AgentDesktopView: {\n\n3\n    showPanel2: false\n\n4\n  }\n\n5\n};",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/configuration"
+    },
+    {
+      "code": "appConfig.disableTransfers = false;",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/configuration"
+    },
+    {
+      "code": "appConfig.logLevel = 'info';",
+      "language": "css-1p78m0",
+      "source_url": "https://www.twilio.com/docs/flex/developer/ui/v1/configuration"
+    }
+  ],
+  "production_patterns": {
+    "feature_structure": {
+      "config.ts": "Feature configuration and settings",
+      "index.ts": "Feature registration and initialization",
+      "flex-hooks/": "Actions, events, components, strings, notifications",
+      "custom-components/": "React components specific to feature",
+      "utils/": "Helper functions",
+      "types/": "TypeScript type definitions"
+    },
+    "real_features": [
+      "conditional-recording",
+      "hang-up-by",
+      "pause-recording",
+      "metrics-data-tiles",
+      "branding",
+      "chat-to-video-escalation",
+      "custom-hold-music",
+      "device-manager",
+      "dispositions",
+      "datadog-log-integration",
+      "custom-transfer-directory",
+      "conference",
+      "inline-media",
+      "park-interaction",
+      "contacts",
+      "teams-view-filters",
+      "omni-channel-capacity-management",
+      "emoji-picker",
+      "dual-channel-recording",
+      "activity-skill-filter",
+      "canned-responses",
+      "send-audio-rec-file",
+      "supervisor-capacity",
+      "callback-and-voicemail",
+      "enhanced-crm-container",
+      "sip-support",
+      "queues-stats-metrics",
+      "agent-automation",
+      "attribute-viewer",
+      "conversation-transfer",
+      "caller-id",
+      "chat-transfer",
+      "schedule-manager",
+      "scrollable-activities",
+      "multi-call",
+      "admin-ui",
+      "ring-notification",
+      "activity-reservation-handler",
+      "worker-canvas-tabs",
+      "internal-call",
+      "supervisor-complete-reservation",
+      "teams-view-enhancements",
+      "worker-details",
+      "keyboard-shortcuts",
+      "localization",
+      "supervisor-barge-coach",
+      "force-conference-region"
+    ],
+    "common_dependencies": [
+      {
+        "package": "@twilio/flex-ui",
+        "usage_count": 430
+      },
+      {
+        "package": "@twilio-paste/core/box",
+        "usage_count": 38
+      },
+      {
+        "package": "@twilio-paste/core/button",
+        "usage_count": 34
+      },
+      {
+        "package": "@twilio-paste/core/flex",
+        "usage_count": 30
+      },
+      {
+        "package": "@twilio-paste/core/stack",
+        "usage_count": 25
+      },
+      {
+        "package": "@twilio-paste/core/heading",
+        "usage_count": 20
+      },
+      {
+        "package": "@twilio-paste/core/text",
+        "usage_count": 17
+      }
+    ],
+    "file_organization": {
+      "config": 108,
+      "utils": 27,
+      "tests": 4,
+      "types": 100
+    }
+  },
+  "edge_cases_and_gotchas": {
+    "description": "Real production edge cases not in official docs",
+    "by_action": [
+      {
+        "action": "AcceptTask",
+        "file": "AcceptTask.ts",
+        "gotchas": [
+          {
+            "type": "null_validation",
+            "pattern": "if (!payload.task && !payload.sid) return;",
+            "why": "Payload may be incomplete"
+          }
+        ]
+      },
+      {
+        "action": "WrapupTask",
+        "file": "WrapupTask.ts",
+        "gotchas": [
+          {
+            "type": "null_validation",
+            "pattern": "if (!payload.task?.attributes?.videoRoomSid) return;",
+            "why": "Payload may be incomplete"
+          }
+        ]
+      },
+      {
+        "action": "CompleteTask",
+        "file": "CompleteTask.ts",
+        "gotchas": [
+          {
+            "type": "state_access",
+            "pattern": "const state = manager.store.getState() as AppState",
+            "why": "Need Redux state for context/decisions"
+          },
+          {
+            "type": "abort_reinvoke",
+            "pattern": "abortFunction(); await Actions.invokeAction(...)",
+            "why": "Override default with custom payload"
+          }
+        ]
+      },
+      {
+        "action": "HangupCall",
+        "file": "HangupCall.ts",
+        "gotchas": [
+          {
+            "type": "feature_flag",
+            "pattern": "if (!isConferenceEnabledWithoutNativeXWT()) return;",
+            "why": "Conditional feature activation"
+          },
+          {
+            "type": "abort_reinvoke",
+            "pattern": "abortFunction(); await Actions.invokeAction(...)",
+            "why": "Override default with custom payload"
+          }
+        ]
+      },
+      {
+        "action": "UnholdParticipant",
+        "file": "UnholdParticipant.ts",
+        "gotchas": [
+          {
+            "type": "feature_flag",
+            "pattern": "if (!isConferenceEnabledWithoutNativeXWT()) return;",
+            "why": "Conditional feature activation"
+          }
+        ]
+      },
+      {
+        "action": "HoldParticipant",
+        "file": "HoldParticipant.ts",
+        "gotchas": [
+          {
+            "type": "feature_flag",
+            "pattern": "if (!isConferenceEnabledWithoutNativeXWT()) return;",
+            "why": "Conditional feature activation"
+          }
+        ]
+      },
+      {
+        "action": "ApplyTeamsViewFilters",
+        "file": "beforeApplyTeamsViewFilters.ts",
+        "gotchas": [
+          {
+            "type": "feature_flag",
+            "pattern": "if (!isQueueNoWorkerDataFilterEnabled()) return;",
+            "why": "Conditional feature activation"
+          }
+        ]
+      },
+      {
+        "action": "AcceptTask",
+        "file": "AcceptTask.ts",
+        "gotchas": [
+          {
+            "type": "state_access",
+            "pattern": "const state = manager.store.getState() as AppState",
+            "why": "Need Redux state for context/decisions"
+          },
+          {
+            "type": "task_validation",
+            "pattern": "state.flex.worker.tasks.get(taskSid)",
+            "why": "Tasks can be removed asynchronously"
+          }
+        ]
+      },
+      {
+        "action": "SelectTask",
+        "file": "SelectTask.ts",
+        "gotchas": [
+          {
+            "type": "feature_flag",
+            "pattern": "if (!isAutoSelectTaskEnabled()) return;",
+            "why": "Conditional feature activation"
+          },
+          {
+            "type": "state_access",
+            "pattern": "const state = manager.store.getState() as AppState",
+            "why": "Need Redux state for context/decisions"
+          },
+          {
+            "type": "abort_reinvoke",
+            "pattern": "abortFunction(); await Actions.invokeAction(...)",
+            "why": "Override default with custom payload"
+          },
+          {
+            "type": "task_validation",
+            "pattern": "state.flex.worker.tasks.get(taskSid)",
+            "why": "Tasks can be removed asynchronously"
+          }
+        ]
+      },
+      {
+        "action": "StopMonitoringCall",
+        "file": "StopMonitoringCall.ts",
+        "gotchas": [
+          {
+            "type": "state_access",
+            "pattern": "const state = manager.store.getState() as AppState",
+            "why": "Need Redux state for context/decisions"
+          }
+        ]
+      },
+      {
+        "action": "TransferTask",
+        "file": "TransferTask.ts",
+        "gotchas": [
+          {
+            "type": "abort_reinvoke",
+            "pattern": "abortFunction(); await Actions.invokeAction(...)",
+            "why": "Override default with custom payload"
+          }
+        ]
+      },
+      {
+        "action": "WrapupTask",
+        "file": "WrapupTask.ts",
+        "gotchas": [
+          {
+            "type": "state_access",
+            "pattern": "const state = manager.store.getState() as AppState",
+            "why": "Need Redux state for context/decisions"
+          }
+        ]
+      },
+      {
+        "action": "ShowDirectory",
+        "file": "ShowDirectory.ts",
+        "gotchas": [
+          {
+            "type": "state_access",
+            "pattern": "const state = manager.store.getState() as AppState",
+            "why": "Need Redux state for context/decisions"
+          }
+        ]
+      },
+      {
+        "action": "StartOutboundCall",
+        "file": "StartOutboundCall.ts",
+        "gotchas": [
+          {
+            "type": "state_access",
+            "pattern": "const state = manager.store.getState() as AppState",
+            "why": "Need Redux state for context/decisions"
+          }
+        ]
+      }
+    ],
+    "critical_patterns": {
+      "always_validate_payload": {
+        "code": "if (!payload.task && !payload.sid) return;",
+        "why": "Actions can be called with incomplete payloads",
+        "severity": "HIGH",
+        "source": "production_code"
+      },
+      "null_task_means_ended": {
+        "code": "if (payload.task === null) { /* reservation removed */ }",
+        "why": "SelectTask with null task indicates call/reservation ended",
+        "severity": "MEDIUM",
+        "source": "flex-project-template/SelectTask.ts:23-28"
+      },
+      "check_feature_flags": {
+        "code": "if (!isFeatureEnabled()) return;",
+        "why": "Features should respect configuration flags",
+        "severity": "MEDIUM",
+        "source": "production_pattern"
+      },
+      "state_for_context": {
+        "code": "const state = manager.store.getState() as AppState;",
+        "why": "Redux state needed for context-aware decisions",
+        "severity": "LOW",
+        "source": "production_pattern"
+      },
+      "verify_task_exists": {
+        "code": "if (!state.flex.worker.tasks.get(taskSid)) return;",
+        "why": "Tasks removed asynchronously, always check existence",
+        "severity": "HIGH",
+        "source": "flex-project-template/SelectTask.ts:40"
+      }
+    }
+  },
+  "quick_patterns": {
+    "register_custom_action": {
+      "code": "Actions.registerAction(\"MyAction\", async (payload) => { /* logic */ })",
+      "when": "Creating entirely new action",
+      "source": "docs"
+    },
+    "replace_action": {
+      "code": "Actions.replaceAction(\"AcceptTask\", async (payload, original) => { /* custom logic */; return original(payload); })",
+      "when": "Modifying existing action behavior",
+      "gotchas": [
+        "Must call original() or action breaks",
+        "Return original()'s promise"
+      ],
+      "source": "docs"
+    },
+    "before_hook_with_validation": {
+      "code": "Actions.addListener(\"beforeAcceptTask\", (payload, abort) => { if (!isValid(payload)) abort(); })",
+      "when": "Validate before action executes",
+      "gotchas": [
+        "Call abort() to prevent action",
+        "Validation should be synchronous or fast"
+      ],
+      "source": "production"
+    },
+    "after_hook": {
+      "code": "Actions.addListener(\"afterCompleteTask\", async (payload) => { await logToCRM(payload); })",
+      "when": "React to action completion",
+      "gotchas": [
+        "Cannot cancel action (already happened)",
+        "Errors here don't stop Flex"
+      ],
+      "source": "docs"
+    },
+    "add_component": {
+      "code": "Flex.TaskCanvas.Content.add(<MyComponent key=\"unique\" />, { sortOrder: 1 })",
+      "when": "Adding UI to existing container",
+      "gotchas": [
+        "Key must be unique",
+        "sortOrder controls position"
+      ],
+      "source": "docs"
+    },
+    "access_manager": {
+      "code": "const manager = Flex.Manager.getInstance(); const state = manager.store.getState();",
+      "when": "Need access to Flex state/config",
+      "gotchas": [
+        "Manager not available until plugin init",
+        "State is Redux - immutable"
+      ],
+      "source": "production"
+    }
+  },
+  "url_index": [
+    "https://www.twilio.com/docs/flex/developer/config",
+    "https://www.twilio.com/docs/flex/developer/config/appconfigjs",
+    "https://www.twilio.com/docs/flex/developer/config/flex-configuration-rest-api",
+    "https://www.twilio.com/docs/flex/developer/config/known-issue-react-scripts-version",
+    "https://www.twilio.com/docs/flex/developer/conversations",
+    "https://www.twilio.com/docs/flex/developer/conversations/best-practices",
+    "https://www.twilio.com/docs/flex/developer/conversations/faq-and-troubleshooting",
+    "https://www.twilio.com/docs/flex/developer/conversations/integrate-a-custom-chat-client-with-flex",
+    "https://www.twilio.com/docs/flex/developer/conversations/integrate-twilio-webchat-react-app",
+    "https://www.twilio.com/docs/flex/developer/conversations/interactions-api",
+    "https://www.twilio.com/docs/flex/developer/conversations/interactions-api/channels-subresource",
+    "https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interaction-channel-participants",
+    "https://www.twilio.com/docs/flex/developer/conversations/interactions-api/interactions",
+    "https://www.twilio.com/docs/flex/developer/conversations/interactions-api/invites-subresource",
+    "https://www.twilio.com/docs/flex/developer/conversations/known-issues",
+    "https://www.twilio.com/docs/flex/developer/conversations/limits",
+    "https://www.twilio.com/docs/flex/developer/conversations/park-an-interaction",
+    "https://www.twilio.com/docs/flex/developer/conversations/programmable-chat-to-flex-conversations",
+    "https://www.twilio.com/docs/flex/developer/conversations/receive-inbound-messages-from-sms-and-whatsapp",
+    "https://www.twilio.com/docs/flex/developer/conversations/register-interactions-webhooks",
+    "https://www.twilio.com/docs/flex/developer/conversations/send-outbound-messages-via-sms-and-whatsapp",
+    "https://www.twilio.com/docs/flex/developer/conversations/webchat",
+    "https://www.twilio.com/docs/flex/developer/conversations/webchat/cookies-and-web-storage",
+    "https://www.twilio.com/docs/flex/developer/conversations/webchat/migrate",
+    "https://www.twilio.com/docs/flex/developer/conversations/webchat/pre-engagement-and-context",
+    "https://www.twilio.com/docs/flex/developer/conversations/webchat/security",
+    "https://www.twilio.com/docs/flex/developer/conversations/webchat/setup",
+    "https://www.twilio.com/docs/flex/developer/conversations/webchats-resource",
+    "https://www.twilio.com/docs/flex/developer/copilot-webhooks",
+    "https://www.twilio.com/docs/flex/developer/email",
+    "https://www.twilio.com/docs/flex/developer/email/conversations",
+    "https://www.twilio.com/docs/flex/developer/email/limitations",
+    "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+    "https://www.twilio.com/docs/flex/developer/insights",
+    "https://www.twilio.com/docs/flex/developer/insights/api/export-data",
+    "https://www.twilio.com/docs/flex/developer/insights/api/general-usage",
+    "https://www.twilio.com/docs/flex/developer/insights/api/mapping-identifiers",
+    "https://www.twilio.com/docs/flex/developer/insights/custom-domain",
+    "https://www.twilio.com/docs/flex/developer/insights/custom-media-attached-conversations",
+    "https://www.twilio.com/docs/flex/developer/insights/enable-dual-channel-recordings",
+    "https://www.twilio.com/docs/flex/developer/insights/enhance-integration",
+    "https://www.twilio.com/docs/flex/developer/insights/hipaa-flex-insights-historical-reporting",
+    "https://www.twilio.com/docs/flex/developer/insights/insights-dashboards-embedding",
+    "https://www.twilio.com/docs/flex/developer/insights/insights-dashboards-programmability",
+    "https://www.twilio.com/docs/flex/developer/insights/labels",
+    "https://www.twilio.com/docs/flex/developer/insights/playback-recordings-custom-storage",
+    "https://www.twilio.com/docs/flex/developer/insights/real-time-adherence",
+    "https://www.twilio.com/docs/flex/developer/insights/taskrouter-data",
+    "https://www.twilio.com/docs/flex/developer/messaging",
+    "https://www.twilio.com/docs/flex/developer/messaging/chat-channel",
+    "https://www.twilio.com/docs/flex/developer/messaging/faq-and-troubleshooting",
+    "https://www.twilio.com/docs/flex/developer/messaging/flow",
+    "https://www.twilio.com/docs/flex/developer/messaging/inbound-messages-channels",
+    "https://www.twilio.com/docs/flex/developer/messaging/inbound-messages-webchat-ui",
+    "https://www.twilio.com/docs/flex/developer/messaging/integrate-custom-chat-client",
+    "https://www.twilio.com/docs/flex/developer/messaging/limits",
+    "https://www.twilio.com/docs/flex/developer/messaging/manage-flows",
+    "https://www.twilio.com/docs/flex/developer/messaging/outbound-messages-channels",
+    "https://www.twilio.com/docs/flex/developer/messaging/use-legacy-messaging",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/actions",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/attachments-development",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/components",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/configuration",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/cookies-and-web-storage",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/customize-attachment-behavior",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/enable-attachments",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/localization-and-templating",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/pre-engagement-and-context",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/setup",
+    "https://www.twilio.com/docs/flex/developer/messaging/webchat/theming",
+    "https://www.twilio.com/docs/flex/developer/plugins/api",
+    "https://www.twilio.com/docs/flex/developer/plugins/api/plugin",
+    "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-configuration",
+    "https://www.twilio.com/docs/flex/developer/plugins/api/plugin-version",
+    "https://www.twilio.com/docs/flex/developer/plugins/api/release",
+    "https://www.twilio.com/docs/flex/developer/plugins/api/release-guide",
+    "https://www.twilio.com/docs/flex/developer/plugins/api/release-update",
+    "https://www.twilio.com/docs/flex/developer/plugins/api/rollback",
+    "https://www.twilio.com/docs/flex/developer/plugins/call-functions",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli/archive",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli/common-uses",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli/deploy-and-release",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli/install",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli/reference",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli/run-multiple-plugins",
+    "https://www.twilio.com/docs/flex/developer/plugins/cli/upgrade",
+    "https://www.twilio.com/docs/flex/developer/plugins/dashboard",
+    "https://www.twilio.com/docs/flex/developer/plugins/debugging-with-vscode",
+    "https://www.twilio.com/docs/flex/developer/plugins/environment-variables",
+    "https://www.twilio.com/docs/flex/developer/plugins/localize-a-plugin",
+    "https://www.twilio.com/docs/flex/developer/plugins/migrate",
+    "https://www.twilio.com/docs/flex/developer/plugins/plugin-library",
+    "https://www.twilio.com/docs/flex/developer/plugins/plugins-resource-limits",
+    "https://www.twilio.com/docs/flex/developer/plugins/react-versions",
+    "https://www.twilio.com/docs/flex/developer/plugins/updating",
+    "https://www.twilio.com/docs/flex/developer/routing",
+    "https://www.twilio.com/docs/flex/developer/ui",
+    "https://www.twilio.com/docs/flex/developer/ui-and-plugins",
+    "https://www.twilio.com/docs/flex/developer/ui-and-plugins/themes-branding-styling",
+    "https://www.twilio.com/docs/flex/developer/ui/1-migration-guide",
+    "https://www.twilio.com/docs/flex/developer/ui/20-enhancements",
+    "https://www.twilio.com/docs/flex/developer/ui/add-component-context",
+    "https://www.twilio.com/docs/flex/developer/ui/add-components-flex-ui",
+    "https://www.twilio.com/docs/flex/developer/ui/apollo-client",
+    "https://www.twilio.com/docs/flex/developer/ui/components",
+    "https://www.twilio.com/docs/flex/developer/ui/creating-styling-custom-components",
+    "https://www.twilio.com/docs/flex/developer/ui/custom-views-and-routes",
+    "https://www.twilio.com/docs/flex/developer/ui/errors-and-debugging",
+    "https://www.twilio.com/docs/flex/developer/ui/local-logging",
+    "https://www.twilio.com/docs/flex/developer/ui/migration-guide",
+    "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates",
+    "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-enable-update",
+    "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-update-dependencies",
+    "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-update-plugins",
+    "https://www.twilio.com/docs/flex/developer/ui/modify-keyboard-shortcuts",
+    "https://www.twilio.com/docs/flex/developer/ui/overview-of-flex-ui-programmability-options",
+    "https://www.twilio.com/docs/flex/developer/ui/queues-view-programmability",
+    "https://www.twilio.com/docs/flex/developer/ui/redux",
+    "https://www.twilio.com/docs/flex/developer/ui/requirements",
+    "https://www.twilio.com/docs/flex/developer/ui/sound-and-audio",
+    "https://www.twilio.com/docs/flex/developer/ui/team-view-filters",
+    "https://www.twilio.com/docs/flex/developer/ui/troubleshoot-the-flex-ui",
+    "https://www.twilio.com/docs/flex/developer/ui/use-paste-with-a-plugin",
+    "https://www.twilio.com/docs/flex/developer/ui/use-ui-actions",
+    "https://www.twilio.com/docs/flex/developer/ui/v1",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/actions",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/components",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/configuration",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/icons",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/localization-and-templating",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/manager",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/notifications",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/task-channel-definitions",
+    "https://www.twilio.com/docs/flex/developer/ui/v1/themes-branding-styling",
+    "https://www.twilio.com/docs/flex/developer/ui/web-accessibility",
+    "https://www.twilio.com/docs/flex/developer/ui/work-with-components-and-props",
+    "https://www.twilio.com/docs/flex/developer/ui/work-with-notifications",
+    "https://www.twilio.com/docs/flex/developer/unified-profiles-container",
+    "https://www.twilio.com/docs/flex/developer/user-management/flex-teams-api",
+    "https://www.twilio.com/docs/flex/developer/voice",
+    "https://www.twilio.com/docs/flex/developer/voice/dialpad-click-to-dial"
+  ]
+}

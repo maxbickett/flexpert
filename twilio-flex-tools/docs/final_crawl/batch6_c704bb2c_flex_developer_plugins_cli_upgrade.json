@@ -1,0 +1,32 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/upgrade",
+  "batch_id": 6,
+  "crawled_at": "2025-10-07T20:30:57.668126+00:00",
+  "content": {
+    "title": "Upgrade Flex Plugins CLI | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/cli/upgrade",
+    "text_content": "On this page\nPage Tools\nUpgrade Flex Plugins CLI\n\nThe Flex Plugins CLI can be upgraded using the Twilio CLI. Your first step is keeping the Twilio CLI up-to-date. Details are available in the CLI Quickstart Guide. The Twilio CLI will always report if a new version is available when you are executing twilio commands.\n\nUpgrading the Flex Plugin CLI\n\nThe Flex Plugin CLI can be updated using the original install command used when setting up your development environment.\n\nIdentify the latest available version of the Flex Plugin CLI.\nCopy code block\n1\n$ npm show @twilio-labs/plugin-flex\n\n2\n4.8.0\nCheck the version of the Flex Plugins CLI currently installed on your local environment.\nCopy code block\n1\n$ twilio plugins\n\n2\n@twilio-labs/plugin-flex 1.0.0\nUpgrade to the latest version available.\nCopy code block\ntwilio plugins:install @twilio-labs/plugin-flex\nUpgrading your plugins\n\nUpgrading the Plugins CLI will not affect any of your existing plugins. Make sure to follow our guide for updating your plugins and keeping everything up-to-date.\n\nNext Steps\nMigrate pre-existing plugins to use the latest Flex Plugins CLI\nCheck our Reference Guide to get more details on the Flex Plugins CLI",
+    "cli_commands": [
+      "$ npm show @twilio-labs/plugin-flex",
+      "$ twilio plugins",
+      "@twilio-labs/plugin-flex 1.0.0",
+      "twilio plugins:install @twilio-labs/plugin-flex"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\n$ npm show @twilio-labs/plugin-flex\n\n2\n4.8.0",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n$ twilio plugins\n\n2\n@twilio-labs/plugin-flex 1.0.0",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio plugins:install @twilio-labs/plugin-flex",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

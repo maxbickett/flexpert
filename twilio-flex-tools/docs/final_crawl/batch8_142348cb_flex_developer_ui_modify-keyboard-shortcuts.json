@@ -1,0 +1,91 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/modify-keyboard-shortcuts",
+  "batch_id": 8,
+  "crawled_at": "2025-10-07T20:30:56.863585+00:00",
+  "content": {
+    "title": "Modify Flex UI Keyboard Shortcuts | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/modify-keyboard-shortcuts",
+    "text_content": "On this page\nPage Tools\nModify Flex UI Keyboard Shortcuts\n\nFlex UI 2.1 comes with default keyboard shortcuts. You can modify these shortcuts by remapping them to a different key. You can also edit properties of the default shortcuts, delete shortcuts, or add new custom shortcuts. Please be aware that when adding or remapping a shortcut, custom shortcuts will override the defaults if the same key is used. For example, if you use 1 to \"return to active call\", then it will override the \"end currently selected task\" shortcut and apply CTRL + SHIFT + 1 to the action you've set it to. It's also recommended to ensure that custom shortcuts do not conflict with browser or operating system shortcuts (such as CTRL + C, CTRL + V) which may be present. Changes to the shortcuts are reflected in the Keyboard Shortcuts discovery menu in Flex. You can access it under the user menu on the top right of the Flex UI.\n\nYou can make customizations to the default shortcuts using the following Flex API functions:\n\nFlex.KeyboardShortcutManager.remapShortcut()\nFlex.KeyboardShortcutManager.deleteShortcuts()\nFlex.KeyboardShortcutManager.addShortcuts()\nFlex.KeyboardShortcutManager.disableShortcuts()\n\nThe keyboard shortcut mappings use the modifiers CTRL + SHIFT along with a KEY. Flex provides the following default shortcuts:\n\nCopy code block\n1\n{\n\n2\n   0: { action: logout, name: \"Logout\" },\n\n3\n   1: { action: endSelectedTask, name: \"End Selected Task\", throttle: 1000 },\n\n4\n   A: { action: acceptTask, name: \"Accept Task\" },\n\n5\n   R: { action: rejectTask, name: \"Reject Task\" },\n\n6\n   T: { action: selectNextTask, name: \"Select Next Task\" },\n\n7\n   Y: { action: selectPreviousTask, name: \"Select Previous Task\" },\n\n8\n   S: { action: toggleActivityMenu, name: \"Toggle Activity Menu\" },\n\n9\n   H: { action: toggleHold, name: \"Toggle Hold\" },\n\n10\n   M: { action: toggleMute, name: \"Toggle Mute\" },\n\n11\n   C: { action: returnToCall, name: \"Return To Call\" }\n\n12\n};\n\n13\n\nShortcuts are constructed in the following way:\n\nCopy code block\nX: { action: () => functionName(), name: \"Shortcut Name\", throttle: 0 }\nExample\tDescription\tNotes\n1\tThe key which will trigger the shortcut.\tOnly numbers and uppercase letters are valid.\nendSelectedTask\tThe function which is triggered by the shortcut.\t\nEnd Selected Task\tThe name of the shortcut which will be displayed in the Keyboard Shortcuts menu and in error messages if a shortcut does not work.\t\n1000\tThe throttle time in milliseconds which can be set to prevent the shortcut from being triggered again within the set amount of time. The user will see a notification if a shortcut is used repeatedly within the throttle limit time.\tOptional - Default value is 50ms to prevent Flex from being overloaded by repeated firings, and to provide a more seamless visual experience. You can set a higher throttle for destructive actions where a user may accidentally fire a shortcut multiple times by accident.\n\nOnly endSelectedTask has a configured throttle of 1000 ms. You can override this and the default throttle time for the other shortcuts by following the example in Remapping shortcuts.\nRemap shortcuts\n\nYou can modify and remap a keyboard shortcut to use a different key. You can change the default shortcut key to a different one using the following function:\n\nCopy code block\n1\nFlex.KeyboardShortcutManager.remapShortcut(oldKey, newKey,\n\n2\n   { action: functionName(), name: \"Shortcut Name\", throttle: 0 }\n\n3\n);\n\n4\n\nFlex.KeyboardShortcutManager takes three parameters:\n\noldKey - the letter of the key which the shortcut corresponds to (eg., \"S\" of the default keyboard shortcut table)\nnewKey - the new key to assign to the shortcut (the KeyboardEvent.key value of the new mapping)\nOptional: Shortcut object - this can be passed if any modifications need to be made to the shortcut itself\nExamples\n\nThe following example will reassign the \"Toggle Activity Menu\" from CTRL + SHIFT + S (default) to CTRL + SHIFT + K:\n\nCopy code block\nFlex.KeyboardShortcutManager.remapShortcut(\"S\", \"K\");\n\nThe following example will reassign the \"Toggle Activity Menu\" from CTRL + SHIFT + S (default) to CTRL + SHIFT + K, as well as change the throttle time to 1000 ms:\n\nCopy code block\n1\nFlex.KeyboardShortcutManager.remapShortcut(\"S\", \"K\", {\n\n2\n   action: Flex.defaultActions.toggleActivityMenu,\n\n3\n   name: \"Toggle Activity Menu\",\n\n4\n   throttle: 1000\n\n5\n});\n\n6\nDelete default shortcuts\n\nYou can delete one or more keyboard shortcuts using the following:\n\nCopy code block\nFlex.KeyboardShortcutManager.deleteShortcuts([\"S\"]);\nCopy code block\nFlex.KeyboardShortcutManager.deleteShortcuts([\"S\", \"A\", \"1\"]);\n\nThe shortcut of whichever key or keys are passed in an array to this function will be removed. The Keyboard Shortcuts menu will be updated to reflect the deletion.\n\nAdd custom shortcuts\n\nYou can add custom shortcuts to expand the functionality. The following examples show how native Flex actions or basic functionality can be integrated into shortcuts. It is also possible to write more complicated custom logic.\n\nCopy code block\n1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nconst toggleDialpad = () => {\n\n4\n   Actions.invokeAction(\"ToggleOutboundDialer\");\n\n5\n};\n\n6\n\n\n7\n\n\n8\nFlex.KeyboardShortcutManager.addShortcuts({\n\n9\n   5: { action: () => console.log(\"hello\"), name: \"Log hello\" },\n\n10\n   D: { action: toggleDialpad, name: \"Toggle dialpad\", throttle: 100 }\n\n11\n});\n\n12\n\nAt a minimum, a shortcut needs to include the letter or number it maps to, an action, and a name such as:\n\nCopy code block\n5: { action: () => console.log(\"hello\"), name: \"Log hello\" }\n\nOptionally, you can add a custom throttle.\n\nDisable all shortcuts\n\nYou can disable shortcuts entirely by calling the following function:\n\nCopy code block\nFlex.KeyboardShortcutManager.disableShortcuts();\n\nThis will remove the Keyboard Shortcuts menu entirely.",
+    "cli_commands": [
+      "import { Actions } from \"@twilio/flex-ui\";"
+    ],
+    "actions": [
+      "toggleActivityMenu",
+      "invokeAction",
+      "ToggleOutboundDialer"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\n{\n\n2\n   0: { action: logout, name: \"Logout\" },\n\n3\n   1: { action: endSelectedTask, name: \"End Selected Task\", throttle: 1000 },\n\n4\n   A: { action: acceptTask, name: \"Accept Task\" },\n\n5\n   R: { action: rejectTask, name: \"Reject Task\" },\n\n6\n   T: { action: selectNextTask, name: \"Select Next Task\" },\n\n7\n   Y: { action: selectPreviousTask, name: \"Select Previous Task\" },\n\n8\n   S: { action: toggleActivityMenu, name: \"Toggle Activity Menu\" },\n\n9\n   H: { action: toggleHold, name: \"Toggle Hold\" },\n\n10\n   M: { action: toggleMute, name: \"Toggle Mute\" },\n\n11\n   C: { action: returnToCall, name: \"Return To Call\" }\n\n12\n};\n\n13",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "X: { action: () => functionName(), name: \"Shortcut Name\", throttle: 0 }",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.KeyboardShortcutManager.remapShortcut(oldKey, newKey,\n\n2\n   { action: functionName(), name: \"Shortcut Name\", throttle: 0 }\n\n3\n);\n\n4",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.KeyboardShortcutManager.remapShortcut(\"S\", \"K\");",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.KeyboardShortcutManager.remapShortcut(\"S\", \"K\", {\n\n2\n   action: Flex.defaultActions.toggleActivityMenu,\n\n3\n   name: \"Toggle Activity Menu\",\n\n4\n   throttle: 1000\n\n5\n});\n\n6",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.KeyboardShortcutManager.deleteShortcuts([\"S\"]);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.KeyboardShortcutManager.deleteShortcuts([\"S\", \"A\", \"1\"]);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\nconst toggleDialpad = () => {\n\n4\n   Actions.invokeAction(\"ToggleOutboundDialer\");\n\n5\n};\n\n6\n\n\n7\n\n\n8\nFlex.KeyboardShortcutManager.addShortcuts({\n\n9\n   5: { action: () => console.log(\"hello\"), name: \"Log hello\" },\n\n10\n   D: { action: toggleDialpad, name: \"Toggle dialpad\", throttle: 100 }\n\n11\n});\n\n12",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "5: { action: () => console.log(\"hello\"), name: \"Log hello\" }",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.KeyboardShortcutManager.disableShortcuts();",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Example",
+          "Description",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "1",
+            "The key which will trigger the shortcut.",
+            "Only numbers and uppercase letters are valid."
+          ],
+          [
+            "endSelectedTask",
+            "The function which is triggered by the shortcut.",
+            ""
+          ],
+          [
+            "End Selected Task",
+            "The name of the shortcut which will be displayed in the Keyboard Shortcuts menu and in error messages if a shortcut does not work.",
+            ""
+          ],
+          [
+            "1000",
+            "The throttle time in milliseconds which can be set to prevent the shortcut from being triggered again within the set amount of time. The user will see a notification if a shortcut is used repeatedly within the throttle limit time.",
+            "Optional - Default value is 50ms to prevent Flex from being overloaded by repeated firings, and to provide a more seamless visual experience. You can set a higher throttle for destructive actions where a user may accidentally fire a shortcut multiple times by accident.\n\nOnly endSelectedTask has a configured throttle of 1000 ms. You can override this and the default throttle time for the other shortcuts by following the example in Remapping shortcuts."
+          ]
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/local-logging",
+  "batch_id": 8,
+  "crawled_at": "2025-10-07T20:30:44.015231+00:00",
+  "content": {
+    "title": "Flex UI local logging | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/local-logging",
+    "text_content": "On this page\nPage Tools\nFlex UI local logging\n(information)\nPilot\n\nThis Twilio product is currently available as a pilot release. Some features are not yet implemented and others may be changed before the product is declared as Generally Available. Pilot and beta products are not covered by a Twilio SLA. Learn more about how Twilio supports products that are not yet GA\n.\n\nLocal logging allow a user to capture client side logs into a text file which can then be shared with Twilio support to help troubleshooting issues.\n\nHow it works?\n\nIf local logging is enabled (See How to enable local logging), users will see a \"bug\" icon in the header.\n\nExpand image\nSteps\n\nClick on the bug button\n\nStart logging and reproduce the issue. Logs will be captured until logging is stopped, even if user logs out.\n\nExpand image\n\nOnce the issue was reproduced, stop logging and download file\n\nExpand image\n\nSend the file to Twilio support with issue description\n\nHow to enable local logging?\n\nThere are 2 ways to enable local logging:\n\nFor hosted and self-hosted Flex: Upload plugin-logger\n plugin to assets\nFor self-hosted Flex: add the following flag to configuration file (appConfig.js)\nCopy code block\n1\nvar appConfig = {\n\n2\n<..>\n\n3\n      logger: { type:\"file\" },\n\n4\n<..>\n\n5\n};\n\n6",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nvar appConfig = {\n\n2\n<..>\n\n3\n      logger: { type:\"file\" },\n\n4\n<..>\n\n5\n};\n\n6",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

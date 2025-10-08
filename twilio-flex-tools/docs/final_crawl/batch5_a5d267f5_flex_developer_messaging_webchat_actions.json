@@ -1,0 +1,21 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/actions",
+  "batch_id": 5,
+  "crawled_at": "2025-10-07T20:30:32.502482+00:00",
+  "content": {
+    "title": "WebChat 2.0 Actions | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/messaging/webchat/actions",
+    "text_content": "On this page\nPage Tools\nWebChat 2.0 Actions\n(warning)\nWarning\n\nWebchat 2.0 is no longer supported. It uses Flex UI 1.x.x's legacy messaging, which has reached end-of-life.\n\nIf you are using Webchat 2.0, migrate to Webchat 3.x.x.\n\nIf you are starting out with Webchat, build with Webchat 3.x.x instead.\n\nWhat is the Actions Framework?\n\nThe Actions Framework allows you to implement programmatic changes in Flex WebChat UI that are triggered upon certain events. You can register events before or after an action fires, or replace the behavior of an action.\n\nWhat can you do with the Actions Framework?\nReplace native actions\nInvoke actions from your custom components\nTap into before and after action events\nRegister your custom actions and use them in your custom components\n\nFind out more about actions framework in Flex UI - Actions Framework\n\nWebChat Actions\n\nGeneral\n\nStartEngagement - payload: {formData?: any} - post form data to the startEngagement URL to proceed to the in-engagement state.\nRestartEngagement - remove the user from the chat channel and return them to a pre-engagement stage.\nToggleChatVisibility - toggle chat widget visibility between minimized and expanded view.\nMinimizeChat - minimize chat widget\n\nChat:\n\nThese Actions need either channel or channelSid parameter.\n\nSendMessage - payload: {channel?: ChannelState, channelSid?: string, body: string, messageAttributes?: any} - sends message with body to channel defined by ChannelState.\nSetInputText - payload: {channel?: ChannelState, channelSid?: string, body: string} - sets message edit field to body in chat UI for channel ChannelState.\nSendTyping - payload: {channel?: ChannelState, channelSid?: string} - sends typing indicator execution to other party in the channel.\nExample of using an \"after\" Action event\n\nPosting a message on behalf of the user into the chat, after the conversation was initiated, by tapping into StartEngagement post action event\n\nCopy code block\n1\nFlexWebChat.Actions.on(\"afterStartEngagement\", (payload) => {\n\n2\n  const { channelSid } = manager.store.getState().flex.session;\n\n3\n  manager.chatClient.getChannelBySid(channelSid)\n\n4\n    .then(channel => {\n\n5\n      channel.sendMessage(\"My awesome message\");\n\n6\n    })\n\n7\n})",
+    "cli_commands": [],
+    "actions": [
+      "StartEngagement"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\nFlexWebChat.Actions.on(\"afterStartEngagement\", (payload) => {\n\n2\n  const { channelSid } = manager.store.getState().flex.session;\n\n3\n  manager.chatClient.getChannelBySid(channelSid)\n\n4\n    .then(channel => {\n\n5\n      channel.sendMessage(\"My awesome message\");\n\n6\n    })\n\n7\n})",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

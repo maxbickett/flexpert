@@ -1,0 +1,398 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/v1/icons",
+  "batch_id": 9,
+  "crawled_at": "2025-10-07T20:30:54.955275+00:00",
+  "content": {
+    "title": "Flex UI Icons | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/v1/icons",
+    "text_content": "On this page\nPage Tools\nFlex UI Icons\n(information)\nThis page applies to Flex UI 1.x.x.\n\nFor the Flex UI 2.x.x version of this content, see the Twilio Paste icons list\n.\n\nThe following icons are available to use in Flex UI. You can leverage these icons when adding new buttons into the Flex header or sidebar:\n\nCopy code block\n1\nimport { Icon } from '@twilio/flex-ui';\n\n2\n\n\n3\nconst Component = (props) => {\n\n4\n  return (\n\n5\n    <Icon icon=\"Accept\"/>\n\n6\n  );\n\n7\n}\nCreate custom icons\n\nYou can also create your own custom icons using SVG files. First, create a custom module using the SVG(s) you would like to use:\n\nCopy code block\n1\nexport const PayIcon = (props) => {\n\n2\n  return (\n\n3\n    ![svg-0](./svg-0.svg)\n\n4\n  );\n\n5\n}\n\n6\n\n\n7\nexport const PayIconActive = (props) => {\n\n8\n  return (\n\n9\n    ![svg-1](./svg-1.svg)\n\n10\n  );\n\n11\n}\n\nThen import and use the icon module:\n\nCopy code block\n1\nimport { PayIcon, PayIconActive } from \"./PayIcons\";\n\n2\n\n\n3\n// Use it in a component\n\n4\n<PaymentTab\n\n5\n  key=\"payment-tab\"\n\n6\n  icon={<PayIcon />}\n\n7\n  iconActive={<PayIconActive />}\n\n8\n/>\n\n9\nDefault Icons\n(information)\nInfo\n\nThe icon names are case-sensitive.\n\nIcon\tName\n\nExpand image\n\tAccept\n\nExpand image\n\tAcceptLarge\n\nExpand image\n\tAdd\n\nExpand image\n\tAgent\n\nExpand image\n\tAgentBold\n\nExpand image\n\tAgents\n\nExpand image\n\tAgentsBold\n\nExpand image\n\tAlert\n\nExpand image\n\tArrowDown\n\nExpand image\n\tArrowLeft\n\nExpand image\n\tArrowRight\n\nExpand image\n\tArrowUp\n\nExpand image\n\tBulb\n\nExpand image\n\tBulbBold\n\nExpand image\n\tCall\n\nExpand image\n\tCallBold\n\nExpand image\n\tClose\n\nExpand image\n\tCloseLarge\n\nExpand image\n\tCogs\n\nExpand image\n\tDashboard\n\nExpand image\n\tDashboardBold\n\nExpand image\n\tData\n\nExpand image\n\tDataBold\n\nExpand image\n\tDefaultAvatar\n\nExpand image\n\tDefaultAvatarBold\n\nExpand image\n\tDirectory\n\nExpand image\n\tDirectoryBold\n\nExpand image\n\tEye\n\nExpand image\n\tEyeBold\n\nExpand image\n\tFacebook\n\nExpand image\n\tFacebookBold\n\nExpand image\n\tFilter\n\nExpand image\n\tFilterUp\n\nExpand image\n\tGenericTask\n\nExpand image\n\tGenericTaskBold\n\nExpand image\n\tHamburger\n\nExpand image\n\tHangup\n\nExpand image\n\tHangupBold\n\nExpand image\n\tHangupLarge\n\nExpand image\n\tHelp\n\nExpand image\n\tHelpBold\n\nExpand image\n\tHold\n\nExpand image\n\tHoldBold\n\nExpand image\n\tHoldLarge\n\nExpand image\n\tHoldLargeBold\n\nExpand image\n\tIncomingCall\n\nExpand image\n\tIncomingCallBold\n\nExpand image\n\tInfo\n\nExpand image\n\tInfoBold\n\nExpand image\n\tLine\n\nExpand image\n\tLineBold\n\nExpand image\n\tLoading\n\nExpand image\n\tLogout\n\nExpand image\n\tLogoutBold\n\nExpand image\n\tMessage\n\nExpand image\n\tMessageBold\n\nExpand image\n\tMonitor\n\nExpand image\n\tMonitorOff\n\nExpand image\n\tMore\n\nExpand image\n\tMute\n\nExpand image\n\tMuteBold\n\nExpand image\n\tMuteLarge\n\nExpand image\n\tMuteLargeBold\n\nExpand image\n\tRead\n\nExpand image\n\tResize\n\nExpand image\n\tSendLarge\n\nExpand image\n\tSettings\n\nExpand image\n\tSettingsBold\n\nExpand image\n\tSideMenuOff\n\nExpand image\n\tSideMenuOn\n\nExpand image\n\tSms\n\nExpand image\n\tSmsBold\n\nExpand image\n\tSuggested\n\nExpand image\n\tSupervisor\n\nExpand image\n\tSupervisorBold\n\nExpand image\n\tTasksLarge\n\nExpand image\n\tTasksSmall\n\nExpand image\n\tThumbdown\n\nExpand image\n\tThumbdownBold\n\nExpand image\n\tThumbup\n\nExpand image\n\tThumbupBold\n\nExpand image\n\tTwilio\n\nExpand image\n\tVideo\n\nExpand image\n\tVideoBold\n\nExpand image\n\tVoice\n\nExpand image\n\tVoiceBold\n\nExpand image\n\tVolume\n\nExpand image\n\tVolumeBold\n\nExpand image\n\tWhatsapp\n\nExpand image\n\tWhatsappBold",
+    "cli_commands": [
+      "import { Icon } from '@twilio/flex-ui';"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "1\nimport { Icon } from '@twilio/flex-ui';\n\n2\n\n\n3\nconst Component = (props) => {\n\n4\n  return (\n\n5\n    <Icon icon=\"Accept\"/>\n\n6\n  );\n\n7\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nexport const PayIcon = (props) => {\n\n2\n  return (\n\n3\n    ![svg-0](./svg-0.svg)\n\n4\n  );\n\n5\n}\n\n6\n\n\n7\nexport const PayIconActive = (props) => {\n\n8\n  return (\n\n9\n    ![svg-1](./svg-1.svg)\n\n10\n  );\n\n11\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { PayIcon, PayIconActive } from \"./PayIcons\";\n\n2\n\n\n3\n// Use it in a component\n\n4\n<PaymentTab\n\n5\n  key=\"payment-tab\"\n\n6\n  icon={<PayIcon />}\n\n7\n  iconActive={<PayIconActive />}\n\n8\n/>\n\n9",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Icon",
+          "Name"
+        ],
+        "rows": [
+          [
+            "Expand image",
+            "Accept"
+          ],
+          [
+            "Expand image",
+            "AcceptLarge"
+          ],
+          [
+            "Expand image",
+            "Add"
+          ],
+          [
+            "Expand image",
+            "Agent"
+          ],
+          [
+            "Expand image",
+            "AgentBold"
+          ],
+          [
+            "Expand image",
+            "Agents"
+          ],
+          [
+            "Expand image",
+            "AgentsBold"
+          ],
+          [
+            "Expand image",
+            "Alert"
+          ],
+          [
+            "Expand image",
+            "ArrowDown"
+          ],
+          [
+            "Expand image",
+            "ArrowLeft"
+          ],
+          [
+            "Expand image",
+            "ArrowRight"
+          ],
+          [
+            "Expand image",
+            "ArrowUp"
+          ],
+          [
+            "Expand image",
+            "Bulb"
+          ],
+          [
+            "Expand image",
+            "BulbBold"
+          ],
+          [
+            "Expand image",
+            "Call"
+          ],
+          [
+            "Expand image",
+            "CallBold"
+          ],
+          [
+            "Expand image",
+            "Close"
+          ],
+          [
+            "Expand image",
+            "CloseLarge"
+          ],
+          [
+            "Expand image",
+            "Cogs"
+          ],
+          [
+            "Expand image",
+            "Dashboard"
+          ],
+          [
+            "Expand image",
+            "DashboardBold"
+          ],
+          [
+            "Expand image",
+            "Data"
+          ],
+          [
+            "Expand image",
+            "DataBold"
+          ],
+          [
+            "Expand image",
+            "DefaultAvatar"
+          ],
+          [
+            "Expand image",
+            "DefaultAvatarBold"
+          ],
+          [
+            "Expand image",
+            "Directory"
+          ],
+          [
+            "Expand image",
+            "DirectoryBold"
+          ],
+          [
+            "Expand image",
+            "Eye"
+          ],
+          [
+            "Expand image",
+            "EyeBold"
+          ],
+          [
+            "Expand image",
+            "Facebook"
+          ],
+          [
+            "Expand image",
+            "FacebookBold"
+          ],
+          [
+            "Expand image",
+            "Filter"
+          ],
+          [
+            "Expand image",
+            "FilterUp"
+          ],
+          [
+            "Expand image",
+            "GenericTask"
+          ],
+          [
+            "Expand image",
+            "GenericTaskBold"
+          ],
+          [
+            "Expand image",
+            "Hamburger"
+          ],
+          [
+            "Expand image",
+            "Hangup"
+          ],
+          [
+            "Expand image",
+            "HangupBold"
+          ],
+          [
+            "Expand image",
+            "HangupLarge"
+          ],
+          [
+            "Expand image",
+            "Help"
+          ],
+          [
+            "Expand image",
+            "HelpBold"
+          ],
+          [
+            "Expand image",
+            "Hold"
+          ],
+          [
+            "Expand image",
+            "HoldBold"
+          ],
+          [
+            "Expand image",
+            "HoldLarge"
+          ],
+          [
+            "Expand image",
+            "HoldLargeBold"
+          ],
+          [
+            "Expand image",
+            "IncomingCall"
+          ],
+          [
+            "Expand image",
+            "IncomingCallBold"
+          ],
+          [
+            "Expand image",
+            "Info"
+          ],
+          [
+            "Expand image",
+            "InfoBold"
+          ],
+          [
+            "Expand image",
+            "Line"
+          ],
+          [
+            "Expand image",
+            "LineBold"
+          ],
+          [
+            "Expand image",
+            "Loading"
+          ],
+          [
+            "Expand image",
+            "Logout"
+          ],
+          [
+            "Expand image",
+            "LogoutBold"
+          ],
+          [
+            "Expand image",
+            "Message"
+          ],
+          [
+            "Expand image",
+            "MessageBold"
+          ],
+          [
+            "Expand image",
+            "Monitor"
+          ],
+          [
+            "Expand image",
+            "MonitorOff"
+          ],
+          [
+            "Expand image",
+            "More"
+          ],
+          [
+            "Expand image",
+            "Mute"
+          ],
+          [
+            "Expand image",
+            "MuteBold"
+          ],
+          [
+            "Expand image",
+            "MuteLarge"
+          ],
+          [
+            "Expand image",
+            "MuteLargeBold"
+          ],
+          [
+            "Expand image",
+            "Read"
+          ],
+          [
+            "Expand image",
+            "Resize"
+          ],
+          [
+            "Expand image",
+            "SendLarge"
+          ],
+          [
+            "Expand image",
+            "Settings"
+          ],
+          [
+            "Expand image",
+            "SettingsBold"
+          ],
+          [
+            "Expand image",
+            "SideMenuOff"
+          ],
+          [
+            "Expand image",
+            "SideMenuOn"
+          ],
+          [
+            "Expand image",
+            "Sms"
+          ],
+          [
+            "Expand image",
+            "SmsBold"
+          ],
+          [
+            "Expand image",
+            "Suggested"
+          ],
+          [
+            "Expand image",
+            "Supervisor"
+          ],
+          [
+            "Expand image",
+            "SupervisorBold"
+          ],
+          [
+            "Expand image",
+            "TasksLarge"
+          ],
+          [
+            "Expand image",
+            "TasksSmall"
+          ],
+          [
+            "Expand image",
+            "Thumbdown"
+          ],
+          [
+            "Expand image",
+            "ThumbdownBold"
+          ],
+          [
+            "Expand image",
+            "Thumbup"
+          ],
+          [
+            "Expand image",
+            "ThumbupBold"
+          ],
+          [
+            "Expand image",
+            "Twilio"
+          ],
+          [
+            "Expand image",
+            "Video"
+          ],
+          [
+            "Expand image",
+            "VideoBold"
+          ],
+          [
+            "Expand image",
+            "Voice"
+          ],
+          [
+            "Expand image",
+            "VoiceBold"
+          ],
+          [
+            "Expand image",
+            "Volume"
+          ],
+          [
+            "Expand image",
+            "VolumeBold"
+          ],
+          [
+            "Expand image",
+            "Whatsapp"
+          ],
+          [
+            "Expand image",
+            "WhatsappBold"
+          ]
+        ]
+      }
+    ]
+  }
+}

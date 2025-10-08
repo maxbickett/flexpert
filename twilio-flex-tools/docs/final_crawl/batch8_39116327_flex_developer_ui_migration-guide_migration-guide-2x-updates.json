@@ -1,0 +1,422 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates",
+  "batch_id": 8,
+  "crawled_at": "2025-10-07T20:30:48.190237+00:00",
+  "content": {
+    "title": "Flex UI 2.x.x updates that can affect your customizations | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-2x-updates",
+    "text_content": "On this page\nPage Tools\nFlex UI 2.x.x updates that can affect your customizations\n\nThis page describes Flex UI updates that you should be aware of when migrating to Flex UI 2.x.x. Review this information to determine if you need to make updates to your customizations to be compatible with Flex UI 2.x.x.\n\nFor more information about the entire migration process, see Migrate from Flex UI 1.x.x to 2.x.x.\n\nDegraded mode\n\nWe have introduced a Degraded mode for Flex UI - now Flex UI will initialize with limited capabilities, even if some of the components like SDKs (TaskRouter, Conversations, Voice, or Sync) are down. In case of disruptions to Twilio's services, Flex users can still log in to Flex and perform certain tasks related to operational services. For example, in the case of Twilio Voice experiencing an incident, your agent will still be able to handle messaging tasks.\n\nUsers will see a notification informing them of a possible disruption in the normal work of Flex UI and they will be able to download a thorough report with error details and logs.\n\nFor more on error handling and reporting, check out our Troubleshooting the Flex UI guide.\n\nConversations SDK\n\nCurrently, the Flex UI uses the Programmable Chat SDK to handle messaging channels. In 2.x.x, the Flex UI uses the Conversations SDK to replicate this functionality.\n\nTo ease migration of plugins from Flex UI 1.x.x to 2.x.x, we want to create a virtual bridge to also export Chat SDK-compatible constructs. Therefore, you can still use your Chat-based customizations with fewer changes. This bridge logic will render a warning highlighting that the accessed methods and properties are actually deprecated.\n\nIdentified differences between the Chat and Conversation libraries\n\nHere are the properties and methods that have been changed or removed.\n\nChat Client\n\nType\tChat Client\tConversation Client\nproperty\tchannels\tconversations\nmethod\tcreateChannel\tcreateConversation\nmethod\tgetChannelBySid\tgetConversationBySid\nmethod\tgetChannelByUniqueName\tgetConversationByUniqueName\nmethod\tgetSubscribedChannels\tgetSubscribedConversations\nmethod\tgetUserDescriptor\t// pass user instead\nmethod\tgetLocalChannels\t// get subscribed channels\nevent\tchannelAdded\tconversationAdded\nevent\tchannelInvited\tconversationInvited\nevent\tchannelJoined\tconversationJoined\nevent\tchannelLeft\tconversationLeft\nevent\tchannelRemoved\tconversationRemoved\nevent\tchannelUpdated\tconversationUpdated\nevent\tmemberJoined\tparticipantJoined\nevent\tmemberLeft\tparticipantLeft\nevent\tmemberUpdated\tparticipantUpdated\n\nChannel vs Conversations\n\ntype\tChannel\tConversation\tNotes\nproperty\tisPrivate\t\tReturns true\nproperty\tlastConsumedMessageIndex\tlastReadMessageIndex\t\nproperty\ttype\t\tReturns a string 'private'\nproperty\tadvanceLastConsumedMessageIndex\tadvanceLastReadMessageIndex\t\nproperty\tmembers\tparticipants\tNot exposed\nmethod\tgetMemberByIdentity\tgetParticipantByIdentity\t\nmethod\tgetMemberBySid\tgetParticipantBySid\t\nmethod\tgetMembers\tgetParticipants\t\nmethod\tgetMembersCount\tgetParticipantsCount\t\nmethod\tgetUnconsumedMessagesCount\tgetUnreadMessagesCount\t\nmethod\tremoveMember\tremoveParticipant\t\nmethod\tsetAllMessagesConsumed\tsetAllMessagesRead\t\nmethod\tsetNoMessagesConsumed\tsetAllMessagesUnread\t\nmethod\tupdateLastConsumedMessageIndex\tupdateLastReadMessageIndex\t\n\nChannelDescriptor\n\nNo parallel in the Conversations SDK, we fall back to Conversation.\n\nUserDescriptor\n\nNo parallel in the Conversations SDK, we fall back to User.\n\nChat User vs Conversation User\n\ntype\tChat User\tConversation User\nproperty\tonline\tisOnline\nproperty\tnotifiable\tisNotifiable\n\nChat Message vs Conversation Message\n\ntype\tMessage\tMessage\tNotes\nproperty\tchannel\tconversation\t\nproperty\tmemberSid\tparticipantSid\t\n\nChat Member vs Conversation Participant\n\ntype\tMember\tParticipant\tNote\nproperty\tchannel\tconversation\t\nproperty\tlastConsumedMessageIndex\tlastReadMessageIndex\t\nproperty\tlastConsumptionTimestamp\tlastReadTimestamp\t\nmethod\tgetUserDescriptor\t\tUse getUser\nevent argument\tupdateReason 'lastConsumedMessageIndex'\tupdatedReason\n\n'lastReadMessageIndex'\t\nevent argument\tupdateReason 'lastConsumptionTimestamp'\tupdatedReason\n\n'lastReadTimestamp'\t\n\nChat SDK methods and concepts dropped in the Conversations SDK\n\nThere's no concept of a public channel. All the conversations are private.\nDescriptors have been removed. They used to be a \"snapshot\" of the described entity. This is replaceable by returning the actual entity and unsubscribing from its changes.\nThere is no invite method anymore on conversations. We fall back to the add method as their functionalities are very similar.\nFlex UI changes\n\nDeprecated reducers\n\nchannels\nchannelInput\n\nDeprecated props\n\nchannel\nchannelSid\nisMemberOfChannel\nmember\nautoInitChannel\nactiveChatChannel\nchatChannel (on taskContext)\n\nDeprecated Helpers\n\nChatChannelHelper - replaced by ConversationHelper\n\nDeprecated methods\n\nTaskHelper.getTaskChannelSid\n\nDeprecated notifications ID\n\nChatOrchestrationAddToConversationFailed\nChatOrchestrationDeactivateConversationFailed\nChatOrchestrationLeaveConversationFailed\nVoice SDK\n\nThe Flex UI 1.x.x uses the twilio-client\n SDK for voice communications. In 2.x.x, it uses the twilio-voice\n SDK for this functionality since the twilio-client is now deprecated. Functionality and usage of the new Voice SDK remains largely the same with a few exceptions:\n\nThe events Connect, Disconnect, and Cancel which used to apply to the Device instance now applies to the Call instance instead.\nThe Device ready event has been replaced with a registered event. Likewise for online which is now unregistered.\nThe structure of the Device state has changed to:\nCopy code block\n1\n   namespace Device {\n\n2\n   isBusy: boolean;\n\n3\n   enum State {\n\n4\n     Unregistered = 'unregistered';\n\n5\n     Registering = 'registering';\n\n6\n     Registered = 'registered';\n\n7\n     Destroyed = 'destroyed';\n\n8\n   }\n\n9\n }\nListen for a running call on Flex UI 2.x.x\n\nTo detect a running call within the Flex UI 2.x.x, you can listen for an incoming Voice event through the Flex Manager\n. For detecting a call using UI actions, see \"Common use cases and examples\" on Use UI Actions.\n\nCopy code block\n1\nconst manager = Flex.Manager.getInstance();\n\n2\nmanager.voiceClient.on('incoming', onVoiceClientConnectListener);\n\n3\n\n\n4\n// Listener function\n\n5\nfunction onVoiceClientConnectListener (){\n\n6\n  console.log(\"Call detected\");\n\n7\n  // Do something\n\n8\n}\n\nFor more details on the changes from the twilio-client to the twilio-voice SDK, see this migration guide. Also refer to the Twilio.Device and Twilio.Call pages for more details on the Device and Call objects of the Twilio Voice JavaScript SDK.\n\nNew Flex access token update behavior\n\nIn Flex UI 1.x.x, your code may have listened to Flex access token updates in the following way:\n\nCopy code block\nmanager.store.getState().flex.session.loginHandler.on('tokenUpdated', (token) => {});\n\nWith Flex 2.x.x, loginHandler no longer supports this functionality. You can instead use the native Flex 'tokenUpdated' Event\n to achieve the same behavior:\n\nCopy code block\n1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\nmanager.events.addListener(\"tokenUpdated\", (tokenPayload) => {});\nNew Actions and Flex Events for the TaskRouter SDK\n\nWe have added new Flex actions wrapping TaskRouter:\n\nCopy code block\n1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nActions.invokeAction(\"UpdateWorkerToken\", { token: \"newToken\" });\n\n8\n\n\n9\n// Update task attributes\n\n10\nActions.invokeAction(\"SetTaskAttributes\", { sid: \"WRxxxxx\", attributes: {}, mergeExisting: true });\n\n11\n\n\n12\n// Issue a Call to a Worker\n\n13\nActions.invokeAction(\"IssueCallToWorker\", { callerId: \"callerId\", twiMLUrl: \"twiMLUrl\", options: {} });\n\n14\n\n\n15\n// Dequeue the Reservation to the Worker.\n\n16\n// This will perform telephony to dequeue a Task that was enqueued using the Enqueue TwiML verb.\n\n17\n// A contact_uri must exist in the Worker's attributes for this call to go through.\n\n18\nActions.invokeAction(\"DequeueTask\", { options: {} })\n\n19\n\n\n20\n// Redirect the active Call tied to this Reservation\n\n21\nActions.invokeAction(\"RedirectCallTask\", { callSid: \"callSid\", twiMLUrl: \"twiMLUrl\", options: {} });\n\n22\n\n\n23\n// Update the Worker's leg in the Conference associated to this Reservation\n\n24\nActions.invokeAction(\"UpdateWorkerParticipant\", { options: {} });\n\n25\n\n\n26\n// Update the Customer leg in the Conference associated to this Task\n\n27\nActions.invokeAction(\"UpdateCustomerParticipant\", { options: {} });\n\nand introduced new Flex Events wrapping TaskRouter events:\n\nCopy code block\n1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\n\n\n4\n// Emitted when a worker receives a new task\n\n5\nmanager.events.addListener(\"taskReceived\", (task: ITask) => {});\n\n6\n\n\n7\n// Emitted when the worker's activity changes\n\n8\nmanager.events.addListener(\"workerActivityUpdated\", (activity: Activity, allActivities: Map<string, Activity>) => {});\n\n9\n\n\n10\n// Emitted when the worker's attributes changes\n\n11\nmanager.events.addListener(\"workerAttributesUpdated\", (newAttributes: Record<string, any>) => {});\n\n12\n\n\n13\n// Emitted when the worker's task status gets updated\n\n14\nmanager.events.addListener(\"taskUpdated\", (task:ITask) => {});\n\n15\n\n\n16\n// Emitted when the worker's task gets set to 'accepted'\n\n17\nmanager.events.addListener(\"taskAccepted\", (task:ITask) => {});\n\n18\n\n\n19\n// Emitted when the worker's task gets set to 'canceled'\n\n20\nmanager.events.addListener(\"taskCanceled\", (task:ITask) => {});\n\n21\n\n\n22\n// Emitted when the worker's task gets set to 'completed'\n\n23\nmanager.events.addListener(\"taskCompleted\", (task:ITask) => {});\n\n24\n\n\n25\n// Emitted when the worker's task gets set to 'rejected'\n\n26\nmanager.events.addListener(\"taskRejected\", (task:ITask) => {});\n\n27\n\n\n28\n// Emitted when the worker's task gets set to 'rescinded'\n\n29\nmanager.events.addListener(\"taskRescinded\", (task:ITask) => {});\n\n30\n\n\n31\n// Emitted when the worker's task gets set to 'timeout'\n\n32\nmanager.events.addListener(\"taskTimeout\", (task:ITask) => {});\n\n33\n\n\n34\n// Emitted when the worker's task gets set to 'wrapup'\n\n35\nmanager.events.addListener(\"taskWrapup\", (task:ITask) => {});\n\nNow you can use exclusively Flex UI Actions Framework\n when working with TaskRouter SDK, without needing to access its methods directly.\n\nVisit our Flex UI API docs\n for more details on Actions and Events.\n\nTheme and Branding\n\nFlex UI 2.x.x uses a new theming structure that more closely maps to the Twilio Paste\n design system. This new structure is based on the concept of design tokens\n, a set of variables that you can modify. This structure promotes consistency, customization, and web accessibility.\n\nTheme configuration changes\n\nconfig.colorTheme is deprecated. Components which receive the theme as props have the following changes:\n\nprops.theme.calculated is deprecated.\n\nUse props.theme.isLight instead of props.theme.calculated.lightTheme\nUse props.theme.tokens.textColors.colorText instead of props.theme.calculated.textColor.\n\nprops.theme.colors is deprecated.\n\nprops.theme.tokens is introduced:\n\nCopy code block\n1\ninterface Tokens {\n\n2\n   backgroundColors: BackgroundColors;\n\n3\n   textColors: TextColors;\n\n4\n   borderColors: BorderColors;\n\n5\n   borderWidths: typeof BorderWidth;\n\n6\n   radii: typeof BorderRadius;\n\n7\n   fontSizes: typeof FontSize;\n\n8\n   fontWeights: typeof FontWeight;\n\n9\n   lineHeights: typeof LineHeight;\n\n10\n   sizings: typeof Sizing;\n\n11\n   spacings: typeof Spacing;\n\n12\n\n\n13\n}\n\nTo override theme styles in Flex UI 2.x.x, see Override Flex UI 2.x.x themes, branding, and styling.\n\nDeprecated Predefined themes\n\nFlex UI 2.x.x deprecates all predefined themes like DarkTheme, MediumTheme, BlueDarkTheme, BlueMediumTheme. It will now have 2 modes of Flex: Light and Dark.\n\nList of deprecated tokens\nCopy code block\n1\nconst deprecatedTokens = [\n\n2\n   \"errorColor\",\n\n3\n   \"errorGlow\",\n\n4\n   \"buttonHoverColor\",\n\n5\n   \"tabSelectedColor\",\n\n6\n   \"connectingColor\",\n\n7\n   \"disconnectedColor\",\n\n8\n   \"notificationBackgroundColorInformation\",\n\n9\n   \"notificationBackgroundColorSuccess\",\n\n10\n   \"notificationBackgroundColorWarning\",\n\n11\n   \"notificationBackgroundColorError\",\n\n12\n   \"notificationIconColorError\",\n\n13\n   \"notificationIconColorWarning\",\n\n14\n   \"userAvailableColor\",\n\n15\n   \"userUnavailableColor\",\n\n16\n   \"defaultButtonColor\",\n\n17\n   \"lightTextColor\",\n\n18\n   \"darkTextColor\",\n\n19\n   \"disabledColor\",\n\n20\n   \"focusColor\",\n\n21\n   \"focusGlow\",\n\n22\n   \"holdColor\",\n\n23\n   \"declineColor\",\n\n24\n   \"acceptColor\",\n\n25\n   \"declineTextColor\",\n\n26\n   \"acceptTextColor\",\n\n27\n   \"completeTaskColor\",\n\n28\n   \"flexBlueColor\",\n\n29\n   \"agentBusyColor\"\n\n30\n];\nDeprecated Channel colors\nCopy code block\n1\nconst deprecatedChannelColors = [\n\n2\n   \"inactive\",\n\n3\n   \"call\",\n\n4\n   \"video\",\n\n5\n   \"chat\",\n\n6\n   \"sms\",\n\n7\n   \"facebook\",\n\n8\n   \"line\",\n\n9\n   \"whatsapp\",\n\n10\n   \"custom\"\n\n11\n];\nThemeProvider\n\nIn Flex UI 2.x.x, we've introduced Flex.setProviders() to let you load providers once at the root level and set the context correctly. Developers won't have to worry about wrapping again, as the context will be set correctly. For usage examples, see:\n\nUse Twilio Paste with a Flex Plugin\nUse a custom provider\n\nWhen using Material UI for styling, it is important to wrap our plugins with a StylesProvider with a classNameGenerator that sets a productionPrefix and a seed so styles classes don't clash between plugins and Flex. The below example shows how to use a custom provider for styling Material UI components:\n\nCopy code block\n1\nimport { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';\n\n2\n\n\n3\nFlex.setProviders({\n\n4\n      CustomProvider: (RootComponent) => (props) => {\n\n5\n          return (\n\n6\n            <StylesProvider generateClassName={createGenerateClassName({\n\n7\n              productionPrefix: 'pluginXYZ',\n\n8\n              seed: 'pluginXYZ',\n\n9\n            })}>\n\n10\n                  <RootComponent {...props} />\n\n11\n              </StylesProvider>\n\n12\n          );\n\n13\n      }\n\n14\n});\n\n15\n\nIf you would like to gradually migrate from Material UI to Twilio Paste, you may use both in a single plugin by setting both a CustomProvider and a PasteThemeProvider:\n\nCopy code block\n1\nimport { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';\n\n2\nimport { CustomizationProvider } from \"@twilio-paste/core/customization\";\n\n3\n\n\n4\nFlex.setProviders({\n\n5\n      CustomProvider: (RootComponent) => (props) => {\n\n6\n          return (\n\n7\n            <StylesProvider generateClassName={createGenerateClassName({\n\n8\n              productionPrefix: 'pluginXYZ',\n\n9\n              seed: 'pluginXYZ',\n\n10\n            })}>\n\n11\n                  <RootComponent {...props} />\n\n12\n              </StylesProvider>\n\n13\n          );\n\n14\n      },\n\n15\n      PasteThemeProvider: CustomizationProvider\n\n16\n});\n\n17\nFlex Messaging UI V2 changes\n(information)\nInfo\n\nThis change is implemented in version alpha.15 and is turned off for accounts signed up for Flex UI 2.x.x Private Beta prior to this version being released as it is a breaking change in the component API. Please reach out to your technical account manager to have the new messaging UI enabled.\n\nMoving to Flex Conversations with Flex 2.x.x has enabled us to provide an even more customizable Messaging UI, and this comes with a few of changes which you may need to adjust to.\n\nNew Dynamic Component structure - MessageInputV2\n\nThe new default input component in the messaging canvas is the dynamic component MessageInputV2 . This includes the text area component and a new dynamic component, MessageInputActions , and is structured like so:\n\nCopy code block\n1\n<MessageInputV2>\n\n2\n    <MessageInputArea key=\"textarea\"/>\n\n3\n    <MessageInputActions key=\"actions\"/>\n\n4\n</MessageInputV2>\n\nMessageInputActions contains the message send button and the file attachment button (if file attachment is enabled).\n\nYou can use custom actions for this component via the add, replace, and remove methods\n.\n\nNew default props\n\nMessageInputV2 has two new default props: hideSendButton and rows. These control the rendering of the send button and row height of the text area respectively. You can use hideSendButton together with returnKeySendsMessage to enable sending message on Enter.\n\nCombined text and media messages\n\nThe SendMessage action is now capable of sending file attachments and text in the same message. Files can be passed to the SendMessage action on the attachedFiles field of its Action payload.The SendMedia action is deprecated but is still available.\n\nLearn more about new components in the Flex UI API docs\n.\n\nUser and Activity controls\nExpand image\n\nThe user-controls child component in Flex UI 1.x.x has been split out into two new child components for the MainHeader\n in Flex UI 2.x.x:\n\nactivity shows and allows the user status to be changed.\nuser-controls shows the currently logged in user and allows the user to logout.\n(warning)\nWarning\n\nThis is a potential breaking change if you have customized UserCard and its child components using CSS.\n\nState Management Changes\n\nAs part of the upgrades to our core APIs, Flex UI 2.x.x includes the Redux Toolkit and some new APIs for managing your internal state. These tools provide some guardrails for your state management, helping you set up boilerplate code with better defaults.\n\nWe recommend using single Redux store, either let Flex UI create its own store or pass a custom store using Manager.create() API\n\nuseFlexSelector\n\nA wrapper around Redux's useSelector method\n. It exposes the same API but adds some Flex validations to ensure Flex's internal state is usable. This selector is specific for working with Flex state itself. Outside of accessing Flex state, we recommend using the default useSelector.\n\nCopy code block\n1\nconst MyComponent = (props) => {\n\n2\n   const viewState = useFlexSelector(state => state.view);\n\n3\n   return (\n\n4\n       {viewState.isSideNavOpen &&\n\n5\n           <div>My Custom Code</div>\n\n6\n       }\n\n7\n   )\n\n8\n}\n\nThe selector takes the current view state for the custom component. The selector guarantees that the state being selected is safe to read and can be used in the application without side effects. This couldn't be guaranteed with useSelector.\n\nuseFlexDispatch\n\nA wrapper around Redux's useDispatch method\n. It prevents dispatches from causing side effects to Flex's state, ensuring your changes work as expected. Use this hook for interacting with Flex's state. You can use the native useDispatch method outside of Flex's state.\n\nCopy code block\n1\nconst MyComponent = (props) => {\n\n2\n   const viewState = useFlexSelector(state => state.view);\n\n3\n   const dispatch = useFlexDispatch();\n\n4\n   return (\n\n5\n       {viewState.isSideNavOpen &&\n\n6\n               <button onClick={() => dispatch({type: 'close_side_bar'})}>My Custom Code</button>\n\n7\n       }\n\n8\n   )\n\n9\n}\nMessageInput.defaultProps.useSeparateInputStore\n\nThe Flex UI 2.x.x no longer uses the MessageInput.defaultProps.useSeparateInputStore flag and its behavior has been deprecated. All Flex UI development must now be done with a separate Store. You can remove the flag without any repercussions.\n\nAppConfig changes\n\nYou need to update your AppConfig structure to utilize the new config structure's names and capabilities.\n\nFlex 1.x.x\tFlex 2.x.x\tChanges\nNotifications.browser\tNotifications.enabled\trenamed\nwarmTransfers\t-\tremoved\ncolorTheme\ttheme\tUpdated (more info)\nAction changes\nDownload Media Attachment changes\n\nDownloadMedia action no longer requires \"message\" as a part of the payload. Instead, a new property \"media\" of type \"Media\" from @twilio/conversations is required.\n\nRenamed actions\n\nThese actions were renamed to follow the action naming convention:\n\nFlex UI 1.0\tFlex UI 2.x.x\nInsightsPlayer:play\tInsightsPlayerPlay\nInsightsPlayer:show\tInsightsPlayerShow\nInsightsPlayer:hide\tInsightsPlayerHide\nInsightsPlayer:initialized\tInsightsPlayerInitialized\nHistoricalReporting:view\tHistoricalReportingView\nTeams View changes\nRemoved\nRemoved FilterData (shouldn't be needed) and TeamFiltersPanelProps (use TeamFiltersPanelChildrenProps instead) interfaces from Flex.Supervisor.\nRemoved filters props from the Component properties for TeamsView\n. Use TeamsView.defaultProps.filters to apply a filter.\nRemoved uniqueName from TaskCanvasTabsChildrenProps.\nRemoved the deprecated WorkerProfile.defaultProps.details prop. Use WorkerProfile.Content to add additional details to the worker profile panel.\nLegacy filtering in TeamsView was removed. Filters from WorkersDataTable.defaultProps.filters will still be added to the new filter panel, but the support for filter factories was dropped.\nWorkersDataTable.defaultProps.initialCompareFunction was removed. Support for sorting was added to the workers table and you can now use sortWorkers, sortCalls, and sortTasks on WorkersDataTable.defaultProps to specify the compare functions used by the workers, calls and tasks columns. For initial sorting, we've introduced a new prop, defaultSortColumn, to the WorkersDataTable where it would take the key as the value. Please refer to WorkersDataTable of the Flex UI API Reference\n for key details.\nWorkersDataTable.defaultProps.tablePlaceholder was removed. The message displayed when the table is empty can be modified with the TeamsViewResultsSummaryNoWorkersDisplayedTitle and TeamsViewResultsSummaryNoWorkersDisplayed templates.\nCleaned up the WorkersDataTableChildrenProps. Only workers, selectedTask, selectedWorker, and monitoredTaskSid are now available.\nWorkersDataTable no longer forces updates every second. This could be considered breaking for customers who added columns, which contain some timers (eg. task age) and which will no longer tick every second.\nOther changes\n\nWe have also cleaned up our api and renamed or remove objects and interfaces. Most of the changes should not have any impact on plugins.\n\nRemoved/renamed deprecated objects and interfaces\nUserControlsImplProps has been removed. Refer to UserControlsChildrenProps instead\ncall.oldHold removed from TaskContext and state.phone.connection.onHold removed from state. Use TaskHelper.isCallOnHold(task) to get the status of the call.\nDeprecatedLoginView component removed\nDeprecatedRuntimeLoginView component removed\nstate.flex.phone.connections property removed. Refer to state.flex.phone.connection instead.\nEvent selectedViewChanged now only receives one argument (newViewName) and it's not triggered on view resize anymore. To listen to view resize events, please subscribe to the viewResized event.\nActionsImpl object has been removed. Please refer to Actions instead.\nregisterGlobalStyles has been removed. Please refer to registerStyles instead\nAudioManager's ErrorCode has been renamed to AudioErrorCode\nActions.emit has been removed - use Actions.invokeActionsinstead.\nActions.removeAllListeners has been removed - please use Actions.removeListener and provide the specific listeners you want to remove.\nRemoved export of Flex.ErrorManager. This functionality has been replaced with Flex.Monitor.sendDebuggerEvent\nRemoved selectionStart/selectionEnd from MessageState, MessageInputArea, MessageInput, ConversationState\nRemoved show and hide methods from the ModalPopupWithEntryControl\nChanged hiddenQueueFilter to queueFilter which takes a predicate function. See \"Add a Worker Directory Tabs Queue Filter\" on Work with Components and Props for usage details\nRemoved unused objects and interfaces\nChatModule\nChatStateCallback\nchatReducer\nregisterGlobalStyles\nStateMachineCb\nStateMachine\ninitWithStrings\nVersion (not VERSION)\nInitialize (from flex-core)\nDeepPartial\nNotificationManager\nwithDefaultPropsUpdate\nAggregatedDataTile\nArrayInterpolation\nFunctionInterpolation\nInterpolation\nStyledOptions\nThemed\nCreateStyled\nCreateStyledOtherComponent\nCreateStyledStatelessComponent\nStyledComponent\nStyledComponentMethods\nStyledOtherComponent\nStyledStatelessComponent,\ngetBackgroundWithHoverCSS\nThemeSupport\nUtils\nCountryManager\nAnimations\nSVGContainerProps\nFrameConstants\nStyledUl\nCSSProps\nComponent and config changes\nTaskInfoPanel inner html styles tweaked to accommodate new design\nTaskInfoPanelContent string inner html updated\nTaskCanvasTabs resets to default task when switching between tabs\nFlag file-attachments-in-chat is deprecated\nCustomizing the TaskListItem\n color directly is no longer possible. Please refer to addwrapper() in Work with Components and Props for customizing the component",
+    "cli_commands": [
+      "import { Manager } from \"@twilio/flex-ui\";",
+      "import { Actions } from \"@twilio/flex-ui\";",
+      "import { Manager } from \"@twilio/flex-ui\";",
+      "import { CustomizationProvider } from \"@twilio-paste/core/customization\";"
+    ],
+    "actions": [
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "emit",
+      "invokeActionsinstead",
+      "removeAllListeners",
+      "removeListener",
+      "DequeueTask",
+      "RedirectCallTask",
+      "SetWorkerAttributes",
+      "UpdateWorkerToken",
+      "SetTaskAttributes",
+      "IssueCallToWorker",
+      "DequeueTask",
+      "RedirectCallTask",
+      "UpdateWorkerParticipant",
+      "UpdateCustomerParticipant"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\n   namespace Device {\n\n2\n   isBusy: boolean;\n\n3\n   enum State {\n\n4\n     Unregistered = 'unregistered';\n\n5\n     Registering = 'registering';\n\n6\n     Registered = 'registered';\n\n7\n     Destroyed = 'destroyed';\n\n8\n   }\n\n9\n }",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst manager = Flex.Manager.getInstance();\n\n2\nmanager.voiceClient.on('incoming', onVoiceClientConnectListener);\n\n3\n\n\n4\n// Listener function\n\n5\nfunction onVoiceClientConnectListener (){\n\n6\n  console.log(\"Call detected\");\n\n7\n  // Do something\n\n8\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "manager.store.getState().flex.session.loginHandler.on('tokenUpdated', (token) => {});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\nmanager.events.addListener(\"tokenUpdated\", (tokenPayload) => {});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Actions } from \"@twilio/flex-ui\";\n\n2\n\n\n3\n// Set worker attributes\n\n4\nActions.invokeAction(\"SetWorkerAttributes\", { attributes: {}, mergeExisting: true });\n\n5\n\n\n6\n// Update worker token\n\n7\nActions.invokeAction(\"UpdateWorkerToken\", { token: \"newToken\" });\n\n8\n\n\n9\n// Update task attributes\n\n10\nActions.invokeAction(\"SetTaskAttributes\", { sid: \"WRxxxxx\", attributes: {}, mergeExisting: true });\n\n11\n\n\n12\n// Issue a Call to a Worker\n\n13\nActions.invokeAction(\"IssueCallToWorker\", { callerId: \"callerId\", twiMLUrl: \"twiMLUrl\", options: {} });\n\n14\n\n\n15\n// Dequeue the Reservation to the Worker.\n\n16\n// This will perform telephony to dequeue a Task that was enqueued using the Enqueue TwiML verb.\n\n17\n// A contact_uri must exist in the Worker's attributes for this call to go through.\n\n18\nActions.invokeAction(\"DequeueTask\", { options: {} })\n\n19\n\n\n20\n// Redirect the active Call tied to this Reservation\n\n21\nActions.invokeAction(\"RedirectCallTask\", { callSid: \"callSid\", twiMLUrl: \"twiMLUrl\", options: {} });\n\n22\n\n\n23\n// Update the Worker's leg in the Conference associated to this Reservation\n\n24\nActions.invokeAction(\"UpdateWorkerParticipant\", { options: {} });\n\n25\n\n\n26\n// Update the Customer leg in the Conference associated to this Task\n\n27\nActions.invokeAction(\"UpdateCustomerParticipant\", { options: {} });",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { Manager } from \"@twilio/flex-ui\";\n\n2\nconst manager = Manager.getInstance();\n\n3\n\n\n4\n// Emitted when a worker receives a new task\n\n5\nmanager.events.addListener(\"taskReceived\", (task: ITask) => {});\n\n6\n\n\n7\n// Emitted when the worker's activity changes\n\n8\nmanager.events.addListener(\"workerActivityUpdated\", (activity: Activity, allActivities: Map<string, Activity>) => {});\n\n9\n\n\n10\n// Emitted when the worker's attributes changes\n\n11\nmanager.events.addListener(\"workerAttributesUpdated\", (newAttributes: Record<string, any>) => {});\n\n12\n\n\n13\n// Emitted when the worker's task status gets updated\n\n14\nmanager.events.addListener(\"taskUpdated\", (task:ITask) => {});\n\n15\n\n\n16\n// Emitted when the worker's task gets set to 'accepted'\n\n17\nmanager.events.addListener(\"taskAccepted\", (task:ITask) => {});\n\n18\n\n\n19\n// Emitted when the worker's task gets set to 'canceled'\n\n20\nmanager.events.addListener(\"taskCanceled\", (task:ITask) => {});\n\n21\n\n\n22\n// Emitted when the worker's task gets set to 'completed'\n\n23\nmanager.events.addListener(\"taskCompleted\", (task:ITask) => {});\n\n24\n\n\n25\n// Emitted when the worker's task gets set to 'rejected'\n\n26\nmanager.events.addListener(\"taskRejected\", (task:ITask) => {});\n\n27\n\n\n28\n// Emitted when the worker's task gets set to 'rescinded'\n\n29\nmanager.events.addListener(\"taskRescinded\", (task:ITask) => {});\n\n30\n\n\n31\n// Emitted when the worker's task gets set to 'timeout'\n\n32\nmanager.events.addListener(\"taskTimeout\", (task:ITask) => {});\n\n33\n\n\n34\n// Emitted when the worker's task gets set to 'wrapup'\n\n35\nmanager.events.addListener(\"taskWrapup\", (task:ITask) => {});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\ninterface Tokens {\n\n2\n   backgroundColors: BackgroundColors;\n\n3\n   textColors: TextColors;\n\n4\n   borderColors: BorderColors;\n\n5\n   borderWidths: typeof BorderWidth;\n\n6\n   radii: typeof BorderRadius;\n\n7\n   fontSizes: typeof FontSize;\n\n8\n   fontWeights: typeof FontWeight;\n\n9\n   lineHeights: typeof LineHeight;\n\n10\n   sizings: typeof Sizing;\n\n11\n   spacings: typeof Spacing;\n\n12\n\n\n13\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst deprecatedTokens = [\n\n2\n   \"errorColor\",\n\n3\n   \"errorGlow\",\n\n4\n   \"buttonHoverColor\",\n\n5\n   \"tabSelectedColor\",\n\n6\n   \"connectingColor\",\n\n7\n   \"disconnectedColor\",\n\n8\n   \"notificationBackgroundColorInformation\",\n\n9\n   \"notificationBackgroundColorSuccess\",\n\n10\n   \"notificationBackgroundColorWarning\",\n\n11\n   \"notificationBackgroundColorError\",\n\n12\n   \"notificationIconColorError\",\n\n13\n   \"notificationIconColorWarning\",\n\n14\n   \"userAvailableColor\",\n\n15\n   \"userUnavailableColor\",\n\n16\n   \"defaultButtonColor\",\n\n17\n   \"lightTextColor\",\n\n18\n   \"darkTextColor\",\n\n19\n   \"disabledColor\",\n\n20\n   \"focusColor\",\n\n21\n   \"focusGlow\",\n\n22\n   \"holdColor\",\n\n23\n   \"declineColor\",\n\n24\n   \"acceptColor\",\n\n25\n   \"declineTextColor\",\n\n26\n   \"acceptTextColor\",\n\n27\n   \"completeTaskColor\",\n\n28\n   \"flexBlueColor\",\n\n29\n   \"agentBusyColor\"\n\n30\n];",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst deprecatedChannelColors = [\n\n2\n   \"inactive\",\n\n3\n   \"call\",\n\n4\n   \"video\",\n\n5\n   \"chat\",\n\n6\n   \"sms\",\n\n7\n   \"facebook\",\n\n8\n   \"line\",\n\n9\n   \"whatsapp\",\n\n10\n   \"custom\"\n\n11\n];",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';\n\n2\n\n\n3\nFlex.setProviders({\n\n4\n      CustomProvider: (RootComponent) => (props) => {\n\n5\n          return (\n\n6\n            <StylesProvider generateClassName={createGenerateClassName({\n\n7\n              productionPrefix: 'pluginXYZ',\n\n8\n              seed: 'pluginXYZ',\n\n9\n            })}>\n\n10\n                  <RootComponent {...props} />\n\n11\n              </StylesProvider>\n\n12\n          );\n\n13\n      }\n\n14\n});\n\n15",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nimport { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';\n\n2\nimport { CustomizationProvider } from \"@twilio-paste/core/customization\";\n\n3\n\n\n4\nFlex.setProviders({\n\n5\n      CustomProvider: (RootComponent) => (props) => {\n\n6\n          return (\n\n7\n            <StylesProvider generateClassName={createGenerateClassName({\n\n8\n              productionPrefix: 'pluginXYZ',\n\n9\n              seed: 'pluginXYZ',\n\n10\n            })}>\n\n11\n                  <RootComponent {...props} />\n\n12\n              </StylesProvider>\n\n13\n          );\n\n14\n      },\n\n15\n      PasteThemeProvider: CustomizationProvider\n\n16\n});\n\n17",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n<MessageInputV2>\n\n2\n    <MessageInputArea key=\"textarea\"/>\n\n3\n    <MessageInputActions key=\"actions\"/>\n\n4\n</MessageInputV2>",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst MyComponent = (props) => {\n\n2\n   const viewState = useFlexSelector(state => state.view);\n\n3\n   return (\n\n4\n       {viewState.isSideNavOpen &&\n\n5\n           <div>My Custom Code</div>\n\n6\n       }\n\n7\n   )\n\n8\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst MyComponent = (props) => {\n\n2\n   const viewState = useFlexSelector(state => state.view);\n\n3\n   const dispatch = useFlexDispatch();\n\n4\n   return (\n\n5\n       {viewState.isSideNavOpen &&\n\n6\n               <button onClick={() => dispatch({type: 'close_side_bar'})}>My Custom Code</button>\n\n7\n       }\n\n8\n   )\n\n9\n}",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Type",
+          "Chat Client",
+          "Conversation Client"
+        ],
+        "rows": [
+          [
+            "property",
+            "channels",
+            "conversations"
+          ],
+          [
+            "method",
+            "createChannel",
+            "createConversation"
+          ],
+          [
+            "method",
+            "getChannelBySid",
+            "getConversationBySid"
+          ],
+          [
+            "method",
+            "getChannelByUniqueName",
+            "getConversationByUniqueName"
+          ],
+          [
+            "method",
+            "getSubscribedChannels",
+            "getSubscribedConversations"
+          ],
+          [
+            "method",
+            "getUserDescriptor",
+            "// pass user instead"
+          ],
+          [
+            "method",
+            "getLocalChannels",
+            "// get subscribed channels"
+          ],
+          [
+            "event",
+            "channelAdded",
+            "conversationAdded"
+          ],
+          [
+            "event",
+            "channelInvited",
+            "conversationInvited"
+          ],
+          [
+            "event",
+            "channelJoined",
+            "conversationJoined"
+          ],
+          [
+            "event",
+            "channelLeft",
+            "conversationLeft"
+          ],
+          [
+            "event",
+            "channelRemoved",
+            "conversationRemoved"
+          ],
+          [
+            "event",
+            "channelUpdated",
+            "conversationUpdated"
+          ],
+          [
+            "event",
+            "memberJoined",
+            "participantJoined"
+          ],
+          [
+            "event",
+            "memberLeft",
+            "participantLeft"
+          ],
+          [
+            "event",
+            "memberUpdated",
+            "participantUpdated"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "type",
+          "Channel",
+          "Conversation",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "property",
+            "isPrivate",
+            "",
+            "Returns true"
+          ],
+          [
+            "property",
+            "lastConsumedMessageIndex",
+            "lastReadMessageIndex",
+            ""
+          ],
+          [
+            "property",
+            "type",
+            "",
+            "Returns a string 'private'"
+          ],
+          [
+            "property",
+            "advanceLastConsumedMessageIndex",
+            "advanceLastReadMessageIndex",
+            ""
+          ],
+          [
+            "property",
+            "members",
+            "participants",
+            "Not exposed"
+          ],
+          [
+            "method",
+            "getMemberByIdentity",
+            "getParticipantByIdentity",
+            ""
+          ],
+          [
+            "method",
+            "getMemberBySid",
+            "getParticipantBySid",
+            ""
+          ],
+          [
+            "method",
+            "getMembers",
+            "getParticipants",
+            ""
+          ],
+          [
+            "method",
+            "getMembersCount",
+            "getParticipantsCount",
+            ""
+          ],
+          [
+            "method",
+            "getUnconsumedMessagesCount",
+            "getUnreadMessagesCount",
+            ""
+          ],
+          [
+            "method",
+            "removeMember",
+            "removeParticipant",
+            ""
+          ],
+          [
+            "method",
+            "setAllMessagesConsumed",
+            "setAllMessagesRead",
+            ""
+          ],
+          [
+            "method",
+            "setNoMessagesConsumed",
+            "setAllMessagesUnread",
+            ""
+          ],
+          [
+            "method",
+            "updateLastConsumedMessageIndex",
+            "updateLastReadMessageIndex",
+            ""
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "type",
+          "Chat User",
+          "Conversation User"
+        ],
+        "rows": [
+          [
+            "property",
+            "online",
+            "isOnline"
+          ],
+          [
+            "property",
+            "notifiable",
+            "isNotifiable"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "type",
+          "Message",
+          "Message",
+          "Notes"
+        ],
+        "rows": [
+          [
+            "property",
+            "channel",
+            "conversation",
+            ""
+          ],
+          [
+            "property",
+            "memberSid",
+            "participantSid",
+            ""
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "type",
+          "Member",
+          "Participant",
+          "Note"
+        ],
+        "rows": [
+          [
+            "property",
+            "channel",
+            "conversation",
+            ""
+          ],
+          [
+            "property",
+            "lastConsumedMessageIndex",
+            "lastReadMessageIndex",
+            ""
+          ],
+          [
+            "property",
+            "lastConsumptionTimestamp",
+            "lastReadTimestamp",
+            ""
+          ],
+          [
+            "method",
+            "getUserDescriptor",
+            "",
+            "Use getUser"
+          ],
+          [
+            "event argument",
+            "updateReason 'lastConsumedMessageIndex'",
+            "updatedReason\n\n'lastReadMessageIndex'",
+            ""
+          ],
+          [
+            "event argument",
+            "updateReason 'lastConsumptionTimestamp'",
+            "updatedReason\n\n'lastReadTimestamp'",
+            ""
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex 1.x.x",
+          "Flex 2.x.x",
+          "Changes"
+        ],
+        "rows": [
+          [
+            "Notifications.browser",
+            "Notifications.enabled",
+            "renamed"
+          ],
+          [
+            "warmTransfers",
+            "-",
+            "removed"
+          ],
+          [
+            "colorTheme",
+            "theme",
+            "Updated (more info)"
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex UI 1.0",
+          "Flex UI 2.x.x"
+        ],
+        "rows": [
+          [
+            "InsightsPlayer:play",
+            "InsightsPlayerPlay"
+          ],
+          [
+            "InsightsPlayer:show",
+            "InsightsPlayerShow"
+          ],
+          [
+            "InsightsPlayer:hide",
+            "InsightsPlayerHide"
+          ],
+          [
+            "InsightsPlayer:initialized",
+            "InsightsPlayerInitialized"
+          ],
+          [
+            "HistoricalReporting:view",
+            "HistoricalReportingView"
+          ]
+        ]
+      }
+    ]
+  }
+}

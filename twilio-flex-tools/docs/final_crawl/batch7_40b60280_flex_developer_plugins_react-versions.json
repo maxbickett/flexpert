@@ -1,0 +1,58 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions",
+  "batch_id": 7,
+  "crawled_at": "2025-10-07T20:30:43.705645+00:00",
+  "content": {
+    "title": "Selecting React versions for Flex | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/react-versions",
+    "text_content": "On this page\nPage Tools\nSelecting React versions for Flex\n\nThis is a guide on how to select which React\n and ReactDOM\n versions your Flex application uses. This allows you to use React's newest APIs, including React Hooks, when developing your Flex plugins.\n\nGetting Started\n\nYou will need a few things before you start using this feature:\n\nA Twilio Account - sign up here\n if you don't have one yet\nAn instance of Twilio Flex - refer to our getting started guide to create one\nThe Flex Plugins CLI - review our introductory document to get familiar with the Command Line Interface for building and deploying plugins\nSetting the React version within Flex\n\nNavigate to the 'Admin' panel, which is the top icon on your sidebar. You must be logged into Flex as a user with the admin role.\n\nExpand image\n\nClick on the \"Developer Setup\" tile at the bottom of the page\n\nExpand image\nChoose the React version in the drop-down. We currently support React version 16.13.1 and Flex's current default version (16.5.2). If you are using Flex UI 2.x.x, we currently support React version 17.0.2.\nExpand image\n\nYou are now all set to use and develop locally with the latest version on Flex. Save the Account SID and Auth Token of your account; you will need it when you are deploying your plugin.\n\nConfiguring your local environment\nCreating a new plugin to use the latest React version\n\nIf you plan to use the latest version of React with a new plugin, you need to install the latest version of the Flex Plugins CLI.\n\nThen you can create a new plugin using the standard initialization for the Flex Plugins CLI. Run the following command in your terminal:\n\nFlex UI 2.x\nFlex UI 1.x\nCopy code block\ntwilio flex:plugins:create plugin-sample --install --flexui2\n\nThis command will download the default application template that can be used as a starting point for building plugins. When run successfully, a new directory named plugin-sample will be created on your machine. In your terminal, navigate into the new plugin-sample directory:\n\nCopy code block\ncd plugin-sample\n\nUpdate your plugin to use the recommended version (according to your Flex UI version) for react and react-dom. Install React by running the following command in your plugin-sample directory:\n\nFlex UI 2.x\nFlex UI 1.x\nCopy code block\nnpm install react@17.0.2 react-dom@17.0.2\n\nVerify this step by checking the dependencies section of package.json. The version of react and react-dom on the file should now be now set to the correct one.\n\nFinally, execute the following command in the plugin-sample directory:\n\nCopy code block\nnpm install\n\nYou're now set to run and test your Plugin locally using the latest version of React.\n\nUpdating a pre-existing plugin to use the latest React version\n\nIf your existing plugin is using an older version of the Plugin Builder, migrate your plugin to use the latest version of the Flex Plugins CLI.\n\nUpdate the dependencies in package.json within your plugin's directory to ensure you're using the newer React version, according to you version of Flex UI:\n\nFlex UI 2.x\nFlex UI 1.x\nCopy code block\n1\n\"dependencies\": {\n\n2\n    \"craco-config-flex-plugin\": \"latest\",\n\n3\n    \"flex-plugin\": \"latest\",\n\n4\n    \"flex-plugin-scripts\": \"latest\",\n\n5\n    \"react\": \"^17.0.2\",\n\n6\n    \"react-dom\": \"^17.0.2\",\n\n7\n    \"react-scripts\": \"latest\"\n\n8\n}\n\nDelete the node_modules directory and package-lock.json in your plugin directory.\n\nFinally, re-install the dependencies for the plugin by running the following command in your plugin directory:\n\nCopy code block\nnpm install\n\nYou're now set to run and test your Plugin locally using the latest version of React.\n\nBuilding and Deploying Plugins\n\nOnce you are ready to deploy your plugin to Flex, run the following commands from within your plugin directory:\n\nCopy code block\ntwilio flex:plugins:deploy --major --changelog \"Using the latest version of React\"\n\nFinally, enable your plugin on your application by running the following command in your plugin directory:\n\nCopy code block\ntwilio flex:plugins:release --plugin plugin-sample@1.0.0 --name \"Plugin Sample Release\" --description \"Testing React upgrade\"\n\nThe plugin will be successfully deployed if the following conditions are met:\n\nYour Flex instance is on version 1.19 or above\nThe version of React used to build the plugin is less than or equal to the version selected within the Flex Admin UI\n\nCongratulations - your Plugin should now be deployed!\n\nYou can confirm whether your plugin is enabled by logging into Flex, visiting the Plugins Dashboard\n, and viewing the plugin under the 'Installed Plugins' section.\n\nFAQ\nWhich versions of React does Flex currently support?\n\nFlex currently supports the React version 16.13.1 and the default version used by Flex (16.5.2). If you are using Flex UI 2.x.x, we currently support React version 17.0.2.\n\nWhat happens if I change the version of React back to the default version?\n\nYour users may be disrupted if you have a plugin deployed that uses the newer features or APIs within React. To avoid this situation, we recommend redeploying any plugins prior to downgrading the React version. That way you can remove any dependencies on the newer APIs.\n\nCan I use new versions of dependencies like react-redux and react-router?\n\nFlex does not yet support setting versions of react-redux and react-router. When you choose the React version on the Developer Setup page, we set the versions for react-dom and react.",
+    "cli_commands": [
+      "twilio flex:plugins:create plugin-sample --install --flexui2",
+      "twilio flex:plugins:create plugin-sample --install --flexui1",
+      "npm install react@17.0.2 react-dom@17.0.2",
+      "npm install react@16.13.1 react-dom@16.13.1",
+      "twilio flex:plugins:deploy --major --changelog \"Using the latest version of React\"",
+      "twilio flex:plugins:release --plugin plugin-sample@1.0.0 --name \"Plugin Sample Release\" --description \"Testing React upgrade\""
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "twilio flex:plugins:create plugin-sample --install --flexui2",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:create plugin-sample --install --flexui1",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "cd plugin-sample",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "npm install react@17.0.2 react-dom@17.0.2",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "npm install react@16.13.1 react-dom@16.13.1",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n\"dependencies\": {\n\n2\n    \"craco-config-flex-plugin\": \"latest\",\n\n3\n    \"flex-plugin\": \"latest\",\n\n4\n    \"flex-plugin-scripts\": \"latest\",\n\n5\n    \"react\": \"^17.0.2\",\n\n6\n    \"react-dom\": \"^17.0.2\",\n\n7\n    \"react-scripts\": \"latest\"\n\n8\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\"dependencies\": {\n2    \"craco-config-flex-plugin\": \"latest\",\n3    \"flex-plugin\": \"latest\",\n4    \"flex-plugin-scripts\": \"latest\",\n5    \"react\": \"^16.13.1\",\n6    \"react-dom\": \"^16.13.1\",\n7    \"react-scripts\": \"latest\"\n8}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:deploy --major --changelog \"Using the latest version of React\"",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "twilio flex:plugins:release --plugin plugin-sample@1.0.0 --name \"Plugin Sample Release\" --description \"Testing React upgrade\"",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

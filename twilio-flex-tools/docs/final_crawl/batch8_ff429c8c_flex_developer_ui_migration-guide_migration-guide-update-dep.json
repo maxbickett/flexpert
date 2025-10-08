@@ -1,0 +1,109 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-update-dependencies",
+  "batch_id": 8,
+  "crawled_at": "2025-10-07T20:30:52.526546+00:00",
+  "content": {
+    "title": "Update dependencies to be compatible with Flex UI 2.x.x | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/migration-guide/migration-guide-update-dependencies",
+    "text_content": "On this page\nPage Tools\nUpdate dependencies to be compatible with Flex UI 2.x.x\n\nThis page explains how to update your dependencies when migrating to Flex UI 2.x.x. For more information about the entire migration process, see Migrate from Flex UI 1.x.x to 2.x.x.\n\nDependency updates in Flex UI 2.x.x\n\nFlex UI uses a variety of dependencies in order to provide the highest quality user experience for your contact center users. Many of these dependencies have been updated as part of the new major version of Flex.\n\nIf you have deployed plugins to modify your instance of the Flex UI, they may be using incompatible versions of many dependencies. Make sure to update your plugin dependencies to be compatible with the Flex UI 2.x.x.\n\nNode\n\nMinimum required Node version was upgraded from 12 to 14.\n\nReact & React DOM\n\nReact & ReactDOM are now peer dependencies.\n\nNo changes are required, besides including React & ReactDOM as a dependency. Flex UI 2.x.x does not currently use any features that will introduce breaking changes.\n\n(warning)\nWarning\n\nFlex UI 2.x.x requires React v17 as the minimum version and is not guaranteed to work with React v16*.\n\nFlex 1.x.x\tFlex 2.x.x (as peer dependency)\n\"react\": \"^16.5.2\",\t\"react\": \"^17.0.0\",\n\"react-dom\": \"^16.5.2\",\t\"react-dom\": \"^17.0.0\",\nRedux & React-redux\n\nFlex UI 2.x.x does not currently use any features that will introduce breaking changes. If you have used these libraries directly, however, you could experience breaking changes.\n\nFlex 1.x.x\tFlex 2.x.x\n\"react-redux\": \"~5.1.0\",\t\"react-redux\": \"^7.2.2\",\n\"redux\": \"3.7.2\",\t\"redux\": \"^4.0.5\",\nReact-router-redux\n\nThe Flex UI relies solely on the react-router-dom dependency. You can update the version and remove the react-router and react-router-redux dependencies.\n\nFlex 1.x.x\tFlex 2.x.x\n\"react-router-dom\": \"4.3.1\",\n\n\"react-router\": \"4.3.1\",\n\n\"react-router-redux\": \"5.0.0-alpha.9\"\t\"react-router-dom\": \"^5.2.0\",\nImport Router Context\n\nReact-router-dom is now based on React v17 Context\n. If you want to consume the router context from the Flex UI, you need to import withRouter directly from the Flex UI Package.\n\nCopy code block\nimport { withRouter } from \"@twilio/flex-ui\";\nEmotion\n\nPackage versions and structure\n\nEmotion has updated their own package structure, so you will need to update both the versions and the package names.\n\nFlex 1.x.x\tFlex 2.x.x\n\"emotion\": \"9.2.6\",\t\"@emotion/css\": \"^11.1.3\",\n\"emotion-theming\" : \"9.2.6\"\n\n\"react-emotion\": \"9.2.6\",\t\"@emotion/react\": \"^11.1.5\",\n\"create-emotion-styled\": \"^9.2.6\",\t\"@emotion/styled\": \"^11.1.5\",\nImport theme and style\n\nEmotion version 11 uses React v17 Context\n. If you want to consume styles coming from the Flex UI theme, you need to import withTheme and styled directly from the Flex UI Package\n\nCopy code block\nimport { withTheme, styled } from \"@twilio/flex-ui\";\nMaterial UI\n\nPackage versions\n\nMaterial UI has been updated. Note you'll need to address the changes related to the new major version of this library. If you are using MUI versions earlier than 5.x, you must use the new Flex.setProviders() API to prevent clashes between Flex and Material UI style classes. See the ThemeProvider section for more details.\n\nFlex 1.x.x\tFlex 2.x.x\n\"@material-ui/core\": \"3.9.4\",\t\"@material-ui/core\": \"^4.11.3\",\n\nIf you are overriding the Material theme with a Flex Theme, you will need to re-register the MuiThemeProvider in your plugin to use React v17 Context\n, and provide the Flex Theme overrides in the createMuiTheme\narguments\n.\n\nRun this script to update dependencies\n\nThe following script will update all Flex UI dependencies to use 2.x.x dependencies, and remove any unneeded dependencies. It will save these changes in your package.json, and ignore legacy peer dependencies (which can cause issues for users who are currently using NPM v7.0.0 and higher.)\n\nYou will still need to update your plugin code to use the new dependencies correctly.\n\nCopy code block\n1\nnpm install \\\n\n2\n@emotion/css@^11.1.3 @emotion/react@^11.1.5 @emotion/styled@^11.1.5 \\\n\n3\n@material-ui/core@^4.11.3 \\\n\n4\nreact@17.0.2 react-dom@17.0.2 \\\n\n5\nreact-redux@^7.2.2 redux@^4.0.5 \\\n\n6\nreact-router-dom@^5.2.0 \\\n\n7\nreact-test-renderer@^17.0.2 \\\n\n8\n--save --legacy-peer-deps && \\\n\n9\nnpm uninstall react-router react-router-redux --save",
+    "cli_commands": [
+      "import { withRouter } from \"@twilio/flex-ui\";",
+      "import { withTheme, styled } from \"@twilio/flex-ui\";",
+      "npm install \\",
+      "npm uninstall react-router react-router-redux --save"
+    ],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "import { withRouter } from \"@twilio/flex-ui\";",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "import { withTheme, styled } from \"@twilio/flex-ui\";",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nnpm install \\\n\n2\n@emotion/css@^11.1.3 @emotion/react@^11.1.5 @emotion/styled@^11.1.5 \\\n\n3\n@material-ui/core@^4.11.3 \\\n\n4\nreact@17.0.2 react-dom@17.0.2 \\\n\n5\nreact-redux@^7.2.2 redux@^4.0.5 \\\n\n6\nreact-router-dom@^5.2.0 \\\n\n7\nreact-test-renderer@^17.0.2 \\\n\n8\n--save --legacy-peer-deps && \\\n\n9\nnpm uninstall react-router react-router-redux --save",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Flex 1.x.x",
+          "Flex 2.x.x (as peer dependency)"
+        ],
+        "rows": [
+          [
+            "\"react\": \"^16.5.2\",",
+            "\"react\": \"^17.0.0\","
+          ],
+          [
+            "\"react-dom\": \"^16.5.2\",",
+            "\"react-dom\": \"^17.0.0\","
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex 1.x.x",
+          "Flex 2.x.x"
+        ],
+        "rows": [
+          [
+            "\"react-redux\": \"~5.1.0\",",
+            "\"react-redux\": \"^7.2.2\","
+          ],
+          [
+            "\"redux\": \"3.7.2\",",
+            "\"redux\": \"^4.0.5\","
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex 1.x.x",
+          "Flex 2.x.x"
+        ],
+        "rows": [
+          [
+            "\"react-router-dom\": \"4.3.1\",\n\n\"react-router\": \"4.3.1\",\n\n\"react-router-redux\": \"5.0.0-alpha.9\"",
+            "\"react-router-dom\": \"^5.2.0\","
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex 1.x.x",
+          "Flex 2.x.x"
+        ],
+        "rows": [
+          [
+            "\"emotion\": \"9.2.6\",",
+            "\"@emotion/css\": \"^11.1.3\","
+          ],
+          [
+            "\"emotion-theming\" : \"9.2.6\"\n\n\"react-emotion\": \"9.2.6\",",
+            "\"@emotion/react\": \"^11.1.5\","
+          ],
+          [
+            "\"create-emotion-styled\": \"^9.2.6\",",
+            "\"@emotion/styled\": \"^11.1.5\","
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Flex 1.x.x",
+          "Flex 2.x.x"
+        ],
+        "rows": [
+          [
+            "\"@material-ui/core\": \"3.9.4\",",
+            "\"@material-ui/core\": \"^4.11.3\","
+          ]
+        ]
+      }
+    ]
+  }
+}

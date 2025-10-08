@@ -1,0 +1,75 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/ui/work-with-components-and-props",
+  "batch_id": 10,
+  "crawled_at": "2025-10-07T20:30:37.442838+00:00",
+  "content": {
+    "title": "Work with Components and Props | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/ui/work-with-components-and-props",
+    "text_content": "On this page\nPage Tools\nWork with Components and Props\n\nThe Flex UI library contains a myriad of programmable components that allow you to customize Flex to your use case. Each programmable component exposes a static Content property that allows you to add to, remove or replace the component and its children.\n\nEach immediate child of a component has a key property used by the add and replace methods as well as a set of properties that will be inherited by their own children. Any new components added using the add or replace methods must have a key property.\n\nThe full list of programmable components, with details of their properties can be found in the Flex UI API Docs\n.\n\n(warning)\nWarning\n\nDirectly reusing components from the Flex UI library is discouraged. Importing and using an existing component (e.g. MessagingCanvas) and adding your own values for their props is not supported and may result in undesired behavior.\n\nAdding Components\n\nSyntax\n\nCopy code block\nFlex.Component.Content.add(<MyComponent key=\"demo-component\"/>, {options});\n\nExample\n\nCopy code block\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, { sortOrder: -1, align: \"end\" });\n\nMainHeader is the base Flex UI component that we are customizing and we are using the add() method to insert our custom mute button component into MainHeader as a child. Note, the custom mute button component contains a key prop.\n\nChild components have access to a subset of their parent component props and the child props associated with a particular programmable component are documented in the Flex UI API Docs\n.\n\nRemoving Components\n\nThe remove method allows you to remove the immediate children of any programmable component using its key.\n\nSyntax\n\nCopy code block\nFlex.Component.Content.remove(key, {options});\n\nExample\n\nCopy code block\nFlex.MainHeader.Content.remove(\"mute\");\nReplacing Components\n\nThe replace component allows you to completely replace a programmable component with your own custom component.\n\nSyntax\n\nCopy code block\nFlex.Component.Content.replace(<MyComponent key=\"demo-component\"/>, {options});\n\nExample 1\n\nThis snippet replaces the MainHeader component with a MyOwnHeader custom component.\n\nCopy code block\nFlex.MainHeader.Content.replace(<MyOwnHeader key=\"custom-header\"/>, {});\n\nExample 2\n\nWe can customize the TaskListItem component to have a different background color depending on the task's channel type. The Flex UI API Docs\n tell us that the TaskListItem component has access to Task which we can then use to customize the component.\n\nCopy code block\n1\n   interface channelTypeColorMapType {\n\n2\n     [key: string]: string\n\n3\n   }\n\n4\n \n\n5\n   const channelTypeColorMap: channelTypeColorMapType = {\n\n6\n     \"web\": \"blue\",\n\n7\n     \"sms\": \"red\",\n\n8\n     \"voice\": \"pink\",\n\n9\n     \"whatsapp\": \"orange\"\n\n10\n   }\n\n11\n \n\n12\n   const StyledTaskListItem = styled.div(\n\n13\n     ({ channelType }: { channelType: string }) => ({\n\n14\n       backgroundColor: channelTypeColorMap[channelType],\n\n15\n       fontWeight: \"bold\",\n\n16\n       textTransform: \"uppercase\",\n\n17\n       height: \"50px\",\n\n18\n       border: \"5px solid grey\",\n\n19\n       textAlign: \"center\"\n\n20\n     })\n\n21\n   );\n\n22\n \n\n23\n   const TaskListItem = (props: any) => {\n\n24\n     return <StyledTaskListItem channelType={props.task.channelType}>{`${props.task.channelType} Task`}</StyledTaskListItem>;\n\n25\n   };\n\n26\n \n\n27\n \n\n28\n   flex.TaskListItem.Content.replace(<TaskListItem key=\"a-key\" />);\nOptions for add/replace/remove methods\n\nif (Expression)\n\nUsed in both add and replace methods to add conditions on which component is added or replaced.\n\nCopy code block\n1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  if : props => props.isLiveVoiceCall \n\n3\n});\n\nsortOrder (number)\n\nUsed in add method to specify the order in which the new component is placed in relation to other children of the parent component. Native children components take priority. Sort order counter starts with 0. To always place a new component at the very start or end of the order, use large numbers like -100 or 100, depending on the direction.\n\nCopy code block\n1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1\n\n3\n});\n\nalign ('start' | 'end')\n\nUsed in the add method to align new components either to the top/bottom or right/left, depending on the direction of the parent component. Possible values are:\n\nstart - aligns new component on the left or top\nend - aligns new component on the right or bottom\nCopy code block\n1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  align: \"end\"\n\n3\n});\naddWrapper() API\n\nThe addWrapper method allows you to replace a Flex component with a custom component which is able to render the original component and has access to all its original properties.\n\nCopy code block\n1\nFlex.MainHeader.Content.addWrapper(\n\n2\n (OriginalComponent) => (originalProps) => {\n\n3\n   const updatedProps = { ...originalProps, logoUrl: \"custom_url\" };\n\n4\n   const CustomBanner = () => <div>Customer Banner</div>;\n\n5\n \n\n6\n   return (\n\n7\n     <>\n\n8\n       <CustomBanner />\n\n9\n       <OriginalComponent {...updatedProps} />\n\n10\n     </>\n\n11\n   );\n\n12\n }\n\n13\n);\n\nThis allows you to:\n\naugment the original component with additional UI elements, or replace it entirely with a component which has access to all the original props\nmodify the props that the original component receives before they are applied\nadd any wrappers or providers that your use case requires\n\nThe following Components\n are supported:\n\nAgentDesktopView\nPanel1\nPanel2\nCallCanvas\nCallCanvasActions\nConnectingOutboundCallCanvas\nIncomingTaskCanvas\nNoTasksCanvas\nParticipantCanvas\nParticipantsCanvas\nTaskCanvas\nTaskCanvasHeader\nTaskCanvasTabs\nTaskInfoPanel\nCRMContainer\nLiveCommsBar\nLiveCommsBarItem\nLiveCommsBarItemActions\nMainContainer\nMainHeader\nRootContainer\nSideNav\nSupervisor.TaskCanvas\nSupervisor.TaskCanvasHeader\nSupervisor.TaskCanvasTabs\nSupervisor.TaskInfoPanel\nSupervisor.TaskCardList\nSupervisor.TaskCard\nSupervisor.TeamFiltersPanel\nWorkerCanvas\nWorkerSkills\nTaskListItem\nTaskListButtons\nTaskListContainer\nTeamsView\nViewCollection\nWorkerDirectory\nWorkerDirectoryTabs\n(information)\nInfo\n\nContrary to the add, remove or replace methods, addWrapper does not have the if, sortOrder, or align options.\n\nAdditional use cases\n\nReplace the original component with other component\n\nCopy code block\n1\nFlex.MainHeader.Content.addWrapper((OriginalComponent) => (props) => {\n\n2\n   return <SomeOtherComponent {...props} />;\n\n3\n});\n\nChange properties passed on to the original component\n\nCopy code block\n1\nFlex.MainHeader.Content.addWrapper((OriginalComponent) => (props) => {\n\n2\n\n\n3\n const updatedProps = { ...props, someProp: \"newValue\" };\n\n4\n\n\n5\n return <OriginalComponent {...updatedProps} />;\n\n6\n\n\n7\n});\n\nWrap the component inside a new component\n\nCopy code block\n1\nFlex.MainHeader.Content.addWrapper((OriginalComponent) => (props) => {\n\n2\n\n\n3\n    return (\n\n4\n\n\n5\n       <SomeFancyDecorator>\n\n6\n\n\n7\n            <OriginalComponent {...props} />\n\n8\n\n\n9\n       </SomeFancyDecorator>\n\n10\n\n\n11\n    );\n\n12\n\n\n13\n});\n\nAdd a Worker Directory Tabs Queue Filter\n\nYou can programmatically apply a filter that is hidden from the user, i.e. the user cannot disable it. You could use this feature to pre-filter the list of available transferees an agent can search and choose from, to their team members or available agents only.\n\nCopy code block\nFlex.WorkerDirectoryTabs.defaultProps.queueFilter = (queue) => queue.queueName.includes(\"HR\")\nWhat's next?\nSee our API documentation\n for Components details\nCheck out our tutorial on adding a sample component to Flex UI\nLearn how to work with custom components\nAdd task and theme context to components",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [
+      {
+        "content": "Flex.Component.Content.add(<MyComponent key=\"demo-component\"/>, {options});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, { sortOrder: -1, align: \"end\" });",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.Component.Content.remove(key, {options});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.MainHeader.Content.remove(\"mute\");",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.Component.Content.replace(<MyComponent key=\"demo-component\"/>, {options});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.MainHeader.Content.replace(<MyOwnHeader key=\"custom-header\"/>, {});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\n   interface channelTypeColorMapType {\n\n2\n     [key: string]: string\n\n3\n   }\n\n4\n \n\n5\n   const channelTypeColorMap: channelTypeColorMapType = {\n\n6\n     \"web\": \"blue\",\n\n7\n     \"sms\": \"red\",\n\n8\n     \"voice\": \"pink\",\n\n9\n     \"whatsapp\": \"orange\"\n\n10\n   }\n\n11\n \n\n12\n   const StyledTaskListItem = styled.div(\n\n13\n     ({ channelType }: { channelType: string }) => ({\n\n14\n       backgroundColor: channelTypeColorMap[channelType],\n\n15\n       fontWeight: \"bold\",\n\n16\n       textTransform: \"uppercase\",\n\n17\n       height: \"50px\",\n\n18\n       border: \"5px solid grey\",\n\n19\n       textAlign: \"center\"\n\n20\n     })\n\n21\n   );\n\n22\n \n\n23\n   const TaskListItem = (props: any) => {\n\n24\n     return <StyledTaskListItem channelType={props.task.channelType}>{`${props.task.channelType} Task`}</StyledTaskListItem>;\n\n25\n   };\n\n26\n \n\n27\n \n\n28\n   flex.TaskListItem.Content.replace(<TaskListItem key=\"a-key\" />);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  if : props => props.isLiveVoiceCall \n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  sortOrder: -1\n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.add(<AnotherMuteButton key=\"mute\"/>, {\n\n2\n  align: \"end\"\n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.addWrapper(\n\n2\n (OriginalComponent) => (originalProps) => {\n\n3\n   const updatedProps = { ...originalProps, logoUrl: \"custom_url\" };\n\n4\n   const CustomBanner = () => <div>Customer Banner</div>;\n\n5\n \n\n6\n   return (\n\n7\n     <>\n\n8\n       <CustomBanner />\n\n9\n       <OriginalComponent {...updatedProps} />\n\n10\n     </>\n\n11\n   );\n\n12\n }\n\n13\n);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.addWrapper((OriginalComponent) => (props) => {\n\n2\n   return <SomeOtherComponent {...props} />;\n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.addWrapper((OriginalComponent) => (props) => {\n\n2\n\n\n3\n const updatedProps = { ...props, someProp: \"newValue\" };\n\n4\n\n\n5\n return <OriginalComponent {...updatedProps} />;\n\n6\n\n\n7\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.MainHeader.Content.addWrapper((OriginalComponent) => (props) => {\n\n2\n\n\n3\n    return (\n\n4\n\n\n5\n       <SomeFancyDecorator>\n\n6\n\n\n7\n            <OriginalComponent {...props} />\n\n8\n\n\n9\n       </SomeFancyDecorator>\n\n10\n\n\n11\n    );\n\n12\n\n\n13\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "Flex.WorkerDirectoryTabs.defaultProps.queueFilter = (queue) => queue.queueName.includes(\"HR\")",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": []
+  }
+}

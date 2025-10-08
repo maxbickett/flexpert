@@ -1,0 +1,146 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+  "batch_id": 3,
+  "crawled_at": "2025-10-07T20:30:36.666278+00:00",
+  "content": {
+    "title": "Customize the Email in Flex UI | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/email/ui-customization",
+    "text_content": "On this page\nPage Tools\nCustomize the Email in Flex UI\n(warning)\nNot a HIPAA Eligible Service\n\nEmail in Twilio Flex is not a HIPAA Eligible Service and should not be used in workflows that are subject to HIPAA.\n\nEmail in Flex uses the same programmable model as other parts of the Flex UI. This means that you can add, replace, and remove email editor components or invoke various actions related to email in Flex UI. This section describes the dedicated components and actions in Email in Flex, as well as some ideas for how to use them.\n\nEmail UI components\n\nFlex UI has two main components for email: the email editor and the email messages themselves.\n\nEmailMessageItem\nExpand image\n\nEmailMessageItem contains an accordion that displays the email message. You can replace it with a custom component or add components before or after it.\n\nCopy code block\n1\nconst CustomMessage = (props: EmailMessageItemChildrenProps) => {\n\n2\n    return <div>custom message</div>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailMessageItem.Content.replace(<CustomMessage key=\"custom\" />);\n\n6\n\n\n7\n\nThe replaced or added components receive the following props:\n\nCopy code block\n1\nexport interface EmailMessageItemChildrenProps {\n\n2\n   message: MessageState;\n\n3\n   defaultOpen?: boolean;\n\n4\n   avatarUrl: string;\n\n5\n   conversationSid: string;\n\n6\n}\nEmailMessageEditor\nExpand image\n\nThe EmailEditor contains an accordion. You can replace the accordion with custom components, or add components before or after it.\n\nCopy code block\n1\nconst CustomEditor = (props: EmailEditorChildrenProps) => {\n\n2\n   return <textarea>custom content</textarea>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailEditor.Content.replace(<CustomMessage key=\"custom\" />);\n\nThe replaced or added components receive the following props:\n\nCopy code block\n1\nexport interface EmailEditorChildrenProps {\n\n2\n   disabledReason: string;\n\n3\n   charLimit: number;\n\n4\n   conversationSid: string;\n\n5\n   conversation: ConversationState;\n\n6\n   messageState: MessageState;\n\n7\n   connectionState: string;\n\n8\n}\nEmail Actions\n\nEmail in Flex uses the Actions Framework to allow you to modify UI interactions. The following actions are standard for sending messages in Flex:\n\nSetInputText\n\nThis action supports HTML in input text.\n\nSendMessage\n\nThe actions for Email in Flex are:\n\nAttachFiles\n\nAttaches files to the message the agent is drafting.\n\nCopy code block\n1\nFlex.Actions.invokeAction(\"AttachFiles\", {\n\n2\n   files: [file1, file2],\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});\nProperty\tDescription\nfiles\tRequired. An array of files to be attached.\nconversationSID\tRequired. The SID for the Conversation to which the media files should be attached.\nconversationType\tRequired Type: Email. Enforces validation against Conversations limits (max amount of attached files, max size).\nDownloadMedia\n\nDownloads media files attached to a message.\n\nCopy code block\n1\nFlex.Actions.invokeAction(\"DownloadMedia\", {\n\n2\n   media: media,\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});\nProperty\tDescription\nmedia\tRequired. The Conversations media object to be downloaded.\nconversationSID\tRequired. The SID for the Conversation from which the media will be downloaded..\nconversationType\tRequired Type: Email. Enforces validation against Conversations limits (e.g., max size).\nStartOutboundEmailTask\n\nStarts a new task for the worker. The only required argument is destination.\n\nCopy code block\n1\nFlex.Actions.invokeAction(\"StartOutboundEmailTask\", {\n\n2\n   destination: \"customer@address.com\",\n\n3\n   queueSid: \"WQxxxx\",\n\n4\n   from: \"contactCenter@address.com\",\n\n5\n   fromName: \"My contact center name\",\n\n6\n   taskAttributes: {}\n\n7\n});\n\nArguments\n\nProperty\tDescription\ndestination\tRequired. The address to which the email should be sent.\nqueueSid\tOptional. The queue that the new email task should be added to. Falls back to default email outbound queue.\nfrom\tOptional. The from email address. Falls back to default email address.\nfromName\tOptional. The name associated with the From email address. Falls back to the default email name.\ntaskAttributes\tOptional. TaskAttributes for the created Task. Defaults to an empty object.\nSample use cases\n\nFlex UI 2.x.x uses a similar programmable interface for adding, removing, and updating components and for invoking actions. See the Flex Developer documentation to learn more about working with components and actions.\n\nSet a dynamic email signature\n\nUse the SetInputText action to dynamically update the content of the editor. In the following example, the email signature is set using the worker's attributes before they've even written their email.\n\nCopy code block\n1\nconst { full_name, email } = Twilio.Flex.Manager.getInstance().workerClient.attributes;\n\n2\n\n\n3\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n4\n   body: <div><p>Your message here</p><p style='margin-top:20px; border-top: 2px dashed; color: tomato; padding-top:20px'>${full_name} - ${email}</p><p style='color:#333333;'>Engineer</p></div>,\n\n5\n   conversationSid: \"CH049a1c27f2f14bc5b8eba3244a846a05\"\n\n6\n});\n\nEditor output:\n\nExpand image\nInsert a default response\n\nYou can go further and include a default response in the text editor so that agents have a strong template to work from. In this example, the SetInputText action is used alongside the Flex TaskHelper method to populate the response with the customer's name.\n\nCopy code block\n1\nconst conversationSid = \"CH...\"\n\n2\nconst task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(conversationSid);\n\n3\n\n\n4\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n5\n   body: <div><p>Hi ${task.attributes.customerName},  thanks for your email. </p><p>Regards,  Owl Customer Centre</p></div>,\n\n6\n   conversationSid,\n\n7\n})\n\nEditor output:\n\nExpand image\nAutomatically add a disclaimer\n\nYou can automatically inject text after (or before) the agent message by adding the beforeSendMessage listener to Flex Actions. In this example, the code appends a confidentiality disclaimer before sending the email. The agent won't see this change in their HTML editor, but they will see it in the sent message.\n\nCopy code block\n1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   payload.htmlBody += <p style=\"font-size:10px; color:#666; margin-top:20px;\">CONFIDENTIAL: This email and any files transmitted [....]</p>;\n\n3\n});\n\nMessage in agent's editor:\n\nExpand image\n\nOutput message:\n\nExpand image\nReplace placeholder text\n\nYou can create message templates by adding the beforeSendMessage listener to Flex Actions. In this example, Flex replaces the $CUSTOMER_NAME variable with the actual name of the customer. The agent won't see this change in their HTML editor, but they will see it in the sent message.\n\nCopy code block\n1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   const task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(payload.conversationSid);\n\n3\n   payload.htmlBody = payload.htmlBody.replace(/\\$CUSTOMER_NAME\\$/g, task.attributes.customerName);\n\n4\n})\n\nMessage in agent's editor:\n\nExpand image\n\nOutput message:\n\nExpand image\nNext Steps\nStart using Conversations to interact with email contents on the fly\n\n< Email index page",
+    "cli_commands": [],
+    "actions": [
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "invokeAction",
+      "addListener",
+      "addListener",
+      "SendMessage",
+      "SendMessage",
+      "SendMessage",
+      "SendMessage",
+      "StartOutboundEmailTask",
+      "AttachFiles",
+      "DownloadMedia",
+      "StartOutboundEmailTask",
+      "SetInputText",
+      "SetInputText"
+    ],
+    "code_blocks": [
+      {
+        "content": "1\nconst CustomMessage = (props: EmailMessageItemChildrenProps) => {\n\n2\n    return <div>custom message</div>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailMessageItem.Content.replace(<CustomMessage key=\"custom\" />);\n\n6\n\n\n7",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nexport interface EmailMessageItemChildrenProps {\n\n2\n   message: MessageState;\n\n3\n   defaultOpen?: boolean;\n\n4\n   avatarUrl: string;\n\n5\n   conversationSid: string;\n\n6\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst CustomEditor = (props: EmailEditorChildrenProps) => {\n\n2\n   return <textarea>custom content</textarea>;\n\n3\n};\n\n4\n\n\n5\nFlex.EmailEditor.Content.replace(<CustomMessage key=\"custom\" />);",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nexport interface EmailEditorChildrenProps {\n\n2\n   disabledReason: string;\n\n3\n   charLimit: number;\n\n4\n   conversationSid: string;\n\n5\n   conversation: ConversationState;\n\n6\n   messageState: MessageState;\n\n7\n   connectionState: string;\n\n8\n}",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Actions.invokeAction(\"AttachFiles\", {\n\n2\n   files: [file1, file2],\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Actions.invokeAction(\"DownloadMedia\", {\n\n2\n   media: media,\n\n3\n   conversationSid: \"CHxxxxxxxxx\",\n\n4\n   conversationType: \"email\"\n\n5\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nFlex.Actions.invokeAction(\"StartOutboundEmailTask\", {\n\n2\n   destination: \"customer@address.com\",\n\n3\n   queueSid: \"WQxxxx\",\n\n4\n   from: \"contactCenter@address.com\",\n\n5\n   fromName: \"My contact center name\",\n\n6\n   taskAttributes: {}\n\n7\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst { full_name, email } = Twilio.Flex.Manager.getInstance().workerClient.attributes;\n\n2\n\n\n3\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n4\n   body: <div><p>Your message here</p><p style='margin-top:20px; border-top: 2px dashed; color: tomato; padding-top:20px'>${full_name} - ${email}</p><p style='color:#333333;'>Engineer</p></div>,\n\n5\n   conversationSid: \"CH049a1c27f2f14bc5b8eba3244a846a05\"\n\n6\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nconst conversationSid = \"CH...\"\n\n2\nconst task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(conversationSid);\n\n3\n\n\n4\nTwilio.Flex.Actions.invokeAction(\"SetInputText\", {\n\n5\n   body: <div><p>Hi ${task.attributes.customerName},  thanks for your email. </p><p>Regards,  Owl Customer Centre</p></div>,\n\n6\n   conversationSid,\n\n7\n})",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   payload.htmlBody += <p style=\"font-size:10px; color:#666; margin-top:20px;\">CONFIDENTIAL: This email and any files transmitted [....]</p>;\n\n3\n});",
+        "language": "css-1p78m0"
+      },
+      {
+        "content": "1\nTwilio.Flex.Actions.addListener(\"beforeSendMessage\", (payload) => {\n\n2\n   const task = Twilio.Flex.TaskHelper.getTaskFromConversationSid(payload.conversationSid);\n\n3\n   payload.htmlBody = payload.htmlBody.replace(/\\$CUSTOMER_NAME\\$/g, task.attributes.customerName);\n\n4\n})",
+        "language": "css-1p78m0"
+      }
+    ],
+    "tables": [
+      {
+        "headers": [
+          "Property",
+          "Description"
+        ],
+        "rows": [
+          [
+            "files",
+            "Required. An array of files to be attached."
+          ],
+          [
+            "conversationSID",
+            "Required. The SID for the Conversation to which the media files should be attached."
+          ],
+          [
+            "conversationType",
+            "Required Type: Email. Enforces validation against Conversations limits (max amount of attached files, max size)."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Property",
+          "Description"
+        ],
+        "rows": [
+          [
+            "media",
+            "Required. The Conversations media object to be downloaded."
+          ],
+          [
+            "conversationSID",
+            "Required. The SID for the Conversation from which the media will be downloaded.."
+          ],
+          [
+            "conversationType",
+            "Required Type: Email. Enforces validation against Conversations limits (e.g., max size)."
+          ]
+        ]
+      },
+      {
+        "headers": [
+          "Property",
+          "Description"
+        ],
+        "rows": [
+          [
+            "destination",
+            "Required. The address to which the email should be sent."
+          ],
+          [
+            "queueSid",
+            "Optional. The queue that the new email task should be added to. Falls back to default email outbound queue."
+          ],
+          [
+            "from",
+            "Optional. The from email address. Falls back to default email address."
+          ],
+          [
+            "fromName",
+            "Optional. The name associated with the From email address. Falls back to the default email name."
+          ],
+          [
+            "taskAttributes",
+            "Optional. TaskAttributes for the created Task. Defaults to an empty object."
+          ]
+        ]
+      }
+    ]
+  }
+}

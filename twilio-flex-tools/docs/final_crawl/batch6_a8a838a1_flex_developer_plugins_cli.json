@@ -1,0 +1,14 @@
+{
+  "url": "https://www.twilio.com/docs/flex/developer/plugins/cli",
+  "batch_id": 6,
+  "crawled_at": "2025-10-07T20:30:42.610848+00:00",
+  "content": {
+    "title": "Flex Plugins CLI | Twilio",
+    "url": "https://www.twilio.com/docs/flex/developer/plugins/cli",
+    "text_content": "On this page\nPage Tools\nFlex Plugins CLI\n(information)\nInfo\n\nCheck out the Flex Plugin Library. It requires Flex UI 2.x.x and gives you access to ready-to-install plugins without using the CLI.\n\nThe Flex Plugins CLI (command line interface) is the interface for developing, testing, and releasing plugins. It accelerates your plugin development by automating the key workflows you'll use while customizing Flex for your users. All plugins developed using the Plugins CLI can be managed on the Plugins Dashboard.\n\nCLI Features\nBuild new plugins\n\nThe Flex Plugins CLI enables you to create new plugins in JavaScript or TypeScript. You can start with a blank slate, or create a plugin from a pre-existing template with the --template parameter. You can manage packages either via NPM\n or Yarn\n (Supported in Flex UI versions 1.19 and up).\n\nDeploy and release plugin versions\n\nThe Flex Plugins CLI is built on the Plugins API. You can define plugin versions to track incremental updates to your customer experience. Deploy updates for each of your plugins individually, or bundle all of your updates together in a single release.\n\nManage your version and release history\n\nAll of the updates to your plugin versions are tracked as a history of releases. Use this history to quickly identify and track changes in your application, and select a prior configuration to re-release in the event of an issue with your users.\n\nValidate your plugin code\n\nGet code recommendations from the Flex Plugins CLI to help you follow best practices for maintaining the compatibility of your plugins as Flex UI evolves. Plugin code validation runs implicitly when you use the plugin Deploy command. You can also use the Validate command to run it explicitly.\n\nWhat's next?\nInstall the Plugins CLI\nMigrate your legacy plugins to use the new CLI\nCheck out the Reference Guide to see everything the Plugins CLI can do",
+    "cli_commands": [],
+    "actions": [],
+    "code_blocks": [],
+    "tables": []
+  }
+}
