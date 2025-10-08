@@ -31,8 +31,6 @@ let enrichedData = null;  // Our enriched metadata
 let finalKnowledge = null;  // FINAL_FLEX_KNOWLEDGE with 753 code blocks
 let embeddings = null;
 let embeddingPipeline = null;
-let isReady = false;
-let initializationPromise = null;
 
 // Load knowledge base
 async function loadKnowledgeBase() {
@@ -73,22 +71,21 @@ async function loadKnowledgeBase() {
 
 // Load or build embeddings
 async function initEmbeddings() {
-  console.error('🧠 Initializing embedding model...');
-
-  // Use lightweight sentence transformer
-  embeddingPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-
-  console.error('✅ Embedding model ready');
-
-  // Try to load pre-built embeddings
+  // Try to load pre-built embeddings first
   try {
     const embeddingsPath = path.resolve(__dirname, 'embeddings.json');
     const embData = await fs.readFile(embeddingsPath, 'utf-8');
     embeddings = JSON.parse(embData);
-    console.error(`✅ Loaded ${embeddings.length} pre-built embeddings`);
+
+    // Only initialize the model if embeddings exist
+    console.error('🧠 Initializing embedding model...');
+    embeddingPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    console.error(`✅ Loaded ${embeddings.length} pre-built embeddings with model`);
   } catch (e) {
-    console.error('⚠️  No pre-built embeddings found. Build them with: npm run build-index');
+    // No embeddings file - skip embedding initialization entirely
+    console.error('ℹ️  Semantic search disabled (embeddings.json not found). Using lexical search only.');
     embeddings = null;
+    embeddingPipeline = null;
   }
 }
 
@@ -429,14 +426,6 @@ function rankByIntent(results, intent) {
 
 // Hybrid search: semantic + lexical + enriched + intent-aware
 async function searchKnowledge(query, limit = 10) {
-  if (!isReady) {
-    await initializationPromise;
-  }
-
-  if (!knowledgeBase) {
-    throw new Error('Knowledge base not loaded');
-  }
-
   const results = [];
 
   const queryLower = query.toLowerCase();
@@ -587,13 +576,7 @@ function calculateSimilarity(str1, str2) {
 }
 
 // Get Flex overview context (for initial orientation)
-async function getFlexOverview() {
-  if (!isReady) {
-    await initializationPromise;
-  }
-
-  if (!knowledgeBase) return '';
-
+function getFlexOverview() {
   const topActions = knowledgeBase.api_reference.actions.all.slice(0, 12);
   const quickPatterns = knowledgeBase.quick_patterns || {};
   const criticalGotchas = Object.entries(knowledgeBase.edge_cases_and_gotchas.critical_patterns)
@@ -757,13 +740,7 @@ flex_get_cli("deploy")  // Returns safest deployment commands
 }
 
 // Validate Action name
-async function validateAction(actionName) {
-  if (!isReady) {
-    await initializationPromise;
-  }
-
-  if (!knowledgeBase) return { valid: false, reason: 'Knowledge base not loaded' };
-
+function validateAction(actionName) {
   const allActions = new Set(knowledgeBase.api_reference.actions.all.map(([name]) => name));
 
   if (allActions.has(actionName)) {
@@ -942,10 +919,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   }
 
   if (name === 'flex_get_cli') {
-    if (!isReady) {
-      await initializationPromise;
-    }
-
     const operation = args.operation.toLowerCase();
     const commands = knowledgeBase.cli_commands;
 
@@ -1002,27 +975,21 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
   throw new Error(`Unknown resource: ${uri}`);
 });
 
-// Initialize data in background
-async function initializeData() {
-  try {
-    await loadKnowledgeBase();
-    await initEmbeddings();
-    isReady = true;
-  } catch (error) {
-    console.error('❌ Failed to initialize data:', error);
-    throw error;
-  }
-}
-
 // Start server
 async function main() {
+  console.error('🚀 Starting Flexpert MCP Server...');
+
+  // Load data BEFORE connecting to transport
+  await loadKnowledgeBase();
+  await initEmbeddings();
+
   const transport = new StdioServerTransport();
   await server.connect(transport);
 
-  console.error('✅ Flexpert MCP Server running');
-
-  initializationPromise = initializeData();
-  await initializationPromise;
+  console.error('✅ Flexpert MCP Server ready');
 }
 
-main().catch(console.error);
+main().catch((error) => {
+  console.error('❌ Fatal error starting server:', error);
+  process.exit(1);
+});
