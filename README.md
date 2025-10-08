@@ -6,7 +6,7 @@ Makes Claude Code an expert in Twilio Flex plugin development through enriched d
 
 **Knowledge Base** (2MB): 143 official docs + 300 code examples with 256 deeply enriched (85.3%)
 **MCP Server**: Intelligent search with tiered ranking, action validation, CLI commands
-**Status**: ✅ Production ready
+**Status**: ✅ Working (semantic search TODO)
 
 ## Key Features
 
@@ -35,14 +35,38 @@ mcp-server/
 
 ## Installation
 
-From this project directory:
+### From GitHub
 
 ```bash
-claude mcp add flexpert node /Users/maxmac/Projects/flexpert/mcp-server/index.js
+# 1. Clone the repository
+git clone https://github.com/maxbickett/flexpert.git
+cd flexpert/mcp-server
+
+# 2. Install dependencies
+npm install
+
+# 3. Add to Claude Code (replace /path/to/ with your actual path)
+claude mcp add flexpert node /path/to/flexpert/mcp-server/index.js
+
+# 4. Restart Claude Code
 ```
 
-Restart Claude Code. Three tools will be available:
-- `flex_search(query, limit)` - Semantic search with tiered ranking
+### Run Without Permissions (Optional)
+
+To allow the MCP tools to run without requiring approval each time:
+
+```bash
+# Add with allowed patterns for all tools
+claude mcp add flexpert node /path/to/flexpert/mcp-server/index.js \
+  --allow-tool flex_search \
+  --allow-tool flex_validate_action \
+  --allow-tool flex_get_cli
+```
+
+### Available Tools
+
+After installation, three tools will be available:
+- `flex_search(query, limit)` - Intelligent search with tiered ranking
 - `flex_validate_action(action_name)` - Validate Flex Actions with examples
 - `flex_get_cli(operation)` - Get correct CLI commands with gotchas
 
@@ -64,14 +88,18 @@ Claude automatically loads the Flex mental model overview when you work on Flex 
 ## Search Intelligence
 
 Results are ranked by tier:
-1. **Tier 1 (Deep)**: Fully enriched with gotchas, use cases, patterns (256 examples)
-2. **Tier 2 (Light)**: Basic context and categorization
-3. **Tier 3 (Basic)**: Code-only, no enrichment
+1. **Tier 1 (Deep)**: Enriched component/action exact matches (highest priority)
+2. **Tier 2 (Medium)**: Curated quick patterns from docs
+3. **Tier 3 (Light)**: Code blocks with relevance scoring (592 examples)
+4. **Tier 4 (Basic)**: Lexical search in curated knowledge
+5. **Tier 5 (Semantic)**: 🚧 TODO - Vector embeddings for semantic search
 
 Search also considers:
 - Intent detection (adding, modifying, debugging)
 - Component location awareness (TaskCanvas, MainHeader, etc.)
 - Deduplication (same pattern from different docs)
+
+**Note**: Currently running on Tiers 1-4. Semantic search (Tier 5) requires building embeddings index.
 
 ## Critical Gotchas
 

@@ -8,8 +8,7 @@
     "flex-expert-mcp": "./index.js"
   },
   "scripts": {
-    "start": "node index.js",
-    "build-index": "node build-embeddings.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.6.0",
