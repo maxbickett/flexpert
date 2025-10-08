@@ -31,6 +31,8 @@ let enrichedData = null;  // Our enriched metadata
 let finalKnowledge = null;  // FINAL_FLEX_KNOWLEDGE with 753 code blocks
 let embeddings = null;
 let embeddingPipeline = null;
+let isReady = false;
+let initializationPromise = null;
 
 // Load knowledge base
 async function loadKnowledgeBase() {
@@ -427,6 +429,10 @@ function rankByIntent(results, intent) {
 
 // Hybrid search: semantic + lexical + enriched + intent-aware
 async function searchKnowledge(query, limit = 10) {
+  if (!isReady) {
+    await initializationPromise;
+  }
+
   if (!knowledgeBase) {
     throw new Error('Knowledge base not loaded');
   }
@@ -581,7 +587,11 @@ function calculateSimilarity(str1, str2) {
 }
 
 // Get Flex overview context (for initial orientation)
-function getFlexOverview() {
+async function getFlexOverview() {
+  if (!isReady) {
+    await initializationPromise;
+  }
+
   if (!knowledgeBase) return '';
 
   const topActions = knowledgeBase.api_reference.actions.all.slice(0, 12);
@@ -747,7 +757,11 @@ flex_get_cli("deploy")  // Returns safest deployment commands
 }
 
 // Validate Action name
-function validateAction(actionName) {
+async function validateAction(actionName) {
+  if (!isReady) {
+    await initializationPromise;
+  }
+
   if (!knowledgeBase) return { valid: false, reason: 'Knowledge base not loaded' };
 
   const allActions = new Set(knowledgeBase.api_reference.actions.all.map(([name]) => name));
@@ -917,7 +931,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   }
 
   if (name === 'flex_validate_action') {
-    const result = validateAction(args.action_name);
+    const result = await validateAction(args.action_name);
 
     return {
       content: [{
@@ -928,6 +942,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
   }
 
   if (name === 'flex_get_cli') {
+    if (!isReady) {
+      await initializationPromise;
+    }
+
     const operation = args.operation.toLowerCase();
     const commands = knowledgeBase.cli_commands;
 
@@ -976,7 +994,7 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
       contents: [{
         uri,
         mimeType: 'text/markdown',
-        text: getFlexOverview()
+        text: await getFlexOverview()
       }]
     };
   }
@@ -984,15 +1002,27 @@ server.setRequestHandler(ReadResourceRequestSchema, async (request) => {
   throw new Error(`Unknown resource: ${uri}`);
 });
 
+// Initialize data in background
+async function initializeData() {
+  try {
+    await loadKnowledgeBase();
+    await initEmbeddings();
+    isReady = true;
+  } catch (error) {
+    console.error('❌ Failed to initialize data:', error);
+    throw error;
+  }
+}
+
 // Start server
 async function main() {
-  await loadKnowledgeBase();
-  await initEmbeddings();
-
   const transport = new StdioServerTransport();
   await server.connect(transport);
 
   console.error('✅ Flexpert MCP Server running');
+
+  initializationPromise = initializeData();
+  await initializationPromise;
 }
 
 main().catch(console.error);
